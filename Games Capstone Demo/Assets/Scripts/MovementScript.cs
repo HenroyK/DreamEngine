@@ -8,10 +8,16 @@ public class MovementScript : MonoBehaviour
     public float maxSpeed;
     public float accel;
     public float jumpaccel;
+    public float gravityModifier;
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    void FixedUpdate()
+    {
+        playerRigidbody.AddForce(Vector3.down * gravityModifier * GetComponent<Rigidbody>().mass);
     }
 
     // Update is called once per frame
