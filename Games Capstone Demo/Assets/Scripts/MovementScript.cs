@@ -34,9 +34,20 @@ public class MovementScript : MonoBehaviour
             playerRigidbody.velocity += Vector3.right * accel;
         }
         //jump if y velocity 0 and spcbar
-        if (Input.GetKey(KeyCode.Space)&& playerRigidbody.velocity.y ==0)
+        if (Input.GetKey(KeyCode.Space) && playerRigidbody.velocity.y == 0)
         {
             playerRigidbody.velocity += Vector3.up * jumpaccel;
+        }
+
+        HardStop();
+    }
+
+    void HardStop()
+    {
+        // stop character if player isn't moving right or left
+        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && playerRigidbody.velocity.y == 0)
+        {
+            playerRigidbody.velocity = Vector3.zero;
         }
     }
 }
