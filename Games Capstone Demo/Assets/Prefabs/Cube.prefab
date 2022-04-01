@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9099555578908678809}
   - component: {fileID: 9099555578908678808}
   - component: {fileID: 9099555578908678815}
+  - component: {fileID: -8264895286552967964}
   - component: {fileID: 9099555578908678814}
   - component: {fileID: 9099555578908678810}
   - component: {fileID: 9099555578908678811}
@@ -86,6 +87,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-8264895286552967964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099555578908678813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932b2bc41c512ec4f9909213b4be72be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loopLength: 30
 --- !u!65 &9099555578908678814
 BoxCollider:
   m_ObjectHideFlags: 0
