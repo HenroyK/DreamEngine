@@ -16,7 +16,7 @@ public class TestLoop : MonoBehaviour
     {
 
         Vector3 p = transform.position;
-        if (p.x < (loopLength * -1))
+        if (p.x < (-30))
         {
             p.x = loopLength;
             transform.position = p;  // you can set the position as a whole, just not individual fields
