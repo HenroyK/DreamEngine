@@ -10,7 +10,7 @@ public class MovementScript : MonoBehaviour
     public float accel;
     public float jumpaccel;
     public float gravityModifier;
-    public bool CanJump;
+    public bool canJump;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,10 +36,10 @@ public class MovementScript : MonoBehaviour
             playerRigidbody.velocity += Vector3.right * accel;
         }
         //jump if y velocity 0 and spcbar
-        if (Input.GetKey(KeyCode.Space) && CanJump)
+        if (Input.GetKey(KeyCode.Space) && canJump)
         {
             playerRigidbody.velocity = Vector3.up * jumpaccel;
-            CanJump = false;
+            canJump = false;
         }
 
         HardStop();
@@ -59,7 +59,7 @@ public class MovementScript : MonoBehaviour
     {
         if (other.gameObject.tag == "ground")
         {
-            CanJump = true;
+            canJump = true;
         }
     }
 }
