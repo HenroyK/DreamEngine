@@ -6,12 +6,12 @@ public class MovementScript : MonoBehaviour
 {
 	//Variables
 	public Rigidbody playerRigidbody;
+	public Collider playerCollider;
 	public float yvelocity;
 	public float maxSpeed;
 	public float accel;
 	public float jumpaccel;
 	public float gravityModifier;
-	public bool CanJump;
 	//Keys
 	public KeyCode jumpKey;
 	public KeyCode forwardKey;
@@ -48,10 +48,9 @@ public class MovementScript : MonoBehaviour
 			playerRigidbody.velocity += Vector3.right * accel;
 		}
 		//jump if y velocity 0 and spcbar
-		if (Input.GetKey(jumpKey) && CanJump)
+		if (Input.GetKey(jumpKey) && IsGrounded())
 		{
 			playerRigidbody.velocity = Vector3.up * jumpaccel;
-			CanJump = false;
 		}
 		//Change depth
 		if (Input.GetKeyDown(swapFKey))
@@ -68,7 +67,6 @@ public class MovementScript : MonoBehaviour
 		{
 			HardStop();
 		}
-		yvelocity = playerRigidbody.velocity.y;
 	}
 
 	void HardStop()
@@ -83,12 +81,34 @@ public class MovementScript : MonoBehaviour
 		//gameObject.layer = curDepth + 7;
 		transform.position = new Vector3(transform.position.x, transform.position.y, curDepth * 5);
 	}
-
-	void OnCollisionEnter(Collision other)
-	{
-		if (other.gameObject.tag == "ground")
+	
+	bool IsGrounded()
+    {
+		LayerMask mask = LayerMask.GetMask(new string[] { "Ground", "Building" });
+		Quaternion weirdQuat = new Quaternion();
+		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
+		if (Physics.CheckBox(transform.position + new Vector3(-1f, -1.5f, 0), new Vector3(1, 0.1f, 1),weirdQuat, mask))
 		{
-			CanJump = true;
+			Debug.Log("grounded");
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
+    private void OnDrawGizmos()
+    {
+		Gizmos.color = Color.red;
+		// *********************************
+		// NUMBERS ARE TO BE CHANGED IF MODEL IS UPDATED.
+		Gizmos.DrawWireCube(transform.position + new Vector3(-1f, -1.5f, 0), new Vector3(2,0.2f,2));
+	}
+    //void OnCollisionEnter(Collision other)
+    //{
+    //	if (other.gameObject.tag == "ground")
+    //	{
+    //		CanJump = true;
+    //	}
+    //}
 }
