@@ -97,6 +97,7 @@ public class MovementScript : MonoBehaviour
 			return false;
 		}
 	}
+
     private void OnDrawGizmos()
     {
 		Gizmos.color = Color.red;

@@ -1059,11 +1059,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &939849211 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 8022007116041893812, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
-  m_PrefabInstance: {fileID: 8022007116841909430}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2430,6 @@ PrefabInstance:
     - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: playerCollider
       value: 
-      objectReference: {fileID: 939849211}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
