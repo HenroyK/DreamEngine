@@ -2308,6 +2308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6ec2e003fd44784496e327e2aedde59, type: 3}
+--- !u!65 &2137877655 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2000101234070049783, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
+  m_PrefabInstance: {fileID: 8022007116841909430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8022007116841909430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2421,7 +2426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: jumpaccel
-      value: 40
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: forwardKey
@@ -2430,6 +2435,6 @@ PrefabInstance:
     - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: playerCollider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2137877655}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
