@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 8022007116041893449}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3042853982259583995}
@@ -190,14 +190,11 @@ MonoBehaviour:
   accel: 1
   jumpaccel: 50
   gravityModifier: 100
-  jumpKey: 0
-  forwardKey: 0
-  backKey: 0
-  duckKey: 0
-  swapFKey: 0
-  swapBKey: 0
+  dashDuration: 0.2
+  dashCooldown: 3
+  dashSpeed: 30
   minDepth: 0
-  maxDepth: 0
+  maxDepth: 2
   curDepth: 0
 --- !u!54 &8022007116041893814
 Rigidbody:
