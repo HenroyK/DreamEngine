@@ -12,7 +12,7 @@ public class MovementScript : MonoBehaviour
 	public float accel;
 	public float jumpaccel;
 	public float gravityModifier;
-	//Keys
+	//Control Keys
 	public KeyCode jumpKey;
 	public KeyCode forwardKey;
 	public KeyCode backKey;
@@ -65,6 +65,7 @@ public class MovementScript : MonoBehaviour
 		// stop character if player isn't moving right or left
 		if (!Input.GetKey(backKey) && !Input.GetKey(forwardKey))
 		{
+			Debug.Log("stopped");
 			HardStop();
 		}
 	}
