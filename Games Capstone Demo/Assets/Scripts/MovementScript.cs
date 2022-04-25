@@ -65,7 +65,7 @@ public class MovementScript : MonoBehaviour
 		// stop character if player isn't moving right or left
 		if (!Input.GetKey(backKey) && !Input.GetKey(forwardKey))
 		{
-			Debug.Log("stopped");
+			//Debug.Log("stopped");
 			HardStop();
 		}
 	}
