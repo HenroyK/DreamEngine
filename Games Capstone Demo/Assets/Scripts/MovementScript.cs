@@ -23,6 +23,11 @@ public class MovementScript : MonoBehaviour
 	public int minDepth;
 	public int maxDepth;
 	public int curDepth;
+
+	//
+	private bool blockDetect = false;
+	private RaycastHit blockRaycastHit;
+	private bool moveBack = true;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -77,9 +82,23 @@ public class MovementScript : MonoBehaviour
 	//Change z axis
 	void ChangeDepth(int newDepth)
 	{
-		curDepth = Mathf.Clamp(curDepth += newDepth, minDepth, maxDepth);
-		//gameObject.layer = curDepth + 7;
-		transform.position = new Vector3(transform.position.x, transform.position.y, curDepth * 5);
+		
+		
+		blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward*newDepth, out blockRaycastHit, transform.rotation, 5);
+
+		if(blockDetect)
+		{
+			//Output the name of the Collider your Box hit
+			Debug.Log("Hit : " + blockRaycastHit.collider.name);
+		}
+		else
+        {
+			curDepth = Mathf.Clamp(curDepth += newDepth, minDepth, maxDepth);
+			//gameObject.layer = curDepth + 7;
+			transform.position = new Vector3(transform.position.x, transform.position.y, curDepth * 5);
+		}
+
+		
 	}
 	
 	bool IsGrounded()
@@ -104,6 +123,23 @@ public class MovementScript : MonoBehaviour
 		// *********************************
 		// NUMBERS ARE TO BE CHANGED IF MODEL IS UPDATED.
 		Gizmos.DrawWireCube(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(2,0.2f,2));
+
+		if(moveBack)
+        {
+			Gizmos.DrawRay(transform.position, Vector3.forward * 5);
+
+			//Draw a cube at the maximum distance
+			Gizmos.DrawWireCube(transform.position + Vector3.forward * 5, transform.localScale);
+		}
+        else
+        {
+			Gizmos.DrawRay(transform.position, Vector3.forward * -5);
+			//Draw a cube at the maximum distance
+			Gizmos.DrawWireCube(transform.position + Vector3.forward * -5, transform.localScale);
+		}
+        
+		
+
 	}
     //void OnCollisionEnter(Collision other)
     //{
