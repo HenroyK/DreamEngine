@@ -23,6 +23,7 @@ public class MovementScript : MonoBehaviour
 	public float dashDuration;
 	public float dashCooldown;
 	public float dashSpeed;
+	private float currentDashCooldown = -1;
 	private float currentDashDuration = -1;
 	private bool isDashing = false;
 	private float dashDirection;
@@ -50,10 +51,12 @@ public class MovementScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && isDashing == false)
+		
+		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && isDashing == false && currentDashCooldown <= 0)
 		{
 			//SoundManagerScript.PlaySound("Dash");
 			currentDashDuration = dashDuration;
+			currentDashCooldown = dashCooldown;
 			//set which direction to dash
 			dashDirection = Input.GetAxis("Horizontal");
 			//set dashing state
@@ -62,6 +65,7 @@ public class MovementScript : MonoBehaviour
 		}
 		//Tick down dash duration
 		currentDashDuration -= Time.deltaTime;
+		currentDashCooldown -= Time.deltaTime;
 
 		//if dash duration is over, stop dashing
 		if (currentDashDuration < 0)

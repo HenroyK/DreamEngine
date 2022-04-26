@@ -2808,7 +2808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: dashDuration
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: playerCollider
