@@ -12,13 +12,21 @@ public class MovementScript : MonoBehaviour
 	public float accel;
 	public float jumpaccel;
 	public float gravityModifier;
-	//Control Keys
-	public KeyCode jumpKey;
-	public KeyCode forwardKey;
-	public KeyCode backKey;
-	public KeyCode duckKey;
-	public KeyCode swapFKey;
-	public KeyCode swapBKey;
+	////Control Keys
+	//public KeyCode jumpKey;
+	//public KeyCode forwardKey;
+	//public KeyCode backKey;
+	//public KeyCode duckKey;
+	//public KeyCode swapFKey;
+	//public KeyCode swapBKey;
+	//Dash variables
+	public float dashDuration;
+	public float dashCooldown;
+	public float dashSpeed;
+	private float currentDashDuration = -1;
+	private bool isDashing = false;
+	private float dashDirection;
+
 	//Vals
 	public int minDepth;
 	public int maxDepth;
@@ -42,43 +50,74 @@ public class MovementScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//move left
-		if (Input.GetKey(backKey) && playerRigidbody.velocity.x > maxSpeed * -1)
+		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && isDashing == false)
 		{
-			playerRigidbody.velocity += Vector3.left * accel;
+			//SoundManagerScript.PlaySound("Dash");
+			currentDashDuration = dashDuration;
+			//set which direction to dash
+			dashDirection = Input.GetAxis("Horizontal");
+			//set dashing state
+			isDashing = true;
+			//animation.DashAnimation((Direction)Mathf.Round(Input.GetAxis("Horizontal")));
 		}
-		//move right
-		if (Input.GetKey(forwardKey) && playerRigidbody.velocity.x < maxSpeed)
+		//Tick down dash duration
+		currentDashDuration -= Time.deltaTime;
+
+		//if dash duration is over, stop dashing
+		if (currentDashDuration < 0)
 		{
-			playerRigidbody.velocity += Vector3.right * accel;
-		}
-		//jump if y velocity 0 and spcbar
-		if (Input.GetKey(jumpKey) && IsGrounded())
-		{
-			playerRigidbody.velocity = Vector3.up * jumpaccel;
-		}
-		//Change depth
-		if (Input.GetKeyDown(swapFKey))
-		{
-			ChangeDepth(-1);
-		}
-		if (Input.GetKeyDown(swapBKey))
-		{
-			ChangeDepth(1);
+			isDashing = false;
 		}
 
-		// stop character if player isn't moving right or left
-		if (!Input.GetKey(backKey) && !Input.GetKey(forwardKey))
+		if (isDashing)
 		{
-			//Debug.Log("stopped");
-			HardStop();
+			//When dashing, move in a set direction
+			if (dashDirection > 0)
+			{
+				playerRigidbody.velocity = new Vector3(dashSpeed, 0);
+			}
+			else
+			{
+				playerRigidbody.velocity = new Vector3(-dashSpeed, 0);
+			}
 		}
+
+		if (!isDashing)//when not dashing. Avoids conflict with dash movement
+		{
+			//Move left/right
+			playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+
+			//Jump
+			if (Input.GetButtonDown("Jump") && IsGrounded())
+			{
+				//SoundManagerScript.PlaySound("Jump");
+				//animation.JumpAnimation();
+				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
+			}
+
+			//Change depth
+			if (Input.GetButtonDown("SwapForward"))
+			{
+				ChangeDepth(-1);
+			}
+			if (Input.GetButtonDown("SwapBackward"))
+			{
+				ChangeDepth(1);
+			}
+		}
+
+		//// stop character if player isn't moving right or left
+		//if (!Input.GetKey(backKey) && !Input.GetKey(forwardKey))
+		//{
+		//	//Debug.Log("stopped");
+		//	HardStop();
+		//}
 	}
 
-	void HardStop()
-	{
-		playerRigidbody.velocity = new Vector3(0, playerRigidbody.velocity.y, 0);
-	}
+	//void HardStop()
+	//{
+	//	playerRigidbody.velocity = new Vector3(0, playerRigidbody.velocity.y, 0);
+	//}
 
 	//Change z axis
 	void ChangeDepth(int newDepth)
