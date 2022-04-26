@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBoundary : MonoBehaviour
 {
-    
-    void OnTriggerExit(Collider other)
+    // Checks if the player is the object to trigger the method
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
@@ -14,20 +14,9 @@ public class PlayerBoundary : MonoBehaviour
         }
     }
     
+    // Reloads the current scene
     void Reload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
