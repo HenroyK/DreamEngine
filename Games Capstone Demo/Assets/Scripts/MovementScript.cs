@@ -64,11 +64,11 @@ public class MovementScript : MonoBehaviour
 			//When dashing, move in a set direction
 			if (dashDirection > 0)
 			{
-				playerRigidbody.velocity = new Vector3(dashSpeed, playerRigidbody.velocity.y);
+				playerRigidbody.velocity = new Vector3(dashSpeed, 0);
 			}
 			else
 			{
-				playerRigidbody.velocity = new Vector3(-dashSpeed, playerRigidbody.velocity.y);
+				playerRigidbody.velocity = new Vector3(-dashSpeed, 0);
 			}
 		}
 
