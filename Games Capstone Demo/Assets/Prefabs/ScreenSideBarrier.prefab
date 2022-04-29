@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3542479401997337726}
   - component: {fileID: 3542479401997337727}
   m_Layer: 8
-  m_Name: OffScreenSideWall
+  m_Name: ScreenSideBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
