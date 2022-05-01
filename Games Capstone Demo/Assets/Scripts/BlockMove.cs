@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BlockMove : MonoBehaviour
 {
-    public Rigidbody blockRigidbody;
-    public float speed;
+    private Rigidbody blockRigidbody;
+    private float speed;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+		blockRigidbody = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -17,4 +18,10 @@ public class BlockMove : MonoBehaviour
     {
         blockRigidbody.velocity = Vector3.left * speed;
     }
+
+	//Speed change message subscription
+	public void ChangeSpeed(float newSpeed)
+	{
+		speed = newSpeed;
+	}
 }
