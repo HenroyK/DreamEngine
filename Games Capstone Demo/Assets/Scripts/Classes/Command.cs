@@ -10,7 +10,8 @@ public class Command
         None,
         Spawn,
         Wait,
-        ChangeSpeed
+        ChangeSpeed,
+        Checkpoint
     };
     [Tooltip("Type of command")]
     public CommandType commandType = CommandType.None;
