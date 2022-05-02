@@ -30,14 +30,14 @@ public class CommandPropertyDrawer : PropertyDrawer
             var vectorRect = new Rect(rect.x + 110, rect.y, 130, rect.height);
             EditorGUI.PropertyField(vectorRect, property.FindPropertyRelative("vector3"), GUIContent.none);
         }
-
+        //if command type is wait
         if (property.FindPropertyRelative("commandType").enumValueIndex == 2)
         {
             // New rect for next element
             var timeRect = new Rect(rect.x + 20, rect.y, 80, rect.height);
             EditorGUI.PropertyField(timeRect, property.FindPropertyRelative("time"), GUIContent.none);
         }
-
+        //if command type is speed
         if (property.FindPropertyRelative("commandType").enumValueIndex == 3)
         {
             // New rect for next element
