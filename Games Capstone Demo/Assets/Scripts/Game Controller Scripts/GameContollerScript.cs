@@ -8,7 +8,9 @@ public class GameContollerScript : MonoBehaviour
     //list of all instantiated moving objects, ie. Buildings
     private List<GameObject> movingObjects = new List<GameObject>();
 
-    
+    //list of all instantiated moving objects to be saved at a checkpoint
+    private List<GameObject> checkpointObjects = new List<GameObject>();
+
     //List of Commands, such as spawning stuff, waiting or changing gamespeed.
     public List<Command> commandList = new List<Command>();
     private int commandListIndex = 0;
@@ -82,13 +84,15 @@ public class GameContollerScript : MonoBehaviour
                         //NotImplemented
                         break;
                     case Command.CommandType.Checkpoint:
-                        //Set last checkpoint to current command index for easy access. Might want to do something like save the state of many things.
-                        lastCheckpoint = commandListIndex;
+                        //Set last checkpoint to current command index for easy access. Copy and disable all objects in movingObjects.
+                        SetCheckpoint();
+                        
                         break;
                     case Command.CommandType.PlayAudio:
                         //Checkpoint
 
                         //NotImplemented
+                        //Probably make a list of audio sources, place them into a list and use that to access them.
                         break;
                     default:
                         Debug.LogError("Something has gone wrong -> no command type match or command not implemented.");
@@ -102,9 +106,34 @@ public class GameContollerScript : MonoBehaviour
         }
     }
 
+    void SetCheckpoint()
+    {
+        //Handle saving checkpoint.
+        lastCheckpoint = commandListIndex;
+        foreach (GameObject obj in movingObjects)
+        {
+            GameObject newObj = Instantiate(obj);
+            newObj.SetActive(false);
+            checkpointObjects.Add(newObj);
+        }
+    }
     void LoadCheckpoint()
     {
-        //Handle loading checkpoint. Probably want to set commandListIndex to lastCheckpoint in case of going to last checkpoint.
+        //Handle loading checkpoint.
+        clearObjects();
+        foreach (GameObject obj in checkpointObjects)
+        {
+            obj.SetActive(true);
+            movingObjects.Add(obj);
+        }
+    }
+    void clearObjects()
+    {
+        //Clear all moving objects.
+        foreach (GameObject obj in movingObjects)
+        {
+            Destroy(obj);
+        }
     }
 }
 
