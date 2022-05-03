@@ -5,24 +5,16 @@ using UnityEngine;
 public class JumpPadScript : MonoBehaviour
 {
     public float force = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
+    // Makes the player bounce upward when in contacted with the player
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            other.attachedRigidbody.AddForce(Vector3.up*force, ForceMode.VelocityChange);
+            other.attachedRigidbody.AddForce(Vector3.up * force, ForceMode.VelocityChange);
         }
     }
-    void Update()
-    {
     
-    }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

@@ -5,12 +5,15 @@ using System.Linq;
 
 public class GameContollerScript : MonoBehaviour
 {
+    //Script controllers the events of the game
+    
     //list of all instantiated moving objects, ie. Buildings
     private List<GameObject> movingObjects = new List<GameObject>();
 
     
     //List of Commands, such as spawning stuff, waiting or changing gamespeed.
     public List<Command> commandList = new List<Command>();
+
     private int commandListIndex = 0;
     private int lastCheckpoint = 0;
     private float delay;
@@ -63,6 +66,8 @@ public class GameContollerScript : MonoBehaviour
                         }
                         
                         break;
+                    // makes the controller wait a set amount of 
+                    // time before commiting another command
                     case Command.CommandType.Wait:
                         delay = nextCommand.time;
                         Debug.Log("Waiting " + delay + " seconds.");
@@ -82,7 +87,8 @@ public class GameContollerScript : MonoBehaviour
                         //NotImplemented
                         break;
                     case Command.CommandType.Checkpoint:
-                        //Set last checkpoint to current command index for easy access. Might want to do something like save the state of many things.
+                        //Set last checkpoint to current command index for easy access.
+                        //Might want to do something like save the state of many things.
                         lastCheckpoint = commandListIndex;
                         break;
                     case Command.CommandType.PlayAudio:
