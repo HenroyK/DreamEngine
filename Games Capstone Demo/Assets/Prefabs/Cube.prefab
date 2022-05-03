@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9099555578908678814}
   - component: {fileID: 9099555578908678810}
   - component: {fileID: 9099555578908678811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: ground
   m_Icon: {fileID: 0}
@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932b2bc41c512ec4f9909213b4be72be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopLength: 30
+  loopSpawnPos: 160
+  loopDespawnPos: -30
 --- !u!65 &9099555578908678814
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -84,7 +84,7 @@ public class GameContollerScript : MonoBehaviour
                         //NotImplemented
                         break;
                     case Command.CommandType.Checkpoint:
-                        //Set last checkpoint to current command index for easy access. Copy and disable all objects in movingObjects.
+                        //Set last checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
                         SetCheckpoint();
                         
                         break;
