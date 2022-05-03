@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestLoop : MonoBehaviour
+public class SpawnLoop : MonoBehaviour
 {
     public float loopSpawnPos = 160;
     public float loopDespawnPos = -30;
 
-    // Update is called once per frame
+    // When the attacted object reaches a certain position
+    // on the X axis it changes its position
     void Update()
     {
-
         Vector3 p = transform.position;
         if (p.x < (loopDespawnPos))
         {
