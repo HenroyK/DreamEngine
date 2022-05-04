@@ -5,15 +5,14 @@ using System.Linq;
 
 public class GameContollerScript : MonoBehaviour
 {
-    //Script controllers the events of the game
-    
     //list of all instantiated moving objects, ie. Buildings
     private List<GameObject> movingObjects = new List<GameObject>();
 
-    
+    //list of all instantiated moving objects to be saved at a checkpoint
+    private List<GameObject> checkpointObjects = new List<GameObject>();
+
     //List of Commands, such as spawning stuff, waiting or changing gamespeed.
     public List<Command> commandList = new List<Command>();
-
     private int commandListIndex = 0;
     private int lastCheckpoint = 0;
     private float delay;
@@ -57,7 +56,7 @@ public class GameContollerScript : MonoBehaviour
                             GameObject newObject = Instantiate(nextCommand.spawnObject, nextCommand.vector3, Quaternion.identity);
                             Debug.Log("Spawning " + nextCommand.spawnObject + " at " + nextCommand.vector3 + ".");
                             //Set Object speed
-                            newObject.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
+                            newObject.GetComponent<BlockMove>().speed = globalSpeed;
                             movingObjects.Add(newObject);
                         }
                         else
@@ -66,8 +65,6 @@ public class GameContollerScript : MonoBehaviour
                         }
                         
                         break;
-                    // makes the controller wait a set amount of 
-                    // time before commiting another command
                     case Command.CommandType.Wait:
                         delay = nextCommand.time;
                         Debug.Log("Waiting " + delay + " seconds.");
@@ -77,7 +74,7 @@ public class GameContollerScript : MonoBehaviour
                         globalSpeed = nextCommand.speed;
                         foreach (GameObject a in movingObjects)
                         {
-                            a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
+                            a.GetComponent<BlockMove>().speed = globalSpeed;
                         }
                         Debug.Log("Global speed is now" + globalSpeed);
                         break;
@@ -87,14 +84,15 @@ public class GameContollerScript : MonoBehaviour
                         //NotImplemented
                         break;
                     case Command.CommandType.Checkpoint:
-                        //Set last checkpoint to current command index for easy access.
-                        //Might want to do something like save the state of many things.
-                        lastCheckpoint = commandListIndex;
+                        //Set last checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
+                        SetCheckpoint();
+                        
                         break;
                     case Command.CommandType.PlayAudio:
                         //Checkpoint
 
                         //NotImplemented
+                        //Probably make a list of audio sources, place them into a list and use that to access them.
                         break;
                     default:
                         Debug.LogError("Something has gone wrong -> no command type match or command not implemented.");
@@ -108,9 +106,34 @@ public class GameContollerScript : MonoBehaviour
         }
     }
 
+    void SetCheckpoint()
+    {
+        //Handle saving checkpoint.
+        lastCheckpoint = commandListIndex;
+        foreach (GameObject obj in movingObjects)
+        {
+            GameObject newObj = Instantiate(obj);
+            newObj.SetActive(false);
+            checkpointObjects.Add(newObj);
+        }
+    }
     void LoadCheckpoint()
     {
-        //Handle loading checkpoint. Probably want to set commandListIndex to lastCheckpoint in case of going to last checkpoint.
+        //Handle loading checkpoint.
+        clearObjects();
+        foreach (GameObject obj in checkpointObjects)
+        {
+            obj.SetActive(true);
+            movingObjects.Add(obj);
+        }
+    }
+    void clearObjects()
+    {
+        //Clear all moving objects.
+        foreach (GameObject obj in movingObjects)
+        {
+            Destroy(obj);
+        }
     }
 }
 
