@@ -1920,6 +1920,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 9099555578908678814, guid: 694690a50852ca04995627e0d77c4b71, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 694690a50852ca04995627e0d77c4b71, type: 3}
 --- !u!1 &1563696958
@@ -2752,6 +2756,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2000101234070049783, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 90e132eae38f1ff45b597e425bdbaf82, type: 2}
     - target: {fileID: 8022007116041893449, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: m_Name
       value: Test_character

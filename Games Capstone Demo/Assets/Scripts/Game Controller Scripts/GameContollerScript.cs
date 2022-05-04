@@ -5,6 +5,8 @@ using System.Linq;
 
 public class GameContollerScript : MonoBehaviour
 {
+    //Script controllers the events of the game
+    
     //list of all instantiated moving objects, ie. Buildings
     private List<GameObject> movingObjects = new List<GameObject>();
 
@@ -12,6 +14,8 @@ public class GameContollerScript : MonoBehaviour
     //List of Commands, such as spawning stuff, waiting or changing gamespeed.
     public List<Command> commandList = new List<Command>();
 
+    private int commandListIndex = 0;
+    private int lastCheckpoint = 0;
     private float delay;
     private float globalSpeed;
 
@@ -36,11 +40,11 @@ public class GameContollerScript : MonoBehaviour
         else
         {
             //if not end of commands
-            if(commandList.Count() > 0)
+            if(commandList.Count() > commandListIndex)
             {
                 //get the next command from the list
-                Command nextCommand = commandList.ElementAt(0);
-                commandList.RemoveAt(0);
+                Command nextCommand = commandList.ElementAt(commandListIndex);
+                commandListIndex++;
                 switch (nextCommand.commandType)
                 {
                     case Command.CommandType.None:
@@ -62,6 +66,8 @@ public class GameContollerScript : MonoBehaviour
                         }
                         
                         break;
+                    // makes the controller wait a set amount of 
+                    // time before commiting another command
                     case Command.CommandType.Wait:
                         delay = nextCommand.time;
                         Debug.Log("Waiting " + delay + " seconds.");
@@ -75,8 +81,23 @@ public class GameContollerScript : MonoBehaviour
                         }
                         Debug.Log("Global speed is now" + globalSpeed);
                         break;
+                    case Command.CommandType.Camera:
+                        //make Camera look at worldpoint.
+
+                        //NotImplemented
+                        break;
+                    case Command.CommandType.Checkpoint:
+                        //Set last checkpoint to current command index for easy access.
+                        //Might want to do something like save the state of many things.
+                        lastCheckpoint = commandListIndex;
+                        break;
+                    case Command.CommandType.PlayAudio:
+                        //Checkpoint
+
+                        //NotImplemented
+                        break;
                     default:
-                        Debug.LogError("Something has gone wrong -> no command type match");
+                        Debug.LogError("Something has gone wrong -> no command type match or command not implemented.");
                         break;
                 }
             }
@@ -85,6 +106,11 @@ public class GameContollerScript : MonoBehaviour
                 //Debug.Log("End of commands");
             }
         }
+    }
+
+    void LoadCheckpoint()
+    {
+        //Handle loading checkpoint. Probably want to set commandListIndex to lastCheckpoint in case of going to last checkpoint.
     }
 }
 

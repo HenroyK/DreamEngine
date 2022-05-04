@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932b2bc41c512ec4f9909213b4be72be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopLength: 30
+  loopSpawnPos: 160
+  loopDespawnPos: -30
 --- !u!65 &9099555578908678814
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9099555578908678813}
-  m_Material: {fileID: 13400000, guid: 90e132eae38f1ff45b597e425bdbaf82, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

@@ -10,7 +10,10 @@ public class Command
         None,
         Spawn,
         Wait,
-        ChangeSpeed
+        ChangeSpeed,
+        Checkpoint,
+        Camera,
+        PlayAudio
     };
     [Tooltip("Type of command")]
     public CommandType commandType = CommandType.None;

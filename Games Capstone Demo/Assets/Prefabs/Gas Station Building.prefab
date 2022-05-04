@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4248441041884306751}
   m_Layer: 0
   m_Name: Gas Station Building
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8498530330558066925}
-  m_Material: {fileID: 13400000, guid: 90e132eae38f1ff45b597e425bdbaf82, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
