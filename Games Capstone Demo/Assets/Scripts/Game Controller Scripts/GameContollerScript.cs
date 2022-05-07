@@ -56,7 +56,7 @@ public class GameContollerScript : MonoBehaviour
                             GameObject newObject = Instantiate(nextCommand.spawnObject, nextCommand.vector3, Quaternion.identity);
                             Debug.Log("Spawning " + nextCommand.spawnObject + " at " + nextCommand.vector3 + ".");
                             //Set Object speed
-                            newObject.GetComponent<BlockMove>().speed = globalSpeed;
+                            newObject.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                             movingObjects.Add(newObject);
                         }
                         else
@@ -74,7 +74,7 @@ public class GameContollerScript : MonoBehaviour
                         globalSpeed = nextCommand.speed;
                         foreach (GameObject a in movingObjects)
                         {
-                            a.GetComponent<BlockMove>().speed = globalSpeed;
+                            a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                         }
                         Debug.Log("Global speed is now" + globalSpeed);
                         break;
