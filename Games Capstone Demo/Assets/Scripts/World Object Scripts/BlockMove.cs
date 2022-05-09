@@ -16,6 +16,10 @@ public class BlockMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.x < -100)
+        {
+            Destroy(this.gameObject);
+        }
         blockRigidbody.velocity = Vector3.left * speed;
     }
 

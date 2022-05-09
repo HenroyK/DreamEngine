@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2035111932442367560}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Suburb01Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,6 +49,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 2889002187846440329, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
+      propertyPath: m_Constraints
+      value: 124
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903433616131812683, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6033687136284024681, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -97,7 +105,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mail box 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6408664974989575635, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2980143006891497416, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
 --- !u!4 &6849321857333385805 stripped
 Transform:
@@ -111,6 +124,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 6955688638156011531, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9099555578908678809, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -159,7 +176,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: house2 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9099555578908678813, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -8264895286552967964, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
 --- !u!4 &8066376375940919262 stripped
 Transform:
@@ -221,7 +243,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: house1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9099555578908678813, guid: 14bf0c23b066f8f4aa6820fe545aeeb3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -8264895286552967964, guid: 14bf0c23b066f8f4aa6820fe545aeeb3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 14bf0c23b066f8f4aa6820fe545aeeb3, type: 3}
 --- !u!4 &6653799019407664407 stripped
 Transform:
@@ -235,9 +262,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 1586697572131729736, guid: d935dedd2f1076440895769f8934aa62, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236060475196444861, guid: d935dedd2f1076440895769f8934aa62, type: 3}
+      propertyPath: m_Constraints
+      value: 124
+      objectReference: {fileID: 0}
     - target: {fileID: 6948668701660987117, guid: d935dedd2f1076440895769f8934aa62, type: 3}
       propertyPath: m_Name
       value: Light poll (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948668701660987117, guid: d935dedd2f1076440895769f8934aa62, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7720702423661077591, guid: d935dedd2f1076440895769f8934aa62, type: 3}
       propertyPath: m_RootOrder
@@ -283,7 +322,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1168545391750506756, guid: d935dedd2f1076440895769f8934aa62, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d935dedd2f1076440895769f8934aa62, type: 3}
 --- !u!4 &5196945570744643317 stripped
 Transform:
@@ -297,9 +337,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 1586697572131729736, guid: d935dedd2f1076440895769f8934aa62, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236060475196444861, guid: d935dedd2f1076440895769f8934aa62, type: 3}
+      propertyPath: m_Constraints
+      value: 124
+      objectReference: {fileID: 0}
     - target: {fileID: 6948668701660987117, guid: d935dedd2f1076440895769f8934aa62, type: 3}
       propertyPath: m_Name
       value: Light poll
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948668701660987117, guid: d935dedd2f1076440895769f8934aa62, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7720702423661077591, guid: d935dedd2f1076440895769f8934aa62, type: 3}
       propertyPath: m_RootOrder
@@ -345,7 +397,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1168545391750506756, guid: d935dedd2f1076440895769f8934aa62, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d935dedd2f1076440895769f8934aa62, type: 3}
 --- !u!4 &4887737782982494661 stripped
 Transform:
@@ -407,7 +460,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: dumpster
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9099555578908678813, guid: 694690a50852ca04995627e0d77c4b71, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -8264895286552967964, guid: 694690a50852ca04995627e0d77c4b71, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 694690a50852ca04995627e0d77c4b71, type: 3}
 --- !u!4 &5449669411954595262 stripped
 Transform:
@@ -421,6 +479,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 4179328917976034810, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
+      propertyPath: m_Constraints
+      value: 124
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142880497018236716, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8433984573426457082, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -469,7 +535,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mail box 1 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9097368985015747392, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7808027814915321724, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
 --- !u!4 &3682960106232202809 stripped
 Transform:
@@ -483,6 +554,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 4179328917976034810, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
+      propertyPath: m_Constraints
+      value: 124
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142880497018236716, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8433984573426457082, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -531,7 +610,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mail box 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9097368985015747392, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7808027814915321724, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e9e33176082a59542ac431a7a180dcc5, type: 3}
 --- !u!4 &2667380764711784539 stripped
 Transform:
@@ -545,6 +629,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 6955688638156011531, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9099555578908678809, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -593,7 +681,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: house2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9099555578908678813, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -8264895286552967964, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a61b8a1204d7d7f4ba0d7cc5db196b92, type: 3}
 --- !u!4 &972601684595474172 stripped
 Transform:
@@ -607,6 +700,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 2431102326958301979, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649632889442759324, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306345122697498255, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5979409343690704149, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -663,11 +768,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6422157524424605903, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
+      propertyPath: m_Constraints
+      value: 124
+      objectReference: {fileID: 0}
     - target: {fileID: 6462931215101353903, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
       propertyPath: m_Name
       value: house3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6462931215101353903, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844904013971411098, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9142374492843357559, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5cb31d2cebdf2934b9fa6f4f74227ee2, type: 3}
 --- !u!4 &2849830160186724059 stripped
 Transform:
@@ -681,6 +799,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2035111932442367560}
     m_Modifications:
+    - target: {fileID: 2889002187846440329, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
+      propertyPath: m_Constraints
+      value: 124
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903433616131812683, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6033687136284024681, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -729,7 +855,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mail box 2 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6408664974989575635, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2980143006891497416, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bb681bc44c0f9cc4d9cfaa968a0d4279, type: 3}
 --- !u!4 &3386417641448816106 stripped
 Transform:
