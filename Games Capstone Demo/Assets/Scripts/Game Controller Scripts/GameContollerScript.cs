@@ -67,10 +67,10 @@ public class GameContollerScript : MonoBehaviour
                         }
                         
                         break;
-                    case Command.CommandType.Wait:
-                        delay = nextCommand.time;
-                        Debug.Log("Waiting " + delay + " seconds.");
-                        break;
+                    //case Command.CommandType.Wait:
+                    //    delay = nextCommand.time;
+                    //    Debug.Log("Waiting " + delay + " seconds.");
+                    //    break;
                     //Change the global speed of all objects
                     case Command.CommandType.ChangeSpeed:
                         globalSpeed = nextCommand.speed;
@@ -101,6 +101,8 @@ public class GameContollerScript : MonoBehaviour
                         Debug.LogError("Something has gone wrong -> no command type match or command not implemented.");
                         break;
                 }
+                delay = nextCommand.time;
+                Debug.Log("Waiting " + delay + " seconds.");
             }
             else
             {

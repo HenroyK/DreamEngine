@@ -5,11 +5,14 @@ using UnityEditor;
 [CustomPropertyDrawer(typeof(Command))]
 public class CommandPropertyDrawer : PropertyDrawer
 {
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        return 34.0f;
+    }
     public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
     {
         // draw label, it returns modified rect
         rect = EditorGUI.PrefixLabel(rect, new GUIContent("Command:"));
-
         // reset indentation
         var indent = EditorGUI.indentLevel;
         EditorGUI.indentLevel = 0;
@@ -23,28 +26,35 @@ public class CommandPropertyDrawer : PropertyDrawer
         if (property.FindPropertyRelative("commandType").enumValueIndex == 1)
         {
             // New rect for next element
-            var spawnRect = new Rect(rect.x + 20, rect.y, 80, rect.height);
+            var spawnRect = new Rect(rect.x + 20, rect.y, 80, rect.height / 2);
             EditorGUI.PropertyField(spawnRect, property.FindPropertyRelative("spawnObject"), GUIContent.none);
 
             // New rect for next element
-            var vectorRect = new Rect(rect.x + 110, rect.y, 130, rect.height);
+            var vectorRect = new Rect(rect.x + 110, rect.y, 130, rect.height / 2);
             EditorGUI.PropertyField(vectorRect, property.FindPropertyRelative("vector3"), GUIContent.none);
         }
         //if command type is wait
+        //if (property.FindPropertyRelative("commandType").enumValueIndex == 2)
+        //{
+        //    // New rect for next element
+        //    var timeRect = new Rect(rect.x + 20, rect.y, 80, rect.height);
+        //    EditorGUI.PropertyField(timeRect, property.FindPropertyRelative("time"), GUIContent.none);
+        //}
+        //if command type is speed
         if (property.FindPropertyRelative("commandType").enumValueIndex == 2)
         {
             // New rect for next element
-            var timeRect = new Rect(rect.x + 20, rect.y, 80, rect.height);
-            EditorGUI.PropertyField(timeRect, property.FindPropertyRelative("time"), GUIContent.none);
+            var speedRect = new Rect(rect.x + 20, rect.y, 30, rect.height / 2);
+            EditorGUI.PropertyField(speedRect, property.FindPropertyRelative("speed"), GUIContent.none);
         }
-        //if command type is speed
-        if (property.FindPropertyRelative("commandType").enumValueIndex == 3)
-        {
-            // New rect for next element
-            var timeRect = new Rect(rect.x + 20, rect.y, 80, rect.height);
-            EditorGUI.PropertyField(timeRect, property.FindPropertyRelative("speed"), GUIContent.none);
-        }
-
+        
+        
+        var labelRect = new Rect(80, rect.y + rect.height / 2, 159, rect.height / 2);
+        var timeRect = labelRect;
+        timeRect.x += labelRect.width + 20;
+        timeRect.width = 30;
+        EditorGUI.LabelField(labelRect, "Delay before next command");
+        EditorGUI.PropertyField(timeRect, property.FindPropertyRelative("time"), GUIContent.none);
         // indent back to where it was
         EditorGUI.indentLevel = indent;
     }
