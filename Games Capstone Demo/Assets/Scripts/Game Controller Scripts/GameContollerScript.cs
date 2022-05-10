@@ -13,7 +13,9 @@ public class GameContollerScript : MonoBehaviour
 
     //List of Commands, such as spawning stuff, waiting or changing gamespeed.
     public List<Command> commandList = new List<Command>();
+    [SerializeField]
     private int commandListIndex = 0;
+
     private int lastCheckpoint = 0;
     private float delay;
     private float globalSpeed;
