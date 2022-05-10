@@ -34,6 +34,7 @@ public class MovementScript : MonoBehaviour
 	public int maxDepth;
 	public int curDepth;
 
+	public Animator animator;
 	//
 	private bool blockDetect = false;
 	private RaycastHit blockRaycastHit;
@@ -104,7 +105,7 @@ public class MovementScript : MonoBehaviour
 				if (Input.GetButtonDown("Jump"))
 				{
 					//SoundManagerScript.PlaySound("Jump");
-					//animation.JumpAnimation();
+					animator.SetTrigger("Jump");
 					playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
 				}
 			}
@@ -171,7 +172,7 @@ public class MovementScript : MonoBehaviour
 		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
 		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(1, 0.1f, 1),weirdQuat, mask))
 		{
-			Debug.Log("grounded");
+			animator.SetTrigger("Land");
 			return true;
 		}
 		else
