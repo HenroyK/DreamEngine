@@ -5,6 +5,11 @@ using System.Linq;
 
 public class GameContollerScript : MonoBehaviour
 {
+    public GameObject player;
+    public GameObject playerSpawn;
+
+    private GameObject playerRef;
+    
     //list of all instantiated moving objects, ie. Buildings
     private List<GameObject> movingObjects = new List<GameObject>();
 
@@ -17,9 +22,9 @@ public class GameContollerScript : MonoBehaviour
     private int commandListIndex = 0;
 
     private int lastCheckpoint = 0;
-    private float delay;
+    private float delay = 0;
     private float globalSpeed;
-
+    private float checkpointDelay;
     //Below is stuff for later.
     //public List<GameObject> otherSpawnMovingObjects = new List<GameObject>();
     //public List<GameObject> FixedObjects = new List<GameObject>();
@@ -27,7 +32,9 @@ public class GameContollerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
+
+        playerRef = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -115,6 +122,7 @@ public class GameContollerScript : MonoBehaviour
 
     public void SetCheckpoint()
     {
+        checkpointDelay = delay;
         //Handle saving checkpoint.
         lastCheckpoint = commandListIndex;
         foreach (GameObject obj in movingObjects)
@@ -133,6 +141,9 @@ public class GameContollerScript : MonoBehaviour
             obj.SetActive(true);
             movingObjects.Add(obj);
         }
+        commandListIndex = lastCheckpoint;
+        delay = checkpointDelay;
+        playerRef.transform.position = playerSpawn.transform.position;
     }
     void clearObjects()
     {

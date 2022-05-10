@@ -70,6 +70,8 @@ public class LivesScript : MonoBehaviour
 
             if (lifeCount <= 0)
             {
+                RefreshUI();
+
                 gameOverScript.playerDied();
 
                 return;
