@@ -9,7 +9,6 @@ public class Command
     {
         None,
         Spawn,
-        Wait,
         ChangeSpeed,
         Checkpoint,
         Camera,
