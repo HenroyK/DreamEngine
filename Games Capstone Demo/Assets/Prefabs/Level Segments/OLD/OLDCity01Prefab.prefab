@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1894993944472514938}
   m_Layer: 6
-  m_Name: City01Prefab
+  m_Name: OLDCity01Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
