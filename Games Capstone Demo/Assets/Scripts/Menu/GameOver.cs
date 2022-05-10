@@ -12,7 +12,7 @@ public class GameOver : MonoBehaviour
     private Pause pauseScript;
     private bool playerDead = false;
 
-    // Start is called before the first frame update
+    // Set up variables / find scripts
     void Start()
     {
         GameObject gameController = GameObject.FindWithTag("GameController");
@@ -32,6 +32,7 @@ public class GameOver : MonoBehaviour
         gameOverMenuUI.SetActive(false);
     }
 
+    // Reload on button press
     void TaskOnClick()
     {
         if (playerDead == true)
@@ -46,6 +47,7 @@ public class GameOver : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
+    // Turns on Game over UI
     public void playerDied()
     {
         pauseScript.disablePause();

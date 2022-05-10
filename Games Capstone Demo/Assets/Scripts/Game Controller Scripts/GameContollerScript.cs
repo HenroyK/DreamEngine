@@ -113,7 +113,7 @@ public class GameContollerScript : MonoBehaviour
         }
     }
 
-    void SetCheckpoint()
+    public void SetCheckpoint()
     {
         //Handle saving checkpoint.
         lastCheckpoint = commandListIndex;
@@ -124,7 +124,7 @@ public class GameContollerScript : MonoBehaviour
             checkpointObjects.Add(newObj);
         }
     }
-    void LoadCheckpoint()
+    public void LoadCheckpoint()
     {
         //Handle loading checkpoint.
         clearObjects();

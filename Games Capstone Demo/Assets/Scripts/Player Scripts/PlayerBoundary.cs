@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBoundary : MonoBehaviour
 {
-    private GameOver endScreenScript;
+    //private GameOver endScreenScript;
+    private LivesScript livesScript;
     
     void Start()
     {
@@ -13,7 +14,8 @@ public class PlayerBoundary : MonoBehaviour
 
         if (gameController != null)
         {
-            endScreenScript = gameController.GetComponent<GameOver>();
+            //endScreenScript = gameController.GetComponent<GameOver>();
+            livesScript = gameController.GetComponent<LivesScript>();
         }
         else
         {
@@ -26,7 +28,7 @@ public class PlayerBoundary : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            endScreenScript.playerDied();
+            livesScript.LifeCountLoss(1);
         }
     }
 }
