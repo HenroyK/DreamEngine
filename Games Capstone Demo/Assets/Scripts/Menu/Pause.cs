@@ -9,17 +9,19 @@ public class Pause : MonoBehaviour
     public GameObject pauseMenuUI;
 
     private bool gamePaused;
+    private bool canPause;
 
     // Game starts unpaused (running)
     void Start()
     {
         ResumeGame();
+        enablePause();
     }
 
     // Game is paused and unpaused with a toggle control (key)
     void Update()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && canPause)
         {
             if (gamePaused == false)
             {
@@ -44,5 +46,15 @@ public class Pause : MonoBehaviour
         gamePaused = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void disablePause()
+    {
+        canPause = false;
+    }
+
+    public void enablePause()
+    {
+        canPause = true;
     }
 }

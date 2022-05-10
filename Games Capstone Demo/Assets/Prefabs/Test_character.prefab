@@ -187,8 +187,9 @@ MonoBehaviour:
   playerCollider: {fileID: 2000101234070049783}
   yvelocity: 0
   maxSpeed: 15
-  accel: 1
+  accel: 0.5
   jumpaccel: 45
+  airStrafeSpeed: 1
   gravityModifier: 100
   dashDuration: 0.1
   dashCooldown: 3
