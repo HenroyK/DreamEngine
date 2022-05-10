@@ -850,6 +850,11 @@ MonoBehaviour:
     vector3: {x: 0, y: 0, z: 0}
     time: 0
     speed: 1
+  - commandType: 3
+    spawnObject: {fileID: 908613688977971745, guid: e36fccc166e4a2f43b68acff43784a66, type: 3}
+    vector3: {x: 0, y: 0, z: 0}
+    time: 0
+    speed: 15
 --- !u!4 &739109348
 Transform:
   m_ObjectHideFlags: 0
@@ -1018,7 +1023,6 @@ GameObject:
   - component: {fileID: 818473226}
   - component: {fileID: 818473225}
   - component: {fileID: 818473224}
-  - component: {fileID: 818473223}
   m_Layer: 0
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -1026,19 +1030,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &818473223
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818473222}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &818473224
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1115,7 +1106,6 @@ GameObject:
   - component: {fileID: 838688818}
   - component: {fileID: 838688817}
   - component: {fileID: 838688816}
-  - component: {fileID: 838688815}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -1123,19 +1113,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &838688815
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838688814}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &838688816
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1659,7 +1636,6 @@ GameObject:
   - component: {fileID: 1299762642}
   - component: {fileID: 1299762641}
   - component: {fileID: 1299762640}
-  - component: {fileID: 1299762639}
   m_Layer: 0
   m_Name: Cube (6)
   m_TagString: Untagged
@@ -1667,19 +1643,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1299762639
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299762638}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1299762640
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2274,7 +2237,6 @@ GameObject:
   - component: {fileID: 1664386745}
   - component: {fileID: 1664386744}
   - component: {fileID: 1664386743}
-  - component: {fileID: 1664386742}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -2282,19 +2244,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1664386742
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664386741}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1664386743
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2497,7 +2446,6 @@ GameObject:
   - component: {fileID: 1855422880}
   - component: {fileID: 1855422879}
   - component: {fileID: 1855422878}
-  - component: {fileID: 1855422877}
   m_Layer: 0
   m_Name: Cube (8)
   m_TagString: Untagged
@@ -2505,19 +2453,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1855422877
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855422876}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1855422878
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3192,6 +3127,10 @@ PrefabInstance:
     - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: dashDuration
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
+      propertyPath: airStrafeSpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8022007116041893815, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
       propertyPath: playerCollider

@@ -11,6 +11,7 @@ public class MovementScript : MonoBehaviour
 	public float maxSpeed;
 	public float accel;
 	public float jumpaccel;
+	public float airStrafeSpeed;
 	public float gravityModifier;
 	////Control Keys
 	//public KeyCode jumpKey;
@@ -43,17 +44,20 @@ public class MovementScript : MonoBehaviour
 
 	}
 
-	void FixedUpdate()
-	{
-		playerRigidbody.AddForce(Vector3.down * gravityModifier * GetComponent<Rigidbody>().mass);
-	}
+	//removed gravity code and just used the gravity part of the unity physics engine. Should be the same thing.
+
+	//void FixedUpdate()
+	//{
+	//	playerRigidbody.AddForce(Vector3.down * gravityModifier * GetComponent<Rigidbody>().mass);
+	//}
 
 	// Update is called once per frame
 	void Update()
 	{
 		
-		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && isDashing == false && currentDashCooldown <= 0)
+		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
+			playerRigidbody.useGravity = false;
 			//SoundManagerScript.PlaySound("Dash");
 			currentDashDuration = dashDuration;
 			currentDashCooldown = dashCooldown;
@@ -68,13 +72,17 @@ public class MovementScript : MonoBehaviour
 		currentDashCooldown -= Time.deltaTime;
 
 		//if dash duration is over, stop dashing
-		if (currentDashDuration < 0)
+		if (currentDashDuration < 0 && isDashing)
 		{
+			playerRigidbody.velocity = new Vector3(0, 0, 0);
 			isDashing = false;
+			playerRigidbody.useGravity = true;
+			
 		}
 
-		if (isDashing)
+		if (isDashing)  //when dashing.
 		{
+			
 			//When dashing, move in a set direction
 			if (dashDirection > 0)
 			{
@@ -85,18 +93,32 @@ public class MovementScript : MonoBehaviour
 				playerRigidbody.velocity = new Vector3(-dashSpeed, 0);
 			}
 		}
-
-		if (!isDashing)//when not dashing. Avoids conflict with dash movement
+		else //when not dashing. Avoids conflict with dash movement
 		{
-			//Move left/right
-			playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
-
-			//Jump
-			if (Input.GetButtonDown("Jump") && IsGrounded())
+			//Movement is different when airstrafing to standing on ground
+			if (IsGrounded())
 			{
-				//SoundManagerScript.PlaySound("Jump");
-				//animation.JumpAnimation();
-				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
+				//Move left/right
+				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+				//Jump
+				if (Input.GetButtonDown("Jump"))
+				{
+					//SoundManagerScript.PlaySound("Jump");
+					//animation.JumpAnimation();
+					playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
+				}
+			}
+			else //Airstrafe movement code.
+			{
+				//Checks if the player is trying to go left or right, checks that they are below half of max speed then modifies velocity by airStrafeSpeed. 
+				if (Input.GetAxis("Horizontal") > 0 && playerRigidbody.velocity.x < maxSpeed / 2)
+				{
+					playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+				}
+				if (Input.GetAxis("Horizontal") < 0 && playerRigidbody.velocity.x > -1 * maxSpeed)
+				{
+					playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+				}
 			}
 
 			//Change depth
@@ -108,6 +130,7 @@ public class MovementScript : MonoBehaviour
 			{
 				ChangeDepth(1);
 			}
+
 		}
 
 		//// stop character if player isn't moving right or left
@@ -126,8 +149,6 @@ public class MovementScript : MonoBehaviour
 	//Change z axis
 	void ChangeDepth(int newDepth)
 	{
-		
-		
 		blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward*newDepth, out blockRaycastHit, transform.rotation, 5);
 
 		if(blockDetect)
@@ -141,8 +162,6 @@ public class MovementScript : MonoBehaviour
 			//gameObject.layer = curDepth + 7;
 			transform.position = new Vector3(transform.position.x, transform.position.y, curDepth * 5);
 		}
-
-		
 	}
 	
 	bool IsGrounded()
