@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 6033687136284024681}
   - component: {fileID: 7306143510123038789}
   - component: {fileID: 2889002187846440329}
-  - component: {fileID: 2980143006891497416}
   - component: {fileID: 8052737875728648066}
   m_Layer: 0
   m_Name: Mail box 2
@@ -148,20 +147,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 124
   m_CollisionDetection: 0
---- !u!114 &2980143006891497416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6408664974989575635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932b2bc41c512ec4f9909213b4be72be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loopSpawnPos: 160
-  loopDespawnPos: -30
 --- !u!114 &8052737875728648066
 MonoBehaviour:
   m_ObjectHideFlags: 0

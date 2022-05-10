@@ -260,7 +260,6 @@ GameObject:
   - component: {fileID: 5979409343690704149}
   - component: {fileID: 9059797348112686851}
   - component: {fileID: 6422157524424605903}
-  - component: {fileID: 9142374492843357559}
   - component: {fileID: 4111998522710010222}
   m_Layer: 0
   m_Name: house3
@@ -317,20 +316,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &9142374492843357559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6462931215101353903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932b2bc41c512ec4f9909213b4be72be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loopSpawnPos: 160
-  loopDespawnPos: -30
 --- !u!114 &4111998522710010222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,8 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e583b2fa96f50e4448ae23bd7f68bdd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockRigidbody: {fileID: 6422157524424605903}
-  speed: 10
 --- !u!1 &6844904013971411098
 GameObject:
   m_ObjectHideFlags: 0
