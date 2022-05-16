@@ -101,12 +101,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRigidbody: {fileID: 8022007116041893814}
   playerCollider: {fileID: 2000101234070049783}
-  yvelocity: 0
   maxSpeed: 15
   accel: 1
+  airStrafeSpeed: 0.2
   jumpaccel: 45
-  airStrafeSpeed: 0
   gravityModifier: 100
+  globalSpeed: 0
+  coyoteTimeLimit: 0.1
+  coyoteTimer: 0
   dashDuration: 0.1
   dashCooldown: 3
   dashSpeed: 60
@@ -141,7 +143,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.25, y: 5, z: 1.0000002}
+  m_Size: {x: 3.4, y: 5, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7579565159512142881
 PrefabInstance:

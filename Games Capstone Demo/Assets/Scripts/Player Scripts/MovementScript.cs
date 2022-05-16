@@ -7,12 +7,16 @@ public class MovementScript : MonoBehaviour
 	//Variables
 	public Rigidbody playerRigidbody;
 	public Collider playerCollider;
-	public float yvelocity;
 	public float maxSpeed;
-	public float accel;
-	public float jumpaccel;
+    public float accel;
 	public float airStrafeSpeed;
+	public float jumpaccel;
 	public float gravityModifier;
+	
+	public float globalSpeed;
+
+	public float coyoteTimeLimit = 0.1f;
+	public float coyoteTimer = 0;
 	////Control Keys
 	//public KeyCode jumpKey;
 	//public KeyCode forwardKey;
@@ -20,6 +24,7 @@ public class MovementScript : MonoBehaviour
 	//public KeyCode duckKey;
 	//public KeyCode swapFKey;
 	//public KeyCode swapBKey;
+
 	//Dash variables
 	public float dashDuration;
 	public float dashCooldown;
@@ -72,6 +77,9 @@ public class MovementScript : MonoBehaviour
 		currentDashDuration -= Time.deltaTime;
 		currentDashCooldown -= Time.deltaTime;
 
+		//Coyote Timer
+		coyoteTimer -= Time.deltaTime;
+
 		//if dash duration is over, stop dashing
 		if (currentDashDuration < 0 && isDashing)
 		{
@@ -97,10 +105,17 @@ public class MovementScript : MonoBehaviour
 		else //when not dashing. Avoids conflict with dash movement
 		{
 			//Movement is different when airstrafing to standing on ground
-			if (IsGrounded())
+			//CoyoteTimer or grounded
+			if (IsGrounded() || coyoteTimer > 0)
 			{
 				//Move left/right
+
 				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+                if (playerRigidbody.velocity.x < 0)
+                {
+					playerRigidbody.velocity += new Vector3(-globalSpeed, 0);
+				}
+
 				//Jump
 				if (Input.GetButtonDown("Jump"))
 				{
@@ -111,6 +126,7 @@ public class MovementScript : MonoBehaviour
 			}
 			else //Airstrafe movement code.
 			{
+				
 				//Checks if the player is trying to go left or right, checks that they are below half of max speed then modifies velocity by airStrafeSpeed. 
 				if (Input.GetAxis("Horizontal") > 0 && playerRigidbody.velocity.x < maxSpeed / 2)
 				{
@@ -167,11 +183,13 @@ public class MovementScript : MonoBehaviour
 	
 	bool IsGrounded()
     {
+		
 		LayerMask mask = LayerMask.GetMask(new string[] { "Ground", "Building" });
 		Quaternion weirdQuat = new Quaternion();
 		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
 		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(1, 0.1f, 1),weirdQuat, mask))
 		{
+			coyoteTimer = coyoteTimeLimit;
 			animator.SetTrigger("Land");
 			return true;
 		}
@@ -181,7 +199,12 @@ public class MovementScript : MonoBehaviour
 		}
 	}
 
-    private void OnDrawGizmos()
+	public void UpdateSpeed(float speed)
+    {
+		globalSpeed = speed;
+    }
+
+	private void OnDrawGizmos()
     {
 		Gizmos.color = Color.red;
 		// *********************************

@@ -8,7 +8,7 @@ public class GameContollerScript : MonoBehaviour
     public GameObject player;
     public GameObject playerSpawn;
 
-    private GameObject playerRef;
+    //private GameObject playerRef;
     
     //list of all instantiated moving objects, ie. Buildings
     private List<GameObject> movingObjects = new List<GameObject>();
@@ -34,7 +34,8 @@ public class GameContollerScript : MonoBehaviour
     {
         //Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
 
-        playerRef = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
+        player = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
+        player.BroadcastMessage("UpdateSpeed", globalSpeed);
     }
 
     // Update is called once per frame
@@ -85,9 +86,10 @@ public class GameContollerScript : MonoBehaviour
                         globalSpeed = nextCommand.speed;
                         foreach (GameObject a in movingObjects)
                         {
-                            a.BroadcastMessage("ChangeSpeed", globalSpeed);
+                            a.BroadcastMessage("GlobalSpeed", globalSpeed);
                             //a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                         }
+                        player.BroadcastMessage("UpdateSpeed", globalSpeed);
                         Debug.Log("Global speed is now" + globalSpeed);
                         break;
                     case Command.CommandType.Camera:
@@ -143,7 +145,7 @@ public class GameContollerScript : MonoBehaviour
         }
         commandListIndex = lastCheckpoint;
         delay = checkpointDelay;
-        playerRef.transform.position = playerSpawn.transform.position;
+        player.transform.position = playerSpawn.transform.position;
     }
     void clearObjects()
     {
@@ -153,6 +155,11 @@ public class GameContollerScript : MonoBehaviour
             Destroy(obj);
         }
     }
+    float GetCurrentSpeed()
+    {
+        return globalSpeed;
+    }
+
 }
 
 
