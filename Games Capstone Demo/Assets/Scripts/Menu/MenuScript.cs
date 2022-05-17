@@ -5,13 +5,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartButton : MonoBehaviour
+public class MenuScript : MonoBehaviour
 {
 	//Variables
-	public SceneAsset gameScene;
+	///public Object gameScene; This currently doesnt work when building, comes up as null
 	public List<Texture2D> introImages;
 	public GameObject cutsceneUI;
+	public AudioSource audioSource;
 	private int curScene = -1;
+
+	//Startup stuff
+	void Start()
+    {
+		audioSource.Play(0);
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -40,7 +47,7 @@ public class StartButton : MonoBehaviour
 	//Load scene (asynchronous)
 	IEnumerator LoadAsyncScene()
 	{
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(gameScene.name);
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
 
 		//Wait until scene fully loads
 		while (!asyncLoad.isDone)
