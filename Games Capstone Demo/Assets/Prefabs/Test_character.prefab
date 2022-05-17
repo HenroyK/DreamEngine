@@ -112,8 +112,8 @@ MonoBehaviour:
   dashDuration: 0.1
   dashCooldown: 3
   dashSpeed: 60
-  minDepth: 0
-  maxDepth: 2
+  minDepth: -1
+  maxDepth: 1
   curDepth: 0
   animator: {fileID: 6728015053132064364}
 --- !u!54 &8022007116041893814

@@ -111,6 +111,7 @@ public class MovementScript : MonoBehaviour
 				//Move left/right
 
 				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+				//Debug.Log(Input.GetAxis("Horizontal"));
                 if (playerRigidbody.velocity.x < 0)
                 {
 					playerRigidbody.velocity += new Vector3(-globalSpeed, 0);
