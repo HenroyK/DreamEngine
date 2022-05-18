@@ -20,6 +20,9 @@ public class Pause : MonoBehaviour
         Button btnResume = resumeBtn.GetComponent<Button>();
         btnResume.onClick.AddListener(ResumeOnClick);
 
+        Button btnMainMenu = mainMenuBtn.GetComponent<Button>();
+        btnMainMenu.onClick.AddListener(MainMenuOnClick);
+
         ResumeGame();
         enablePause();
     }
@@ -52,7 +55,7 @@ public class Pause : MonoBehaviour
 
     void MainMenuOnClick()
     {
-
+        SceneManager.LoadScene(0);
     }
 
     void PauseGame()

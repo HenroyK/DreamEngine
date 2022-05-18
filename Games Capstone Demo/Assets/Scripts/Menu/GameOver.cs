@@ -47,7 +47,7 @@ public class GameOver : MonoBehaviour
 
     void MainMenuOnClick()
     {
-
+        SceneManager.LoadScene(0);
     }
 
     // Reloads the current scene
