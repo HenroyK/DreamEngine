@@ -8,6 +8,7 @@ public class GameOver : MonoBehaviour
 {
     public GameObject gameOverMenuUI;
     public Button retryBtn;
+    public Button mainMenuBtn;
 
     private Pause pauseScript;
     private bool playerDead = false;
@@ -26,19 +27,27 @@ public class GameOver : MonoBehaviour
             Debug.Log("Error. Couldn't find Game Controller");
         }
 
-        Button btn = retryBtn.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClick);
+        Button btnRetry = retryBtn.GetComponent<Button>();
+        btnRetry.onClick.AddListener(RetryOnClick);
+
+        Button btnMainMenu = mainMenuBtn.GetComponent<Button>();
+        btnMainMenu.onClick.AddListener(MainMenuOnClick);
 
         gameOverMenuUI.SetActive(false);
     }
 
     // Reload on button press
-    void TaskOnClick()
+    void RetryOnClick()
     {
         if (playerDead == true)
         {
             Reload();
         }
+    }
+
+    void MainMenuOnClick()
+    {
+
     }
 
     // Reloads the current scene
