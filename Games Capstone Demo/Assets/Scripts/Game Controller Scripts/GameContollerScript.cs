@@ -143,6 +143,11 @@ public class GameContollerScript : MonoBehaviour
             obj.SetActive(true);
             movingObjects.Add(obj);
         }
+        foreach (GameObject a in movingObjects)
+        {
+            a.BroadcastMessage("ChangeSpeed", globalSpeed);
+            //a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
+        }
         commandListIndex = lastCheckpoint;
         delay = checkpointDelay;
         player.transform.position = playerSpawn.transform.position;
