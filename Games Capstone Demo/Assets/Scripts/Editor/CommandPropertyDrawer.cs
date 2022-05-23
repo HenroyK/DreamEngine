@@ -47,8 +47,29 @@ public class CommandPropertyDrawer : PropertyDrawer
             var speedRect = new Rect(rect.x + 20, rect.y, 30, rect.height / 2);
             EditorGUI.PropertyField(speedRect, property.FindPropertyRelative("speed"), GUIContent.none);
         }
-        
-        
+
+
+
+        //if command type is audio
+        if (property.FindPropertyRelative("commandType").enumValueIndex == 5)
+        {
+            // New rect for next element
+            var audioClipRect = new Rect(rect.x + 20, rect.y, 69, rect.height / 2);
+            EditorGUI.PropertyField(audioClipRect, property.FindPropertyRelative("audioClip"), GUIContent.none);
+
+            var audioLabelRect = new Rect(audioClipRect.x + 71, rect.y, 50, rect.height / 2);
+            EditorGUI.LabelField(audioLabelRect, "Duration");
+
+            var audioDurationRect = new Rect(audioLabelRect.x + 50, audioLabelRect.y, 25, rect.height / 2);
+            EditorGUI.PropertyField(audioDurationRect, property.FindPropertyRelative("audioDuration"), GUIContent.none);
+
+            audioLabelRect = new Rect(audioDurationRect.x + 27, rect.y, 45, rect.height / 2);
+            EditorGUI.LabelField(audioLabelRect, "Volume");
+
+            var audioVolumeRect = new Rect(audioLabelRect.x + 47, audioLabelRect.y, 25, rect.height / 2);
+            EditorGUI.PropertyField(audioVolumeRect, property.FindPropertyRelative("audioVolume"), GUIContent.none);
+        }
+
         var labelRect = new Rect(80, rect.y + rect.height / 2, 159, rect.height / 2);
         var timeRect = labelRect;
         timeRect.x += labelRect.width + 20;

@@ -7,9 +7,9 @@ public class GameContollerScript : MonoBehaviour
 {
     public GameObject player;
     public GameObject playerSpawn;
-
     //private GameObject playerRef;
-    
+
+    public AudioManager audioManager;
     //list of all instantiated moving objects, ie. Buildings
     private List<GameObject> movingObjects = new List<GameObject>();
 
@@ -32,6 +32,11 @@ public class GameContollerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (audioManager = null)
+        {
+            audioManager = new AudioManager();
+        }
+
         //Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
 
         player = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
@@ -104,7 +109,7 @@ public class GameContollerScript : MonoBehaviour
                         break;
                     case Command.CommandType.PlayAudio:
                         //Checkpoint
-
+                        audioManager.AudioCommand(nextCommand.audioClip, nextCommand.audioDuration, nextCommand.audioVolume);
                         //NotImplemented
                         //Probably make a list of audio sources, place them into a list and use that to access them.
                         break;
