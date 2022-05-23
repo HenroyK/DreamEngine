@@ -16,12 +16,14 @@ public class GameContollerScript : MonoBehaviour
     //list of all instantiated moving objects to be saved at a checkpoint
     private List<GameObject> checkpointObjects = new List<GameObject>();
 
+    private int lastCheckpoint = 0;
+
     //List of Commands, such as spawning stuff, waiting or changing gamespeed.
     public List<Command> commandList = new List<Command>();
     [SerializeField]
     private int commandListIndex = 0;
 
-    private int lastCheckpoint = 0;
+    
     private float delay = 0;
     private float globalSpeed;
     private float checkpointDelay;
@@ -127,6 +129,8 @@ public class GameContollerScript : MonoBehaviour
         checkpointDelay = delay;
         //Handle saving checkpoint.
         lastCheckpoint = commandListIndex;
+        checkpointObjects.Clear();
+
         foreach (GameObject obj in movingObjects)
         {
             GameObject newObj = Instantiate(obj);
@@ -140,14 +144,15 @@ public class GameContollerScript : MonoBehaviour
         clearObjects();
         foreach (GameObject obj in checkpointObjects)
         {
-            obj.SetActive(true);
-            movingObjects.Add(obj);
+            GameObject newObj = Instantiate(obj);
+            movingObjects.Add(newObj);
         }
-        foreach (GameObject a in movingObjects)
+        foreach (GameObject obj in movingObjects)
         {
-            a.BroadcastMessage("ChangeSpeed", globalSpeed);
-            //a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
+            obj.SetActive(true);
+            obj.BroadcastMessage("ChangeSpeed", globalSpeed);
         }
+        //lateCheckpointUpdate = true;
         commandListIndex = lastCheckpoint;
         delay = checkpointDelay;
         player.transform.position = playerSpawn.transform.position;
@@ -159,6 +164,7 @@ public class GameContollerScript : MonoBehaviour
         {
             Destroy(obj);
         }
+        movingObjects.Clear();
     }
     float GetCurrentSpeed()
     {
