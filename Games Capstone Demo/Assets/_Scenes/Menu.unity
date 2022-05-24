@@ -1260,6 +1260,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 7fb9faffbfb4dae4d9ca5469145d34cc, type: 3}
   cutsceneUI: {fileID: 1382998447}
   audioSource: {fileID: 1540553031}
+  cutsceneMusic: {fileID: 8300000, guid: 1d992ba2eb9165949abb7e313bb04280, type: 3}
 --- !u!82 &1540553031
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1270,7 +1271,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4114c4299649fcb4e94bb7207fdbd60a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
