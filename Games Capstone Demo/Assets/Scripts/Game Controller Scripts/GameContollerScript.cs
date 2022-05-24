@@ -170,6 +170,10 @@ public class GameContollerScript : MonoBehaviour
     {
         return globalSpeed;
     }
+    public void EndLevel()
+    {
+        //EndLevelCode
+    }
 
 }
 
