@@ -24,9 +24,9 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6abe918ee1229b34f8557fc2a5a39825, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.66621685, g: 0.8827709, b: 0.8857476, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -233,6 +233,38 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[1].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[2].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[2].vector3.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[2].vector3.z
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[1].commandType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[2].commandType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[2].spawnObject
+      value: 
+      objectReference: {fileID: 972125480459473594, guid: 6d3b6f54109714b4ca234b985bcec7c0, type: 3}
     - target: {fileID: 6064070200953209875, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: m_Name
       value: GameController

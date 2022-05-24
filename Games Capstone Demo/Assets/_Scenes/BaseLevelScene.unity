@@ -235,23 +235,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[1].speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
-      propertyPath: commandList.Array.data[2].speed
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[2].speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[1].vector3.x
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[1].vector3.z
       value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[2].vector3.x
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[2].vector3.z
@@ -259,7 +263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[1].commandType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[1].spawnObject
@@ -267,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 972125480459473594, guid: 6d3b6f54109714b4ca234b985bcec7c0, type: 3}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[2].commandType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[2].spawnObject
