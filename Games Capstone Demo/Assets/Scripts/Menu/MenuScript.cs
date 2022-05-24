@@ -12,6 +12,7 @@ public class MenuScript : MonoBehaviour
 	public List<Texture2D> introImages;
 	public GameObject cutsceneUI;
 	public AudioSource audioSource;
+	public AudioClip cutsceneMusic;
 	private int curScene = -1;
 
 	//Startup stuff
@@ -41,6 +42,8 @@ public class MenuScript : MonoBehaviour
 	public void OnPButtonPress()
 	{
 		curScene = 0;
+		audioSource.clip = cutsceneMusic;
+		audioSource.Play(0);
 		cutsceneUI.SetActive(true);
 	}
 
