@@ -35,19 +35,24 @@ public class MovementScript : MonoBehaviour
 	private float dashDirection;
 
 	//Vals
-	public int minDepth;
-	public int maxDepth;
-	public int curDepth;
+	public float minDepth;
+	public float maxDepth;
+	public float curDepth;
 
 	public Animator animator;
 	//
 	private bool blockDetect = false;
 	private RaycastHit blockRaycastHit;
 	private bool moveBack = true;
+
+	private float spawnDepth;
+
 	// Start is called before the first frame update
 	void Start()
 	{
+		spawnDepth = gameObject.transform.position.z;
 
+		//curDepth = spawnDepth;
 	}
 
 	//removed gravity code and just used the gravity part of the unity physics engine. Should be the same thing.
@@ -178,7 +183,7 @@ public class MovementScript : MonoBehaviour
         {
 			curDepth = Mathf.Clamp(curDepth += newDepth, minDepth, maxDepth);
 			//gameObject.layer = curDepth + 7;
-			transform.position = new Vector3(transform.position.x, transform.position.y, curDepth * 5);
+			transform.position = new Vector3(transform.position.x, transform.position.y, spawnDepth + (curDepth * 5));
 		}
 	}
 	
