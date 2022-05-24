@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEditor;
 
 public class Pause : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public Button resumeBtn;
+    public Button mainMenuBtn;
 
     private bool gamePaused;
     private bool canPause;
@@ -14,6 +17,12 @@ public class Pause : MonoBehaviour
     // Game starts unpaused (running)
     void Start()
     {
+        Button btnResume = resumeBtn.GetComponent<Button>();
+        btnResume.onClick.AddListener(ResumeOnClick);
+
+        Button btnMainMenu = mainMenuBtn.GetComponent<Button>();
+        btnMainMenu.onClick.AddListener(MainMenuOnClick);
+
         ResumeGame();
         enablePause();
     }
@@ -23,15 +32,30 @@ public class Pause : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause") && canPause)
         {
-            if (gamePaused == false)
-            {
-                PauseGame();
-            }
-            else if (gamePaused == true)
-            {
-                ResumeGame();
-            }
+            TogglePause();
         }
+    }
+
+    void TogglePause()
+    {
+        if (gamePaused == false)
+        {
+            PauseGame();
+        }
+        else if (gamePaused == true)
+        {
+            ResumeGame();
+        }
+    }
+
+    void ResumeOnClick()
+    {
+        TogglePause();
+    }
+
+    void MainMenuOnClick()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void PauseGame()
