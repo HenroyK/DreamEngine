@@ -38,10 +38,16 @@ public class MenuScript : MonoBehaviour
 	}
 
 	//Button pressed
-	public void OnButtonPress()
+	public void OnPButtonPress()
 	{
 		curScene = 1;
 		cutsceneUI.SetActive(true);
+	}
+
+	//Button pressed
+	public void OnQButtonPress()
+	{
+		Application.Quit();
 	}
 
 	//Load scene (asynchronous)
