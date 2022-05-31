@@ -12,6 +12,7 @@ public class MenuScript : MonoBehaviour
 	public List<Texture2D> introImages;
 	public GameObject cutsceneUI;
 	public AudioSource audioSource;
+	public AudioClip cutsceneMusic;
 	private int curScene = -1;
 
 	//Startup stuff
@@ -24,7 +25,7 @@ public class MenuScript : MonoBehaviour
 	void Update()
 	{
 		//Progress when jump is pressed, loading when hitting the end of the images
-		if (Input.GetButtonDown("Jump") && curScene > 0)
+		if (Input.GetButtonDown("Jump") && curScene >= 0)
 		{
 			curScene++;
 			if (curScene >= introImages.Count)
@@ -40,7 +41,9 @@ public class MenuScript : MonoBehaviour
 	//Button pressed
 	public void OnPButtonPress()
 	{
-		curScene = 1;
+		curScene = 0;
+		audioSource.clip = cutsceneMusic;
+		audioSource.Play(0);
 		cutsceneUI.SetActive(true);
 	}
 

@@ -104,7 +104,7 @@ MonoBehaviour:
   maxSpeed: 15
   accel: 1
   airStrafeSpeed: 0.2
-  jumpaccel: 45
+  jumpaccel: 50
   gravityModifier: 100
   globalSpeed: 0
   coyoteTimeLimit: 0.1
