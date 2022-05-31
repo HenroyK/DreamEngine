@@ -1254,10 +1254,9 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 17d47f700155d09469e575347d8dd31a, type: 3}
   - {fileID: 2800000, guid: cfd4885f042d22949b232cd0ddf05ec3, type: 3}
   - {fileID: 2800000, guid: 72d513f983def1843918fa1663dd6058, type: 3}
-  - {fileID: 2800000, guid: 0de5746f5ea89794a8b3020a46571b77, type: 3}
   - {fileID: 2800000, guid: 208195a6eea405946bc4a3869046c3bb, type: 3}
-  - {fileID: 2800000, guid: d83f768f1764adb428a2e93b72349320, type: 3}
-  - {fileID: 2800000, guid: 7fb9faffbfb4dae4d9ca5469145d34cc, type: 3}
+  - {fileID: 2800000, guid: 37e63908ae0bf5b4bbae2cbead2856b1, type: 3}
+  - {fileID: 2800000, guid: 11daa11b274a21f46add3777a0f95fc6, type: 3}
   cutsceneUI: {fileID: 1382998447}
   audioSource: {fileID: 1540553031}
   cutsceneMusic: {fileID: 8300000, guid: 1d992ba2eb9165949abb7e313bb04280, type: 3}
