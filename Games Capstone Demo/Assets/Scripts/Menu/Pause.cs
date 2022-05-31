@@ -15,6 +15,7 @@ public class Pause : MonoBehaviour
     private bool canPause;
 
     // Game starts unpaused (running)
+    // Set up the button variables for use
     void Start()
     {
         Button btnResume = resumeBtn.GetComponent<Button>();
@@ -63,6 +64,7 @@ public class Pause : MonoBehaviour
         gamePaused = true;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0;
+        gameObject.GetComponent<AudioSource>().Pause();
     }
 
     void ResumeGame()
@@ -70,6 +72,7 @@ public class Pause : MonoBehaviour
         gamePaused = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1;
+        gameObject.GetComponent<AudioSource>().UnPause();
     }
 
     public void disablePause()

@@ -242,6 +242,18 @@ PrefabInstance:
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[4].time
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[5].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[6].time
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[1].speed
       value: 10
       objectReference: {fileID: 0}
@@ -259,6 +271,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[5].speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[6].speed
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
@@ -291,6 +307,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[5].vector3.z
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[6].vector3.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[6].vector3.z
       value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
@@ -327,6 +351,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[5].spawnObject
+      value: 
+      objectReference: {fileID: 8400982411017895507, guid: 4cd590f17db10d9458e729fb7f092600, type: 3}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[6].commandType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandList.Array.data[6].spawnObject
       value: 
       objectReference: {fileID: 972125480459473594, guid: 181478f7fa90d7841824585607fb2337, type: 3}
     - target: {fileID: 6064070200953209875, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
