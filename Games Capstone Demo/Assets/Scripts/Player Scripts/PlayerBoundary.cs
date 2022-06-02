@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBoundary : MonoBehaviour
 {
-    //private GameOver endScreenScript;
     private LivesScript livesScript;
     
+    // Get a reference of Lives Script that is attached to the Game controller object
     void Start()
     {
         GameObject gameController = GameObject.FindWithTag("GameController");
 
         if (gameController != null)
         {
-            //endScreenScript = gameController.GetComponent<GameOver>();
             livesScript = gameController.GetComponent<LivesScript>();
         }
         else
@@ -23,7 +22,7 @@ public class PlayerBoundary : MonoBehaviour
         }
     }    
 
-    // Checks if the player is the object to trigger the method
+    // Subract one life if player collides with attached object
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

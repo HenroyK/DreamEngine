@@ -6,9 +6,10 @@ using TMPro;
 
 public class LivesScript : MonoBehaviour
 {
-    public float lifeCount = 3;
-    public float lifeCountCap = 3;
+    public float lifeCount = 3;     // current lives
+    public float lifeCountCap = 3;  // maximum possible lives
 
+    // GUI global variables
     public GameObject livesUI;
     public string defaultText = "Lives: ";
     public GameObject livesText;
@@ -16,7 +17,7 @@ public class LivesScript : MonoBehaviour
     private GameContollerScript gameControllerScript;
     private GameOver gameOverScript;
 
-    // Set up variables / find scripts
+    // Set up variables and find scripts
     void Start()
     {
         GameObject gameController = GameObject.FindWithTag("GameController");
@@ -61,7 +62,8 @@ public class LivesScript : MonoBehaviour
         RefreshUI();
     }
 
-    // Remove health
+    // Remove health and return them to checkpoint,
+    // trigger end game function in game over script if life count is zero
     public void LifeCountLoss(float damage)
     {
         for (int i = 0; i < (int)damage; i++)

@@ -37,6 +37,8 @@ public class Pause : MonoBehaviour
         }
     }
 
+    // Manages the pause state of the game,
+    // if game is pause -> unpause, else pause
     void TogglePause()
     {
         if (gamePaused == false)
@@ -49,16 +51,19 @@ public class Pause : MonoBehaviour
         }
     }
 
+    // Unpauses when resume button is clicked
     void ResumeOnClick()
     {
         TogglePause();
     }
 
+    // Load Main Menu scene when menu button is clicked
     void MainMenuOnClick()
     {
         SceneManager.LoadScene(0);
     }
 
+    // pauses game and music, loads respective UI
     void PauseGame()
     {
         gamePaused = true;
@@ -67,6 +72,7 @@ public class Pause : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Pause();
     }
 
+    //unpauses game and music, hides respective UI
     void ResumeGame()
     {
         gamePaused = false;

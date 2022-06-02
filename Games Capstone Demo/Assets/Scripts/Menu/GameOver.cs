@@ -13,7 +13,7 @@ public class GameOver : MonoBehaviour
     private Pause pauseScript;
     private bool playerDead = false;
 
-    // Set up variables / find scripts
+    // Set up variables, find scripts, and enable buttons
     void Start()
     {
         GameObject gameController = GameObject.FindWithTag("GameController");
@@ -45,6 +45,7 @@ public class GameOver : MonoBehaviour
         }
     }
 
+    // Load Main Menu scene when menu button is clicked
     void MainMenuOnClick()
     {
         SceneManager.LoadScene(0);
@@ -56,7 +57,7 @@ public class GameOver : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
-    // Turns on Game over UI
+    // Turns on Game over UI, pauses game and music
     public void playerDied()
     {
         pauseScript.disablePause();

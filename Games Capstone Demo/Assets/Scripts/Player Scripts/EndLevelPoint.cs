@@ -7,14 +7,13 @@ public class EndLevelPoint : MonoBehaviour
 {
     private EndLevel endLevelScript;
 
-    // Start is called before the first frame update
+    // Get a reference of EndLevel script attached to the scene game controller script
     void Start()
     {
         GameObject gameController = GameObject.FindWithTag("GameController");
 
         if (gameController != null)
         {
-            //endScreenScript = gameController.GetComponent<GameOver>();
             endLevelScript = gameController.GetComponent<EndLevel>();
         }
         else
@@ -23,7 +22,7 @@ public class EndLevelPoint : MonoBehaviour
         }
     }
 
-    // Checks if the player is the object to trigger the method
+    // Triggers EndLevel script function if the player collides with the attached object
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

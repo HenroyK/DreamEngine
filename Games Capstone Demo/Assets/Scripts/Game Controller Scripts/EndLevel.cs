@@ -12,7 +12,7 @@ public class EndLevel : MonoBehaviour
 
     private Pause pauseScript;
 
-    // Start is called before the first frame update
+    // Set up variables, find scripts, and enable buttons
     void Start()
     {
         GameObject gameController = GameObject.FindWithTag("GameController");
@@ -35,21 +35,25 @@ public class EndLevel : MonoBehaviour
         endLevelMenuUI.SetActive(false);
     }
 
+    // Reload on button press
     void ReloadOnClick()
     {
         Reload();
     }
 
+    // Load Main Menu scene when menu button is clicked
     void MainMenuOnClick()
     {
         SceneManager.LoadScene(0);
     }
 
+    // Reloads the current scene
     void Reload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // Turns on end game UI, pauses game and music
     public void EndLevelReached()
     {
         pauseScript.disablePause();
