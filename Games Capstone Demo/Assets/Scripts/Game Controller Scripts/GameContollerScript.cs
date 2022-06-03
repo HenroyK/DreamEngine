@@ -5,19 +5,28 @@ using System.Linq;
 
 public class GameContollerScript : MonoBehaviour
 {
+    public GameObject player;
+    public GameObject playerSpawn;
+    //private GameObject playerRef;
+
+    public AudioManager audioManager;
     //list of all instantiated moving objects, ie. Buildings
     private List<GameObject> movingObjects = new List<GameObject>();
 
     //list of all instantiated moving objects to be saved at a checkpoint
     private List<GameObject> checkpointObjects = new List<GameObject>();
 
+    private int lastCheckpoint = 0;
+
     //List of Commands, such as spawning stuff, waiting or changing gamespeed.
     public List<Command> commandList = new List<Command>();
+    [SerializeField]
     private int commandListIndex = 0;
-    private int lastCheckpoint = 0;
-    private float delay;
-    private float globalSpeed;
 
+    
+    private float delay = 0;
+    private float globalSpeed;
+    private float checkpointDelay;
     //Below is stuff for later.
     //public List<GameObject> otherSpawnMovingObjects = new List<GameObject>();
     //public List<GameObject> FixedObjects = new List<GameObject>();
@@ -25,7 +34,15 @@ public class GameContollerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (audioManager = null)
+        {
+            audioManager = new AudioManager();
+        }
+
+        //Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
+
+        player = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
+        player.BroadcastMessage("UpdateSpeed", globalSpeed);
     }
 
     // Update is called once per frame
@@ -56,7 +73,9 @@ public class GameContollerScript : MonoBehaviour
                             GameObject newObject = Instantiate(nextCommand.spawnObject, nextCommand.vector3, Quaternion.identity);
                             Debug.Log("Spawning " + nextCommand.spawnObject + " at " + nextCommand.vector3 + ".");
                             //Set Object speed
-                            newObject.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
+                            newObject.BroadcastMessage("ChangeSpeed", globalSpeed);
+
+                            //newObject.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                             movingObjects.Add(newObject);
                         }
                         else
@@ -65,17 +84,19 @@ public class GameContollerScript : MonoBehaviour
                         }
                         
                         break;
-                    case Command.CommandType.Wait:
-                        delay = nextCommand.time;
-                        Debug.Log("Waiting " + delay + " seconds.");
-                        break;
+                    //case Command.CommandType.Wait:
+                    //    delay = nextCommand.time;
+                    //    Debug.Log("Waiting " + delay + " seconds.");
+                    //    break;
                     //Change the global speed of all objects
                     case Command.CommandType.ChangeSpeed:
                         globalSpeed = nextCommand.speed;
                         foreach (GameObject a in movingObjects)
                         {
-                            a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
+                            a.BroadcastMessage("GlobalSpeed", globalSpeed);
+                            //a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                         }
+                        player.BroadcastMessage("UpdateSpeed", globalSpeed);
                         Debug.Log("Global speed is now" + globalSpeed);
                         break;
                     case Command.CommandType.Camera:
@@ -90,7 +111,7 @@ public class GameContollerScript : MonoBehaviour
                         break;
                     case Command.CommandType.PlayAudio:
                         //Checkpoint
-
+                        audioManager.AudioCommand(nextCommand.audioClip, nextCommand.audioDuration, nextCommand.audioVolume);
                         //NotImplemented
                         //Probably make a list of audio sources, place them into a list and use that to access them.
                         break;
@@ -98,6 +119,8 @@ public class GameContollerScript : MonoBehaviour
                         Debug.LogError("Something has gone wrong -> no command type match or command not implemented.");
                         break;
                 }
+                delay = nextCommand.time;
+                Debug.Log("Waiting " + delay + " seconds.");
             }
             else
             {
@@ -106,10 +129,13 @@ public class GameContollerScript : MonoBehaviour
         }
     }
 
-    void SetCheckpoint()
+    public void SetCheckpoint()
     {
+        checkpointDelay = delay;
         //Handle saving checkpoint.
         lastCheckpoint = commandListIndex;
+        checkpointObjects.Clear();
+
         foreach (GameObject obj in movingObjects)
         {
             GameObject newObj = Instantiate(obj);
@@ -117,15 +143,24 @@ public class GameContollerScript : MonoBehaviour
             checkpointObjects.Add(newObj);
         }
     }
-    void LoadCheckpoint()
+    public void LoadCheckpoint()
     {
         //Handle loading checkpoint.
         clearObjects();
         foreach (GameObject obj in checkpointObjects)
         {
-            obj.SetActive(true);
-            movingObjects.Add(obj);
+            GameObject newObj = Instantiate(obj);
+            movingObjects.Add(newObj);
         }
+        foreach (GameObject obj in movingObjects)
+        {
+            obj.SetActive(true);
+            obj.BroadcastMessage("ChangeSpeed", globalSpeed);
+        }
+        //lateCheckpointUpdate = true;
+        commandListIndex = lastCheckpoint;
+        delay = checkpointDelay;
+        player.transform.position = playerSpawn.transform.position;
     }
     void clearObjects()
     {
@@ -134,7 +169,17 @@ public class GameContollerScript : MonoBehaviour
         {
             Destroy(obj);
         }
+        movingObjects.Clear();
     }
+    float GetCurrentSpeed()
+    {
+        return globalSpeed;
+    }
+    public void EndLevel()
+    {
+        //EndLevelCode
+    }
+
 }
 
 

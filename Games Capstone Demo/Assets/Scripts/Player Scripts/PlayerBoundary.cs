@@ -5,18 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBoundary : MonoBehaviour
 {
-    // Checks if the player is the object to trigger the method
+    private LivesScript livesScript;
+    
+    // Get a reference of Lives Script that is attached to the Game controller object
+    void Start()
+    {
+        GameObject gameController = GameObject.FindWithTag("GameController");
+
+        if (gameController != null)
+        {
+            livesScript = gameController.GetComponent<LivesScript>();
+        }
+        else
+        {
+            Debug.Log("Error. Couldn't find Game Controller");
+        }
+    }    
+
+    // Subract one life if player collides with attached object
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Reload();
+            livesScript.LifeCountLoss(1);
         }
-    }
-    
-    // Reloads the current scene
-    void Reload()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
