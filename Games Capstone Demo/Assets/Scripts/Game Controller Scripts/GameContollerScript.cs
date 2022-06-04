@@ -6,7 +6,7 @@ using System.Linq;
 public class GameContollerScript : MonoBehaviour
 {
     public GameObject player;
-    public GameObject playerSpawn;
+    public GameObject playerSpawn;       
     //private GameObject playerRef;
 
     public AudioManager audioManager;
@@ -23,10 +23,20 @@ public class GameContollerScript : MonoBehaviour
     [SerializeField]
     private int commandListIndex = 0;
 
-    
+    //Score variable, does nothing right now.
+    private int score;
+    public int Score { get => score; set => score = value; }
+
+    //Combo variable, does nothing right now.
+    private int combo;
+    public int Combo { get => combo; set => combo = value; }
+
     private float delay = 0;
     private float globalSpeed;
     private float checkpointDelay;
+
+    
+
     //Below is stuff for later.
     //public List<GameObject> otherSpawnMovingObjects = new List<GameObject>();
     //public List<GameObject> FixedObjects = new List<GameObject>();
@@ -105,7 +115,7 @@ public class GameContollerScript : MonoBehaviour
                         //NotImplemented
                         break;
                     case Command.CommandType.Checkpoint:
-                        //Set last checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
+                        //Set     public int Combo { get => combo; set => combo = value; } checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
                         SetCheckpoint();
                         
                         break;
@@ -179,7 +189,15 @@ public class GameContollerScript : MonoBehaviour
     {
         //EndLevelCode
     }
+    //private void setScore(int pscore)
+    //{
 
+    //}
+
+    //private void setCombo(int pcombo)
+    //{
+
+    //}
 }
 
 
