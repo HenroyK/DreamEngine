@@ -103,7 +103,7 @@ public class GameContollerScript : MonoBehaviour
                         globalSpeed = nextCommand.speed;
                         foreach (GameObject a in movingObjects)
                         {
-                            a.BroadcastMessage("GlobalSpeed", globalSpeed);
+                            a.BroadcastMessage("ChangeSpeed", globalSpeed);
                             //a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                         }
                         player.BroadcastMessage("UpdateSpeed", globalSpeed);
