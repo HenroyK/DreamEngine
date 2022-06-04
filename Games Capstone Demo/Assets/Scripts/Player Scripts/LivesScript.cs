@@ -14,6 +14,10 @@ public class LivesScript : MonoBehaviour
     public string defaultText = "Lives: ";
     public GameObject livesText;
 
+    public GameObject heartA;
+    public GameObject heartB;
+    public GameObject heartC;
+
     private GameContollerScript gameControllerScript;
     private GameOver gameOverScript;
 
@@ -41,7 +45,32 @@ public class LivesScript : MonoBehaviour
 
     void RefreshUI()
     {
-        livesText.GetComponent<TextMeshProUGUI>().text = defaultText + lifeCount;
+        //livesText.GetComponent<TextMeshProUGUI>().text = defaultText + lifeCount;
+        switch(lifeCount)
+        {
+            case 3:
+                heartA.SetActive(true);
+                heartB.SetActive(true);
+                heartC.SetActive(true);
+                break;
+            case 2:
+                heartA.SetActive(true);
+                heartB.SetActive(true);
+                heartC.SetActive(false);
+                break;
+            case 1:
+                heartA.SetActive(true);
+                heartB.SetActive(false);
+                heartC.SetActive(false);
+                break;
+            case 0:
+                heartA.SetActive(false);
+                heartB.SetActive(false);
+                heartC.SetActive(false);
+                break;
+            default:
+                break;
+        }
     }
 
     // Add health
