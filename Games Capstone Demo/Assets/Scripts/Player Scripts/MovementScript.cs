@@ -25,6 +25,13 @@ public class MovementScript : MonoBehaviour
 	//public KeyCode swapFKey;
 	//public KeyCode swapBKey;
 
+	//Sound Stuff
+	public AudioSource audioSource;
+	public AudioClip runClip;
+	public AudioClip jumpClip;
+	public AudioClip dashClip;
+	public float stepDelay = 0.3f;
+	private float stepTimer = 0;
 	//Dash variables
 	public float dashDuration;
 	public float dashCooldown;
@@ -51,8 +58,6 @@ public class MovementScript : MonoBehaviour
 	void Start()
 	{
 		spawnDepth = gameObject.transform.position.z;
-
-		//curDepth = spawnDepth;
 	}
 
 	//removed gravity code and just used the gravity part of the unity physics engine. Should be the same thing.
@@ -65,7 +70,7 @@ public class MovementScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
+		stepTimer -= Time.deltaTime;
 		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
 			playerRigidbody.useGravity = false;
@@ -113,8 +118,8 @@ public class MovementScript : MonoBehaviour
 			//CoyoteTimer or grounded
 			if (IsGrounded() || coyoteTimer > 0)
 			{
+				RunAudio();
 				//Move left/right
-
 				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
 				//Debug.Log(Input.GetAxis("Horizontal"));
                 if (playerRigidbody.velocity.x < 0)
@@ -126,13 +131,14 @@ public class MovementScript : MonoBehaviour
 				if (Input.GetButtonDown("Jump"))
 				{
 					//SoundManagerScript.PlaySound("Jump");
+					audioSource.volume = 1;
+					audioSource.PlayOneShot(jumpClip);
 					animator.SetTrigger("Jump");
 					playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
 				}
 			}
 			else //Airstrafe movement code.
 			{
-				
 				//Checks if the player is trying to go left or right, checks that they are below half of max speed then modifies velocity by airStrafeSpeed. 
 				if (Input.GetAxis("Horizontal") > 0 && playerRigidbody.velocity.x < maxSpeed / 2)
 				{
@@ -153,28 +159,15 @@ public class MovementScript : MonoBehaviour
 			{
 				ChangeDepth(1);
 			}
-
 		}
-
-		//// stop character if player isn't moving right or left
-		//if (!Input.GetKey(backKey) && !Input.GetKey(forwardKey))
-		//{
-		//	//Debug.Log("stopped");
-		//	HardStop();
-		//}
 	}
-
-	//void HardStop()
-	//{
-	//	playerRigidbody.velocity = new Vector3(0, playerRigidbody.velocity.y, 0);
-	//}
-
 	//Change z axis
 	void ChangeDepth(int newDepth)
 	{
 		blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward*newDepth, out blockRaycastHit, transform.rotation, 5);
-
-		if(blockDetect)
+		audioSource.volume = 1;
+		audioSource.PlayOneShot(jumpClip);
+		if (blockDetect)
 		{
 			//Output the name of the Collider your Box hit
 			Debug.Log("Hit : " + blockRaycastHit.collider.name);
@@ -189,7 +182,6 @@ public class MovementScript : MonoBehaviour
 	
 	bool IsGrounded()
     {
-		
 		LayerMask mask = LayerMask.GetMask(new string[] { "Ground", "Building" });
 		Quaternion weirdQuat = new Quaternion();
 		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
@@ -230,9 +222,17 @@ public class MovementScript : MonoBehaviour
 			//Draw a cube at the maximum distance
 			Gizmos.DrawWireCube(transform.position + Vector3.forward * -5, transform.localScale);
 		}
-        
-		
+	}
 
+	void RunAudio()
+    {
+		audioSource.volume = 0.3f;
+		if (stepTimer < 0)
+        {
+			stepTimer = stepDelay;
+			audioSource.PlayOneShot(runClip);
+        }
+		
 	}
     //void OnCollisionEnter(Collision other)
     //{
