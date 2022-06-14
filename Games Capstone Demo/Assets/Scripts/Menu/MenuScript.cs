@@ -36,6 +36,11 @@ public class MenuScript : MonoBehaviour
 			else
 				cutsceneUI.GetComponent<RawImage>().texture = introImages[curScene];
 		}
+		if (Input.GetButtonDown("Skip"))
+		{
+			curScene = -1;
+			StartCoroutine(LoadAsyncScene());
+		}
 	}
 
 	//Button pressed
