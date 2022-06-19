@@ -7,6 +7,9 @@ public class MovementScript : MonoBehaviour
 	//Variables
 	public Rigidbody playerRigidbody;
 	public Collider playerCollider;
+	public PhysicMaterial slipperyMat;
+	public PhysicMaterial roughMat;
+
 	public float maxSpeed;
     public float accel;
 	public float airStrafeSpeed;
@@ -71,6 +74,17 @@ public class MovementScript : MonoBehaviour
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
+		
+		// check for input
+		if (Input.anyKey)
+        {
+			SwapPhysicsMaterial(true);
+		}
+		else
+        {
+			SwapPhysicsMaterial(false);
+		}
+		
 		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
 			playerRigidbody.useGravity = false;
@@ -161,6 +175,20 @@ public class MovementScript : MonoBehaviour
 			}
 		}
 	}
+
+	// Change the physics material of the collider
+	void SwapPhysicsMaterial(bool moving)
+    {
+		if (moving)
+        {
+			playerCollider.material = slipperyMat;
+		}
+		else if (!moving)
+        {
+			playerCollider.material = roughMat;
+		}
+	}
+
 	//Change z axis
 	void ChangeDepth(int newDepth)
 	{
