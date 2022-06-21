@@ -9,6 +9,7 @@ public class MovementScript : MonoBehaviour
 	public Collider playerCollider;
 	public PhysicMaterial slipperyMat;
 	public PhysicMaterial roughMat;
+	public GameObject cooldownBar;
 
 	public float maxSpeed;
     public float accel;
@@ -100,7 +101,7 @@ public class MovementScript : MonoBehaviour
 		//Tick down dash duration
 		currentDashDuration -= Time.deltaTime;
 		currentDashCooldown -= Time.deltaTime;
-
+		cooldownBar.GetComponent<CooldownRadialScript>().UpdateRadialBar(currentDashCooldown/dashCooldown);
 		//Coyote Timer
 		coyoteTimer -= Time.deltaTime;
 
