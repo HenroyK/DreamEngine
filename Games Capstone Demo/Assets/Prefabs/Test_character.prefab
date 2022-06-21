@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8022007116041893814}
   - component: {fileID: 2000101234070049783}
   - component: {fileID: -7998740433712840455}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Test_character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -306,6 +306,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Sprite
       objectReference: {fileID: 0}
+    - target: {fileID: 5483183536938855651, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
 --- !u!4 &2963439990703865072 stripped
@@ -409,6 +413,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2788324458350138836, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4199031616980121862, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 3
@@ -425,6 +433,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CooldownRadialCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6723695301283746874, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7190785474884888141, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 3
@@ -440,6 +452,10 @@ PrefabInstance:
     - target: {fileID: 7190785474884888141, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460640383160540926, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
