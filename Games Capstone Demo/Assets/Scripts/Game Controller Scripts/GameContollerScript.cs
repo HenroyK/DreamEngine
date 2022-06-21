@@ -53,6 +53,7 @@ public class GameContollerScript : MonoBehaviour
 
         player = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
         player.BroadcastMessage("UpdateSpeed", globalSpeed);
+        this.GetComponent<CameraScript>().SetLookat(player);
     }
 
     // Update is called once per frame
