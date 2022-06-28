@@ -21,13 +21,6 @@ public class MovementScript : MonoBehaviour
 
 	public float coyoteTimeLimit = 0.1f;
 	public float coyoteTimer = 0;
-	////Control Keys
-	//public KeyCode jumpKey;
-	//public KeyCode forwardKey;
-	//public KeyCode backKey;
-	//public KeyCode duckKey;
-	//public KeyCode swapFKey;
-	//public KeyCode swapBKey;
 
 	//Sound Stuff
 	public AudioSource audioSource;
@@ -129,6 +122,7 @@ public class MovementScript : MonoBehaviour
 		}
 		else //when not dashing. Avoids conflict with dash movement
 		{
+
 			//Movement is different when airstrafing to standing on ground
 			//CoyoteTimer or grounded
 			if (IsGrounded() || coyoteTimer > 0)
@@ -174,6 +168,8 @@ public class MovementScript : MonoBehaviour
 			{
 				ChangeDepth(1);
 			}
+
+			CheckStopped();
 		}
 	}
 
@@ -231,27 +227,7 @@ public class MovementScript : MonoBehaviour
 		globalSpeed = speed;
     }
 
-	private void OnDrawGizmos()
-    {
-		Gizmos.color = Color.red;
-		// *********************************
-		// NUMBERS ARE TO BE CHANGED IF MODEL IS UPDATED.
-		Gizmos.DrawWireCube(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(2,0.2f,2));
 
-		if(moveBack)
-        {
-			Gizmos.DrawRay(transform.position, Vector3.forward * 5);
-
-			//Draw a cube at the maximum distance
-			Gizmos.DrawWireCube(transform.position + Vector3.forward * 5, transform.localScale);
-		}
-        else
-        {
-			Gizmos.DrawRay(transform.position, Vector3.forward * -5);
-			//Draw a cube at the maximum distance
-			Gizmos.DrawWireCube(transform.position + Vector3.forward * -5, transform.localScale);
-		}
-	}
 
 	void RunAudio()
     {
@@ -263,11 +239,44 @@ public class MovementScript : MonoBehaviour
         }
 		
 	}
-    //void OnCollisionEnter(Collision other)
-    //{
-    //	if (other.gameObject.tag == "ground")
-    //	{
-    //		CanJump = true;
-    //	}
-    //}
+	void CheckStopped()
+    {
+		LayerMask mask = LayerMask.GetMask(new string[] { "Ground", "Building" });
+        if (Physics.Raycast(transform.position + new Vector3(0,-1,0), Vector3.right, 2, mask) || Physics.Raycast(transform.position + new Vector3(0, -1, 0), Vector3.left, 2, mask))
+        {
+			animator.SetTrigger("Idle");
+			Debug.Log("idle");
+        }
+        else
+        {
+			animator.SetTrigger("Run");
+			Debug.Log("run");
+		}
+	}
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		// *********************************
+		// NUMBERS ARE TO BE CHANGED IF MODEL IS UPDATED.
+		Gizmos.DrawWireCube(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(2, 0.2f, 2));
+
+		if (moveBack)
+		{
+			Gizmos.DrawRay(transform.position, Vector3.forward * 5);
+
+			//Draw a cube at the maximum distance
+			Gizmos.DrawWireCube(transform.position + Vector3.forward * 5, transform.localScale);
+		}
+		else
+		{
+			Gizmos.DrawRay(transform.position, Vector3.forward * -5);
+			//Draw a cube at the maximum distance
+			Gizmos.DrawWireCube(transform.position + Vector3.forward * -5, transform.localScale);
+		}
+
+
+
+		Gizmos.DrawRay(transform.position + new Vector3(0, -1, 0), Vector3.right * 2);
+		Gizmos.DrawRay(transform.position + new Vector3(0, -1, 0), Vector3.left * 2);
+	}
 }

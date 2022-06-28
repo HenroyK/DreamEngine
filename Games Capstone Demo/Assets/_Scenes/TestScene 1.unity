@@ -318,6 +318,10 @@ PrefabInstance:
       value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: commandListIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064070200953209874, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.size
       value: 9
       objectReference: {fileID: 0}
