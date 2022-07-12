@@ -38,10 +38,7 @@ public class MovementScript : MonoBehaviour
 	private bool isDashing = false;
 	private float dashDirection;
 
-	//Vals
-	public float minDepth;
-	public float maxDepth;
-	public float curDepth;
+	public DepthBehaviour depth;
 
 	public Animator animator;
 	//
@@ -49,12 +46,9 @@ public class MovementScript : MonoBehaviour
 	private RaycastHit blockRaycastHit;
 	private bool moveBack = true;
 
-	private float spawnDepth;
-
 	// Start is called before the first frame update
 	void Start()
 	{
-		spawnDepth = gameObject.transform.position.z;
 	}
 
 	//removed gravity code and just used the gravity part of the unity physics engine. Should be the same thing.
@@ -161,11 +155,11 @@ public class MovementScript : MonoBehaviour
 			//Change depth
 			if (Input.GetButtonDown("SwapForward"))
 			{
-				ChangeDepth(-1);
+				ChangeDepth(depth.CheckLayer(-1));
 			}
 			if (Input.GetButtonDown("SwapBackward"))
 			{
-				ChangeDepth(1);
+				ChangeDepth(depth.CheckLayer(1));
 			}
 		}
 	}
@@ -186,19 +180,21 @@ public class MovementScript : MonoBehaviour
 	//Change z axis
 	void ChangeDepth(int newDepth)
 	{
-		blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward*newDepth, out blockRaycastHit, transform.rotation, 5);
-		audioSource.volume = 1;
-		audioSource.PlayOneShot(jumpClip);
-		if (blockDetect)
+		if (newDepth != -1)
 		{
-			//Output the name of the Collider your Box hit
-			Debug.Log("Hit : " + blockRaycastHit.collider.name);
-		}
-		else
-        {
-			curDepth = Mathf.Clamp(curDepth += newDepth, minDepth, maxDepth);
-			//gameObject.layer = curDepth + 7;
-			transform.position = new Vector3(transform.position.x, transform.position.y, spawnDepth + (curDepth * 5));
+			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
+			audioSource.volume = 1;
+			audioSource.PlayOneShot(jumpClip);
+			if (blockDetect)
+			{
+				//Output the name of the Collider your Box hit
+				Debug.Log("Hit : " + blockRaycastHit.collider.name);
+			}
+			else
+			{
+				depth.curDepth = newDepth;
+				transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+			}
 		}
 	}
 	

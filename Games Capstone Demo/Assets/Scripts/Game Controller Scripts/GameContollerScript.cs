@@ -121,8 +121,13 @@ public class GameContollerScript : MonoBehaviour
                         
                         break;
                     case Command.CommandType.PlayAudio:
-                        //Checkpoint
                         audioManager.AudioCommand(nextCommand.audioClip, nextCommand.audioDuration, nextCommand.audioVolume);
+                        //NotImplemented
+                        //Probably make a list of audio sources, place them into a list and use that to access them.
+                        break;
+                    case Command.CommandType.SetLayer:
+                        //Checkpoint
+                        player.GetComponent<DepthBehaviour>().SetLayerState(nextCommand.layerNo, nextCommand.layerState);
                         //NotImplemented
                         //Probably make a list of audio sources, place them into a list and use that to access them.
                         break;

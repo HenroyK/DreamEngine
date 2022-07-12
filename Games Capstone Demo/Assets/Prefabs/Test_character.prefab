@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8022007116041893810}
   - component: {fileID: 8022007116041893813}
   - component: {fileID: 8022007116041893815}
+  - component: {fileID: 5078044890271832808}
   - component: {fileID: 8022007116041893814}
   - component: {fileID: 2000101234070049783}
   - component: {fileID: -7998740433712840455}
@@ -123,10 +124,29 @@ MonoBehaviour:
   dashDuration: 0.1
   dashCooldown: 3
   dashSpeed: 60
-  minDepth: -1
-  maxDepth: 0
-  curDepth: 0
+  depth: {fileID: 5078044890271832808}
   animator: {fileID: 6728015053132064364}
+--- !u!114 &5078044890271832808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022007116041893449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171f7041bcde55428c7ee611b84bfbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerAvailable: 0001010000
+  layerAxis:
+  - 12
+  - 17
+  - 22
+  - 27
+  - 32
+  curDepth: 2
+  player: {fileID: 8022007116041893449}
 --- !u!54 &8022007116041893814
 Rigidbody:
   m_ObjectHideFlags: 0
