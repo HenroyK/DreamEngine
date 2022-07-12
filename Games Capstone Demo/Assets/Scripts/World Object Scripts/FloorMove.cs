@@ -22,8 +22,8 @@ public class FloorMove : MonoBehaviour
         {
             transform.position = start;
         }
-        //blockRigidbody.velocity = Vector3.left * speed;
-        transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
+        blockRigidbody.velocity = Vector3.left * speed;
+        //transform.position += Vector3.left * speed * Time.deltaTime;
     }
 
     //Speed change message subscription
