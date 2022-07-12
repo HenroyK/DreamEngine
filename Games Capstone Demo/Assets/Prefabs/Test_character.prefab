@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6171f7041bcde55428c7ee611b84bfbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerAvailable: 0101010001
+  layerAvailable: 0001010000
   layerAxis:
   - 12
   - 17

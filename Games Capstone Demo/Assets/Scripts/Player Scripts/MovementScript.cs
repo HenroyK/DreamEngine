@@ -189,8 +189,7 @@ public class MovementScript : MonoBehaviour
 	{
 		if (newDepth != -1)
 		{
-			//MAKE THIS RELATIVE TO THE LAYER AXIS
-			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), out blockRaycastHit, transform.rotation,5);
+			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
 			audioSource.volume = 1;
 			audioSource.PlayOneShot(jumpClip);
 			if (blockDetect)

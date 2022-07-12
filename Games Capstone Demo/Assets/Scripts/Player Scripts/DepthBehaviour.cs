@@ -32,4 +32,13 @@ public class DepthBehaviour : MonoBehaviour
         else
             Debug.LogWarning("Outside of layer range ("+"0"+(layerAvailable.Length-1)+")");
     }
+
+    // Set the axis of a layer
+    public void SetLayerAxis(int layer, float axis)
+    {
+        if (layer >= 0 && layer < layerAvailable.Length)
+            layerAxis[layer] = axis;
+        else
+            Debug.LogWarning("Outside of layer range (" + "0" + (layerAvailable.Length - 1) + ")");
+    }
 }
