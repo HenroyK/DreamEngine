@@ -21,13 +21,6 @@ public class MovementScript : MonoBehaviour
 
 	public float coyoteTimeLimit = 0.1f;
 	public float coyoteTimer = 0;
-	////Control Keys
-	//public KeyCode jumpKey;
-	//public KeyCode forwardKey;
-	//public KeyCode backKey;
-	//public KeyCode duckKey;
-	//public KeyCode swapFKey;
-	//public KeyCode swapBKey;
 
 	//Sound Stuff
 	public AudioSource audioSource;
