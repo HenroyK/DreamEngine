@@ -200,13 +200,14 @@ public class MovementScript : MonoBehaviour
 	
 	bool IsGrounded()
     {
-		LayerMask mask = LayerMask.GetMask(new string[] { "Ground", "Building" });
+		LayerMask mask = LayerMask.GetMask(new string[] { "GroundFloor", "Building" });
 		Quaternion weirdQuat = new Quaternion();
 		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
 		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(1, 0.1f, 1),weirdQuat, mask))
 		{
 			coyoteTimer = coyoteTimeLimit;
 			animator.SetTrigger("Land");
+			//Debug.Log("Is Grounded");
 			return true;
 		}
 		else
