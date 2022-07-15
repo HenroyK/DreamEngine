@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8702786131354184830}
   - component: {fileID: 8702786131354184826}
   - component: {fileID: 8702786131354184831}
-  - component: {fileID: 8702786131354184828}
   m_Layer: 3
   m_Name: Floor_1
   m_TagString: ground
@@ -128,21 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332fbd702786acd49a2f69a1cd69db57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 0
   start: {x: 150, y: 0.5, z: 25.5}
   endX: -150
---- !u!114 &8702786131354184828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8702786131354184805}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e583b2fa96f50e4448ae23bd7f68bdd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8702786131799954804
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +144,6 @@ GameObject:
   - component: {fileID: 8702786131799954763}
   - component: {fileID: 8702786131799954760}
   - component: {fileID: 8702786131799954762}
-  - component: {fileID: 8702786131799954767}
   m_Layer: 3
   m_Name: Floor_2
   m_TagString: ground
@@ -271,21 +257,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332fbd702786acd49a2f69a1cd69db57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 0
   start: {x: 150, y: 0.5, z: 25.5}
   endX: -150
---- !u!114 &8702786131799954767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8702786131799954804}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e583b2fa96f50e4448ae23bd7f68bdd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8702786132180167172
 GameObject:
   m_ObjectHideFlags: 0
