@@ -1,42 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour
 {
     //Score variable, does nothing right now.
-    private int score;
-    private int combo;
-    private float comboTimer = 0;
-    private float startComboTimer = 5;
+    private int score = 0;
+    private int combo = 0;
+    private float comboTimer = 0; 
+    public float startComboTimer = 5;
 
+    public Image comboBar;
+    public Text comboText;
+    public Text scoreText;
 
     private void Update()
     {
-        comboTimer += Time.deltaTime;
-        if (comboTimer > startComboTimer)
+        comboTimer -= Time.deltaTime;
+        if (comboTimer <= 0)
         {
             combo = 0;
         }
+        UpdateScoreboard();
     }
     public int Combo { get => combo; set => combo = value; }
 
-    public void updateCombo(int pIncrement = 1)
+    public void UpdateCombo(int pIncrement = 1)
     {
         combo += pIncrement;
-        comboTimer = 0;
+        comboTimer = startComboTimer;
     }
-    public void addScore(int pScore)
+    public void AddScore(int pScore)
     {
-        score += pScore;
+        score += pScore*combo;
     }
-    public void addScore(int pScore, int pMultiplier)
-    {
-        score += pScore * pMultiplier;
-    }
+    //public void AddScore(int pScore, int pMultiplier)
+    //{
+    //    score += pScore * pMultiplier;
+    //}
 
-    private void updateScoreboard()
+    private void UpdateScoreboard()
     {
+        //update combo meter
+        if(comboTimer > 0)
+        {
+            comboBar.GetComponent<Image>().fillAmount = comboTimer / startComboTimer;
+        }
+        else
+        {
+            comboBar.GetComponent<Image>().fillAmount = 0;
+        }
+
         //update scoreboard
+
+        scoreText.text = "Score: " + score;
+        comboText.text = "Combo: " + combo;
     }
 }

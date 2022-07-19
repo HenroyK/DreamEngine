@@ -11,8 +11,8 @@ public class ScorePickup : CollectableScript
     public override void PickUp()
     {
         GameObject scoreController = GameObject.FindGameObjectWithTag("GameController");
-        scoreController.GetComponent<ScoreScript>().updateCombo(comboIncrement);
-        scoreController.GetComponent<ScoreScript>().addScore(comboIncrement);
+        scoreController.GetComponent<ScoreScript>().UpdateCombo(comboIncrement);
+        scoreController.GetComponent<ScoreScript>().AddScore(score);
         Destroy(this.gameObject);
     }
 }
