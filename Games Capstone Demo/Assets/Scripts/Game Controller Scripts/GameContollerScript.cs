@@ -23,10 +23,6 @@ public class GameContollerScript : MonoBehaviour
     [SerializeField]
     private int commandListIndex = 0;
 
-    //Score variable, does nothing right now.
-    private int score;
-    public int Score { get => score; set => score = value; }
-
     //Combo variable, does nothing right now.
     private int combo;
     public int Combo { get => combo; set => combo = value; }
@@ -195,15 +191,7 @@ public class GameContollerScript : MonoBehaviour
     {
         //EndLevelCode
     }
-    //private void setScore(int pscore)
-    //{
 
-    //}
-
-    //private void setCombo(int pcombo)
-    //{
-
-    //}
 }
 
 
