@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6343145687491080760}
   m_Layer: 6
   m_Name: Hexgon
-  m_TagString: Untagged
+  m_TagString: DoesntBlockSwap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f37afc6f66ef834e8e23d085ada8edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  comboIncrement: 1
+  score: 1
 --- !u!54 &3143715238199361276
 Rigidbody:
   m_ObjectHideFlags: 0

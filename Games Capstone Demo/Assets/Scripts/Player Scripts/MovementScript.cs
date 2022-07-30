@@ -64,13 +64,13 @@ public class MovementScript : MonoBehaviour
 		stepTimer -= Time.deltaTime;
 		
 		// check for input
-		if (Input.anyKey)
-        {
-			SwapPhysicsMaterial(true);
+		if (Input.GetAxis("Horizontal") == 0)
+		{
+			SwapPhysicsMaterial(false);
 		}
 		else
-        {
-			SwapPhysicsMaterial(false);
+		{
+			SwapPhysicsMaterial(true);
 		}
 		
 		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
@@ -185,10 +185,21 @@ public class MovementScript : MonoBehaviour
 			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
 			audioSource.volume = 1;
 			audioSource.PlayOneShot(jumpClip);
+
 			if (blockDetect)
 			{
-				//Output the name of the Collider your Box hit
-				Debug.Log("Hit : " + blockRaycastHit.collider.name);
+				if(blockRaycastHit.collider.tag == "DoesntBlockSwap")
+				{
+					//I dupe code like a nughty boy ;)
+					depth.curDepth = newDepth;
+					transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+					Debug.Log("Hit : " + blockRaycastHit.collider.name);
+				}
+				else
+				{
+					//Output the name of the Collider your Box hit
+					Debug.Log("Hit : " + blockRaycastHit.collider.name);
+				}
 			}
 			else
 			{
