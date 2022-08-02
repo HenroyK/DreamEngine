@@ -154,6 +154,7 @@ public class GameContollerScript : MonoBehaviour
             newObj.SetActive(false);
             checkpointObjects.Add(newObj);
         }
+        this.GetComponent<ScoreScript>().SetCheckpoint();
     }
     public void LoadCheckpoint()
     {
@@ -173,6 +174,7 @@ public class GameContollerScript : MonoBehaviour
         commandListIndex = lastCheckpoint;
         delay = checkpointDelay;
         player.transform.position = playerSpawn.transform.position;
+        this.GetComponent<ScoreScript>().ResetCheckpoint();
     }
     void clearObjects()
     {
