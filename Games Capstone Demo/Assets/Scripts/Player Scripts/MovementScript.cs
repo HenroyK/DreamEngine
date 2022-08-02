@@ -16,7 +16,7 @@ public class MovementScript : MonoBehaviour
 	public float airStrafeSpeed;
 	public float jumpaccel;
 	public float gravityModifier;
-	
+	public float jumpTimer;
 	public float globalSpeed;
 
 	public float coyoteTimeLimit = 0.1f;
@@ -55,6 +55,7 @@ public class MovementScript : MonoBehaviour
 
 	//void FixedUpdate()
 	//{
+	//	me hate magic numbers >:c
 	//	playerRigidbody.AddForce(Vector3.down * gravityModifier * GetComponent<Rigidbody>().mass);
 	//}
 
@@ -62,14 +63,16 @@ public class MovementScript : MonoBehaviour
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
-		
+		print(Mathf.Round(playerRigidbody.velocity.y));
 		// check for input
-		if (Input.GetAxis("Horizontal") == 0)
+		if (Input.GetAxis("Horizontal") == 0 && IsGrounded() && jumpTimer <= 0)
 		{
+			print("false");
 			SwapPhysicsMaterial(false);
 		}
 		else
 		{
+			print("true");
 			SwapPhysicsMaterial(true);
 		}
 		
@@ -91,6 +94,7 @@ public class MovementScript : MonoBehaviour
 		cooldownBar.GetComponent<CooldownRadialScript>().UpdateRadialBar(currentDashCooldown/dashCooldown);
 		//Coyote Timer
 		coyoteTimer -= Time.deltaTime;
+		jumpTimer -= Time.deltaTime;
 
 		//if dash duration is over, stop dashing
 		if (currentDashDuration < 0 && isDashing)
@@ -132,6 +136,7 @@ public class MovementScript : MonoBehaviour
 				//Jump
 				if (Input.GetButtonDown("Jump"))
 				{
+					jumpTimer = 0.2f;
 					//SoundManagerScript.PlaySound("Jump");
 					audioSource.volume = 1;
 					audioSource.PlayOneShot(jumpClip);
@@ -183,14 +188,13 @@ public class MovementScript : MonoBehaviour
 		if (newDepth != -1)
 		{
 			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
-			audioSource.volume = 1;
-			audioSource.PlayOneShot(jumpClip);
-
 			if (blockDetect)
 			{
 				if(blockRaycastHit.collider.tag == "DoesntBlockSwap")
 				{
-					//I dupe code like a nughty boy ;)
+					//I dupe code like a nughty boy ;)			
+					audioSource.volume = 1;
+					audioSource.PlayOneShot(jumpClip);
 					depth.curDepth = newDepth;
 					transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
 					Debug.Log("Hit : " + blockRaycastHit.collider.name);
@@ -203,6 +207,8 @@ public class MovementScript : MonoBehaviour
 			}
 			else
 			{
+				audioSource.volume = 1;
+				audioSource.PlayOneShot(jumpClip);
 				depth.curDepth = newDepth;
 				transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
 			}
@@ -223,6 +229,7 @@ public class MovementScript : MonoBehaviour
 		}
 		else
 		{
+			jumpTimer = 0.2f;
 			return false;
 		}
 	}
