@@ -63,16 +63,13 @@ public class MovementScript : MonoBehaviour
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
-		print(Mathf.Round(playerRigidbody.velocity.y));
 		// check for input
 		if (Input.GetAxis("Horizontal") == 0 && IsGrounded() && jumpTimer <= 0)
 		{
-			print("false");
 			SwapPhysicsMaterial(false);
 		}
 		else
 		{
-			print("true");
 			SwapPhysicsMaterial(true);
 		}
 		
