@@ -65,15 +65,23 @@ public class MovementScript : MonoBehaviour
 		stepTimer -= Time.deltaTime;
 		print(Mathf.Round(playerRigidbody.velocity.y));
 		// check for input
-		if (Input.GetAxis("Horizontal") == 0 && IsGrounded() && jumpTimer <= 0)
-		{
-			print("false");
-			SwapPhysicsMaterial(false);
-		}
-		else
-		{
+		if (Input.GetButtonDown("Jump"))
+        {
 			print("true");
 			SwapPhysicsMaterial(true);
+		}
+        else
+        {
+			if (Input.GetAxis("Horizontal") == 0 && IsGrounded() && jumpTimer <= 0)
+			{
+				print("false");
+				SwapPhysicsMaterial(false);
+			}
+			else
+			{
+				print("true");
+				SwapPhysicsMaterial(true);
+			}
 		}
 		
 		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
