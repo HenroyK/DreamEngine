@@ -11,7 +11,28 @@ public class Obstacle : ObstacleScript
 	[SerializeField]
 	public bool lifeLoss;
 	[SerializeField]
-	public bool DestroyOnHit;
+	public bool destroyOnHit;
+
+	private LivesScript livesScript;
+	private GameObject player;
+	private GameObject gameController;
+	private BlackFade fader;
+	
+	void Start()
+	{
+		gameController = GameObject.FindWithTag("GameController");
+		fader = gameController.GetComponent<BlackFade>();
+		player = GameObject.FindWithTag("Player");
+
+		if (gameController != null)
+		{
+			livesScript = gameController.GetComponent<LivesScript>();
+		}
+		else
+		{
+			Debug.Log("Error. Couldn't find Game Controller");
+		}
+	}
 
 	//Do things when colliding with something
 	public override void Collided(Collider hit)
@@ -22,7 +43,7 @@ public class Obstacle : ObstacleScript
 			print("hit player");
 			if(lifeLoss)
 			{
-				GameObject.FindGameObjectWithTag("GameController").GetComponent<LivesScript>().LifeCountLoss(1);
+				livesScript.LifeCountLoss(1);
 			}
 			else if (damage != 0)
 			{
@@ -32,7 +53,7 @@ public class Obstacle : ObstacleScript
 
 		}
 
-		if(DestroyOnHit)
+		if(destroyOnHit)
 			Destroy(gameObject);
 	}
 }
