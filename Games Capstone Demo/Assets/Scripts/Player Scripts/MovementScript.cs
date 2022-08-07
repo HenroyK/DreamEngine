@@ -63,16 +63,24 @@ public class MovementScript : MonoBehaviour
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
-		// check for input
-		if (Input.GetAxis("Horizontal") == 0 && IsGrounded() && jumpTimer <= 0)
-		{
-			SwapPhysicsMaterial(false);
-		}
-		else
-		{
+
+		if (Input.GetButtonDown("Jump"))
+        {
 			SwapPhysicsMaterial(true);
 		}
-		
+		else
+        {
+			// check for input
+			if (Input.GetAxis("Horizontal") == 0 && IsGrounded() /*&& jumpTimer <= 0*/)
+			{
+				SwapPhysicsMaterial(false);
+			}
+			else
+			{
+				SwapPhysicsMaterial(true);
+			}
+		}
+
 		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
 			playerRigidbody.useGravity = false;
