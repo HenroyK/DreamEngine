@@ -51,34 +51,24 @@ public class MovementScript : MonoBehaviour
 	{
 	}
 
-	//removed gravity code and just used the gravity part of the unity physics engine. Should be the same thing.
+	void FixedUpdate()
+	{
 
-	//void FixedUpdate()
-	//{
-	//	me hate magic numbers >:c
-	//	playerRigidbody.AddForce(Vector3.down * gravityModifier * GetComponent<Rigidbody>().mass);
-	//}
+	}
 
 	// Update is called once per frame
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
 
-		if (Input.GetButtonDown("Jump"))
-        {
-			SwapPhysicsMaterial(true);
+		// check for input
+		if (Input.GetAxis("Horizontal") == 0 && IsGrounded() && jumpTimer <= 0)
+		{
+			SwapPhysicsMaterial(false);
 		}
 		else
-        {
-			// check for input
-			if (Input.GetAxis("Horizontal") == 0 && IsGrounded() /*&& jumpTimer <= 0*/)
-			{
-				SwapPhysicsMaterial(false);
-			}
-			else
-			{
-				SwapPhysicsMaterial(true);
-			}
+		{
+			SwapPhysicsMaterial(true);
 		}
 
 		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
@@ -100,6 +90,10 @@ public class MovementScript : MonoBehaviour
 		//Coyote Timer
 		coyoteTimer -= Time.deltaTime;
 		jumpTimer -= Time.deltaTime;
+		if (jumpTimer <= 0)
+        {
+			jumpTimer = 0;
+        }
 
 		//if dash duration is over, stop dashing
 		if (currentDashDuration < 0 && isDashing)
@@ -141,6 +135,7 @@ public class MovementScript : MonoBehaviour
 				//Jump
 				if (Input.GetButtonDown("Jump"))
 				{
+					//SwapPhysicsMaterial(true);
 					jumpTimer = 0.2f;
 					//SoundManagerScript.PlaySound("Jump");
 					audioSource.volume = 1;
@@ -177,11 +172,12 @@ public class MovementScript : MonoBehaviour
 	// Change the physics material of the collider
 	void SwapPhysicsMaterial(bool moving)
     {
+		//Debug.Log(moving);
 		if (moving)
         {
 			playerCollider.material = slipperyMat;
 		}
-		else if (!moving)
+		else
         {
 			playerCollider.material = roughMat;
 		}
@@ -192,7 +188,8 @@ public class MovementScript : MonoBehaviour
 	{
 		if (newDepth != -1)
 		{
-			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
+			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), 
+				out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
 			if (blockDetect)
 			{
 				if(blockRaycastHit.collider.tag == "DoesntBlockSwap")
@@ -225,7 +222,7 @@ public class MovementScript : MonoBehaviour
 		LayerMask mask = LayerMask.GetMask(new string[] { "GroundFloor", "Building" });
 		Quaternion weirdQuat = new Quaternion();
 		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
-		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(1, 0.1f, 1),weirdQuat, mask))
+		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(1, 0.1f, 1), weirdQuat, mask))
 		{
 			coyoteTimer = coyoteTimeLimit;
 			animator.SetTrigger("Land");
@@ -234,7 +231,6 @@ public class MovementScript : MonoBehaviour
 		}
 		else
 		{
-			jumpTimer = 0.2f;
 			return false;
 		}
 	}
