@@ -15,6 +15,8 @@ public class ScoreScript : MonoBehaviour
     public Text comboText;
     public Text scoreText;
 
+    public int checkpointScore = 0;
+
     private void Update()
     {
         comboTimer -= Time.deltaTime;
@@ -56,5 +58,15 @@ public class ScoreScript : MonoBehaviour
 
         scoreText.text = "Score: " + score;
         comboText.text = "Combo: " + combo;
+    }
+    public void SetCheckpoint()
+    {
+        checkpointScore = score;
+    }
+    public void ResetCheckpoint()
+    {
+        score = checkpointScore;
+        combo = 0;
+        comboTimer = 0;
     }
 }
