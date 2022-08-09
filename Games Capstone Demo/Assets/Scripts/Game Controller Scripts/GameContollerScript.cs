@@ -6,8 +6,12 @@ using System.Linq;
 public class GameContollerScript : MonoBehaviour
 {
     public GameObject player;
-    public GameObject playerSpawn;       
+    public GameObject playerSpawn;
     //private GameObject playerRef;
+
+    public bool enableLives = false;
+    private LivesScript livesScript;
+
 
     public AudioManager audioManager;
     //list of all instantiated moving objects, ie. Buildings
@@ -45,7 +49,21 @@ public class GameContollerScript : MonoBehaviour
             audioManager = new AudioManager();
         }
 
-        //Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
+        GameObject gameController = GameObject.FindWithTag("GameController");
+
+        if (gameController != null)
+        {
+            livesScript = gameController.GetComponent<LivesScript>();
+        }
+        else
+        {
+            Debug.Log("Error. Couldn't find Game Controller");
+        }
+
+        if (!enableLives)
+        {
+            livesScript.enabled = false;
+        }
 
         player = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
         player.BroadcastMessage("UpdateSpeed", globalSpeed);

@@ -61,8 +61,10 @@ public class PlayerBoundary : MonoBehaviour
             {
 				livesScript.LifeCountLoss(damage);
 			}
-
-			gameControllerScript.LoadCheckpoint();
+			else
+            {
+				gameControllerScript.LoadCheckpoint();
+			}
 		}
     }
 }
