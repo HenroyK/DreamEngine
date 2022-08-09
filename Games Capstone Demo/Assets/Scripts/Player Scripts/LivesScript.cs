@@ -109,8 +109,6 @@ public class LivesScript : MonoBehaviour
             }
         }
 
-        gameControllerScript.LoadCheckpoint();
-
         RefreshUI();
     }
 }

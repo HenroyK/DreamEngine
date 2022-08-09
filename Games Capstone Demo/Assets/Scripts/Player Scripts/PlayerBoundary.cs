@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBoundary : MonoBehaviour
 {
-    private LivesScript livesScript;
+	public float damage = 1;
+
+	private LivesScript livesScript;
+	private GameContollerScript gameControllerScript;
 	private GameObject player;
 	private GameObject gameController;
 	private BlackFade fader;
@@ -20,7 +23,9 @@ public class PlayerBoundary : MonoBehaviour
 		if (gameController != null)
         {
             livesScript = gameController.GetComponent<LivesScript>();
-        }
+			gameControllerScript = gameController.GetComponent<GameContollerScript>();
+
+		}
         else
         {
             Debug.Log("Error. Couldn't find Game Controller");
@@ -52,7 +57,12 @@ public class PlayerBoundary : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            livesScript.LifeCountLoss(1);
-        }
+            if (livesScript.enabled)
+            {
+				livesScript.LifeCountLoss(damage);
+			}
+
+			gameControllerScript.LoadCheckpoint();
+		}
     }
 }
