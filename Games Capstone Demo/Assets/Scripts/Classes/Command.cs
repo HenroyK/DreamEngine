@@ -13,7 +13,8 @@ public class Command
         Checkpoint,
         Camera,
         PlayAudio,
-        SetLayer
+        SetLayer,
+        AwaitTrigger
     };
     public enum AudioFunctions
     {
