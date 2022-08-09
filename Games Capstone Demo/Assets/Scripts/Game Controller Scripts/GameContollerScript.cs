@@ -27,10 +27,6 @@ public class GameContollerScript : MonoBehaviour
     [SerializeField]
     private int commandListIndex = 0;
 
-    //Combo variable, does nothing right now.
-    private int combo;
-    public int Combo { get => combo; set => combo = value; }
-
     private float delay = 0;
     private float globalSpeed;
     private float checkpointDelay;
@@ -130,7 +126,7 @@ public class GameContollerScript : MonoBehaviour
                         //NotImplemented
                         break;
                     case Command.CommandType.Checkpoint:
-                        //Set     public int Combo { get => combo; set => combo = value; } checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
+                        //Set checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
                         SetCheckpoint();
                         
                         break;

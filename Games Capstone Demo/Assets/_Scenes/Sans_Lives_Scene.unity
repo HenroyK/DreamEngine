@@ -3660,6 +3660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 8022007116041893449, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
   playerSpawn: {fileID: 8206763482393315025}
+  enableLives: 0
   audioManager: {fileID: 0}
   commandList:
   - commandType: 3
@@ -4958,7 +4959,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6064070201435632965}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2aef33c225bf94da83aa62b46b2458, type: 3}
   m_Name: 
