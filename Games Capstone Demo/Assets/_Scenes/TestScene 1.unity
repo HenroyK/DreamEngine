@@ -2396,10 +2396,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb469ee6492fcca4a8ab44e305f39874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startComboTimer: 6
+  startComboTimer: 2
   comboBar: {fileID: 2077858820878543638}
   comboText: {fileID: 4509719299978788434}
   scoreText: {fileID: 8296735528629658993}
+  checkpointScore: 0
 --- !u!114 &2919385597739598397
 MonoBehaviour:
   m_ObjectHideFlags: 0
