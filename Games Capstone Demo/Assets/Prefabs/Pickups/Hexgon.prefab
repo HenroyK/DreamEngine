@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboIncrement: 1
   score: 1
+  scoreEffect: {fileID: 4244087062777355129, guid: 65089d2e13addb440becbad99bd38706, type: 3}
 --- !u!54 &3143715238199361276
 Rigidbody:
   m_ObjectHideFlags: 0
