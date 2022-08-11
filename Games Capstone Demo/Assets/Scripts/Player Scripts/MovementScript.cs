@@ -50,6 +50,9 @@ public class MovementScript : MonoBehaviour
 	private Vector3 ziplinePos;
 	public float ziplineSpeed = 1;
 	private float ziplineRelSpeed = 0;
+	private float lerpPos;
+	private float lerpTimer;
+	public float lerpSpeed;
 
 
 	// Start is called before the first frame update
@@ -189,6 +192,12 @@ public class MovementScript : MonoBehaviour
 			if (Vector3.Distance(transform.position, ziplinePos) < 5)
 				EndZipline();
 		}
+		//Lerping to the current layer
+		if (lerpTimer < 1)
+		{
+			lerpTimer += Time.deltaTime*lerpSpeed;
+			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]), lerpTimer);
+		}
 	}
 
 	// Change the physics material of the collider
@@ -216,11 +225,7 @@ public class MovementScript : MonoBehaviour
 			{
 				if(blockRaycastHit.collider.tag == "DoesntBlockSwap")
 				{
-					//I dupe code like a nughty boy ;)			
-					audioSource.volume = 1;
-					audioSource.PlayOneShot(jumpClip);
-					depth.curDepth = newDepth;
-					transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+					ChangeLayer(newDepth);
 					Debug.Log("Hit : " + blockRaycastHit.collider.name);
 				}
 				else
@@ -231,14 +236,22 @@ public class MovementScript : MonoBehaviour
 			}
 			else
 			{
-				audioSource.volume = 1;
-				audioSource.PlayOneShot(jumpClip);
-				depth.curDepth = newDepth;
-				transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+				ChangeLayer(newDepth);
 			}
 		}
 	}
-	
+
+	//Change to the new layer
+	void ChangeLayer(int newDepth)
+	{
+		audioSource.volume = 1;
+		audioSource.PlayOneShot(jumpClip);
+		depth.curDepth = newDepth;
+		lerpTimer = 0;
+		//transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+	}
+
+	//Check if the player is grounded
 	bool IsGrounded()
     {
 		LayerMask mask = LayerMask.GetMask(new string[] { "GroundFloor", "Building" });
@@ -260,6 +273,7 @@ public class MovementScript : MonoBehaviour
 		}
 	}
 
+	//Change speed to the new global one
 	public void UpdateSpeed(float speed)
     {
 		globalSpeed = speed;

@@ -113,6 +113,7 @@ MonoBehaviour:
   airStrafeSpeed: 0.2
   jumpaccel: 50
   gravityModifier: 100
+  jumpTimer: 0
   globalSpeed: 0
   coyoteTimeLimit: 0.1
   coyoteTimer: 0
@@ -126,6 +127,8 @@ MonoBehaviour:
   dashSpeed: 60
   depth: {fileID: 5078044890271832808}
   animator: {fileID: 6728015053132064364}
+  ziplineSpeed: 1
+  lerpSpeed: 5
 --- !u!114 &5078044890271832808
 MonoBehaviour:
   m_ObjectHideFlags: 0
