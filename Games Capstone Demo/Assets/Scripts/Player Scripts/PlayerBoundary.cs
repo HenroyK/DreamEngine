@@ -9,6 +9,7 @@ public class PlayerBoundary : MonoBehaviour
 
 	private LivesScript livesScript;
 	private GameContollerScript gameControllerScript;
+	private DropInRespawn respawnScript;
 	private GameObject player;
 	private GameObject gameController;
 	private BlackFade fader;
@@ -35,7 +36,17 @@ public class PlayerBoundary : MonoBehaviour
 	void Update()
 	{
 		if (player == null)
-			player = GameObject.FindWithTag("Player");
+		{
+            player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                respawnScript = player.GetComponent<DropInRespawn>();
+            }
+            else
+            {
+                Debug.Log("Error. Couldn't find Player character");
+            }
+        }
 		else
 		{
 			//Find the distance between player and the boundry
@@ -63,7 +74,9 @@ public class PlayerBoundary : MonoBehaviour
 			}
 			else
             {
-				gameControllerScript.LoadCheckpoint();
+				// Livesless respawn
+				respawnScript.RespawnPlayer();
+				//gameControllerScript.LoadCheckpoint();
 			}
 		}
     }
