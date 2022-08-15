@@ -3721,9 +3721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77455d1ce18431043a50778173ead550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8022007116041893449, guid: f3392c73a12776b419e1ff0cbf478cf8, type: 3}
+  player: {fileID: 8022007116041893449, guid: b89e4bae75b720242b05bb0c2f20ff49, type: 3}
   playerSpawn: {fileID: 8206763482393315025}
-  enableLives: 0
+  enableLifes: 0
   audioManager: {fileID: 0}
   commandList:
   - commandType: 3
@@ -3827,7 +3827,7 @@ MonoBehaviour:
     layerState: 0
   - commandType: 1
     spawnObject: {fileID: 8400982411017895507, guid: 4cd590f17db10d9458e729fb7f092600, type: 3}
-    vector3: {x: 50, y: 0, z: 22}
+    vector3: {x: 90, y: 0, z: 22}
     time: 0
     speed: 10
     audioClip: {fileID: 0}

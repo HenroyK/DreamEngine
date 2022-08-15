@@ -13,7 +13,7 @@ public class Obstacle : ObstacleScript
 	[SerializeField]
 	public bool destroyOnHit;
 
-	private LivesScript livesScript;
+	private LifesScript livesScript;
 	private GameObject player;
 	private GameObject gameController;
 	private BlackFade fader;
@@ -26,7 +26,7 @@ public class Obstacle : ObstacleScript
 
 		if (gameController != null)
 		{
-			livesScript = gameController.GetComponent<LivesScript>();
+			livesScript = gameController.GetComponent<LifesScript>();
 		}
 		else
 		{

@@ -7,7 +7,7 @@ public class PlayerBoundary : MonoBehaviour
 {
 	public float damage = 1;
 
-	private LivesScript livesScript;
+	private LifesScript livesScript;
 	private GameContollerScript gameControllerScript;
 	private DropInRespawn respawnScript;
 	private GameObject player;
@@ -23,7 +23,7 @@ public class PlayerBoundary : MonoBehaviour
 
 		if (gameController != null)
         {
-            livesScript = gameController.GetComponent<LivesScript>();
+            livesScript = gameController.GetComponent<LifesScript>();
 			gameControllerScript = gameController.GetComponent<GameContollerScript>();
 
 		}

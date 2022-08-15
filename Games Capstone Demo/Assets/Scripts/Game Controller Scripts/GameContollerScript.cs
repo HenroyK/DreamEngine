@@ -9,8 +9,8 @@ public class GameContollerScript : MonoBehaviour
     public GameObject playerSpawn;
     //private GameObject playerRef;
 
-    public bool enableLives = false;
-    private LivesScript livesScript;
+    public bool enableLifes = false;
+    private LifesScript livesScript;
 
 
     public AudioManager audioManager;
@@ -50,14 +50,14 @@ public class GameContollerScript : MonoBehaviour
 
         if (gameController != null)
         {
-            livesScript = gameController.GetComponent<LivesScript>();
+            livesScript = gameController.GetComponent<LifesScript>();
         }
         else
         {
             Debug.Log("Error. Couldn't find Game Controller");
         }
 
-        if (!enableLives)
+        if (!enableLifes)
         {
             livesScript.enabled = false;
         }
