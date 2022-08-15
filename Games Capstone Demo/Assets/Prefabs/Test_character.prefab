@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8022007116041893810}
   - component: {fileID: 8022007116041893813}
   - component: {fileID: 8022007116041893815}
+  - component: {fileID: -1646179683084080548}
   - component: {fileID: 5078044890271832808}
   - component: {fileID: 8022007116041893814}
   - component: {fileID: 2000101234070049783}
@@ -113,6 +114,7 @@ MonoBehaviour:
   airStrafeSpeed: 0.2
   jumpaccel: 50
   gravityModifier: 100
+  jumpTimer: 0
   globalSpeed: 0
   coyoteTimeLimit: 0.1
   coyoteTimer: 0
@@ -126,6 +128,20 @@ MonoBehaviour:
   dashSpeed: 60
   depth: {fileID: 5078044890271832808}
   animator: {fileID: 6728015053132064364}
+--- !u!114 &-1646179683084080548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022007116041893449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7321046214221449897544031aa0a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnXAxis: 0
+  spawnYAxis: 30
 --- !u!114 &5078044890271832808
 MonoBehaviour:
   m_ObjectHideFlags: 0

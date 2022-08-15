@@ -6,8 +6,12 @@ using System.Linq;
 public class GameContollerScript : MonoBehaviour
 {
     public GameObject player;
-    public GameObject playerSpawn;       
+    public GameObject playerSpawn;
     //private GameObject playerRef;
+
+    public bool enableLives = false;
+    private LivesScript livesScript;
+
 
     public AudioManager audioManager;
     //list of all instantiated moving objects, ie. Buildings
@@ -22,10 +26,6 @@ public class GameContollerScript : MonoBehaviour
     public List<Command> commandList = new List<Command>();
     [SerializeField]
     private int commandListIndex = 0;
-
-    //Combo variable, does nothing right now.
-    private int combo;
-    public int Combo { get => combo; set => combo = value; }
 
     private float delay = 0;
     private float globalSpeed;
@@ -46,7 +46,21 @@ public class GameContollerScript : MonoBehaviour
             audioManager = new AudioManager();
         }
 
-        //Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
+        GameObject gameController = GameObject.FindWithTag("GameController");
+
+        if (gameController != null)
+        {
+            livesScript = gameController.GetComponent<LivesScript>();
+        }
+        else
+        {
+            Debug.Log("Error. Couldn't find Game Controller");
+        }
+
+        if (!enableLives)
+        {
+            livesScript.enabled = false;
+        }
 
         player = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
         player.BroadcastMessage("UpdateSpeed", globalSpeed);
@@ -108,12 +122,11 @@ public class GameContollerScript : MonoBehaviour
                     break;
                 case Command.CommandType.Camera:
                     //make Camera look at worldpoint.
-
                     //NotImplemented
                     break;
                 case Command.CommandType.Checkpoint:
-                    //Set     public int Combo { get => combo; set => combo = value; } checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
-                    SetCheckpoint();
+                        //Set checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
+                        SetCheckpoint();
                         
                     break;
                 case Command.CommandType.PlayAudio:
