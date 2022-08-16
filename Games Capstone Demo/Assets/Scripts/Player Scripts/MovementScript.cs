@@ -20,8 +20,7 @@ public class MovementScript : MonoBehaviour
 	public float globalSpeed;
 	public float coyoteTimeLimit = 0.1f;
 	public float coyoteTimer = 0;
-
-	private float jumpBooster = 0;
+	public float jumpBoost;
 
 	//Sound Stuff
 	public AudioSource audioSource;
@@ -110,7 +109,7 @@ public class MovementScript : MonoBehaviour
 			if (Input.GetButton("Jump"))
 			{
 				Debug.Log("jumpers");
-				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + 20);
+				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
 			}
 		}
 

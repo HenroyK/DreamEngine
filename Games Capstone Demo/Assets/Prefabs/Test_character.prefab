@@ -111,7 +111,7 @@ MonoBehaviour:
   maxSpeed: 15
   accel: 1
   airStrafeSpeed: 0.2
-  jumpaccel: 50
+  jumpaccel: 30
   gravityModifier: 100
   jumpTimer: 0
   globalSpeed: 0
