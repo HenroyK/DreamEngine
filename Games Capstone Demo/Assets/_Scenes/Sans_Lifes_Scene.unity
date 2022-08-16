@@ -3723,6 +3723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 8022007116041893449, guid: b89e4bae75b720242b05bb0c2f20ff49, type: 3}
   playerSpawn: {fileID: 8206763482393315025}
+  playerSpawnLayer: 1
   enableLifes: 0
   audioManager: {fileID: 0}
   commandList:

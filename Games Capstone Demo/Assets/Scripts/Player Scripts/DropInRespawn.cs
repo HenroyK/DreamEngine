@@ -36,14 +36,29 @@ public class DropInRespawn : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        // currently only respawns the player on the layer they are currently on
+        // finds the closest active layer, assumes that the
+        // first active layer in the list is the closest
+        int index = 0;
+        foreach (bool layer in layerActive)
+        {
+            if (layer)
+            {
+                break;
+            }
+            else
+            {
+                index++;
+            }
+        }
 
+        // currently only respawns the player on the layer they are currently on
         curLayer = depthScript.curDepth;
 
-        if (layerActive[curLayer])
+        if (layerActive[index])
         {
+            depthScript.curDepth = index;
             playerCharacter.transform.position = new Vector3(
-                respawnPostionA.x, respawnPostionA.y, layerZAxis[curLayer]);
+                respawnPostionA.x, respawnPostionA.y, layerZAxis[index]);
         }
         else
         {
