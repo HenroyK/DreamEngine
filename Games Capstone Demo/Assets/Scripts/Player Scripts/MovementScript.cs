@@ -15,7 +15,6 @@ public class MovementScript : MonoBehaviour
     public float accel;
 	public float airStrafeSpeed;
 	public float jumpaccel;
-	public float gravityModifier;
 	public float jumpTimer;
 	public float globalSpeed;
 	public float coyoteTimeLimit = 0.1f;

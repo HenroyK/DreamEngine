@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBoundary : MonoBehaviour
 {
-    private LivesScript livesScript;
+	public float damage = 1;
+
+	private LifesScript livesScript;
+	private GameContollerScript gameControllerScript;
+	private DropInRespawn respawnScript;
 	private GameObject player;
 	private GameObject gameController;
 	private BlackFade fader;
@@ -19,8 +23,10 @@ public class PlayerBoundary : MonoBehaviour
 
 		if (gameController != null)
         {
-            livesScript = gameController.GetComponent<LivesScript>();
-        }
+            livesScript = gameController.GetComponent<LifesScript>();
+			gameControllerScript = gameController.GetComponent<GameContollerScript>();
+
+		}
         else
         {
             Debug.Log("Error. Couldn't find Game Controller");
@@ -30,7 +36,17 @@ public class PlayerBoundary : MonoBehaviour
 	void Update()
 	{
 		if (player == null)
-			player = GameObject.FindWithTag("Player");
+		{
+            player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                respawnScript = player.GetComponent<DropInRespawn>();
+            }
+            else
+            {
+                Debug.Log("Error. Couldn't find Player character");
+            }
+        }
 		else
 		{
 			//Find the distance between player and the boundry
@@ -52,7 +68,16 @@ public class PlayerBoundary : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            livesScript.LifeCountLoss(1);
-        }
+            if (livesScript.enabled)
+            {
+				livesScript.LifeCountLoss(damage);
+			}
+			else
+            {
+				// Livesless respawn
+				respawnScript.RespawnPlayer();
+				//gameControllerScript.LoadCheckpoint();
+			}
+		}
     }
 }

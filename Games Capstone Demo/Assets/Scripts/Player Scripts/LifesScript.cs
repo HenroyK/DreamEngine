@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class LivesScript : MonoBehaviour
+public class LifesScript : MonoBehaviour
 {
     public float lifeCount = 3;     // current lives
     public float lifeCountCap = 3;  // maximum possible lives
@@ -36,11 +36,14 @@ public class LivesScript : MonoBehaviour
             Debug.Log("Error. Couldn't find Game Controller");
         }
 
-        livesUI.SetActive(true);
+        if (gameControllerScript.enableLifes)
+        {
+            livesUI.SetActive(true);
 
-        RefreshUI();
+            RefreshUI();
 
-        Debug.Log(livesText.GetComponent<TextMeshProUGUI>().text);
+            Debug.Log(livesText.GetComponent<TextMeshProUGUI>().text);
+        }
     }
 
     void RefreshUI()
