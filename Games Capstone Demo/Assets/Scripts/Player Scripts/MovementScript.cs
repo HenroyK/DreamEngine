@@ -18,9 +18,10 @@ public class MovementScript : MonoBehaviour
 	public float gravityModifier;
 	public float jumpTimer;
 	public float globalSpeed;
-
 	public float coyoteTimeLimit = 0.1f;
 	public float coyoteTimer = 0;
+
+	private float jumpBooster = 0;
 
 	//Sound Stuff
 	public AudioSource audioSource;
@@ -100,9 +101,18 @@ public class MovementScript : MonoBehaviour
 		coyoteTimer -= Time.deltaTime;
 		jumpTimer -= Time.deltaTime;
 		if (jumpTimer <= 0)
-        {
+		{
 			jumpTimer = 0;
-        }
+		}
+		else
+		{
+			//Extend jump
+			if (Input.GetButton("Jump"))
+			{
+				Debug.Log("jumpers");
+				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + 20);
+			}
+		}
 
 		//if dash duration is over, stop dashing
 		if (currentDashDuration < 0 && isDashing)
