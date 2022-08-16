@@ -107,7 +107,6 @@ public class MovementScript : MonoBehaviour
 			//Extend jump
 			if (Input.GetButton("Jump"))
 			{
-				Debug.Log("jumpers");
 				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
 			}
 		}

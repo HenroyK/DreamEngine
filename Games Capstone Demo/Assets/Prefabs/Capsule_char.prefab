@@ -112,12 +112,12 @@ MonoBehaviour:
   maxSpeed: 15
   accel: 1
   airStrafeSpeed: 0.5
-  jumpaccel: 50
-  gravityModifier: 100
+  jumpaccel: 30
   jumpTimer: 0
   globalSpeed: 0
   coyoteTimeLimit: 0.1
   coyoteTimer: 0
+  jumpBoost: 0.4
   audioSource: {fileID: -7998740433712840455}
   runClip: {fileID: 8300000, guid: 827993acc4956c54398d676a9030c1e8, type: 3}
   jumpClip: {fileID: 8300000, guid: 471219dc6e5bfbd4d90c826e39e3b18a, type: 3}
@@ -128,6 +128,8 @@ MonoBehaviour:
   dashSpeed: 60
   depth: {fileID: 5078044890271832808}
   animator: {fileID: 6728015053132064364}
+  ziplineSpeed: 1
+  lerpSpeed: 5
 --- !u!114 &-1646179683084080548
 MonoBehaviour:
   m_ObjectHideFlags: 0
