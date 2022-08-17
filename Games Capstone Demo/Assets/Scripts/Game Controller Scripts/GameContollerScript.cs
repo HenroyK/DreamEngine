@@ -61,6 +61,7 @@ public class GameContollerScript : MonoBehaviour
         if (!enableLifes)
         {
             livesScript.enabled = false;
+			livesScript.livesUI.SetActive(false);
         }
 
         // sets the players Z axis spawn to the selected layer

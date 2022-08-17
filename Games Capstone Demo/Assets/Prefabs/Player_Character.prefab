@@ -164,7 +164,7 @@ MonoBehaviour:
   - 22
   - 27
   - 32
-  curDepth: 2
+  curDepth: 1
   player: {fileID: 8022007116041893449}
 --- !u!54 &8022007116041893814
 Rigidbody:
