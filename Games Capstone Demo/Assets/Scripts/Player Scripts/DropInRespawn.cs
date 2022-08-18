@@ -1,15 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DropInRespawn : MonoBehaviour
 {
-    public float spawnXAxis = 0;
-    public float spawnYAxis = 30;
-
-    public Vector2 respawnPostionA = new Vector2(0, 30);
-    public Vector2 respawnPostionB = new Vector2(10, 30);
-    public Vector2 respawnPostionC = new Vector2(20, 30);
+    public Vector2 defaultRespawn = new Vector2(0, 30);
+    
+    public Vector2[] respawnPostions;
 
     private GameObject playerCharacter;
     private DepthBehaviour depthScript;
@@ -39,41 +39,34 @@ public class DropInRespawn : MonoBehaviour
         curLayer = depthScript.curDepth;
     }
 
-    // function needs further work
     // Advanced respawn function
     // 1. checks current layer to see if any spawn positions are free
-    // 2. checks the the forward most layers relative to the current layer
+    // 2. checks the forward most layers relative to the current layer
     // 3. brute force search all layers to find an open position
     // 4. default respawn position
     public void AltRespawnPlayer()
     {
-        // currently only respawns the player on the layer they are currently on
+        // 1.checks current layer to see if any spawn positions are free
         curLayer = depthScript.curDepth;
-
-        // needs to be an array
-        Vector3 spawnPoint1 = new Vector3(
-                respawnPostionA.x, respawnPostionA.y, layerZAxis[curLayer]);
-        Vector3 spawnPoint2 = new Vector3(
-                respawnPostionB.x, respawnPostionB.y, layerZAxis[curLayer]);
-        Vector3 spawnPoint3 = new Vector3(
-                respawnPostionC.x, respawnPostionC.y, layerZAxis[curLayer]);
 
         LayerMask mask = LayerMask.GetMask(new string[] { "GroundFloor", "Building" });
         Quaternion weirdQuat = new Quaternion();
         weirdQuat.eulerAngles = new Vector3(0, 0, 0);
-        if (!Physics.CheckBox(spawnPoint1, transform.localScale, weirdQuat, mask))
+
+        foreach (Vector2 xyPostion in respawnPostions)
         {
-            playerCharacter.transform.position = spawnPoint1;
+            Vector3 spawnPoint = new Vector3(
+                xyPostion.x, xyPostion.y, layerZAxis[curLayer]);
+
+            if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
+            {
+                playerCharacter.transform.position = spawnPoint;
+                return;
+            }
         }
-        else if (!Physics.CheckBox(spawnPoint2, transform.localScale, weirdQuat, mask))
-        {
-            playerCharacter.transform.position = spawnPoint2;
-        }
-        else if (!Physics.CheckBox(spawnPoint3, transform.localScale, weirdQuat, mask))
-        {
-            playerCharacter.transform.position = spawnPoint3;
-        }
-        else if (curLayer != 0)
+
+        // 2.checks the forward most layers relative to the current layer
+        if (curLayer != 0)
         {
             int nextLayer = curLayer;
 
@@ -83,32 +76,46 @@ public class DropInRespawn : MonoBehaviour
 
                 if (layerActive[nextLayer])
                 {
-                    spawnPoint1 = new Vector3(
-                    respawnPostionA.x, respawnPostionA.y, layerZAxis[nextLayer]);
-                    spawnPoint2 = new Vector3(
-                        respawnPostionB.x, respawnPostionB.y, layerZAxis[nextLayer]);
-                    spawnPoint3 = new Vector3(
-                        respawnPostionC.x, respawnPostionC.y, layerZAxis[nextLayer]);
+                    foreach (Vector2 xyPostion in respawnPostions)
+                    {
+                        Vector3 spawnPoint = new Vector3(
+                            xyPostion.x, xyPostion.y, layerZAxis[nextLayer]);
 
-                    if (!Physics.CheckBox(spawnPoint1, transform.localScale, weirdQuat, mask))
-                    {
-                        playerCharacter.transform.position = spawnPoint1;
-                        break;
-                    }
-                    else if (!Physics.CheckBox(spawnPoint2, transform.localScale, weirdQuat, mask))
-                    {
-                        playerCharacter.transform.position = spawnPoint2;
-                        break;
-                    }
-                    else if (!Physics.CheckBox(spawnPoint3, transform.localScale, weirdQuat, mask))
-                    {
-                        playerCharacter.transform.position = spawnPoint3;
-                        break;
+                        if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
+                        {
+                            depthScript.curDepth = nextLayer;
+                            playerCharacter.transform.position = spawnPoint;
+                            return;
+                        }
                     }
                 }
-
             }
         }
+
+        // 3. brute force search all layers to find an open position
+        for (int i = 0; i < layerActive.Length; i++)
+        {
+            if (layerActive[i])
+            {
+                foreach (Vector2 xyPostion in respawnPostions)
+                {
+                    Vector3 spawnPoint = new Vector3(
+                        xyPostion.x, xyPostion.y, layerZAxis[i]);
+
+                    if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
+                    {
+                        depthScript.curDepth = i;
+                        playerCharacter.transform.position = spawnPoint;
+                        return;
+                    }
+                }
+            }
+        }
+
+        // 4. default respawn position
+        playerCharacter.transform.position = new Vector3(
+                defaultRespawn.x, defaultRespawn.y, layerZAxis[curLayer]);
+
     }
 
     public void RespawnPlayer()
@@ -135,16 +142,11 @@ public class DropInRespawn : MonoBehaviour
         {
             depthScript.curDepth = index;
             playerCharacter.transform.position = new Vector3(
-                respawnPostionA.x, respawnPostionA.y, layerZAxis[index]);
+                respawnPostions[0].x, respawnPostions[0].y, layerZAxis[index]);
         }
         else
         {
             // alternate layer/position
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

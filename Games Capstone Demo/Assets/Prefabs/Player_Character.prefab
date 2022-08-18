@@ -142,9 +142,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe7321046214221449897544031aa0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnXAxis: 0
-  spawnYAxis: 30
   respawnPostionA: {x: 0, y: 30}
+  respawnPostionB: {x: 10, y: 30}
+  respawnPostionC: {x: 20, y: 30}
+  respawnPostions:
+  - {x: 0, y: 30}
+  - {x: 10, y: 30}
+  - {x: 20, y: 30}
 --- !u!114 &5078044890271832808
 MonoBehaviour:
   m_ObjectHideFlags: 0
