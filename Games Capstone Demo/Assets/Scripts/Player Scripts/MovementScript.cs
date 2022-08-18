@@ -108,7 +108,8 @@ public class MovementScript : MonoBehaviour
 			if (Input.GetButton("Jump"))
 			{
 				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
-			}
+                //Debug.Log("powered jump");
+            }
 		}
 
 		//if dash duration is over, stop dashing
@@ -152,7 +153,8 @@ public class MovementScript : MonoBehaviour
 				if (Input.GetButtonDown("Jump"))
 				{
 					Jump();
-				}
+                    //Debug.Log("normal jump 1");
+                }
 			}
 			else //Airstrafe movement code.
 			{
@@ -174,6 +176,7 @@ public class MovementScript : MonoBehaviour
 					if (Input.GetButtonDown("Jump"))
 					{
 						Jump();
+						//Debug.Log("normal jump 2");
 					}
 				}
 			}
