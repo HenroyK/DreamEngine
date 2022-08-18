@@ -115,7 +115,6 @@ public class DropInRespawn : MonoBehaviour
         // 4. default respawn position
         playerCharacter.transform.position = new Vector3(
                 defaultRespawn.x, defaultRespawn.y, layerZAxis[curLayer]);
-
     }
 
     public void RespawnPlayer()
