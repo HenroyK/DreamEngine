@@ -19,18 +19,21 @@ public class LifesScript : MonoBehaviour
     public GameObject heartC;
 
     private GameContollerScript gameControllerScript;
-    private GameOver gameOverScript;
+	private GameObject gameController;
+	private GameOver gameOverScript;
+	private BlackFade fader;
 
-    // Set up variables and find scripts
-    void Start()
+	// Set up variables and find scripts
+	void Start()
     {
-        GameObject gameController = GameObject.FindWithTag("GameController");
+		gameController = GameObject.FindWithTag("GameController");
 
-        if (gameController != null)
+		if (gameController != null)
         {
             gameControllerScript = gameController.GetComponent<GameContollerScript>();
             gameOverScript = gameController.GetComponent<GameOver>();
-        }
+			fader = gameControllerScript.GetComponent<BlackFade>();
+		}
         else
         {
             Debug.Log("Error. Couldn't find Game Controller");
@@ -112,7 +115,8 @@ public class LifesScript : MonoBehaviour
             }
         }
 
-        gameControllerScript.LoadCheckpoint();
+		gameControllerScript.LoadCheckpoint();
+		fader.ResetFade();
 
         RefreshUI();
     }

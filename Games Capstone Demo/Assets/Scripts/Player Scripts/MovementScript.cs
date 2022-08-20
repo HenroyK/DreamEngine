@@ -58,26 +58,28 @@ public class MovementScript : MonoBehaviour
 	void Start()
 	{
 	}
-
+	
 	void FixedUpdate()
 	{
 
+		jumpTimer -= Time.fixedDeltaTime;
+		if (jumpTimer <= 0)
+		{
+			jumpTimer = 0;
+		}
+		else
+		{
+			//Extend jump
+			if (Input.GetButton("Jump"))
+			{
+				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
+			}
+		}
 	}
-
 	// Update is called once per frame
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
-
-		// check for input
-		if (!ziplined && Input.GetAxis("Horizontal") == 0 && IsGrounded() && jumpTimer <= 0)
-		{
-			SwapPhysicsMaterial(false);
-		}
-		else
-		{
-			SwapPhysicsMaterial(true);
-		}
 
 		if (!ziplined && Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
@@ -97,19 +99,6 @@ public class MovementScript : MonoBehaviour
 		cooldownBar.GetComponent<CooldownRadialScript>().UpdateRadialBar(currentDashCooldown/dashCooldown);
 		//Coyote Timer
 		coyoteTimer -= Time.deltaTime;
-		jumpTimer -= Time.deltaTime;
-		if (jumpTimer <= 0)
-		{
-			jumpTimer = 0;
-		}
-		else
-		{
-			//Extend jump
-			if (Input.GetButton("Jump"))
-			{
-				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
-			}
-		}
 
 		//if dash duration is over, stop dashing
 		if (currentDashDuration < 0 && isDashing)
@@ -204,6 +193,16 @@ public class MovementScript : MonoBehaviour
 		{
 			lerpTimer += Time.deltaTime*lerpSpeed;
 			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]), lerpTimer);
+		}
+
+		//Swap phys material (moving with objects)
+		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && IsGrounded())
+		{
+			SwapPhysicsMaterial(false);
+		}
+		else
+		{
+			SwapPhysicsMaterial(true);
 		}
 	}
 

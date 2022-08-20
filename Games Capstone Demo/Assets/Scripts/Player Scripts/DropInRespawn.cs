@@ -14,13 +14,15 @@ public class DropInRespawn : MonoBehaviour
     private bool[] layerActive;
     private float[] layerZAxis;
     private int curLayer;
-    
-    // Start is called before the first frame update
-    void Start()
+	private BlackFade fader;
+
+	// Start is called before the first frame update
+	void Start()
     {
         playerCharacter = GameObject.FindWithTag("Player");
+		fader = GameObject.FindWithTag("GameController").GetComponent<BlackFade>();
 
-        if (playerCharacter != null)
+		if (playerCharacter != null)
         {
             depthScript = playerCharacter.GetComponent<DepthBehaviour>();
         }
@@ -36,9 +38,10 @@ public class DropInRespawn : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        // finds the closest active layer, assumes that the
-        // first active layer in the list is the closest
-        int index = 0;
+		fader.ResetFade();
+		// finds the closest active layer, assumes that the
+		// first active layer in the list is the closest
+		int index = 0;
         foreach (bool layer in layerActive)
         {
             if (layer)
