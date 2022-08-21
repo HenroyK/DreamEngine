@@ -10,6 +10,9 @@ public class MovementScript : MonoBehaviour
 	public PhysicMaterial slipperyMat;
 	public PhysicMaterial roughMat;
 	public GameObject cooldownBar;
+	public GameObject spotLight;
+	public Vector3 spotLightRotation;
+	public float spotLightHeight = 12;
 
 	public float maxSpeed;
     public float accel;
@@ -57,6 +60,18 @@ public class MovementScript : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		if (spotLight != null)
+		{
+			Vector3 spotlightSpawn = new Vector3(
+				this.transform.position.x, 
+				spotLightHeight, 
+				this.transform.position.z);
+
+            spotLight = Instantiate(
+				spotLight,
+                spotlightSpawn, 
+				Quaternion.Euler(spotLightRotation));
+        }
 	}
 
 	void FixedUpdate()
