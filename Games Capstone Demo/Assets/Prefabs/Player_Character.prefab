@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: -1646179683084080548}
   - component: {fileID: 5078044890271832808}
   - component: {fileID: 8022007116041893814}
+  - component: {fileID: -6160223817651151845}
   - component: {fileID: -7998740433712840455}
   - component: {fileID: 3628920118242843887}
-  - component: {fileID: -6160223817651151845}
   m_Layer: 7
   m_Name: Player_Character
   m_TagString: Player
@@ -109,6 +109,9 @@ MonoBehaviour:
   slipperyMat: {fileID: 13400000, guid: 90e132eae38f1ff45b597e425bdbaf82, type: 2}
   roughMat: {fileID: 13400000, guid: f074a990f229a1b4181fd9ae58e3c947, type: 2}
   cooldownBar: {fileID: 5836240254894637982}
+  spotLight: {fileID: 924176796843420716, guid: 8a50016834e185b428e69e0d8caa011f, type: 3}
+  spotLightRotation: {x: 90, y: 0, z: 0}
+  spotLightHeight: 8
   maxSpeed: 15
   accel: 1
   airStrafeSpeed: 5
@@ -142,9 +145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe7321046214221449897544031aa0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnXAxis: 0
-  spawnYAxis: 30
-  respawnPostionA: {x: 0, y: 30}
+  defaultRespawn: {x: 0, y: 30}
+  respawnPostions:
+  - {x: 0, y: 30}
+  - {x: 10, y: 30}
+  - {x: 20, y: 30}
 --- !u!114 &5078044890271832808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +187,20 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 3
+--- !u!136 &-6160223817651151845
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022007116041893449}
+  m_Material: {fileID: 13400000, guid: 90e132eae38f1ff45b597e425bdbaf82, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.7
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &-7998740433712840455
 AudioSource:
   m_ObjectHideFlags: 0
@@ -290,20 +309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe217d41442e4dd448ad25c3e89c1f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &-6160223817651151845
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8022007116041893449}
-  m_Material: {fileID: 13400000, guid: 90e132eae38f1ff45b597e425bdbaf82, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.7
-  m_Height: 5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7579565159512142881
 PrefabInstance:
   m_ObjectHideFlags: 0

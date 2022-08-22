@@ -77,10 +77,11 @@ public class PlayerBoundary : MonoBehaviour
 			}
 			else
             {
-				// Livesless respawn
-				respawnScript.RespawnPlayer();
-				//gameControllerScript.LoadCheckpoint();
-			}
+                // Livesless respawn
+                respawnScript.AltRespawnPlayer();
+                //respawnScript.RespawnPlayer();
+                //gameControllerScript.LoadCheckpoint();
+            }
 		}
     }
 }
