@@ -48,6 +48,8 @@ public class DropInRespawn : MonoBehaviour
     // 4. default respawn position
     public void AltRespawnPlayer()
     {
+        fader.ResetFade();
+
         // 1.checks current layer to see if any spawn positions are free
         curLayer = depthScript.curDepth;
 
@@ -121,7 +123,6 @@ public class DropInRespawn : MonoBehaviour
 
     public void RespawnPlayer()
     {
-
 		fader.ResetFade();
 
         // currently only respawns the player on the layer they are currently on

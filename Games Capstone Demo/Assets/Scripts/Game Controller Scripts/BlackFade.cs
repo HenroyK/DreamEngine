@@ -24,7 +24,8 @@ public class BlackFade : MonoBehaviour
 		}
 		if (closest == obj && closeDist <= 25)
 		{
-			float percent = Mathf.InverseLerp(0, 255, (((((dist / 25) - 1) * -1) * 100) / 100) * maxFade); //Quick Maff
+			float percent = Mathf.InverseLerp(
+				0, 255, (((((dist / 25) - 1) * -1) * 100) / 100) * maxFade); //Quick Maff
 			blackFader.color = new Color(0, 0, 0, percent);
 
 			print(closest);

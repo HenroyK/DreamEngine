@@ -9,8 +9,8 @@ public class PlayerBoundary : MonoBehaviour
 
 	private LifesScript livesScript;
 	private GameContollerScript gameControllerScript;
-	public DropInRespawn respawnScript;
-	public GameObject player;
+	private DropInRespawn respawnScript;
+	private GameObject player;
 	private GameObject gameController;
 	private BlackFade fader;
 
