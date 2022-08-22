@@ -72,7 +72,8 @@ public class GameContollerScript : MonoBehaviour
             playerSpawn.transform.position.y, 
             zPlayerSpawn[playerSpawnLayer]);
 
-        // Spawn player and set cameara to player character
+        // Spawn player and set cameara to player character.
+        // Also keeps a reference of the player in the scene
         player = Instantiate(player, playerSpawnPoint, Quaternion.identity);
         player.BroadcastMessage("UpdateSpeed", globalSpeed);
         this.GetComponent<CameraScript>().SetLookat(player);
