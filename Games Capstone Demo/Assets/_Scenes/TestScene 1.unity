@@ -4021,6 +4021,61 @@ MonoBehaviour:
     audioVolume: 0
     layerNo: 0
     layerState: 0
+  - commandType: 7
+    spawnObject: {fileID: 8400982411017895507, guid: 4cd590f17db10d9458e729fb7f092600, type: 3}
+    vector3: {x: 90, y: 0, z: 22}
+    time: 0.1
+    speed: 10
+    audioClip: {fileID: 0}
+    audioFunction: 0
+    audioDuration: 0
+    audioVolume: 0
+    layerNo: 0
+    layerState: 0
+  - commandType: 1
+    spawnObject: {fileID: 1686059550865437287, guid: 1692e9cde03977941823cd6dddee79f7, type: 3}
+    vector3: {x: 0, y: 18, z: 25}
+    time: 0
+    speed: 10
+    audioClip: {fileID: 0}
+    audioFunction: 0
+    audioDuration: 0
+    audioVolume: 0
+    layerNo: 0
+    layerState: 0
+  - commandType: 1
+    spawnObject: {fileID: 7961945654807694738, guid: f0f8274cb92081741aecb20f4881b8c5, type: 3}
+    vector3: {x: 0, y: 4.3, z: 22}
+    time: 0
+    speed: 10
+    audioClip: {fileID: 0}
+    audioFunction: 0
+    audioDuration: 0
+    audioVolume: 0
+    layerNo: 0
+    layerState: 0
+  - commandType: 7
+    spawnObject: {fileID: 8400982411017895507, guid: 4cd590f17db10d9458e729fb7f092600, type: 3}
+    vector3: {x: 90, y: 0, z: 22}
+    time: 0.1
+    speed: 10
+    audioClip: {fileID: 0}
+    audioFunction: 0
+    audioDuration: 0
+    audioVolume: 0
+    layerNo: 0
+    layerState: 0
+  - commandType: 2
+    spawnObject: {fileID: 8400982411017895507, guid: 4cd590f17db10d9458e729fb7f092600, type: 3}
+    vector3: {x: 90, y: 0, z: 22}
+    time: 0
+    speed: 10
+    audioClip: {fileID: 0}
+    audioFunction: 0
+    audioDuration: 0
+    audioVolume: 0
+    layerNo: 0
+    layerState: 0
   - commandType: 1
     spawnObject: {fileID: 972125480459473594, guid: 6d3b6f54109714b4ca234b985bcec7c0, type: 3}
     vector3: {x: 50, y: 1, z: 22}
