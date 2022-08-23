@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3143715238199361276}
   - component: {fileID: 7898042572233453128}
   - component: {fileID: 6343145687491080760}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Hexgon
   m_TagString: DoesntBlockSwap
   m_Icon: {fileID: 0}
