@@ -280,7 +280,7 @@ public class MovementScript : MonoBehaviour
 		LayerMask mask = LayerMask.GetMask(new string[] { "GroundFloor", "Building" });
 		Quaternion weirdQuat = new Quaternion();
 		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
-		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(1, 0.1f, 1), weirdQuat, mask))
+		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -2.5f, 0), new Vector3(1, 0.1f, 1), weirdQuat, mask))
 		{
 			coyoteTimer = coyoteTimeLimit;
 			animator.SetTrigger("Land");
@@ -348,7 +348,7 @@ public class MovementScript : MonoBehaviour
 		Gizmos.color = Color.red;
 		// *********************************
 		// NUMBERS ARE TO BE CHANGED IF MODEL IS UPDATED.
-		Gizmos.DrawWireCube(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(2,0.2f,2));
+		Gizmos.DrawWireCube(playerCollider.bounds.center + new Vector3(0, -2.5f, 0), new Vector3(2,0.2f,2));
 
 		if(moveBack)
         {
