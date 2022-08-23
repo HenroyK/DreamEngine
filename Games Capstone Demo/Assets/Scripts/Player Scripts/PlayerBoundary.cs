@@ -5,29 +5,83 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBoundary : MonoBehaviour
 {
-    private LivesScript livesScript;
-    
-    // Get a reference of Lives Script that is attached to the Game controller object
-    void Start()
-    {
-        GameObject gameController = GameObject.FindWithTag("GameController");
+	public float damage = 1;
 
-        if (gameController != null)
+	private LifesScript livesScript;
+	private GameContollerScript gameControllerScript;
+	private DropInRespawn respawnScript;
+	private GameObject player;
+	private GameObject gameController;
+	private BlackFade fader;
+
+	// Get a reference of Lives Script that is attached to the Game controller object
+	void Start()
+    {
+        gameController = GameObject.FindWithTag("GameController");
+	    fader = gameController.GetComponent<BlackFade>();
+		player = GameObject.FindWithTag("Player");
+
+		if (gameController != null)
         {
-            livesScript = gameController.GetComponent<LivesScript>();
-        }
+            livesScript = gameController.GetComponent<LifesScript>();
+			gameControllerScript = gameController.GetComponent<GameContollerScript>();
+
+		}
         else
         {
             Debug.Log("Error. Couldn't find Game Controller");
         }
-    }    
+    }
+
+	void Update()
+	{
+		if (player == null && respawnScript == null)
+		{
+			if (player == null)
+			{
+				player = GameObject.FindWithTag("Player");
+			}
+			else
+			{
+				Debug.Log("Error. Couldn't find Player");
+			}
+			if (respawnScript == null)
+            {
+                respawnScript = player.GetComponent<DropInRespawn>();
+            }
+			else
+			{
+				Debug.Log("Error. Couldn't find Respawn script");
+			}
+        }
+		else
+		{
+			//Find the distance between player and the boundry
+			float dist = Vector3.Distance(this.transform.position, player.transform.position);
+			//Set the amount of fade
+			if (dist < 30)
+			{
+				fader.SetFade(gameObject, dist);
+			}
+		}
+	}
 
     // Subract one life if player collides with attached object
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            livesScript.LifeCountLoss(1);
-        }
+            if (livesScript.enabled)
+            {
+				livesScript.LifeCountLoss(damage);
+			}
+			else
+            {
+                // Livesless respawn
+                respawnScript.AltRespawnPlayer();
+                //respawnScript.RespawnPlayer();
+                //gameControllerScript.LoadCheckpoint();
+            }
+		}
     }
 }

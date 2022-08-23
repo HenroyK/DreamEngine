@@ -10,6 +10,7 @@ public class GameOver : MonoBehaviour
     public Button retryBtn;
     public Button mainMenuBtn;
 
+    private GameContollerScript gameControllerScript;
     private Pause pauseScript;
     private bool playerDead = false;
 
@@ -21,6 +22,8 @@ public class GameOver : MonoBehaviour
         if (gameController != null)
         {
             pauseScript = gameController.GetComponent<Pause>();
+            gameControllerScript = 
+                gameController.GetComponent<GameContollerScript>();
         }
         else
         {
@@ -60,10 +63,12 @@ public class GameOver : MonoBehaviour
     // Turns on Game over UI, pauses game and music
     public void playerDied()
     {
-        pauseScript.disablePause();
+        pauseScript.disablePause(); // disable pause functionality
         playerDead = true;
-        gameOverMenuUI.SetActive(true);
-        Time.timeScale = 0;
+        gameOverMenuUI.SetActive(true); // enable game over UI
+        gameControllerScript.PlayerControls(false); // disable player controls
+        Time.timeScale = 0; // pause game
+        // pause game music (attached to game controller object)
         gameObject.GetComponent<AudioSource>().Pause();
     }
 }

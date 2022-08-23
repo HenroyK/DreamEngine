@@ -5,18 +5,22 @@ TagManager:
   serializedVersion: 2
   tags:
   - ground
+  - ScoreController
+  - DoesntBlockSwap
+  - PickupEffectTarget
+  - Tutorial
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - GroundFloor
   - Water
   - UI
   - Building
   - Player
   - Wall
   - Checkpoint
-  - 
+  - Floor
   - 
   - 
   - 

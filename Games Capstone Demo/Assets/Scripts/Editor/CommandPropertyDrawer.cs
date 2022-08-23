@@ -70,6 +70,17 @@ public class CommandPropertyDrawer : PropertyDrawer
             EditorGUI.PropertyField(audioVolumeRect, property.FindPropertyRelative("audioVolume"), GUIContent.none);
         }
 
+        //if command type is set layer state
+        if (property.FindPropertyRelative("commandType").enumValueIndex == 6)
+        {
+            // New rect for next element
+            var layerNoRect = new Rect(rect.x + 20, rect.y, 30, rect.height / 2);
+            EditorGUI.PropertyField(layerNoRect, property.FindPropertyRelative("layerNo"), GUIContent.none);
+
+            var layerStateRect = new Rect(layerNoRect.x + 40, rect.y, 30, rect.height / 2);
+            EditorGUI.PropertyField(layerStateRect, property.FindPropertyRelative("layerState"), GUIContent.none);
+        }
+
         var labelRect = new Rect(80, rect.y + rect.height / 2, 159, rect.height / 2);
         var timeRect = labelRect;
         timeRect.x += labelRect.width + 20;

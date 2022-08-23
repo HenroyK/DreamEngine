@@ -7,24 +7,30 @@ public class MovementScript : MonoBehaviour
 	//Variables
 	public Rigidbody playerRigidbody;
 	public Collider playerCollider;
+	public PhysicMaterial slipperyMat;
+	public PhysicMaterial roughMat;
+	public GameObject cooldownBar;
+	public GameObject spotLight;
+	public Vector3 spotLightRotation;
+	public float spotLightHeight = 12;
+
 	public float maxSpeed;
     public float accel;
 	public float airStrafeSpeed;
 	public float jumpaccel;
-	public float gravityModifier;
-	
+	public float jumpTimer;
 	public float globalSpeed;
-
 	public float coyoteTimeLimit = 0.1f;
 	public float coyoteTimer = 0;
-	////Control Keys
-	//public KeyCode jumpKey;
-	//public KeyCode forwardKey;
-	//public KeyCode backKey;
-	//public KeyCode duckKey;
-	//public KeyCode swapFKey;
-	//public KeyCode swapBKey;
+	public float jumpBoost;
 
+	//Sound Stuff
+	public AudioSource audioSource;
+	public AudioClip runClip;
+	public AudioClip jumpClip;
+	public AudioClip dashClip;
+	public float stepDelay = 0.3f;
+	private float stepTimer = 0;
 	//Dash variables
 	public float dashDuration;
 	public float dashCooldown;
@@ -34,39 +40,63 @@ public class MovementScript : MonoBehaviour
 	private bool isDashing = false;
 	private float dashDirection;
 
-	//Vals
-	public float minDepth;
-	public float maxDepth;
-	public float curDepth;
+	public DepthBehaviour depth;
 
 	public Animator animator;
 	//
 	private bool blockDetect = false;
 	private RaycastHit blockRaycastHit;
 	private bool moveBack = true;
+	private bool ziplined = false;
+	private bool ignoreZipline = false;
+	private Vector3 ziplinePos;
+	public float ziplineSpeed = 1;
+	private float ziplineRelSpeed = 0;
+	private float lerpPos;
+	private float lerpTimer;
+	public float lerpSpeed;
 
-	private float spawnDepth;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		spawnDepth = gameObject.transform.position.z;
+		if (spotLight != null)
+		{
+			Vector3 spotlightSpawn = new Vector3(
+				this.transform.position.x, 
+				spotLightHeight, 
+				this.transform.position.z);
 
-		//curDepth = spawnDepth;
+            spotLight = Instantiate(
+				spotLight,
+                spotlightSpawn, 
+				Quaternion.Euler(spotLightRotation));
+        }
 	}
+	
+	void FixedUpdate()
+	{
 
-	//removed gravity code and just used the gravity part of the unity physics engine. Should be the same thing.
-
-	//void FixedUpdate()
-	//{
-	//	playerRigidbody.AddForce(Vector3.down * gravityModifier * GetComponent<Rigidbody>().mass);
-	//}
-
+		jumpTimer -= Time.fixedDeltaTime;
+		if (jumpTimer <= 0)
+		{
+			jumpTimer = 0;
+		}
+		else
+		{
+			//Extend jump
+			if (Input.GetButton("Jump"))
+			{
+				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
+			}
+		}
+	}
 	// Update is called once per frame
 	void Update()
 	{
-		
-		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
+		stepTimer -= Time.deltaTime;
+
+		if (!ziplined && Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
 			playerRigidbody.useGravity = false;
 			//SoundManagerScript.PlaySound("Dash");
@@ -81,7 +111,7 @@ public class MovementScript : MonoBehaviour
 		//Tick down dash duration
 		currentDashDuration -= Time.deltaTime;
 		currentDashCooldown -= Time.deltaTime;
-
+		cooldownBar.GetComponent<CooldownRadialScript>().UpdateRadialBar(currentDashCooldown/dashCooldown);
 		//Coyote Timer
 		coyoteTimer -= Time.deltaTime;
 
@@ -113,8 +143,8 @@ public class MovementScript : MonoBehaviour
 			//CoyoteTimer or grounded
 			if (IsGrounded() || coyoteTimer > 0)
 			{
+				RunAudio();
 				//Move left/right
-
 				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
 				//Debug.Log(Input.GetAxis("Horizontal"));
                 if (playerRigidbody.velocity.x < 0)
@@ -125,78 +155,139 @@ public class MovementScript : MonoBehaviour
 				//Jump
 				if (Input.GetButtonDown("Jump"))
 				{
-					//SoundManagerScript.PlaySound("Jump");
-					animator.SetTrigger("Jump");
-					playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
-				}
+					Jump();
+                    //Debug.Log("normal jump 1");
+                }
 			}
 			else //Airstrafe movement code.
 			{
-				
-				//Checks if the player is trying to go left or right, checks that they are below half of max speed then modifies velocity by airStrafeSpeed. 
-				if (Input.GetAxis("Horizontal") > 0 && playerRigidbody.velocity.x < maxSpeed / 2)
+				if (!ziplined)
 				{
-					playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+					//Checks if the player is trying to go left or right, checks that they are below half of max speed then modifies velocity by airStrafeSpeed. 
+					if (Input.GetAxis("Horizontal") > 0 && playerRigidbody.velocity.x < maxSpeed / 2)
+					{
+						playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+					}
+					if (Input.GetAxis("Horizontal") < 0 && playerRigidbody.velocity.x > -1 * maxSpeed)
+					{
+						playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+					}
 				}
-				if (Input.GetAxis("Horizontal") < 0 && playerRigidbody.velocity.x > -1 * maxSpeed)
+				else
 				{
-					playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+					//Jump
+					if (Input.GetButtonDown("Jump"))
+					{
+						Jump();
+						//Debug.Log("normal jump 2");
+					}
 				}
 			}
 
 			//Change depth
-			if (Input.GetButtonDown("SwapForward"))
+			if (!ziplined)
 			{
-				ChangeDepth(-1);
+				if (Input.GetButtonDown("SwapForward"))
+				{
+					ChangeDepth(depth.CheckLayer(-1));
+				}
+				if (Input.GetButtonDown("SwapBackward"))
+				{
+					ChangeDepth(depth.CheckLayer(1));
+				}
 			}
-			if (Input.GetButtonDown("SwapBackward"))
-			{
-				ChangeDepth(1);
-			}
-
+		}
+		if(ziplined)
+		{
+			playerRigidbody.velocity = Vector3.zero;
+			//Move towards end point based on base speed and the relative distance vertically from start-end
+			transform.position = Vector3.MoveTowards(transform.position, ziplinePos, ziplineSpeed + ziplineRelSpeed);
+			if (Vector3.Distance(transform.position, ziplinePos) < 5)
+				EndZipline();
+		}
+		//Lerping to the current layer
+		if (lerpTimer < 1)
+		{
+			lerpTimer += Time.deltaTime*lerpSpeed;
+			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]), lerpTimer);
 		}
 
-		//// stop character if player isn't moving right or left
-		//if (!Input.GetKey(backKey) && !Input.GetKey(forwardKey))
-		//{
-		//	//Debug.Log("stopped");
-		//	HardStop();
-		//}
+		//Swap phys material (moving with objects)
+		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && IsGrounded())
+		{
+			SwapPhysicsMaterial(false);
+		}
+		else
+		{
+			SwapPhysicsMaterial(true);
+		}
 	}
 
-	//void HardStop()
-	//{
-	//	playerRigidbody.velocity = new Vector3(0, playerRigidbody.velocity.y, 0);
-	//}
+	// Change the physics material of the collider
+	void SwapPhysicsMaterial(bool moving)
+    {
+		//Debug.Log(moving);
+		if (moving || ziplined)
+        {
+			playerCollider.material = slipperyMat;
+		}
+		else
+        {
+			playerCollider.material = roughMat;
+		}
+	}
 
 	//Change z axis
 	void ChangeDepth(int newDepth)
 	{
-		blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward*newDepth, out blockRaycastHit, transform.rotation, 5);
-
-		if(blockDetect)
+		if (newDepth != -1)
 		{
-			//Output the name of the Collider your Box hit
-			Debug.Log("Hit : " + blockRaycastHit.collider.name);
-		}
-		else
-        {
-			curDepth = Mathf.Clamp(curDepth += newDepth, minDepth, maxDepth);
-			//gameObject.layer = curDepth + 7;
-			transform.position = new Vector3(transform.position.x, transform.position.y, spawnDepth + (curDepth * 5));
+			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), 
+				out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
+			if (blockDetect)
+			{
+				if(blockRaycastHit.collider.tag == "DoesntBlockSwap")
+				{
+					ChangeLayer(newDepth);
+					Debug.Log("Hit : " + blockRaycastHit.collider.name);
+				}
+				else
+				{
+					//Output the name of the Collider your Box hit
+					Debug.Log("Hit : " + blockRaycastHit.collider.name);
+				}
+			}
+			else
+			{
+				ChangeLayer(newDepth);
+			}
 		}
 	}
-	
+
+	//Change to the new layer
+	void ChangeLayer(int newDepth)
+	{
+		audioSource.volume = 1;
+		audioSource.PlayOneShot(jumpClip);
+		depth.curDepth = newDepth;
+		lerpTimer = 0;
+		//transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+	}
+
+	//Check if the player is grounded
 	bool IsGrounded()
     {
-		
-		LayerMask mask = LayerMask.GetMask(new string[] { "Ground", "Building" });
+		LayerMask mask = LayerMask.GetMask(new string[] { "GroundFloor", "Building" });
 		Quaternion weirdQuat = new Quaternion();
 		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
-		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(1, 0.1f, 1),weirdQuat, mask))
+		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -1.5f, 0), new Vector3(1, 0.1f, 1), weirdQuat, mask))
 		{
 			coyoteTimer = coyoteTimeLimit;
 			animator.SetTrigger("Land");
+			//Debug.Log("Is Grounded");
+			if(ziplined)
+				EndZipline();
+			ignoreZipline = false;
 			return true;
 		}
 		else
@@ -205,10 +296,52 @@ public class MovementScript : MonoBehaviour
 		}
 	}
 
+	//Change speed to the new global one
 	public void UpdateSpeed(float speed)
     {
 		globalSpeed = speed;
     }
+
+	//Zipline to a point
+	public void ZiplineTo(Vector3 attachPos,Vector3 endPos, float relSpeed)
+	{
+		//Finish dashing before grabbing on
+		if (!ignoreZipline && !ziplined && !isDashing)
+		{
+			transform.position = new Vector3(attachPos.x, attachPos.y - 1, attachPos.z);
+			ziplined = true;
+			ziplinePos = new Vector3(endPos.x, endPos.y-1, endPos.z);
+			playerRigidbody.useGravity = false;
+			ziplineRelSpeed = relSpeed;
+			print("zipling to:" + ziplinePos + " at:" + ziplineRelSpeed);
+		}
+	}
+
+	//Finish ziplinging
+	public void EndZipline()
+	{
+		print("ended zipline");
+		ziplined = false;
+		ziplinePos = new Vector3(0,0,0);
+		playerRigidbody.useGravity = true;
+		ignoreZipline = true;
+	}
+
+	//Jumping
+	void Jump()
+	{
+		jumpTimer = 0.2f;
+		audioSource.volume = 1;
+		audioSource.PlayOneShot(jumpClip);
+		animator.SetTrigger("Jump");
+		playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
+		if (ziplined)
+		{
+			//Jump forward / back
+			playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+			EndZipline();
+		}
+	}
 
 	private void OnDrawGizmos()
     {
@@ -230,9 +363,17 @@ public class MovementScript : MonoBehaviour
 			//Draw a cube at the maximum distance
 			Gizmos.DrawWireCube(transform.position + Vector3.forward * -5, transform.localScale);
 		}
-        
-		
+	}
 
+	void RunAudio()
+    {
+		audioSource.volume = 0.3f;
+		if (stepTimer < 0)
+        {
+			stepTimer = stepDelay;
+			audioSource.PlayOneShot(runClip);
+        }
+		
 	}
     //void OnCollisionEnter(Collision other)
     //{

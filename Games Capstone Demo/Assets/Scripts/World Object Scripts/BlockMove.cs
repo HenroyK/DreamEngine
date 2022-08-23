@@ -16,7 +16,7 @@ public class BlockMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < -100)
+        if (transform.position.x < -450)
         {
             Destroy(this.gameObject);
         }

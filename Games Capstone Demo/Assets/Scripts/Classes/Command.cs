@@ -12,7 +12,9 @@ public class Command
         ChangeSpeed,
         Checkpoint,
         Camera,
-        PlayAudio
+        PlayAudio,
+        SetLayer,
+        AwaitTrigger
     };
     public enum AudioFunctions
     {
@@ -30,9 +32,6 @@ public class Command
     public float time = 0;
     [Tooltip("New global speed.")]
     public float speed = 0;
-
-
-
     [Tooltip("Audio Clip")]
     public AudioClip audioClip;
     [Tooltip("Audio Function")]
@@ -41,4 +40,7 @@ public class Command
     public float audioDuration = 0;
     [Tooltip("Volume. Leave this at -1 for swapping audio tracks if you want to use the existing volume.")]
     public float audioVolume = -1;
+    [Tooltip("Set the state of a certain layer")]
+    public int layerNo = 0;
+    public bool layerState = false;
 }
