@@ -7,7 +7,12 @@ public class UnpauseTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameContollerScript>().UnPauseTimer();
-        BroadcastMessage("DeleteTrigger");
         
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Tutorial"))
+        {
+            Debug.Log(g);
+            g.BroadcastMessage("DeleteTrigger");
+        }
+        BroadcastMessage("DeleteTrigger");
     }
 }

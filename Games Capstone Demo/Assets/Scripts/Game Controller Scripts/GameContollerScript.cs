@@ -68,7 +68,7 @@ public class GameContollerScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         //handle if the gamecontroller should wait before executing next command
         if(delay >= 0 && !pauseTimer)

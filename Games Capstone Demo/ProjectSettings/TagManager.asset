@@ -8,6 +8,7 @@ TagManager:
   - ScoreController
   - DoesntBlockSwap
   - PickupEffectTarget
+  - Tutorial
   layers:
   - Default
   - TransparentFX
