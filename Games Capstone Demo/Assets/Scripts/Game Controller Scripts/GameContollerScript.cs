@@ -164,6 +164,12 @@ public class GameContollerScript : MonoBehaviour
         }
     }
 
+    // Disables / enables the movement controls for the player
+    public void PlayerControls(bool state)
+    {
+        player.GetComponent<MovementScript>().enabled = state;
+    }
+
     public void SetCheckpoint()
     {
         checkpointDelay = delay;
