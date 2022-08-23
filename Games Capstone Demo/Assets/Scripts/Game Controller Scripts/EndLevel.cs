@@ -10,6 +10,7 @@ public class EndLevel : MonoBehaviour
     public Button reloadlevelBtn;
     public Button mainMenuBtn;
 
+    private GameContollerScript gameControllerScript;
     private Pause pauseScript;
 
     // Set up variables, find scripts, and enable buttons
@@ -20,6 +21,7 @@ public class EndLevel : MonoBehaviour
         if (gameController != null)
         {
             pauseScript = gameController.GetComponent<Pause>();
+            gameControllerScript = gameController.GetComponent<GameContollerScript>();
         }
         else
         {
@@ -56,9 +58,11 @@ public class EndLevel : MonoBehaviour
     // Turns on end game UI, pauses game and music
     public void EndLevelReached()
     {
-        pauseScript.disablePause();
-        endLevelMenuUI.SetActive(true);
-        Time.timeScale = 0;
+        pauseScript.disablePause(); // disable pause functionality
+        gameControllerScript.PlayerControls(false); // disable player controls
+        endLevelMenuUI.SetActive(true); // enable game over UI
+        Time.timeScale = 0; // pause game
+        // pause game music (attached to game controller object)
         gameObject.GetComponent<AudioSource>().Pause();
     }
 }

@@ -11,6 +11,7 @@ public class Pause : MonoBehaviour
     public Button resumeBtn;
     public Button mainMenuBtn;
 
+    private GameContollerScript gameControllerScript;
     private bool gamePaused;
     private bool canPause;
 
@@ -18,6 +19,17 @@ public class Pause : MonoBehaviour
     // Set up the button variables for use
     void Start()
     {
+        GameObject gameController = GameObject.FindWithTag("GameController");
+
+        if (gameController != null)
+        {
+            gameControllerScript = gameController.GetComponent<GameContollerScript>();
+        }
+        else
+        {
+            Debug.Log("Error. Couldn't find Game Controller");
+        }
+
         Button btnResume = resumeBtn.GetComponent<Button>();
         btnResume.onClick.AddListener(ResumeOnClick);
 
@@ -67,18 +79,22 @@ public class Pause : MonoBehaviour
     void PauseGame()
     {
         gamePaused = true;
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0;
-        gameObject.GetComponent<AudioSource>().Pause();
+        pauseMenuUI.SetActive(true); // enable pause UI
+        gameControllerScript.PlayerControls(false); // disable player controls
+        Time.timeScale = 0; // pause game
+        // pause game music (attached to game controller object)
+        gameObject.GetComponent<AudioSource>().Pause(); 
     }
 
     //unpauses game and music, hides respective UI
     void ResumeGame()
     {
         gamePaused = false;
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1;
-        gameObject.GetComponent<AudioSource>().UnPause();
+        pauseMenuUI.SetActive(false); // disable pause UI
+        gameControllerScript.PlayerControls(true); // enable player controls
+        Time.timeScale = 1; // unpause game
+        // unpause game music (attached to game controller object)
+        gameObject.GetComponent<AudioSource>().UnPause(); 
     }
 
     public void disablePause()
