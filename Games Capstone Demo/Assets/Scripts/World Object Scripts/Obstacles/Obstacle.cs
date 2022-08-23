@@ -17,14 +17,15 @@ public class Obstacle : ObstacleScript
 	private DropInRespawn respawnScript;
 	private GameObject player;
 	private GameObject gameController;
-	private BlackFade fader;
 	
 	void Start()
 	{
 		gameController = GameObject.FindWithTag("GameController");
-		fader = gameController.GetComponent<BlackFade>();
 		player = GameObject.FindWithTag("Player");
-		respawnScript = player.GetComponent<DropInRespawn>();
+		if(player != null)
+			respawnScript = player.GetComponent<DropInRespawn>();
+		else
+			Debug.Log("Error. Couldn't find player");
 
 		if (gameController != null)
 		{
@@ -36,8 +37,19 @@ public class Obstacle : ObstacleScript
 		}
 	}
 
-	//Do things when colliding with something
-	public override void Collided(Collider hit)
+    private void Update()
+    {
+		//Make sure these aint null fam
+		if (player == null)
+			player = GameObject.FindWithTag("Player");
+		if(respawnScript == null)
+			respawnScript = player.GetComponent<DropInRespawn>();
+		if (gameController == null)
+			gameController = GameObject.FindWithTag("GameController");
+	}
+
+    //Do things when colliding with something
+    public override void Collided(Collider hit)
 	{
 		//Hit Player
 		if(hit.tag == "Player" && hitTags.Contains(ValidTags.Player))
