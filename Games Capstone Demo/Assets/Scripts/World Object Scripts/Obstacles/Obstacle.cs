@@ -14,6 +14,7 @@ public class Obstacle : ObstacleScript
 	public bool destroyOnHit;
 
 	private LifesScript livesScript;
+	private DropInRespawn respawnScript;
 	private GameObject player;
 	private GameObject gameController;
 	private BlackFade fader;
@@ -23,6 +24,7 @@ public class Obstacle : ObstacleScript
 		gameController = GameObject.FindWithTag("GameController");
 		fader = gameController.GetComponent<BlackFade>();
 		player = GameObject.FindWithTag("Player");
+		respawnScript = player.GetComponent<DropInRespawn>();
 
 		if (gameController != null)
 		{
@@ -43,7 +45,11 @@ public class Obstacle : ObstacleScript
 			print("hit player");
 			if(lifeLoss)
 			{
-				livesScript.LifeCountLoss(1);
+				if(livesScript.enabled)
+					livesScript.LifeCountLoss(1);
+				else
+					respawnScript.RespawnPlayer();
+
 			}
 			else if (damage != 0)
 			{

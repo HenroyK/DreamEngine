@@ -10,6 +10,9 @@ public class MovementScript : MonoBehaviour
 	public PhysicMaterial slipperyMat;
 	public PhysicMaterial roughMat;
 	public GameObject cooldownBar;
+	public GameObject spotLight;
+	public Vector3 spotLightRotation;
+	public float spotLightHeight = 12;
 
 	public float maxSpeed;
     public float accel;
@@ -17,9 +20,9 @@ public class MovementScript : MonoBehaviour
 	public float jumpaccel;
 	public float jumpTimer;
 	public float globalSpeed;
-
 	public float coyoteTimeLimit = 0.1f;
 	public float coyoteTimer = 0;
+	public float jumpBoost;
 
 	//Sound Stuff
 	public AudioSource audioSource;
@@ -44,33 +47,56 @@ public class MovementScript : MonoBehaviour
 	private bool blockDetect = false;
 	private RaycastHit blockRaycastHit;
 	private bool moveBack = true;
+	private bool ziplined = false;
+	private bool ignoreZipline = false;
+	private Vector3 ziplinePos;
+	public float ziplineSpeed = 1;
+	private float ziplineRelSpeed = 0;
+	private float lerpPos;
+	private float lerpTimer;
+	public float lerpSpeed;
+
 
 	// Start is called before the first frame update
 	void Start()
 	{
-	}
+		if (spotLight != null)
+		{
+			Vector3 spotlightSpawn = new Vector3(
+				this.transform.position.x, 
+				spotLightHeight, 
+				this.transform.position.z);
 
+            spotLight = Instantiate(
+				spotLight,
+                spotlightSpawn, 
+				Quaternion.Euler(spotLightRotation));
+        }
+	}
+	
 	void FixedUpdate()
 	{
 
+		jumpTimer -= Time.fixedDeltaTime;
+		if (jumpTimer <= 0)
+		{
+			jumpTimer = 0;
+		}
+		else
+		{
+			//Extend jump
+			if (Input.GetButton("Jump"))
+			{
+				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
+			}
+		}
 	}
-
 	// Update is called once per frame
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
 
-		// check for input
-		if (Input.GetAxis("Horizontal") == 0 && IsGrounded() && jumpTimer <= 0)
-		{
-			SwapPhysicsMaterial(false);
-		}
-		else
-		{
-			SwapPhysicsMaterial(true);
-		}
-
-		if (Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
+		if (!ziplined && Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
 			playerRigidbody.useGravity = false;
 			//SoundManagerScript.PlaySound("Dash");
@@ -88,11 +114,6 @@ public class MovementScript : MonoBehaviour
 		cooldownBar.GetComponent<CooldownRadialScript>().UpdateRadialBar(currentDashCooldown/dashCooldown);
 		//Coyote Timer
 		coyoteTimer -= Time.deltaTime;
-		jumpTimer -= Time.deltaTime;
-		if (jumpTimer <= 0)
-        {
-			jumpTimer = 0;
-        }
 
 		//if dash duration is over, stop dashing
 		if (currentDashDuration < 0 && isDashing)
@@ -134,37 +155,71 @@ public class MovementScript : MonoBehaviour
 				//Jump
 				if (Input.GetButtonDown("Jump"))
 				{
-					//SwapPhysicsMaterial(true);
-					jumpTimer = 0.2f;
-					//SoundManagerScript.PlaySound("Jump");
-					audioSource.volume = 1;
-					audioSource.PlayOneShot(jumpClip);
-					animator.SetTrigger("Jump");
-					playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
-				}
+					Jump();
+                    //Debug.Log("normal jump 1");
+                }
 			}
 			else //Airstrafe movement code.
 			{
-				//Checks if the player is trying to go left or right, checks that they are below half of max speed then modifies velocity by airStrafeSpeed. 
-				if (Input.GetAxis("Horizontal") > 0 && playerRigidbody.velocity.x < maxSpeed / 2)
+				if (!ziplined)
 				{
-					playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+					//Checks if the player is trying to go left or right, checks that they are below half of max speed then modifies velocity by airStrafeSpeed. 
+					if (Input.GetAxis("Horizontal") > 0 && playerRigidbody.velocity.x < maxSpeed / 2)
+					{
+						playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+					}
+					if (Input.GetAxis("Horizontal") < 0 && playerRigidbody.velocity.x > -1 * maxSpeed)
+					{
+						playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+					}
 				}
-				if (Input.GetAxis("Horizontal") < 0 && playerRigidbody.velocity.x > -1 * maxSpeed)
+				else
 				{
-					playerRigidbody.velocity += new Vector3(Input.GetAxis("Horizontal") * airStrafeSpeed, 0);
+					//Jump
+					if (Input.GetButtonDown("Jump"))
+					{
+						Jump();
+						//Debug.Log("normal jump 2");
+					}
 				}
 			}
 
 			//Change depth
-			if (Input.GetButtonDown("SwapForward"))
+			if (!ziplined)
 			{
-				ChangeDepth(depth.CheckLayer(-1));
+				if (Input.GetButtonDown("SwapForward"))
+				{
+					ChangeDepth(depth.CheckLayer(-1));
+				}
+				if (Input.GetButtonDown("SwapBackward"))
+				{
+					ChangeDepth(depth.CheckLayer(1));
+				}
 			}
-			if (Input.GetButtonDown("SwapBackward"))
-			{
-				ChangeDepth(depth.CheckLayer(1));
-			}
+		}
+		if(ziplined)
+		{
+			playerRigidbody.velocity = Vector3.zero;
+			//Move towards end point based on base speed and the relative distance vertically from start-end
+			transform.position = Vector3.MoveTowards(transform.position, ziplinePos, ziplineSpeed + ziplineRelSpeed);
+			if (Vector3.Distance(transform.position, ziplinePos) < 5)
+				EndZipline();
+		}
+		//Lerping to the current layer
+		if (lerpTimer < 1)
+		{
+			lerpTimer += Time.deltaTime*lerpSpeed;
+			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]), lerpTimer);
+		}
+
+		//Swap phys material (moving with objects)
+		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && IsGrounded())
+		{
+			SwapPhysicsMaterial(false);
+		}
+		else
+		{
+			SwapPhysicsMaterial(true);
 		}
 	}
 
@@ -172,7 +227,7 @@ public class MovementScript : MonoBehaviour
 	void SwapPhysicsMaterial(bool moving)
     {
 		//Debug.Log(moving);
-		if (moving)
+		if (moving || ziplined)
         {
 			playerCollider.material = slipperyMat;
 		}
@@ -193,11 +248,7 @@ public class MovementScript : MonoBehaviour
 			{
 				if(blockRaycastHit.collider.tag == "DoesntBlockSwap")
 				{
-					//I dupe code like a nughty boy ;)			
-					audioSource.volume = 1;
-					audioSource.PlayOneShot(jumpClip);
-					depth.curDepth = newDepth;
-					transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+					ChangeLayer(newDepth);
 					Debug.Log("Hit : " + blockRaycastHit.collider.name);
 				}
 				else
@@ -208,14 +259,22 @@ public class MovementScript : MonoBehaviour
 			}
 			else
 			{
-				audioSource.volume = 1;
-				audioSource.PlayOneShot(jumpClip);
-				depth.curDepth = newDepth;
-				transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+				ChangeLayer(newDepth);
 			}
 		}
 	}
-	
+
+	//Change to the new layer
+	void ChangeLayer(int newDepth)
+	{
+		audioSource.volume = 1;
+		audioSource.PlayOneShot(jumpClip);
+		depth.curDepth = newDepth;
+		lerpTimer = 0;
+		//transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
+	}
+
+	//Check if the player is grounded
 	bool IsGrounded()
     {
 		LayerMask mask = LayerMask.GetMask(new string[] { "GroundFloor", "Building" });
@@ -226,6 +285,9 @@ public class MovementScript : MonoBehaviour
 			coyoteTimer = coyoteTimeLimit;
 			animator.SetTrigger("Land");
 			//Debug.Log("Is Grounded");
+			if(ziplined)
+				EndZipline();
+			ignoreZipline = false;
 			return true;
 		}
 		else
@@ -234,10 +296,52 @@ public class MovementScript : MonoBehaviour
 		}
 	}
 
+	//Change speed to the new global one
 	public void UpdateSpeed(float speed)
     {
 		globalSpeed = speed;
     }
+
+	//Zipline to a point
+	public void ZiplineTo(Vector3 attachPos,Vector3 endPos, float relSpeed)
+	{
+		//Finish dashing before grabbing on
+		if (!ignoreZipline && !ziplined && !isDashing)
+		{
+			transform.position = new Vector3(attachPos.x, attachPos.y - 1, attachPos.z);
+			ziplined = true;
+			ziplinePos = new Vector3(endPos.x, endPos.y-1, endPos.z);
+			playerRigidbody.useGravity = false;
+			ziplineRelSpeed = relSpeed;
+			print("zipling to:" + ziplinePos + " at:" + ziplineRelSpeed);
+		}
+	}
+
+	//Finish ziplinging
+	public void EndZipline()
+	{
+		print("ended zipline");
+		ziplined = false;
+		ziplinePos = new Vector3(0,0,0);
+		playerRigidbody.useGravity = true;
+		ignoreZipline = true;
+	}
+
+	//Jumping
+	void Jump()
+	{
+		jumpTimer = 0.2f;
+		audioSource.volume = 1;
+		audioSource.PlayOneShot(jumpClip);
+		animator.SetTrigger("Jump");
+		playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
+		if (ziplined)
+		{
+			//Jump forward / back
+			playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+			EndZipline();
+		}
+	}
 
 	private void OnDrawGizmos()
     {

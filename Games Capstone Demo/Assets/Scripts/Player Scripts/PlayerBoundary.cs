@@ -35,30 +35,33 @@ public class PlayerBoundary : MonoBehaviour
 
 	void Update()
 	{
-		if (player == null)
+		if (player == null && respawnScript == null)
 		{
-            player = GameObject.FindWithTag("Player");
-            if (player != null)
+			if (player == null)
+			{
+				player = GameObject.FindWithTag("Player");
+			}
+			else
+			{
+				Debug.Log("Error. Couldn't find Player");
+			}
+			if (respawnScript == null)
             {
                 respawnScript = player.GetComponent<DropInRespawn>();
             }
-            else
-            {
-                Debug.Log("Error. Couldn't find Player character");
-            }
+			else
+			{
+				Debug.Log("Error. Couldn't find Respawn script");
+			}
         }
 		else
 		{
 			//Find the distance between player and the boundry
 			float dist = Vector3.Distance(this.transform.position, player.transform.position);
 			//Set the amount of fade
-			if (dist < 25)
+			if (dist < 30)
 			{
-				fader.SetFade((((dist / 25) - 1) * -1) * 100); //Quick maff
-			}
-			else
-			{
-				fader.SetFade(0);
+				fader.SetFade(gameObject, dist);
 			}
 		}
 	}
@@ -74,10 +77,11 @@ public class PlayerBoundary : MonoBehaviour
 			}
 			else
             {
-				// Livesless respawn
-				respawnScript.RespawnPlayer();
-				//gameControllerScript.LoadCheckpoint();
-			}
+                // Livesless respawn
+                respawnScript.AltRespawnPlayer();
+                //respawnScript.RespawnPlayer();
+                //gameControllerScript.LoadCheckpoint();
+            }
 		}
     }
 }

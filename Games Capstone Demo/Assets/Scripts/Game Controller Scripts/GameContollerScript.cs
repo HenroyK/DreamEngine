@@ -7,6 +7,7 @@ public class GameContollerScript : MonoBehaviour
 {
     public GameObject player;
     public GameObject playerSpawn;
+    public int playerSpawnLayer;
     //private GameObject playerRef;
 
     public bool enableLifes = false;
@@ -60,9 +61,20 @@ public class GameContollerScript : MonoBehaviour
         if (!enableLifes)
         {
             livesScript.enabled = false;
+			livesScript.livesUI.SetActive(false);
         }
 
-        player = Instantiate(player, playerSpawn.transform.position, Quaternion.identity);
+        // sets the players Z axis spawn to the selected layer
+        player.GetComponent<DepthBehaviour>().curDepth = playerSpawnLayer;
+        float[] zPlayerSpawn = player.GetComponent<DepthBehaviour>().layerAxis;
+        Vector3 playerSpawnPoint = new Vector3(
+            playerSpawn.transform.position.x, 
+            playerSpawn.transform.position.y, 
+            zPlayerSpawn[playerSpawnLayer]);
+
+        // Spawn player and set cameara to player character.
+        // Also keeps a reference of the player in the scene
+        player = Instantiate(player, playerSpawnPoint, Quaternion.identity);
         player.BroadcastMessage("UpdateSpeed", globalSpeed);
         this.GetComponent<CameraScript>().SetLookat(player);
     }
