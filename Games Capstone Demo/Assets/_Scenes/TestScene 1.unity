@@ -2950,6 +2950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8198d61cacf83734cb52d24d6d8fb4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownBackground: {fileID: 0}
 --- !u!222 &4584106824860708843
 CanvasRenderer:
   m_ObjectHideFlags: 0
