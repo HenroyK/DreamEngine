@@ -187,14 +187,16 @@ public class MovementScript : MonoBehaviour
 			//Change depth
 			if (!ziplined)
 			{
-				if (Input.GetButtonDown("SwapForward"))
+				if (Input.GetButtonDown("SwapForward") || Input.GetAxis("SwapForward") > 0)
 				{
 					ChangeDepth(depth.CheckLayer(-1));
+					Debug.Log("shift forward");
 				}
-				if (Input.GetButtonDown("SwapBackward"))
+				if (Input.GetButtonDown("SwapBackward") || Input.GetAxis("SwapBackward") > 0)
 				{
 					ChangeDepth(depth.CheckLayer(1));
-				}
+                    Debug.Log("shift backward");
+                }
 			}
 		}
 		if(ziplined)
