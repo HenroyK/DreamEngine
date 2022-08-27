@@ -20,19 +20,41 @@ public class BlackFade : MonoBehaviour
 		player = GameObject.FindWithTag("Player");
 	}
 
-	public void Update()
+	public void LateUpdate()
 	{
-
-		Physics.Raycast(player.transform.position, (player.transform.position - closest.transform.position).normalized,
-			out hit, 25, 1);
-		if (hit.collider.gameObject == closest)
+		//Raycast to get the true distance to the closest object (so size is accounted for)
+		if (closest != null)
 		{
-
-		}
-		else
-		{
-			closest = null;
-			closeDist = 25;
+			Debug.DrawRay(player.transform.position, -player.transform.right * 25);
+			//Close to a boundary
+			Physics.Raycast(player.transform.position, -player.transform.right,
+				out hit, fadeDist, LayerMask.GetMask("Boundary"),UnityEngine.QueryTriggerInteraction.Collide);
+			if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Boundary"))
+			{
+				print(hit.collider.gameObject.name);
+				closeDist = Vector3.Distance(player.transform.position, hit.point);
+				FadeAmount(closeDist);
+			}
+			else
+			{
+				closest = null;
+				closeDist = 25;
+			}
+			//Close to other fade triggers
+			/*
+			Physics.Raycast(player.transform.position, closest.transform.position-player.transform.position,
+				out hit, fadeDist);
+			if (hit.collider)
+			{
+				closeDist = Vector3.Distance(player.transform.position, hit.point);
+				FadeAmount(closeDist);
+			}
+			else
+			{
+				closest = null;
+				closeDist = 25;
+			}
+			*/
 		}
 	}
 
@@ -40,16 +62,14 @@ public class BlackFade : MonoBehaviour
 	public void SetFade(GameObject obj, float dist)
 	{
 		//Listen to only the closest object for the fade
-		if (closest != obj && dist <= 25 && dist < closeDist)
+		if (closest != obj && dist <= fadeDist && dist < closeDist)
 		{
 			closest = obj;
 			closeDist = dist;
 		}
-		if (closest == obj && closeDist <= 25)
+		if (closest == obj && closeDist <= fadeDist)
 		{
-			float percent = Mathf.InverseLerp(
-				0, 255, (((((dist / 25) - 1) * -1) * 100) / 100) * maxFade); //Quick Maff
-			blackFader.color = new Color(0, 0, 0, percent);
+			FadeAmount(dist);
 		}
 	}
 
@@ -62,7 +82,7 @@ public class BlackFade : MonoBehaviour
 	public void FadeAmount(float amount)
 	{
 		float percent = Mathf.InverseLerp(
-			0, 255, (((((amount / 25) - 1) * -1) * 100) / 100) * maxFade); //Quick Maff
+			0, 255, (((((amount / fadeDist) - 1) * -1) * 100) / 100) * maxFade); //Quick Maff
 		blackFader.color = new Color(0, 0, 0, percent);
 	}
 }
