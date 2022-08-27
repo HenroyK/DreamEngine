@@ -9,6 +9,8 @@ public class PathMove : MonoBehaviour
 	public float minDistance;
 	public float waitTime;
 	public GameObject[] movePoints;
+
+	private Rigidbody rb;
 	private int pointIndex = 0;
 	private bool waiting = true;
 	private float waitTimer = 0;
@@ -17,6 +19,7 @@ public class PathMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		rb = gameObject.GetComponent<Rigidbody>();
 		if (movePoints.Length > 0)
 			valid = true;
 		else
@@ -24,15 +27,20 @@ public class PathMove : MonoBehaviour
 	}
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 		if (valid)
 		{
-			var step = speed * Time.deltaTime;
+			float step = Time.deltaTime * speed;
+			Vector3 vel = rb.velocity;
+
 			//Move towards point, going to next once close enough
 			if (!waiting)
 			{
-				transform.position = Vector3.MoveTowards(transform.position, movePoints[pointIndex].transform.position, speed);
+				Vector3 dir = movePoints[pointIndex].transform.position - rb.position;
+				dir /= Time.fixedDeltaTime;
+				dir = Vector3.ClampMagnitude(dir, speed);
+				rb.velocity = dir;
 				if (Vector3.Distance(transform.position, movePoints[pointIndex].transform.position) < minDistance)
 				{
 					waiting = true;
