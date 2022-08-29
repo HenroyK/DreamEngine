@@ -35,7 +35,7 @@ public class PlayerBoundary : MonoBehaviour
 
 	void Update()
 	{
-		if (player == null && respawnScript == null)
+		if (player == null || respawnScript == null)
 		{
 			if (player == null)
 			{
@@ -69,7 +69,8 @@ public class PlayerBoundary : MonoBehaviour
     // Subract one life if player collides with attached object
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+		//Debug.Log(other.tag);
+		if (other.tag == "Player")
         {
             if (livesScript.enabled)
             {
@@ -79,6 +80,8 @@ public class PlayerBoundary : MonoBehaviour
             {
                 // Livesless respawn
                 respawnScript.AltRespawnPlayer();
+
+				//Debug.Log("respawn");
                 //respawnScript.RespawnPlayer();
                 //gameControllerScript.LoadCheckpoint();
             }
