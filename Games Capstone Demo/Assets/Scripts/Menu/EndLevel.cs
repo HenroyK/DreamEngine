@@ -43,7 +43,7 @@ public class EndLevel : MonoBehaviour
         Reload();
     }
 
-    // Load Main Menu scene when menu button is clicked
+    // Load Main Menu scene when menu button press
     void MainMenuOnClick()
     {
         SceneManager.LoadScene(0);
