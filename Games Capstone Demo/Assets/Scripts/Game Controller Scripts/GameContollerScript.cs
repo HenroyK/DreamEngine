@@ -75,7 +75,8 @@ public class GameContollerScript : MonoBehaviour
         // Spawn player and set cameara to player character.
         // Also keeps a reference of the player in the scene
         player = Instantiate(player, playerSpawnPoint, Quaternion.identity);
-        player.BroadcastMessage("UpdateSpeed", globalSpeed);
+        GameObject pla = GameObject.FindGameObjectWithTag("Player");
+        pla.BroadcastMessage("UpdateSpeed", globalSpeed);
         this.GetComponent<CameraScript>().SetLookat(player);
     }
 
@@ -124,12 +125,14 @@ public class GameContollerScript : MonoBehaviour
                 //Change the global speed of all objects
                 case Command.CommandType.ChangeSpeed:
                     globalSpeed = nextCommand.speed;
+                    player.BroadcastMessage("UpdateSpeed", globalSpeed);
                     foreach (GameObject a in movingObjects)
                     {
                         a.BroadcastMessage("ChangeSpeed", globalSpeed);
+                        
                         //a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                     }
-                    player.BroadcastMessage("UpdateSpeed", globalSpeed);
+                    
                     Debug.Log("Global speed is now" + globalSpeed);
                     break;
                 case Command.CommandType.Camera:
