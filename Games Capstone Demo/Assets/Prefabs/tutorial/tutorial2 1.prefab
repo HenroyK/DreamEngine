@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1686059550865437289}
   - component: {fileID: 1686059550865437288}
   - component: {fileID: 7385301690001385176}
-  - component: {fileID: -8735692919094945520}
-  - component: {fileID: -3858826061268746508}
+  - component: {fileID: -4033651537165687317}
+  - component: {fileID: -8709163321525596880}
   m_Layer: 0
-  m_Name: tutorial4
+  m_Name: tutorial2 1
   m_TagString: Tutorial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 71e877f6697b57848a413ceedc4642ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 72ca8fdd17b00e244ae323e8772778ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b76dc608e7ca94aacfc5c5390aa93c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8735692919094945520
+--- !u!114 &-4033651537165687317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e583b2fa96f50e4448ae23bd7f68bdd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &-3858826061268746508
+--- !u!54 &-8709163321525596880
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

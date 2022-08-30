@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1686059550865437289}
   - component: {fileID: 1686059550865437288}
   - component: {fileID: 7385301690001385176}
+  - component: {fileID: 3883439696266271810}
+  - component: {fileID: 5450580301084450781}
   m_Layer: 0
   m_Name: tutorial2
   m_TagString: Tutorial
@@ -97,3 +99,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b76dc608e7ca94aacfc5c5390aa93c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3883439696266271810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686059550865437287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e583b2fa96f50e4448ae23bd7f68bdd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &5450580301084450781
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686059550865437287}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
