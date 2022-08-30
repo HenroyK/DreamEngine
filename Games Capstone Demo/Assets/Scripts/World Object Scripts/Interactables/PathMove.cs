@@ -15,6 +15,7 @@ public class PathMove : MonoBehaviour
 	private bool waiting = true;
 	private float waitTimer = 0;
 	private bool valid = false;
+	private float globalSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -29,53 +30,68 @@ public class PathMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-		if (valid)
+		if (valid && transform.position.x > -400)
 		{
 			float step = Time.deltaTime * speed;
 			Vector3 vel = rb.velocity;
-			print(Vector3.Distance(rb.position, movePoints[pointIndex].GetComponent<Rigidbody>().position));
 			//Move towards point, going to next once close enough
-			if (!waiting)
+			if (movePoints[pointIndex] != null)
 			{
-				Vector3 dir = movePoints[pointIndex].GetComponent<Rigidbody>().position - rb.position;
-				dir /= Time.fixedDeltaTime;
-				dir = Vector3.ClampMagnitude(dir, speed);
-				rb.velocity = dir;
-				if (Vector3.Distance(rb.position, movePoints[pointIndex].GetComponent<Rigidbody>().position) < minDistance)
+				if (!waiting)
 				{
-					waiting = true;
-					if (pointIndex < movePoints.Length-1)
-						pointIndex++;
-					else
-						pointIndex = 0;
+					Vector3 dir = movePoints[pointIndex].GetComponent<Rigidbody>().position - rb.position;
+					dir /= Time.fixedDeltaTime;
+					dir = Vector3.ClampMagnitude(dir, speed) + (Vector3.left * globalSpeed);
+					rb.velocity = dir;
+					if (Vector3.Distance(rb.position, movePoints[pointIndex].GetComponent<Rigidbody>().position) < minDistance)
+					{
+						waiting = true;
+						if (pointIndex < movePoints.Length - 1)
+							pointIndex++;
+						else
+							pointIndex = 0;
+					}
 				}
-			}
-			else
-			{
-				waitTimer += Time.deltaTime;
-				if (waitTimer >= waitTime)
+				else
 				{
-					waiting = false;
-					waitTimer = 0;
+					waitTimer += Time.deltaTime;
+					if (waitTimer >= waitTime)
+					{
+						waiting = false;
+						waitTimer = 0;
+					}
 				}
 			}
 		}
+		else
+        {
+			this.enabled = false;
+        }
 
 	}
 
-	private void OnDrawGizmos()
+	//Speed change message subscription
+	public void ChangeSpeed(float newSpeed)
 	{
-		Gizmos.color = Color.yellow;
+		globalSpeed = newSpeed;
+	}
 
-		//Draw the radius of being close enough and the path being taken
-		for (int i = 0; i < movePoints.Length; i++)
+    private void OnDrawGizmos()
+	{
+		if (this.enabled)
 		{
-			Vector3 pos = new Vector3(movePoints[i].transform.position.x+3, movePoints[i].transform.position.y, movePoints[i].transform.position.z);
-			Gizmos.DrawSphere(pos, minDistance);
-			if(i < movePoints.Length - 1)
-				Gizmos.DrawLine(pos, new Vector3(movePoints[i+1].transform.position.x + 3, movePoints[i+1].transform.position.y, movePoints[i+1].transform.position.z));
-			else
-				Gizmos.DrawLine(pos, new Vector3(movePoints[0].transform.position.x + 3, movePoints[0].transform.position.y, movePoints[0].transform.position.z));
+			Gizmos.color = Color.yellow;
+
+			//Draw the radius of being close enough and the path being taken
+			for (int i = 0; i < movePoints.Length; i++)
+			{
+				Vector3 pos = new Vector3(movePoints[i].transform.position.x + 3, movePoints[i].transform.position.y, movePoints[i].transform.position.z);
+				Gizmos.DrawSphere(pos, minDistance);
+				if (i < movePoints.Length - 1)
+					Gizmos.DrawLine(pos, new Vector3(movePoints[i + 1].transform.position.x + 3, movePoints[i + 1].transform.position.y, movePoints[i + 1].transform.position.z));
+				else
+					Gizmos.DrawLine(pos, new Vector3(movePoints[0].transform.position.x + 3, movePoints[0].transform.position.y, movePoints[0].transform.position.z));
+			}
 		}
 	}
 }

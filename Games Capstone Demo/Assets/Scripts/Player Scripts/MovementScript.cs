@@ -50,7 +50,7 @@ public class MovementScript : MonoBehaviour
 	private bool ziplined = false;
 	private bool ignoreZipline = false;
 	private Vector3 ziplinePos;
-	public float ziplineSpeed = 1;
+	public float ziplineSpeed;
 	private float ziplineRelSpeed = 0;
 	private float lerpPos;
 	private float lerpTimer;
@@ -201,7 +201,7 @@ public class MovementScript : MonoBehaviour
 		{
 			playerRigidbody.velocity = Vector3.zero;
 			//Move towards end point based on base speed and the relative distance vertically from start-end
-			transform.position = Vector3.MoveTowards(transform.position, ziplinePos, ziplineSpeed + ziplineRelSpeed);
+			transform.position = Vector3.MoveTowards(transform.position, ziplinePos, (ziplineSpeed + ziplineRelSpeed) * Time.deltaTime);
 			if (Vector3.Distance(transform.position, ziplinePos) < 5)
 				EndZipline();
 		}
@@ -313,14 +313,12 @@ public class MovementScript : MonoBehaviour
 			ziplinePos = new Vector3(endPos.x, endPos.y-1, endPos.z);
 			playerRigidbody.useGravity = false;
 			ziplineRelSpeed = relSpeed;
-			print("zipling to:" + ziplinePos + " at:" + ziplineRelSpeed);
 		}
 	}
 
 	//Finish ziplinging
 	public void EndZipline()
 	{
-		print("ended zipline");
 		ziplined = false;
 		ziplinePos = new Vector3(0,0,0);
 		playerRigidbody.useGravity = true;
@@ -375,11 +373,11 @@ public class MovementScript : MonoBehaviour
         }
 		
 	}
-    //void OnCollisionEnter(Collision other)
-    //{
-    //	if (other.gameObject.tag == "ground")
-    //	{
-    //		CanJump = true;
-    //	}
-    //}
+    void OnCollisionEnter(Collision other)
+    {
+    	if (ziplined && other.gameObject.tag == "Wall")
+    	{
+			EndZipline();
+    	}
+    }
 }

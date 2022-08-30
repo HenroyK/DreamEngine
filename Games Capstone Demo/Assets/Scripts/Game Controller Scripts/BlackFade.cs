@@ -31,7 +31,6 @@ public class BlackFade : MonoBehaviour
 				out hit, fadeDist, LayerMask.GetMask("Boundary"),UnityEngine.QueryTriggerInteraction.Collide);
 			if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Boundary"))
 			{
-				print(hit.collider.gameObject.name);
 				closeDist = Vector3.Distance(player.transform.position, hit.point);
 				FadeAmount(closeDist);
 			}

@@ -18,12 +18,15 @@ public class ZiplinePoint : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		endPos = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y - 1, endPoint.transform.position.z);
-		if (Physics.Linecast(transform.position, endPoint.transform.position, out hitInfo))
+		if (endPoint != null)
 		{
-			if (hitInfo.collider.tag == "Player")
-				GameObject.FindWithTag("Player").GetComponent<MovementScript>().ZiplineTo(hitInfo.point, endPos, (hitInfo.point.y - endPos.y) / 10);
-		}
+			endPos = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y - 1, endPoint.transform.position.z);
+			if (Physics.Linecast(transform.position, endPoint.transform.position, out hitInfo))
+			{
+				if (hitInfo.collider.tag == "Player")
+					GameObject.FindWithTag("Player").GetComponent<MovementScript>().ZiplineTo(hitInfo.point, endPos, (transform.position.y - endPos.y));
+			}
+        }		
 	}
 
 	private void OnDrawGizmos()
