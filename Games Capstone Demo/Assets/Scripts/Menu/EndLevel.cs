@@ -13,6 +13,10 @@ public class EndLevel : MonoBehaviour
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
 
+    private int numberOfOptions = 2;
+    private int selectedOption;
+    private bool gameEnded = false;
+
     // Set up variables, find scripts, and enable buttons
     void Start()
     {
@@ -35,6 +39,70 @@ public class EndLevel : MonoBehaviour
         btnMainMenu.onClick.AddListener(MainMenuOnClick);
 
         endLevelMenuUI.SetActive(false);
+
+        selectedOption = 1;
+        // position selected highlight Icon/shade
+
+    }
+
+    void Update()
+    {
+        if (gameEnded)
+        {
+            // select options code
+            if (Input.GetButtonDown("SwapForward") /*|| Input.GetAxis("SwapForward") > 0*/)
+            {
+                selectedOption += 1;
+                if (selectedOption > numberOfOptions)
+                {
+                    selectedOption = 1;
+                }
+
+                // reset selected highlight
+                SwapSelected(selectedOption);
+            }
+
+            if (Input.GetButtonDown("SwapBackward") /*|| Input.GetAxis("SwapBackward") > 0*/)
+            {
+                selectedOption -= 1;
+                if (selectedOption < 1)
+                {
+                    selectedOption = numberOfOptions;
+                }
+
+                // reset selected highlight
+                SwapSelected(selectedOption);
+            }
+
+            if (Input.GetButton("Jump"))
+            {
+                switch (selectedOption)
+                {
+                    case 1:
+                        //ReloadOnClick();
+                        break;
+                    case 2:
+                        //MainMenuOnClick();
+                        break;
+                }
+            }
+        }
+    }
+
+    void SwapSelected(int option)
+    {
+        // reset selected highlight
+
+        Debug.Log("Picked: " + selectedOption);
+        switch (selectedOption)
+        {
+            case 1:
+                /*Do option two*/
+                break;
+            case 2:
+                /*Do option two*/
+                break;
+        }
     }
 
     // Reload on button press
@@ -62,6 +130,7 @@ public class EndLevel : MonoBehaviour
         gameControllerScript.PlayerControls(false); // disable player controls
         endLevelMenuUI.SetActive(true); // enable game over UI
         Time.timeScale = 0; // pause game
+        gameEnded = true; // game has ended
         // pause game music (attached to game controller object)
         gameObject.GetComponent<AudioSource>().Pause();
     }

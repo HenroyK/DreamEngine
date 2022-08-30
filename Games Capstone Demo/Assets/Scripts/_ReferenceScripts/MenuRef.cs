@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class MenuRef : MonoBehaviour
 {
-
     public Text option1;
     public Text option2;
     public Text option3;

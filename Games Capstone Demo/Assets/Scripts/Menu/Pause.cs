@@ -15,6 +15,9 @@ public class Pause : MonoBehaviour
     private bool gamePaused;
     private bool canPause;
 
+    private int numberOfOptions = 2;
+    private int selectedOption;
+
     // Game starts unpaused (running)
     // Set up the button variables for use
     void Start()
@@ -38,6 +41,9 @@ public class Pause : MonoBehaviour
 
         ResumeGame();
         enablePause();
+
+        selectedOption = 1;
+        // position selected highlight Icon/shade
     }
 
     // Game is paused and unpaused with a toggle control (key)
@@ -46,6 +52,64 @@ public class Pause : MonoBehaviour
         if (Input.GetButtonDown("Pause") && canPause)
         {
             TogglePause();
+        }
+
+        if (gamePaused)
+        {
+            // select options code
+            if (Input.GetButtonDown("SwapForward") /*|| Input.GetAxis("SwapForward") > 0*/)
+            {
+                selectedOption += 1;
+                if (selectedOption > numberOfOptions)
+                {
+                    selectedOption = 1;
+                }
+
+                // reset selected highlight
+                SwapSelected(selectedOption);
+            }
+
+            if (Input.GetButtonDown("SwapBackward") /*|| Input.GetAxis("SwapBackward") > 0*/)
+            {
+                selectedOption -= 1;
+                if (selectedOption < 1)
+                {
+                    selectedOption = numberOfOptions;
+                }
+
+                // reset selected highlight
+                SwapSelected(selectedOption);
+            }
+
+            if (Input.GetButton("Jump"))
+            {
+
+                switch (selectedOption)
+                {
+                    case 1:
+                        ResumeOnClick();
+                        break;
+                    case 2:
+                        MainMenuOnClick();
+                        break;
+                }
+            }
+        }
+    }
+
+    void SwapSelected(int option)
+    {
+        // reset selected highlight
+
+        Debug.Log("Picked: " + selectedOption);
+        switch (selectedOption)
+        {
+            case 1:
+                /*Do option two*/
+                break;
+            case 2:
+                /*Do option two*/
+                break;
         }
     }
 

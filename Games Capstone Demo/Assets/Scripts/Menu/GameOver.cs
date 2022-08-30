@@ -13,6 +13,8 @@ public class GameOver : MonoBehaviour
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
     private bool playerDead = false;
+    private int numberOfOptions = 2;
+    private int selectedOption;
 
     // Set up variables, find scripts, and enable buttons
     void Start()
@@ -37,6 +39,68 @@ public class GameOver : MonoBehaviour
         btnMainMenu.onClick.AddListener(MainMenuOnClick);
 
         gameOverMenuUI.SetActive(false);
+
+        selectedOption = 1;
+    }
+
+    void Update()
+    {
+        if (playerDead)
+        {
+            // select options code
+            if (Input.GetButtonDown("SwapForward") /*|| Input.GetAxis("SwapForward") > 0*/)
+            {
+                selectedOption += 1;
+                if (selectedOption > numberOfOptions)
+                {
+                    selectedOption = 1;
+                }
+
+                // reset selected highlight
+                SwapSelected(selectedOption);
+            }
+
+            if (Input.GetButtonDown("SwapBackward") /*|| Input.GetAxis("SwapBackward") > 0*/)
+            {
+                selectedOption -= 1;
+                if (selectedOption < 1)
+                {
+                    selectedOption = numberOfOptions;
+                }
+
+                // reset selected highlight
+                SwapSelected(selectedOption);
+            }
+
+            if (Input.GetButton("Jump"))
+            {
+                switch (selectedOption)
+                {
+                    case 1:
+                        //ReloadOnClick();
+                        break;
+                    case 2:
+                        //MainMenuOnClick();
+                        break;
+                }
+            }
+        }
+    }
+
+    void SwapSelected(int option)
+    {
+        // reset selected highlight
+
+        Debug.Log("Picked: " + selectedOption);
+        switch (selectedOption)
+        {
+            case 1:
+                /*Do option two*/
+                break;
+            case 2:
+                /*Do option two*/
+                break;
+        }
     }
 
     // Reload on button press
