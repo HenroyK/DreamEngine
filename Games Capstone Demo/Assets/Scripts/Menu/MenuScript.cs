@@ -19,6 +19,10 @@ public class MenuScript : MonoBehaviour
 	private int selectedOption;
 	private bool inMenu = true;
 
+	private float inputTimer = 0;
+	[SerializeField]
+	private float waitTime = 0.3f;
+
 	//Startup stuff
 	void Start()
     {
@@ -27,13 +31,15 @@ public class MenuScript : MonoBehaviour
 		selectedOption = 1;
 	}
 
-	// Update is called once per frame
-	void Update()
+    // Update is called once per frame
+    void Update()
 	{
-		if (inMenu)
+		inputTimer += Time.unscaledDeltaTime;
+
+		if (inMenu && inputTimer >= waitTime)
         {
 			// select options code
-			if (Input.GetButtonDown("SwapForward") /*|| Input.GetAxis("SwapForward") > 0*/)
+			if (Input.GetAxisRaw("Swap") > 0)
 			{
 				selectedOption += 1;
 				if (selectedOption > numberOfOptions)
@@ -45,7 +51,7 @@ public class MenuScript : MonoBehaviour
 				SwapSelected(selectedOption);
 			}
 
-			if (Input.GetButtonDown("SwapBackward") /*|| Input.GetAxis("SwapBackward") > 0*/)
+			if (Input.GetAxisRaw("Swap") < 0)
 			{
 				selectedOption -= 1;
 				if (selectedOption < 1)
@@ -105,6 +111,7 @@ public class MenuScript : MonoBehaviour
 				/*Do option two*/
 				break;
 		}
+		inputTimer = 0;
 	}
 
 	//Button pressed

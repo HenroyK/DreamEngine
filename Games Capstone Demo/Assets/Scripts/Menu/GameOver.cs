@@ -16,6 +16,10 @@ public class GameOver : MonoBehaviour
     private int numberOfOptions = 2;
     private int selectedOption;
 
+    private float inputTimer = 0;
+    [SerializeField]
+    private float waitTime = 0.3f;
+
     // Set up variables, find scripts, and enable buttons
     void Start()
     {
@@ -45,10 +49,12 @@ public class GameOver : MonoBehaviour
 
     void Update()
     {
-        if (playerDead)
+        inputTimer += Time.unscaledDeltaTime;
+
+        if (playerDead && inputTimer >= waitTime)
         {
             // select options code
-            if (Input.GetButtonDown("SwapForward") /*|| Input.GetAxis("SwapForward") > 0*/)
+            if (Input.GetAxisRaw("Swap") > 0)
             {
                 selectedOption += 1;
                 if (selectedOption > numberOfOptions)
@@ -60,7 +66,7 @@ public class GameOver : MonoBehaviour
                 SwapSelected(selectedOption);
             }
 
-            if (Input.GetButtonDown("SwapBackward") /*|| Input.GetAxis("SwapBackward") > 0*/)
+            if (Input.GetAxisRaw("Swap") < 0)
             {
                 selectedOption -= 1;
                 if (selectedOption < 1)
@@ -101,6 +107,7 @@ public class GameOver : MonoBehaviour
                 /*Do option two*/
                 break;
         }
+        inputTimer = 0;
     }
 
     // Reload on button press

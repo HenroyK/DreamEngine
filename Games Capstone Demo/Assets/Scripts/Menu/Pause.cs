@@ -18,6 +18,10 @@ public class Pause : MonoBehaviour
     private int numberOfOptions = 2;
     private int selectedOption;
 
+    private float inputTimer = 0;
+    [SerializeField]
+    private float waitTime = 0.3f;
+
     // Game starts unpaused (running)
     // Set up the button variables for use
     void Start()
@@ -49,15 +53,12 @@ public class Pause : MonoBehaviour
     // Game is paused and unpaused with a toggle control (key)
     void Update()
     {
-        if (Input.GetButtonDown("Pause") && canPause)
-        {
-            TogglePause();
-        }
+        inputTimer += Time.unscaledDeltaTime;
 
-        if (gamePaused)
+        if (gamePaused && inputTimer >= waitTime)
         {
             // select options code
-            if (Input.GetButtonDown("SwapForward") /*|| Input.GetAxis("SwapForward") > 0*/)
+            if (Input.GetAxisRaw("Swap") > 0)
             {
                 selectedOption += 1;
                 if (selectedOption > numberOfOptions)
@@ -69,7 +70,7 @@ public class Pause : MonoBehaviour
                 SwapSelected(selectedOption);
             }
 
-            if (Input.GetButtonDown("SwapBackward") /*|| Input.GetAxis("SwapBackward") > 0*/)
+            if (Input.GetAxisRaw("Swap") < 0)
             {
                 selectedOption -= 1;
                 if (selectedOption < 1)
@@ -95,6 +96,11 @@ public class Pause : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetButtonDown("Pause") && canPause)
+        {
+            TogglePause();
+        }
     }
 
     void SwapSelected(int option)
@@ -111,6 +117,7 @@ public class Pause : MonoBehaviour
                 /*Do option two*/
                 break;
         }
+        inputTimer = 0;
     }
 
     // Manages the pause state of the game,

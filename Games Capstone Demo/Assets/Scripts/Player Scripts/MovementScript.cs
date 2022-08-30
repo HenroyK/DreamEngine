@@ -76,7 +76,6 @@ public class MovementScript : MonoBehaviour
 	
 	void FixedUpdate()
 	{
-
 		jumpTimer -= Time.fixedDeltaTime;
 		if (jumpTimer <= 0)
 		{

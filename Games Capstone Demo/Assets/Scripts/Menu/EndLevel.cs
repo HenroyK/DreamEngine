@@ -17,6 +17,10 @@ public class EndLevel : MonoBehaviour
     private int selectedOption;
     private bool gameEnded = false;
 
+    private float inputTimer = 0;
+    [SerializeField]
+    private float waitTime = 0.3f;
+
     // Set up variables, find scripts, and enable buttons
     void Start()
     {
@@ -47,10 +51,12 @@ public class EndLevel : MonoBehaviour
 
     void Update()
     {
-        if (gameEnded)
+        inputTimer += Time.unscaledDeltaTime;
+
+        if (gameEnded && inputTimer >= waitTime)
         {
             // select options code
-            if (Input.GetButtonDown("SwapForward") /*|| Input.GetAxis("SwapForward") > 0*/)
+            if (Input.GetAxisRaw("Swap") > 0)
             {
                 selectedOption += 1;
                 if (selectedOption > numberOfOptions)
@@ -62,7 +68,7 @@ public class EndLevel : MonoBehaviour
                 SwapSelected(selectedOption);
             }
 
-            if (Input.GetButtonDown("SwapBackward") /*|| Input.GetAxis("SwapBackward") > 0*/)
+            if (Input.GetAxisRaw("Swap") < 0)
             {
                 selectedOption -= 1;
                 if (selectedOption < 1)
@@ -103,6 +109,7 @@ public class EndLevel : MonoBehaviour
                 /*Do option two*/
                 break;
         }
+        inputTimer = 0;
     }
 
     // Reload on button press
