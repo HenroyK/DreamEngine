@@ -8,6 +8,8 @@ public class ScoreScript : MonoBehaviour
     //Score variable, does nothing right now.
     private int score = 0;
     private int combo = 0;
+    [SerializeField]
+    private int comboCap = 10;
     private float comboTimer = 0; 
     public float startComboTimer = 5;
 
@@ -30,7 +32,11 @@ public class ScoreScript : MonoBehaviour
 
     public void UpdateCombo(int pIncrement = 1)
     {
-        combo += pIncrement;
+        if (combo < comboCap)
+        {
+            combo += pIncrement;
+        }
+
         comboTimer = startComboTimer;
     }
     public void AddScore(int pScore)
