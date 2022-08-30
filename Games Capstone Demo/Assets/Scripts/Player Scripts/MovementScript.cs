@@ -95,8 +95,8 @@ public class MovementScript : MonoBehaviour
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
-
-		if (!ziplined && Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
+		//(playerRigidbody.velocity.x != 0)
+		if (!ziplined && Input.GetButtonDown("Dash") && Input.GetAxis("Horizontal")!= 0 && !isDashing && currentDashCooldown <= 0)
 		{
 			playerRigidbody.useGravity = false;
 			//SoundManagerScript.PlaySound("Dash");
