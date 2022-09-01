@@ -43,6 +43,7 @@ public class MovementScript : MonoBehaviour
 	public DepthBehaviour depth;
 
 	public Animator animator;
+	public SpriteRenderer spriteRenderer;
 	//
 	private bool blockDetect = false;
 	private RaycastHit blockRaycastHit;
@@ -55,7 +56,7 @@ public class MovementScript : MonoBehaviour
 	private float lerpPos;
 	private float lerpTimer;
 	public float lerpSpeed;
-
+	private bool currentlyGrounded = true;
 
 	// Start is called before the first frame update
 	void Start()
@@ -95,9 +96,11 @@ public class MovementScript : MonoBehaviour
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
+		currentlyGrounded = IsGrounded();
 
 		if (!ziplined && Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
+			animator.SetTrigger("Dash");
 			playerRigidbody.useGravity = false;
 			//SoundManagerScript.PlaySound("Dash");
 			currentDashDuration = dashDuration;
@@ -126,7 +129,6 @@ public class MovementScript : MonoBehaviour
 
 		if (isDashing)  //when dashing.
 		{
-			
 			//When dashing, move in a set direction
 			if (dashDirection > 0)
 			{
@@ -141,13 +143,13 @@ public class MovementScript : MonoBehaviour
 		{
 			//Movement is different when airstrafing to standing on ground
 			//CoyoteTimer or grounded
-			if (IsGrounded() || coyoteTimer > 0)
+			if (currentlyGrounded || coyoteTimer > 0)
 			{
 				RunAudio();
 				//Move left/right
 				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
 				//Debug.Log(Input.GetAxis("Horizontal"));
-                if (playerRigidbody.velocity.x < 0)
+				if (playerRigidbody.velocity.x < 0)
                 {
 					playerRigidbody.velocity += new Vector3(-globalSpeed, 0);
 				}
@@ -219,7 +221,7 @@ public class MovementScript : MonoBehaviour
 		}
 
 		//Swap phys material (moving with objects)
-		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && IsGrounded())
+		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && currentlyGrounded)
 		{
 			SwapPhysicsMaterial(false);
 		}
@@ -227,6 +229,32 @@ public class MovementScript : MonoBehaviour
 		{
 			SwapPhysicsMaterial(true);
 		}
+
+		//Animations
+		if (playerRigidbody.velocity.x < 0)
+			spriteRenderer.flipX = true;
+		else
+			spriteRenderer.flipX = false;
+		if (currentlyGrounded)
+		{
+			//Idle
+			if (playerRigidbody.velocity.x == 0)
+			{
+				animator.SetFloat("Horizontal Speed", 1);
+				animator.SetTrigger("Idle");
+			}
+			else
+			{
+				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
+				animator.SetTrigger("Run");
+			}
+		}
+		else
+		{
+			if (playerRigidbody.velocity.y < -1)
+				animator.SetTrigger("Landing");
+		}
+		animator.SetFloat("Vertical Speed", playerRigidbody.velocity.y);
 	}
 
 	// Change the physics material of the collider
@@ -289,8 +317,6 @@ public class MovementScript : MonoBehaviour
 		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -2.5f, 0), new Vector3(1, 0.1f, 1), weirdQuat, mask))
 		{
 			coyoteTimer = coyoteTimeLimit;
-			animator.SetTrigger("Land");
-			//Debug.Log("Is Grounded");
 			if(ziplined)
 				EndZipline();
 			ignoreZipline = false;
@@ -337,7 +363,7 @@ public class MovementScript : MonoBehaviour
 		jumpTimer = 0.2f;
 		audioSource.volume = 1;
 		audioSource.PlayOneShot(jumpClip);
-		animator.SetTrigger("Jump");
+		animator.SetTrigger("Jump_Start");
 		playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
 		if (ziplined)
 		{

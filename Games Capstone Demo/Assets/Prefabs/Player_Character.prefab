@@ -131,6 +131,7 @@ MonoBehaviour:
   dashSpeed: 60
   depth: {fileID: 5078044890271832808}
   animator: {fileID: 6728015053132064364}
+  spriteRenderer: {fileID: 2874584860296227141}
   ziplineSpeed: 10
   lerpSpeed: 5
 --- !u!114 &-1646179683084080548
@@ -316,6 +317,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8022007116041893811}
     m_Modifications:
+    - target: {fileID: 3778151003137708621, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: af34b2fa08c9f3f42aa368af6d15efcc, type: 2}
     - target: {fileID: 4616267282936678609, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -376,8 +381,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5680329862108798308, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
+--- !u!212 &2874584860296227141 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5680329862108798308, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
+  m_PrefabInstance: {fileID: 7579565159512142881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2963439990703865072 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4616267282936678609, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
