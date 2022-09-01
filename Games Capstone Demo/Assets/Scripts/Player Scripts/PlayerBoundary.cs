@@ -71,7 +71,9 @@ public class PlayerBoundary : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (livesScript.enabled)
+			gameController.GetComponent<ScoreScript>().ResetCombo();
+			
+			if (livesScript.enabled)
             {
 				livesScript.LifeCountLoss(damage);
 			}
