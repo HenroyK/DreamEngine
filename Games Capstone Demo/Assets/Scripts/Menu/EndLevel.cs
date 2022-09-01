@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class EndLevel : MonoBehaviour
 {
     public GameObject endLevelMenuUI;
-    public Button reloadlevelBtn;
+    public Button reloadLevelBtn;
     public Button mainMenuBtn;
+    public GameObject btnHighlight;
 
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
@@ -36,7 +37,7 @@ public class EndLevel : MonoBehaviour
             Debug.Log("Error. Couldn't find Game Controller");
         }
 
-        Button btnRetry = reloadlevelBtn.GetComponent<Button>();
+        Button btnRetry = reloadLevelBtn.GetComponent<Button>();
         btnRetry.onClick.AddListener(ReloadOnClick);
 
         Button btnMainMenu = mainMenuBtn.GetComponent<Button>();
@@ -46,7 +47,9 @@ public class EndLevel : MonoBehaviour
 
         selectedOption = 1;
         // position selected highlight Icon/shade
-
+        btnHighlight.transform.position =
+                    reloadLevelBtn.transform.position;
+        btnHighlight.SetActive(false);
     }
 
     void Update()
@@ -85,10 +88,10 @@ public class EndLevel : MonoBehaviour
                 switch (selectedOption)
                 {
                     case 1:
-                        //ReloadOnClick();
+                        ReloadOnClick();
                         break;
                     case 2:
-                        //MainMenuOnClick();
+                        MainMenuOnClick();
                         break;
                 }
             }
@@ -100,14 +103,19 @@ public class EndLevel : MonoBehaviour
         // reset selected highlight
 
         Debug.Log("Picked: " + selectedOption);
-        switch (selectedOption)
+        if (btnHighlight != null)
         {
-            case 1:
-                /*Do option two*/
-                break;
-            case 2:
-                /*Do option two*/
-                break;
+            switch (selectedOption)
+            {
+                case 1:
+                    btnHighlight.transform.position =
+                        reloadLevelBtn.transform.position;
+                    break;
+                case 2:
+                    btnHighlight.transform.position =
+                        mainMenuBtn.transform.position;
+                    break;
+            }
         }
         inputTimer = 0;
     }
@@ -136,9 +144,10 @@ public class EndLevel : MonoBehaviour
         pauseScript.disablePause(); // disable pause functionality
         gameControllerScript.PlayerControls(false); // disable player controls
         endLevelMenuUI.SetActive(true); // enable game over UI
-        Time.timeScale = 0; // pause game
         gameEnded = true; // game has ended
         // pause game music (attached to game controller object)
         gameObject.GetComponent<AudioSource>().Pause();
+        btnHighlight.SetActive(true);
+        Time.timeScale = 0; // pause game
     }
 }

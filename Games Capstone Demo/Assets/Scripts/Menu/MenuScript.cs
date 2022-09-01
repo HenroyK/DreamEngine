@@ -13,8 +13,11 @@ public class MenuScript : MonoBehaviour
 	public GameObject cutsceneUI;
 	public AudioSource audioSource;
 	public AudioClip cutsceneMusic;
+    public Button playBtn;
+    public Button quitBtn;
+    public GameObject btnHighlight;
 
-	private int curScene = -1;
+    private int curScene = -1;
 	private int numberOfOptions = 2;
 	private int selectedOption;
 	private bool inMenu = true;
@@ -29,7 +32,10 @@ public class MenuScript : MonoBehaviour
 		audioSource.Play(0);
 
 		selectedOption = 1;
-	}
+        btnHighlight.transform.position =
+                    playBtn.transform.position;
+        btnHighlight.SetActive(true);
+    }
 
     // Update is called once per frame
     void Update()
@@ -105,11 +111,13 @@ public class MenuScript : MonoBehaviour
 		switch (selectedOption)
 		{
 			case 1:
-				/*Do option two*/
-				break;
+                btnHighlight.transform.position =
+                    playBtn.transform.position;
+                break;
 			case 2:
-				/*Do option two*/
-				break;
+                btnHighlight.transform.position =
+                    quitBtn.transform.position;
+                break;
 		}
 		inputTimer = 0;
 	}
@@ -122,13 +130,15 @@ public class MenuScript : MonoBehaviour
 		audioSource.Play(0);
 		cutsceneUI.SetActive(true);
 		inMenu = false;
-	}
+        btnHighlight.SetActive(false);
+    }
 
 	//Button pressed
 	public void OnQButtonPress()
 	{
 		inMenu = false;
-		Application.Quit();
+        btnHighlight.SetActive(false);
+        Application.Quit();
 	}
 
 	//Load scene (asynchronous)

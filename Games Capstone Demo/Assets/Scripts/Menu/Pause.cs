@@ -10,6 +10,7 @@ public class Pause : MonoBehaviour
     public GameObject pauseMenuUI;
     public Button resumeBtn;
     public Button mainMenuBtn;
+    public GameObject btnHighlight;
 
     private GameContollerScript gameControllerScript;
     private bool gamePaused;
@@ -47,6 +48,9 @@ public class Pause : MonoBehaviour
         enablePause();
 
         selectedOption = 1;
+        btnHighlight.transform.position =
+                    resumeBtn.transform.position;
+        btnHighlight.SetActive(false);
         // position selected highlight Icon/shade
     }
 
@@ -108,14 +112,20 @@ public class Pause : MonoBehaviour
         // reset selected highlight
 
         Debug.Log("Picked: " + selectedOption);
-        switch (selectedOption)
+
+        if (btnHighlight != null)
         {
-            case 1:
-                /*Do option two*/
-                break;
-            case 2:
-                /*Do option two*/
-                break;
+            switch (selectedOption)
+            {
+                case 1:
+                    btnHighlight.transform.position =
+                        resumeBtn.transform.position;
+                    break;
+                case 2:
+                    btnHighlight.transform.position =
+                        mainMenuBtn.transform.position;
+                    break;
+            }
         }
         inputTimer = 0;
     }
@@ -152,9 +162,11 @@ public class Pause : MonoBehaviour
         gamePaused = true;
         pauseMenuUI.SetActive(true); // enable pause UI
         gameControllerScript.PlayerControls(false); // disable player controls
-        Time.timeScale = 0; // pause game
         // pause game music (attached to game controller object)
-        gameObject.GetComponent<AudioSource>().Pause(); 
+        gameObject.GetComponent<AudioSource>().Pause();
+        btnHighlight.SetActive(true);
+
+        Time.timeScale = 0; // pause game
     }
 
     //unpauses game and music, hides respective UI
@@ -163,9 +175,11 @@ public class Pause : MonoBehaviour
         gamePaused = false;
         pauseMenuUI.SetActive(false); // disable pause UI
         gameControllerScript.PlayerControls(true); // enable player controls
-        Time.timeScale = 1; // unpause game
         // unpause game music (attached to game controller object)
-        gameObject.GetComponent<AudioSource>().UnPause(); 
+        gameObject.GetComponent<AudioSource>().UnPause();
+        btnHighlight.SetActive(false);
+
+        Time.timeScale = 1; // unpause game
     }
 
     public void disablePause()

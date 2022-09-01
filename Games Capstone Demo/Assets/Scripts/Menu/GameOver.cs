@@ -9,6 +9,7 @@ public class GameOver : MonoBehaviour
     public GameObject gameOverMenuUI;
     public Button retryBtn;
     public Button mainMenuBtn;
+    public GameObject btnHighlight;
 
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
@@ -45,6 +46,9 @@ public class GameOver : MonoBehaviour
         gameOverMenuUI.SetActive(false);
 
         selectedOption = 1;
+        btnHighlight.transform.position =
+                    retryBtn.transform.position;
+        btnHighlight.SetActive(false);
     }
 
     void Update()
@@ -83,10 +87,10 @@ public class GameOver : MonoBehaviour
                 switch (selectedOption)
                 {
                     case 1:
-                        //ReloadOnClick();
+                        RetryOnClick();
                         break;
                     case 2:
-                        //MainMenuOnClick();
+                        MainMenuOnClick();
                         break;
                 }
             }
@@ -101,10 +105,12 @@ public class GameOver : MonoBehaviour
         switch (selectedOption)
         {
             case 1:
-                /*Do option two*/
+                btnHighlight.transform.position =
+                        retryBtn.transform.position;
                 break;
             case 2:
-                /*Do option two*/
+                btnHighlight.transform.position =
+                        mainMenuBtn.transform.position;
                 break;
         }
         inputTimer = 0;
@@ -138,8 +144,9 @@ public class GameOver : MonoBehaviour
         playerDead = true;
         gameOverMenuUI.SetActive(true); // enable game over UI
         gameControllerScript.PlayerControls(false); // disable player controls
-        Time.timeScale = 0; // pause game
         // pause game music (attached to game controller object)
         gameObject.GetComponent<AudioSource>().Pause();
+        btnHighlight.SetActive(true);
+        Time.timeScale = 0; // pause game
     }
 }
