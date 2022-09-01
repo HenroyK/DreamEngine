@@ -21,7 +21,7 @@ public class GameContollerScript : MonoBehaviour
     //list of all instantiated moving objects to be saved at a checkpoint
     private List<GameObject> checkpointObjects = new List<GameObject>();
 
-    private int lastCheckpoint = 0;
+    //private int lastCheckpoint = 0;
 
     //List of Commands, such as spawning stuff, waiting or changing gamespeed.
     public List<Command> commandList = new List<Command>();
@@ -141,7 +141,7 @@ public class GameContollerScript : MonoBehaviour
                     break;
                 case Command.CommandType.Checkpoint:
                         //Set checkpoint to current command index for easy access. Create a copy of all objects in movingObjects and disable the copies.
-                        SetCheckpoint();
+                        //SetCheckpoint();
                         
                     break;
                 case Command.CommandType.PlayAudio:
@@ -173,41 +173,41 @@ public class GameContollerScript : MonoBehaviour
         player.GetComponent<MovementScript>().enabled = state;
     }
 
-    public void SetCheckpoint()
-    {
-        checkpointDelay = delay;
-        //Handle saving checkpoint.
-        lastCheckpoint = commandListIndex;
-        checkpointObjects.Clear();
+    //public void SetCheckpoint()
+    //{
+    //    checkpointDelay = delay;
+    //    //Handle saving checkpoint.
+    //    lastCheckpoint = commandListIndex;
+    //    checkpointObjects.Clear();
 
-        foreach (GameObject obj in movingObjects)
-        {
-            GameObject newObj = Instantiate(obj);
-            newObj.SetActive(false);
-            checkpointObjects.Add(newObj);
-        }
-        this.GetComponent<ScoreScript>().SetCheckpoint();
-    }
-    public void LoadCheckpoint()
-    {
-        //Handle loading checkpoint.
-        clearObjects();
-        foreach (GameObject obj in checkpointObjects)
-        {
-            GameObject newObj = Instantiate(obj);
-            movingObjects.Add(newObj);
-        }
-        foreach (GameObject obj in movingObjects)
-        {
-            obj.SetActive(true);
-            obj.BroadcastMessage("ChangeSpeed", globalSpeed);
-        }
-        //lateCheckpointUpdate = true;
-        commandListIndex = lastCheckpoint;
-        delay = checkpointDelay;
-        player.transform.position = playerSpawn.transform.position;
-        this.GetComponent<ScoreScript>().ResetCheckpoint();
-    }
+    //    foreach (GameObject obj in movingObjects)
+    //    {
+    //        GameObject newObj = Instantiate(obj);
+    //        newObj.SetActive(false);
+    //        checkpointObjects.Add(newObj);
+    //    }
+    //    this.GetComponent<ScoreScript>().SetCheckpoint();
+    //}
+    //public void LoadCheckpoint()
+    //{
+    //    //Handle loading checkpoint.
+    //    clearObjects();
+    //    foreach (GameObject obj in checkpointObjects)
+    //    {
+    //        GameObject newObj = Instantiate(obj);
+    //        movingObjects.Add(newObj);
+    //    }
+    //    foreach (GameObject obj in movingObjects)
+    //    {
+    //        obj.SetActive(true);
+    //        obj.BroadcastMessage("ChangeSpeed", globalSpeed);
+    //    }
+    //    //lateCheckpointUpdate = true;
+    //    commandListIndex = lastCheckpoint;
+    //    delay = checkpointDelay;
+    //    player.transform.position = playerSpawn.transform.position;
+    //    this.GetComponent<ScoreScript>().ResetCheckpoint();
+    //}
     void clearObjects()
     {
         //Clear all moving objects.

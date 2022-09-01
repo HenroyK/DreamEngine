@@ -281,72 +281,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &558434840
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 829899957}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.058408
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.0879383
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -23.78176
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_Name
-      value: Van
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
---- !u!4 &558434841 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 88d7e98c48996fa4e9801fab07c3f876, type: 3}
-  m_PrefabInstance: {fileID: 558434840}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &596353574
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +515,6 @@ Transform:
   m_Children:
   - {fileID: 963194228}
   - {fileID: 104766986}
-  - {fileID: 558434841}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1173,7 +1106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986495c2002cd49428e99d5226f43c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 963194227}
+  mainCamera: {fileID: 963194227}
   lookatObject: {fileID: 0}
 --- !u!1001 &2138282496
 PrefabInstance:
@@ -2205,7 +2138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb469ee6492fcca4a8ab44e305f39874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startComboTimer: 2
+  comboCap: 10
+  startComboTimer: 5.5
+  tempComboTimer: 1
   comboBar: {fileID: 2077858820878543638}
   comboText: {fileID: 4509719299978788434}
   scoreText: {fileID: 8296735528629658993}
@@ -3640,17 +3575,6 @@ MonoBehaviour:
     audioVolume: 0
     layerNo: 0
     layerState: 0
-  - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: -85, y: -5, z: 13}
-    time: 0
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
   - commandType: 7
     spawnObject: {fileID: 0}
     vector3: {x: 0, y: 0, z: 0}
@@ -3872,31 +3796,9 @@ MonoBehaviour:
     layerNo: 0
     layerState: 0
   - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: 50, y: -5, z: 13}
-    time: 0
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
     spawnObject: {fileID: 3983534823119249688, guid: 5652b587123261d49bad483d9c149b7d, type: 3}
     vector3: {x: 50, y: 1, z: 22}
     time: 30
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: 50, y: -5, z: 13}
-    time: 0
     speed: 10
     audioClip: {fileID: 0}
     audioFunction: 0

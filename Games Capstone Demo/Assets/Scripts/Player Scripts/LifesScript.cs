@@ -115,7 +115,7 @@ public class LifesScript : MonoBehaviour
             }
         }
 
-		gameControllerScript.LoadCheckpoint();
+		//gameControllerScript.LoadCheckpoint();
 		fader.ResetFade();
 
         RefreshUI();

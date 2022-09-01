@@ -11,7 +11,9 @@ public class ScoreScript : MonoBehaviour
     [SerializeField]
     private int comboCap = 10;
     private float comboTimer = 0; 
-    public float startComboTimer = 5;
+    public float startComboTimer = 10;
+    [SerializeField]
+    private float tempComboTimer = 1;
 
     public Image comboBar;
     public Text comboText;
@@ -24,7 +26,7 @@ public class ScoreScript : MonoBehaviour
         comboTimer -= Time.deltaTime;
         if (comboTimer <= 0)
         {
-            combo = 0;
+            DropCombo();
         }
         UpdateScoreboard();
     }
@@ -37,7 +39,8 @@ public class ScoreScript : MonoBehaviour
             combo += pIncrement;
         }
 
-        comboTimer = startComboTimer;
+        comboTimer = (startComboTimer-(combo/2));
+        tempComboTimer = comboTimer;
     }
     public void AddScore(int pScore)
     {
@@ -53,7 +56,7 @@ public class ScoreScript : MonoBehaviour
         //update combo meter
         if(comboTimer > 0)
         {
-            comboBar.GetComponent<Image>().fillAmount = comboTimer / startComboTimer;
+            comboBar.GetComponent<Image>().fillAmount = comboTimer / tempComboTimer;
         }
         else
         {
@@ -65,13 +68,22 @@ public class ScoreScript : MonoBehaviour
         scoreText.text = "Score: " + score;
         comboText.text = "Combo: " + combo;
     }
-    public void SetCheckpoint()
+    //public void SetCheckpoint()
+    //{
+    //    checkpointScore = score;
+    //}
+    public void DropCombo()
     {
-        checkpointScore = score;
+        if (combo > 1)
+        {
+            combo -= 1;
+            comboTimer = 1;
+            tempComboTimer = 1;
+        }
     }
-    public void ResetCheckpoint()
+    public void ResetCombo()
     {
-        score = checkpointScore;
+        //score = checkpointScore;
         combo = 0;
         comboTimer = 0;
     }
