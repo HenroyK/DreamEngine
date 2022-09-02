@@ -45,8 +45,6 @@ public class MovementScript : MonoBehaviour
 	public Animator animator;
 	public SpriteRenderer spriteRenderer;
 	//
-	private bool blockDetect = false;
-	private RaycastHit blockRaycastHit;
 	private bool moveBack = true;
 	private bool ziplined = false;
 	private bool ignoreZipline = false;
@@ -195,12 +193,10 @@ public class MovementScript : MonoBehaviour
 					if (Input.GetAxis("Swap") > 0)
 					{
 						ChangeDepth(depth.CheckLayer(-1));
-						Debug.Log("shift forward");
 					}
 					else if (Input.GetAxis("Swap") < 0)
 					{
 						ChangeDepth(depth.CheckLayer(1));
-						Debug.Log("shift backward");
 					}
 				}
 			}
@@ -277,22 +273,19 @@ public class MovementScript : MonoBehaviour
 	{
 		if (newDepth != -1)
 		{
-			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), 
-				out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
-			if (blockDetect)
+			bool valid = true;
+			RaycastHit[] blockDetect = Physics.BoxCastAll(playerCollider.bounds.center, new Vector3(1,2.2f,1), transform.forward * (newDepth - depth.curDepth), 
+				transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
+			//Check all we hit, invalidating if it does block swapping
+			foreach (RaycastHit hit in blockDetect)
 			{
-				if(blockRaycastHit.collider.tag == "DoesntBlockSwap")
+				if (hit.collider.gameObject.layer != 0 && hit.collider.gameObject.layer != 3 && hit.collider.tag != "DoesntBlockSwap" && hit.collider.tag != "Player")
 				{
-					ChangeLayer(newDepth);
-					Debug.Log("Hit : " + blockRaycastHit.collider.name);
-				}
-				else
-				{
-					//Output the name of the Collider your Box hit
-					Debug.Log("Hit : " + blockRaycastHit.collider.name);
+					valid = false;
+					Debug.Log("Hit: " + hit.collider.name);
 				}
 			}
-			else
+			if(valid)
 			{
 				ChangeLayer(newDepth);
 			}
