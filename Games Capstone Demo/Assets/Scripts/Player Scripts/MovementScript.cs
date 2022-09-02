@@ -229,31 +229,32 @@ public class MovementScript : MonoBehaviour
 		{
 			SwapPhysicsMaterial(true);
 		}
+	}
 
+	void LateUpdate()
+	{
 		//Animations
 		if (playerRigidbody.velocity.x < 0)
 			spriteRenderer.flipX = true;
 		else
 			spriteRenderer.flipX = false;
-		if (currentlyGrounded)
+		//Idle
+		if (Input.GetAxis("Horizontal") == 0)
 		{
-			//Idle
-			if (playerRigidbody.velocity.x == 0)
-			{
-				animator.SetFloat("Horizontal Speed", 1);
-				animator.SetTrigger("Idle");
-			}
-			else
-			{
-				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
-				animator.SetTrigger("Run");
-			}
+			animator.SetBool("Moving", false);
+			animator.SetFloat("Horizontal Speed", 1);
+			animator.SetTrigger("Idle");
 		}
 		else
 		{
-			if (playerRigidbody.velocity.y < -1)
-				animator.SetTrigger("Landing");
+			animator.SetBool("Moving", true);
+			animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
+			animator.SetTrigger("Run");
 		}
+
+		if (!currentlyGrounded && playerRigidbody.velocity.y < -1)
+			animator.SetTrigger("Landing");
+		animator.SetBool("Grounded", currentlyGrounded);
 		animator.SetFloat("Vertical Speed", playerRigidbody.velocity.y);
 	}
 
