@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEditor;
+using UnityEngine.EventSystems;
 
 public class Pause : MonoBehaviour
 {
@@ -155,6 +155,17 @@ public class Pause : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    // Mouse over select highlight
+    //bool IsMouseOverUI()
+    //{
+    //    return EventSystem.current.IsPointerOverGameObject();
+    //}
+
+    //bool IsMouseOverUIwithIgnores()
+    //{
+    //    PointerEventData pED
+    //}
 
     // pauses game and music, loads respective UI
     void PauseGame()
