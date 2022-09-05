@@ -43,9 +43,8 @@ public class MovementScript : MonoBehaviour
 	public DepthBehaviour depth;
 
 	public Animator animator;
+	public SpriteRenderer spriteRenderer;
 	//
-	private bool blockDetect = false;
-	private RaycastHit blockRaycastHit;
 	private bool moveBack = true;
 	private bool ziplined = false;
 	private bool ignoreZipline = false;
@@ -55,7 +54,7 @@ public class MovementScript : MonoBehaviour
 	private float lerpPos;
 	private float lerpTimer;
 	public float lerpSpeed;
-
+	private bool currentlyGrounded = true;
 
 	// Start is called before the first frame update
 	void Start()
@@ -94,9 +93,11 @@ public class MovementScript : MonoBehaviour
 	void Update()
 	{
 		stepTimer -= Time.deltaTime;
+		currentlyGrounded = IsGrounded();
 
 		if (!ziplined && Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
 		{
+			animator.SetTrigger("Dash");
 			playerRigidbody.useGravity = false;
 			//SoundManagerScript.PlaySound("Dash");
 			currentDashDuration = dashDuration;
@@ -125,7 +126,6 @@ public class MovementScript : MonoBehaviour
 
 		if (isDashing)  //when dashing.
 		{
-			
 			//When dashing, move in a set direction
 			if (dashDirection > 0)
 			{
@@ -140,13 +140,13 @@ public class MovementScript : MonoBehaviour
 		{
 			//Movement is different when airstrafing to standing on ground
 			//CoyoteTimer or grounded
-			if (IsGrounded() || coyoteTimer > 0)
+			if (currentlyGrounded || coyoteTimer > 0)
 			{
 				RunAudio();
 				//Move left/right
 				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
 				//Debug.Log(Input.GetAxis("Horizontal"));
-                if (playerRigidbody.velocity.x < 0)
+				if (playerRigidbody.velocity.x < 0)
                 {
 					playerRigidbody.velocity += new Vector3(-globalSpeed, 0);
 				}
@@ -192,12 +192,10 @@ public class MovementScript : MonoBehaviour
 					if (Input.GetAxis("Swap") > 0)
 					{
 						ChangeDepth(depth.CheckLayer(-1));
-						Debug.Log("shift forward");
 					}
 					else if (Input.GetAxis("Swap") < 0)
 					{
 						ChangeDepth(depth.CheckLayer(1));
-						Debug.Log("shift backward");
 					}
 				}
 			}
@@ -218,7 +216,7 @@ public class MovementScript : MonoBehaviour
 		}
 
 		//Swap phys material (moving with objects)
-		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && IsGrounded())
+		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && currentlyGrounded)
 		{
 			SwapPhysicsMaterial(false);
 		}
@@ -226,6 +224,33 @@ public class MovementScript : MonoBehaviour
 		{
 			SwapPhysicsMaterial(true);
 		}
+	}
+
+	void LateUpdate()
+	{
+		//Animations
+		if (playerRigidbody.velocity.x < 0)
+			spriteRenderer.flipX = true;
+		else
+			spriteRenderer.flipX = false;
+		//Idle
+		if (Input.GetAxis("Horizontal") == 0)
+		{
+			animator.SetBool("Moving", false);
+			animator.SetFloat("Horizontal Speed", 1);
+			animator.SetTrigger("Idle");
+		}
+		else
+		{
+			animator.SetBool("Moving", true);
+			animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
+			animator.SetTrigger("Run");
+		}
+
+		if (!currentlyGrounded && playerRigidbody.velocity.y < -1)
+			animator.SetTrigger("Landing");
+		animator.SetBool("Grounded", currentlyGrounded);
+		animator.SetFloat("Vertical Speed", playerRigidbody.velocity.y);
 	}
 
 	// Change the physics material of the collider
@@ -247,22 +272,19 @@ public class MovementScript : MonoBehaviour
 	{
 		if (newDepth != -1)
 		{
-			blockDetect = Physics.BoxCast(playerCollider.bounds.center, transform.localScale, transform.forward * (newDepth - depth.curDepth), 
-				out blockRaycastHit, transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
-			if (blockDetect)
+			bool valid = true;
+			RaycastHit[] blockDetect = Physics.BoxCastAll(playerCollider.bounds.center, new Vector3(1,2.2f,1), transform.forward * (newDepth - depth.curDepth), 
+				transform.rotation,Mathf.Abs(depth.layerAxis[depth.curDepth]-depth.layerAxis[newDepth]));
+			//Check all we hit, invalidating if it does block swapping
+			foreach (RaycastHit hit in blockDetect)
 			{
-				if(blockRaycastHit.collider.tag == "DoesntBlockSwap")
+				if (hit.collider.gameObject.layer != 0 && hit.collider.gameObject.layer != 3 && hit.collider.tag != "DoesntBlockSwap" && hit.collider.tag != "Player")
 				{
-					ChangeLayer(newDepth);
-					Debug.Log("Hit : " + blockRaycastHit.collider.name);
-				}
-				else
-				{
-					//Output the name of the Collider your Box hit
-					Debug.Log("Hit : " + blockRaycastHit.collider.name);
+					valid = false;
+					Debug.Log("Hit: " + hit.collider.name);
 				}
 			}
-			else
+			if(valid)
 			{
 				ChangeLayer(newDepth);
 			}
@@ -288,8 +310,6 @@ public class MovementScript : MonoBehaviour
 		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -2.5f, 0), new Vector3(1, 0.1f, 1), weirdQuat, mask))
 		{
 			coyoteTimer = coyoteTimeLimit;
-			animator.SetTrigger("Land");
-			//Debug.Log("Is Grounded");
 			if(ziplined)
 				EndZipline();
 			ignoreZipline = false;
@@ -336,7 +356,7 @@ public class MovementScript : MonoBehaviour
 		jumpTimer = 0.2f;
 		audioSource.volume = 1;
 		audioSource.PlayOneShot(jumpClip);
-		animator.SetTrigger("Jump");
+		animator.SetTrigger("Jump_Start");
 		playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
 		if (ziplined)
 		{
