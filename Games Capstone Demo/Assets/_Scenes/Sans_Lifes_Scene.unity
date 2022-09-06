@@ -1210,7 +1210,7 @@ PrefabInstance:
     - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[2].spawnObject
       value: 
-      objectReference: {fileID: 8702786132180167172, guid: c9af231e37a7c1147bf658f1207fd742, type: 3}
+      objectReference: {fileID: 8702786132180167172, guid: 19a2648cc6870f64f90a618354a19a8e, type: 3}
     - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[3].spawnObject
       value: 
