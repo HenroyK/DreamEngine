@@ -2159,6 +2159,8 @@ MonoBehaviour:
   comboText: {fileID: 4509719299978788434}
   scoreText: {fileID: 8296735528629658993}
   checkpointScore: 0
+  scoreAudioClip: {fileID: 8300000, guid: c1e47666d832beb4496893dd8210200f, type: 3}
+  scoreAudioSource: {fileID: 6847065463850903033}
 --- !u!114 &2919385597739598397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2572,8 +2574,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endLevelMenuUI: {fileID: 1533717975021621075}
-  reloadlevelBtn: {fileID: 2402372463706427440}
+  reloadLevelBtn: {fileID: 0}
   mainMenuBtn: {fileID: 6111074903423705024}
+  btnHighlight: {fileID: 0}
+  waitTime: 0.3
 --- !u!222 &4074847262330701813
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3532,6 +3536,8 @@ MonoBehaviour:
   gameOverMenuUI: {fileID: 6064070201386735999}
   retryBtn: {fileID: 6064070202451727993}
   mainMenuBtn: {fileID: 4265463989209661071}
+  btnHighlight: {fileID: 0}
+  waitTime: 0.3
 --- !u!114 &6064070201435632962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3547,6 +3553,8 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 6064070201443207440}
   resumeBtn: {fileID: 8576940011798912029}
   mainMenuBtn: {fileID: 51307044464012950}
+  btnHighlight: {fileID: 0}
+  waitTime: 0.3
 --- !u!4 &6064070201435632963
 Transform:
   m_ObjectHideFlags: 0
@@ -3867,6 +3875,7 @@ GameObject:
   - component: {fileID: 2897239585710501989}
   - component: {fileID: 2058995765}
   - component: {fileID: 6847065463850903032}
+  - component: {fileID: 6847065463850903033}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -5061,6 +5070,102 @@ MonoBehaviour:
   blackFader: {fileID: 628739347}
   maxFade: 450
   fadeDist: 25
+--- !u!82 &6847065463850903033
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064070201435632965}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!222 &6984870279327470035
 CanvasRenderer:
   m_ObjectHideFlags: 0

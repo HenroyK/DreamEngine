@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     //Variables
-    public Camera mainCamera;
-    public GameObject lookatObject;
+    private Camera mainCamera;
+    private GameObject lookatObject;
 
     private bool curState;
     private float tilt;
@@ -15,8 +15,18 @@ public class CameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curState = true;
-        camTransform = mainCamera.GetComponent<Transform>();
+        GameObject theCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        
+        if (theCamera != null)
+        {
+            mainCamera = theCamera.GetComponent<Camera>();
+            curState = true;
+            camTransform = mainCamera.GetComponent<Transform>();
+        }
+        else
+        {
+            Debug.LogError("Couldn't find Main Cameara");
+        }
     }
 
     // Update is called once per frame
