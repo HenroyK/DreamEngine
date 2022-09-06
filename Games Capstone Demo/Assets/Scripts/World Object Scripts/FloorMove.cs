@@ -20,6 +20,7 @@ public class FloorMove : MonoBehaviour
     {
         if (transform.position.x <= endX)
         {
+            Debug.Log("RESET FLOOR");
             transform.position = start;
         }
         blockRigidbody.velocity = Vector3.left * speed;

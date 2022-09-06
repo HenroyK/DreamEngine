@@ -17,7 +17,7 @@ public class DropInRespawn : MonoBehaviour
     private int curLayer;
 	private BlackFade fader;
 
-    private bool blockDetect = false;
+    //private bool blockDetect = false;
     private RaycastHit blockRaycastHit;
 
     // Start is called before the first frame update
