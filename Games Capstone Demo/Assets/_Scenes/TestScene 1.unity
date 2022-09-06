@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986495c2002cd49428e99d5226f43c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 963194227}
+  mainCamera: {fileID: 963194227}
   lookatObject: {fileID: 0}
 --- !u!1001 &2138282496
 PrefabInstance:
@@ -2152,7 +2152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb469ee6492fcca4a8ab44e305f39874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startComboTimer: 2
+  comboCap: 10
+  startComboTimer: 5.5
+  tempComboTimer: 1
   comboBar: {fileID: 2077858820878543638}
   comboText: {fileID: 4509719299978788434}
   scoreText: {fileID: 8296735528629658993}
@@ -3603,17 +3605,6 @@ MonoBehaviour:
     audioVolume: 0
     layerNo: 0
     layerState: 0
-  - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: -85, y: -5, z: 13}
-    time: 0
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
   - commandType: 7
     spawnObject: {fileID: 0}
     vector3: {x: 0, y: 0, z: 0}
@@ -3835,31 +3826,9 @@ MonoBehaviour:
     layerNo: 0
     layerState: 0
   - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: 50, y: -5, z: 13}
-    time: 0
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
     spawnObject: {fileID: 3983534823119249688, guid: 5652b587123261d49bad483d9c149b7d, type: 3}
     vector3: {x: 50, y: 1, z: 22}
     time: 30
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: 50, y: -5, z: 13}
-    time: 0
     speed: 10
     audioClip: {fileID: 0}
     audioFunction: 0

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DropInRespawn : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class DropInRespawn : MonoBehaviour
 	private BlackFade fader;
 
     //private bool blockDetect = false;
-    private RaycastHit blockRaycastHit;
+    //private RaycastHit blockRaycastHit;
 
     // Start is called before the first frame update
     void Start()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     //Variables
-    public Camera camera;
+    public Camera mainCamera;
     public GameObject lookatObject;
 
     private bool curState;
@@ -16,7 +16,7 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
         curState = true;
-        camTransform = camera.GetComponent<Transform>();
+        camTransform = mainCamera.GetComponent<Transform>();
     }
 
     // Update is called once per frame

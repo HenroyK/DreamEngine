@@ -17,6 +17,6 @@ public class CheckpointScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameContollerScript>().SetCheckpoint();
+        //GameObject.FindGameObjectWithTag("GameController").GetComponent<GameContollerScript>().SetCheckpoint();
     }
 }
