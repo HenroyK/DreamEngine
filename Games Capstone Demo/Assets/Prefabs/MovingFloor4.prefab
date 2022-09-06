@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  start: {x: 145.798, y: 0.5, z: 25.5}
+  start: {x: 145.798, y: 0.5, z: 18}
   endX: -232.97
 --- !u!54 &4113561373708713421
 Rigidbody:
