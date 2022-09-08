@@ -85,7 +85,8 @@ public class EndLevel : MonoBehaviour
                 SwapSelected(selectedOption);
             }
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") ||
+                Input.GetButton("Enter"))
             {
                 switch (selectedOption)
                 {
