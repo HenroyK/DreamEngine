@@ -118,4 +118,8 @@ public class ScoreScript : MonoBehaviour
         combo = 0;
         comboTimer = 0;
     }
+    public int getScore()
+    {
+        return score;
+    }
 }

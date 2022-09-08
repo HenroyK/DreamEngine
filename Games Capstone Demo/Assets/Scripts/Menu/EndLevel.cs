@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class EndLevel : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class EndLevel : MonoBehaviour
 
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
+    private ScoreScript scoreScript;
+
+    private List<HighScoreEntry> leaderboard = new List<HighScoreEntry>();
 
     private int numberOfOptions = 2;
     private int selectedOption;
@@ -32,6 +36,7 @@ public class EndLevel : MonoBehaviour
         {
             pauseScript = gameController.GetComponent<Pause>();
             gameControllerScript = gameController.GetComponent<GameContollerScript>();
+            scoreScript = gameController.GetComponent<ScoreScript>();
         }
         else
         {
@@ -150,5 +155,27 @@ public class EndLevel : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Pause();
         btnHighlight.SetActive(true);
         Time.timeScale = 0; // pause game
+
+        DisplayLeaderboard();
+        WriteLeaderboard();
+    }
+    private void DisplayLeaderboard()
+    {
+        leaderboard = XMLManager.instance.LoadScores(1);
+        leaderboard.Add(new HighScoreEntry { name = "Name Not Implemented + " + scoreScript.getScore() , score = scoreScript.getScore() });
+        leaderboard.OrderBy(HighScoreEntry => HighScoreEntry.score);
+
+        //Change this for an actual display
+        Debug.Log("----Printing Scoreboard----");
+        int i = 1;
+        foreach (HighScoreEntry h in leaderboard)
+        {
+            Debug.Log(i +". "+ h.name + ": "+ h.score);
+        }
+        Debug.Log("----Finished Printing----");
+    }
+    private void WriteLeaderboard()
+    {
+        XMLManager.instance.SaveScores(leaderboard, 1);
     }
 }

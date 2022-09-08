@@ -12,7 +12,7 @@ public class PickupScoreEffect : MonoBehaviour
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("PickupEffectTarget");
-        Debug.Log(target.transform.position);
+        //Debug.Log(target.transform.position);
     }
     private void Update()
     {
