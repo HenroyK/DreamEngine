@@ -22,38 +22,46 @@ public class BlackFade : MonoBehaviour
 
 	public void LateUpdate()
 	{
+
 		//Raycast to get the true distance to the closest object (so size is accounted for)
-		if (closest != null)
+		if (player != null)
 		{
-			Debug.DrawRay(player.transform.position, -player.transform.right * 25);
-			//Close to a boundary
-			Physics.Raycast(player.transform.position, -player.transform.right,
-				out hit, fadeDist, LayerMask.GetMask("Boundary"),UnityEngine.QueryTriggerInteraction.Collide);
-			if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Boundary"))
+			if (closest != null)
 			{
-				closeDist = Vector3.Distance(player.transform.position, hit.point);
-				FadeAmount(closeDist);
+				Debug.DrawRay(player.transform.position, -player.transform.right * 25);
+				//Close to a boundary
+				Physics.Raycast(player.transform.position, -player.transform.right,
+					out hit, fadeDist, LayerMask.GetMask("Boundary"), UnityEngine.QueryTriggerInteraction.Collide);
+				if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Boundary"))
+				{
+					closeDist = Vector3.Distance(player.transform.position, hit.point);
+					FadeAmount(closeDist);
+				}
+				else
+				{
+					closest = null;
+					closeDist = 25;
+				}
+				//Close to other fade triggers
+				/*
+				Physics.Raycast(player.transform.position, closest.transform.position-player.transform.position,
+					out hit, fadeDist);
+				if (hit.collider)
+				{
+					closeDist = Vector3.Distance(player.transform.position, hit.point);
+					FadeAmount(closeDist);
+				}
+				else
+				{
+					closest = null;
+					closeDist = 25;
+				}
+				*/
 			}
-			else
-			{
-				closest = null;
-				closeDist = 25;
-			}
-			//Close to other fade triggers
-			/*
-			Physics.Raycast(player.transform.position, closest.transform.position-player.transform.position,
-				out hit, fadeDist);
-			if (hit.collider)
-			{
-				closeDist = Vector3.Distance(player.transform.position, hit.point);
-				FadeAmount(closeDist);
-			}
-			else
-			{
-				closest = null;
-				closeDist = 25;
-			}
-			*/
+		}
+		else
+		{
+			player = GameObject.FindWithTag("Player");
 		}
 	}
 

@@ -29,6 +29,9 @@ public class MovementScript : MonoBehaviour
 	public AudioClip runClip;
 	public AudioClip jumpClip;
 	public AudioClip dashClip;
+	public AudioClip dashReadyClip;
+	public AudioClip changeClip;
+	public AudioClip respawnClip;
 	public float stepDelay = 0.3f;
 	private float stepTimer = 0;
 	//Dash variables
@@ -55,6 +58,7 @@ public class MovementScript : MonoBehaviour
 	private float lerpTimer;
 	public float lerpSpeed;
 	private bool currentlyGrounded = true;
+	private bool dashed = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -99,14 +103,14 @@ public class MovementScript : MonoBehaviour
 		{
 			animator.SetTrigger("Dash");
 			playerRigidbody.useGravity = false;
-			//SoundManagerScript.PlaySound("Dash");
+			audioSource.PlayOneShot(dashClip);
 			currentDashDuration = dashDuration;
 			currentDashCooldown = dashCooldown;
 			//set which direction to dash
 			dashDirection = Input.GetAxis("Horizontal");
 			//set dashing state
 			isDashing = true;
-			//animation.DashAnimation((Direction)Mathf.Round(Input.GetAxis("Horizontal")));
+			dashed = true;
 		}
 		//Tick down dash duration
 		currentDashDuration -= Time.deltaTime;
@@ -142,7 +146,6 @@ public class MovementScript : MonoBehaviour
 			//CoyoteTimer or grounded
 			if (currentlyGrounded || coyoteTimer > 0)
 			{
-				RunAudio();
 				//Move left/right
 				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
 				//Debug.Log(Input.GetAxis("Horizontal"));
@@ -228,8 +231,8 @@ public class MovementScript : MonoBehaviour
 
 	void LateUpdate()
 	{
-		//Animations
-		if (playerRigidbody.velocity.x < 0)
+		//Animations / Audio
+		if (Input.GetAxis("Horizontal") < 0)
 			spriteRenderer.flipX = true;
 		else
 			spriteRenderer.flipX = false;
@@ -242,15 +245,25 @@ public class MovementScript : MonoBehaviour
 		}
 		else
 		{
+			RunAudio();
 			animator.SetBool("Moving", true);
-			animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
 			animator.SetTrigger("Run");
+			if(Input.GetAxis("Horizontal") > 0)
+				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
+			else
+				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / (maxSpeed*2));
 		}
 
 		if (!currentlyGrounded && playerRigidbody.velocity.y < -1)
 			animator.SetTrigger("Landing");
 		animator.SetBool("Grounded", currentlyGrounded);
 		animator.SetFloat("Vertical Speed", playerRigidbody.velocity.y);
+		animator.SetBool("Zipline", ziplined);
+		if(currentDashCooldown / dashCooldown <= 0 && dashed == true)
+		{
+			dashed = false;
+			audioSource.PlayOneShot(dashReadyClip);
+		}
 	}
 
 	// Change the physics material of the collider
@@ -295,7 +308,7 @@ public class MovementScript : MonoBehaviour
 	void ChangeLayer(int newDepth)
 	{
 		audioSource.volume = 1;
-		audioSource.PlayOneShot(jumpClip);
+		audioSource.PlayOneShot(changeClip);
 		depth.curDepth = newDepth;
 		lerpTimer = 0;
 		//transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
@@ -397,6 +410,21 @@ public class MovementScript : MonoBehaviour
 			audioSource.PlayOneShot(runClip);
         }
 		
+	}
+
+	//Play an audioclip (requested from external sources)
+	public void PlayAudio(string audio)
+	{
+		switch (audio)
+		{
+			case "Respawn":
+				audioSource.PlayOneShot(respawnClip);
+				break;
+			default:
+				Debug.LogWarning("No clip found");
+				break;
+
+		}
 	}
     void OnCollisionEnter(Collision other)
     {

@@ -49,7 +49,7 @@ public class DropInRespawn : MonoBehaviour
     public void AltRespawnPlayer()
     {
         fader.ResetFade();
-
+		playerCharacter.GetComponent<MovementScript>().PlayAudio("Respawn");
         // 1.checks current layer to see if any spawn positions are free
         curLayer = depthScript.curDepth;
 
@@ -124,9 +124,9 @@ public class DropInRespawn : MonoBehaviour
     public void RespawnPlayer()
     {
 		fader.ResetFade();
-
-        // currently only respawns the player on the layer they are currently on
-        curLayer = depthScript.curDepth;
+		playerCharacter.GetComponent<MovementScript>().PlayAudio("Respawn");
+		// currently only respawns the player on the layer they are currently on
+		curLayer = depthScript.curDepth;
 
         // finds the closest active layer, assumes that the
         // first active layer in the list is the closest
