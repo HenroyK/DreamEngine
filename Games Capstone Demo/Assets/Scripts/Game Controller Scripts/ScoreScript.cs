@@ -7,6 +7,8 @@ public class ScoreScript : MonoBehaviour
 {
     //Score variable, does nothing right now.
     private int score = 0;
+    private int displayScore = 0;
+    private float scoreUpdateTimer;
     private int combo = 0;
     [SerializeField]
     private int comboCap = 10;
@@ -76,10 +78,15 @@ public class ScoreScript : MonoBehaviour
         {
             comboBar.GetComponent<Image>().fillAmount = 0;
         }
-
+        scoreUpdateTimer -= Time.deltaTime;
         //update scoreboard
+        if (displayScore < score && scoreUpdateTimer < 0)
+        {
+            scoreUpdateTimer = 0.05f;
+            displayScore++;
+            scoreText.text = "Score: " + displayScore;
+        }
 
-        scoreText.text = "Score: " + score;
         comboText.text = "Combo: x" + combo;
     }
     //public void SetCheckpoint()
