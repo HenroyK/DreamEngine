@@ -1281,6 +1281,7 @@ GameObject:
   - component: {fileID: 4511625718952284709}
   - component: {fileID: 1997413508279204977}
   - component: {fileID: 2329617102891658750}
+  - component: {fileID: 4460463022887387446}
   m_Layer: 5
   m_Name: ReloadButton
   m_TagString: Untagged
@@ -1391,6 +1392,35 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4460463022887387446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009184941452975626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3959074571831529636}
+          m_TargetAssemblyTypeName: EndLevel, Assembly-CSharp
+          m_MethodName: MORetryBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4178113593279107632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,6 +1543,7 @@ GameObject:
   - component: {fileID: 6505361844496874279}
   - component: {fileID: 9058330458389909119}
   - component: {fileID: 6182423391739388430}
+  - component: {fileID: 4781764156617471136}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -1623,6 +1654,35 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4781764156617471136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4934342916783107369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3959074571831529636}
+          m_TargetAssemblyTypeName: EndLevel, Assembly-CSharp
+          m_MethodName: MOMenuBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5154618740415701502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,6 +1695,7 @@ GameObject:
   - component: {fileID: 1006749259529284684}
   - component: {fileID: 6736207933781987187}
   - component: {fileID: 8504465228324741587}
+  - component: {fileID: 6371294139595962812}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -1745,6 +1806,35 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6371294139595962812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154618740415701502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6135416542360553612}
+          m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+          m_MethodName: MOResumeBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5560139677389874071
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,8 +2571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986495c2002cd49428e99d5226f43c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  lookatObject: {fileID: 0}
 --- !u!114 &6775435487571302454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2609,7 +2697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6135416542418121937
 Transform:
   m_ObjectHideFlags: 0
@@ -3072,6 +3160,7 @@ GameObject:
   - component: {fileID: 6135416543556955017}
   - component: {fileID: 6135416543556955062}
   - component: {fileID: 6135416543556955063}
+  - component: {fileID: 1606610999853287841}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -3182,6 +3271,35 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1606610999853287841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6135416543556955061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6135416542360553615}
+          m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+          m_MethodName: MORetryBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6135416543735412510
 GameObject:
   m_ObjectHideFlags: 0
@@ -4055,6 +4173,7 @@ GameObject:
   - component: {fileID: 7847127611236434901}
   - component: {fileID: 1356595540599379269}
   - component: {fileID: 122934276108735320}
+  - component: {fileID: 7275076628991730078}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -4165,6 +4284,35 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7275076628991730078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963785704331221900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6135416542360553612}
+          m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+          m_MethodName: MOMenuBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8081015021537303492
 GameObject:
   m_ObjectHideFlags: 0
@@ -4365,6 +4513,7 @@ GameObject:
   - component: {fileID: 5407841261287469077}
   - component: {fileID: 5896731298399300449}
   - component: {fileID: 4193835902702781249}
+  - component: {fileID: 8264399318933556666}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -4475,6 +4624,35 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8264399318933556666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639896768214248635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6135416542360553615}
+          m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+          m_MethodName: MOMenuBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &72769452990544076
 PrefabInstance:
   m_ObjectHideFlags: 0

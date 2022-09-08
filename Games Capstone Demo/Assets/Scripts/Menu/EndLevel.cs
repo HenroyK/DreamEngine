@@ -151,4 +151,18 @@ public class EndLevel : MonoBehaviour
         btnHighlight.SetActive(true);
         Time.timeScale = 0; // pause game
     }
+
+    // Mouse over Retry button
+    public void MORetryBtn()
+    {
+        selectedOption = 1;
+        SwapSelected(selectedOption);
+    }
+
+    // Mouse over Menu button
+    public void MOMenuBtn()
+    {
+        selectedOption = 2;
+        SwapSelected(selectedOption);
+    }
 }

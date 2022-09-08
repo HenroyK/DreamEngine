@@ -193,6 +193,20 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1; // unpause game
     }
 
+    //Mouse over Resume button
+    public void MOResumeBtn()
+    {
+        selectedOption = 1;
+        SwapSelected(selectedOption);
+    }
+
+    //Mouse over Main Menu button
+    public void MOMenuBtn()
+    {
+        selectedOption = 2;
+        SwapSelected(selectedOption);
+    }
+
     public void disablePause()
     {
         canPause = false;

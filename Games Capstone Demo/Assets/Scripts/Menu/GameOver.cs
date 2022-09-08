@@ -15,6 +15,7 @@ public class GameOver : MonoBehaviour
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
     private bool playerDead = false;
+
     private int numberOfOptions = 2;
     private int selectedOption;
 
@@ -149,5 +150,19 @@ public class GameOver : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Pause();
         btnHighlight.SetActive(true);
         Time.timeScale = 0; // pause game
+    }
+
+    // Mouse over Retry button
+    public void MORetryBtn()
+    {
+        selectedOption = 1;
+        SwapSelected(selectedOption);
+    }
+
+    // Mouse over Menu button
+    public void MOMenuBtn()
+    {
+        selectedOption = 2;
+        SwapSelected(selectedOption);
     }
 }
