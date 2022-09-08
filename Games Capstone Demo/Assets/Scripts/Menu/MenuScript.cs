@@ -19,7 +19,9 @@ public class MenuScript : MonoBehaviour
     public GameObject btnHighlight;
 
     private int curScene = -1;
-	private int numberOfOptions = 2;
+
+    // button select varaibles
+    private int numberOfOptions = 2;
 	private int selectedOption;
 	private bool inMenu = true;
 

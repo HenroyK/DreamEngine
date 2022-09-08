@@ -16,6 +16,7 @@ public class GameOver : MonoBehaviour
     private Pause pauseScript;
     private bool playerDead = false;
 
+    // button select varaibles
     private int numberOfOptions = 2;
     private int selectedOption;
 
@@ -102,18 +103,20 @@ public class GameOver : MonoBehaviour
     void SwapSelected(int option)
     {
         // reset selected highlight
-
-        Debug.Log("Picked: " + selectedOption);
-        switch (selectedOption)
+        if (btnHighlight != null)
         {
-            case 1:
-                btnHighlight.transform.position =
-                        retryBtn.transform.position;
-                break;
-            case 2:
-                btnHighlight.transform.position =
-                        mainMenuBtn.transform.position;
-                break;
+            Debug.Log("Picked: " + selectedOption);
+            switch (selectedOption)
+            {
+                case 1:
+                    btnHighlight.transform.position =
+                            retryBtn.transform.position;
+                    break;
+                case 2:
+                    btnHighlight.transform.position =
+                            mainMenuBtn.transform.position;
+                    break;
+            }
         }
         inputTimer = 0;
     }

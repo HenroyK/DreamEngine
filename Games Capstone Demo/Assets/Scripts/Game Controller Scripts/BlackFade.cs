@@ -18,12 +18,27 @@ public class BlackFade : MonoBehaviour
 	public void Start()
 	{
 		player = GameObject.FindWithTag("Player");
+
+		if (player == null)
+		{
+			Debug.LogError("Can't find player");
+		}
 	}
 
 	public void LateUpdate()
 	{
 		//Raycast to get the true distance to the closest object (so size is accounted for)
-		if (closest != null)
+		//if (player != null)
+		//{
+  //          player = GameObject.FindWithTag("Player");
+  //      }
+
+  //      if (player == null)
+  //      {
+  //          Debug.LogError("Wtf is this");
+  //      }
+
+        if (closest != null)
 		{
 			Debug.DrawRay(player.transform.position, -player.transform.right * 25);
 			//Close to a boundary

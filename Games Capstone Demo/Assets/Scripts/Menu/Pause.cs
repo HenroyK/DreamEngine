@@ -16,6 +16,7 @@ public class Pause : MonoBehaviour
     private bool gamePaused;
     private bool canPause;
 
+    // button select varaibles
     private int numberOfOptions = 2;
     private int selectedOption;
 

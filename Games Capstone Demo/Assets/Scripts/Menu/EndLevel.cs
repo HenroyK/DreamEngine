@@ -15,6 +15,7 @@ public class EndLevel : MonoBehaviour
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
 
+    // button select varaibles
     private int numberOfOptions = 2;
     private int selectedOption;
     private bool gameEnded = false;
