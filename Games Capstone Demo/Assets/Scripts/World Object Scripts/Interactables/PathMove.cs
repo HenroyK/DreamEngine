@@ -85,12 +85,12 @@ public class PathMove : MonoBehaviour
 			//Draw the radius of being close enough and the path being taken
 			for (int i = 0; i < movePoints.Length; i++)
 			{
-				Vector3 pos = new Vector3(movePoints[i].transform.position.x + 3, movePoints[i].transform.position.y, movePoints[i].transform.position.z);
+				Vector3 pos = new Vector3(movePoints[i].transform.position.x, movePoints[i].transform.position.y, movePoints[i].transform.position.z);
 				Gizmos.DrawSphere(pos, minDistance);
 				if (i < movePoints.Length - 1)
-					Gizmos.DrawLine(pos, new Vector3(movePoints[i + 1].transform.position.x + 3, movePoints[i + 1].transform.position.y, movePoints[i + 1].transform.position.z));
+					Gizmos.DrawLine(pos, new Vector3(movePoints[i + 1].transform.position.x, movePoints[i + 1].transform.position.y, movePoints[i + 1].transform.position.z));
 				else
-					Gizmos.DrawLine(pos, new Vector3(movePoints[0].transform.position.x + 3, movePoints[0].transform.position.y, movePoints[0].transform.position.z));
+					Gizmos.DrawLine(pos, new Vector3(movePoints[0].transform.position.x, movePoints[0].transform.position.y, movePoints[0].transform.position.z));
 			}
 		}
 	}
