@@ -1173,7 +1173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[3].vector3.y
-      value: 1
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[3].vector3.z
@@ -1205,7 +1205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[6].vector3.y
-      value: 1
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.data[6].vector3.z
