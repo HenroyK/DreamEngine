@@ -6,35 +6,22 @@ public class ScaleObject : MonoBehaviour
 {
     //Variables
     public GameObject scaledObject;
-    private Resolution targetRes;
-    private Resolution currentRes;
+    public Vector2 targetRes;
+    private Vector2 currentRes;
 
     // Start is called before the first frame update
     void Start()
     {
-        targetRes = Screen.currentResolution;
-        print(targetRes.height + "|" + targetRes.width);
-        Scale(targetRes);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        currentRes = Screen.currentResolution;
-        //Check for resolution change, update accordingly
-        if(targetRes.width != currentRes.width || targetRes.height != currentRes.height)
-        {
-            targetRes = currentRes;
-            Scale(targetRes);
-        }
+        currentRes = new Vector2 (Screen.currentResolution.width, Screen.currentResolution.height);
+        print(currentRes.x + "|" + currentRes.y);
+        Scale();
     }
 
     //Scale the object
-    void Scale(Resolution scale)
+    void Scale()
     {
-        float width = scale.width / 1200f;
-        float height = scale.height / 1000f;
-        print(height + "|" + width);
-        scaledObject.transform.localScale = new Vector3(width, height, scaledObject.transform.localScale.z);
+        Vector2 diff = currentRes - targetRes;
+        print(diff.x + "|" + diff.y);
+        scaledObject.transform.localScale += (scaledObject.transform.localScale * (((diff.x / targetRes.x)*100)/100));
     }
 }
