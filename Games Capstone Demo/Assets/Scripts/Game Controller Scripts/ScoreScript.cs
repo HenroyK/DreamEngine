@@ -7,7 +7,7 @@ public class ScoreScript : MonoBehaviour
 {
     //Score variable, does nothing right now.
     private int score = 0;
-    private int displayScore = 0;
+    private int displayScore = -1;
     private float scoreUpdateTimer;
     private int combo = 0;
     [SerializeField]
@@ -27,10 +27,10 @@ public class ScoreScript : MonoBehaviour
     private AudioClip scoreAudioClip;
     [SerializeField]
     private AudioSource scoreAudioSource;
-    private void Start()
-    {
-        scoreAudioSource.clip = scoreAudioClip;
-    }
+    //private void Start()
+    //{
+    //    scoreAudioSource.clip = scoreAudioClip;
+    //}
     private void Update()
     {
         comboTimer -= Time.deltaTime;
@@ -60,7 +60,7 @@ public class ScoreScript : MonoBehaviour
         //It is most important in Western music theory, where it represents the frequency ratio (musical interval) of a semitone
         //Here, it makes the pitch of the audioclip change by half a note per combo.
         scoreAudioSource.pitch = Mathf.Pow(1.0594631f, combo -5);
-        scoreAudioSource.Play();
+        scoreAudioSource.PlayOneShot(scoreAudioClip);
     }
     //public void AddScore(int pScore, int pMultiplier)
     //{
