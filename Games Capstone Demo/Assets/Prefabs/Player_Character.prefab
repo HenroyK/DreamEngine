@@ -168,11 +168,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerAvailable: 0001010000
   layerAxis:
-  - 12
-  - 17
-  - 22
-  - 27
-  - 32
+  - 0
+  - 10
+  - 20
+  - 30
+  - 40
   curDepth: 1
   player: {fileID: 8022007116041893449}
 --- !u!54 &8022007116041893814

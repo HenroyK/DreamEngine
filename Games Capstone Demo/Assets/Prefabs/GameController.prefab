@@ -2283,17 +2283,6 @@ MonoBehaviour:
     layerNo: 0
     layerState: 0
   - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: -85, y: -5, z: 13}
-    time: 0
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
     spawnObject: {fileID: 972125480459473594, guid: 6d3b6f54109714b4ca234b985bcec7c0, type: 3}
     vector3: {x: 50, y: 1, z: 22}
     time: 35
@@ -2316,31 +2305,9 @@ MonoBehaviour:
     layerNo: 0
     layerState: 0
   - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: 50, y: -5, z: 13}
-    time: 0
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
     spawnObject: {fileID: 3983534823119249688, guid: 5652b587123261d49bad483d9c149b7d, type: 3}
     vector3: {x: 50, y: 1, z: 22}
     time: 30
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: 50, y: -5, z: 13}
-    time: 0
     speed: 10
     audioClip: {fileID: 0}
     audioFunction: 0
