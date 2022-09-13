@@ -1359,6 +1359,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6775435487571302454, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: fadeDist
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7877436387452050694, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: m_IsActive
       value: 0
