@@ -125,19 +125,17 @@ public class MovementScript : MonoBehaviour
 			playerRigidbody.velocity = new Vector3(0, 0, 0);
 			isDashing = false;
 			playerRigidbody.useGravity = true;
-			
 		}
 
 		if (isDashing)  //when dashing.
 		{
 			//When dashing, move in a set direction
-			if (dashDirection > 0)
+			if (Input.GetAxis("Horizontal") != 0)
 			{
-				playerRigidbody.velocity = new Vector3(dashSpeed, 0);
-			}
-			else
-			{
-				playerRigidbody.velocity = new Vector3(-dashSpeed, 0);
+				if (Input.GetAxis("Horizontal") > 0)
+					playerRigidbody.velocity = new Vector3(dashSpeed, 0);
+				else
+					playerRigidbody.velocity = new Vector3(-dashSpeed, 0);
 			}
 		}
 		else //when not dashing. Avoids conflict with dash movement
