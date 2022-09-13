@@ -19,7 +19,9 @@ public class MenuScript : MonoBehaviour
     public GameObject btnHighlight;
 
     private int curScene = -1;
-	private int numberOfOptions = 2;
+
+    // button select varaibles
+    private int numberOfOptions = 2;
 	private int selectedOption;
 	private bool inMenu = true;
 
@@ -70,7 +72,8 @@ public class MenuScript : MonoBehaviour
 				SwapSelected(selectedOption);
 			}
 
-			if (Input.GetButton("Jump"))
+			if (Input.GetButton("Jump") ||
+                Input.GetButton("Enter"))
 			{
 
 				switch (selectedOption)
@@ -123,7 +126,7 @@ public class MenuScript : MonoBehaviour
 		inputTimer = 0;
 	}
 
-	//Button pressed
+	//Play Button pressed
 	public void OnPButtonPress()
 	{
 		curScene = 0;
@@ -134,7 +137,7 @@ public class MenuScript : MonoBehaviour
         btnHighlight.SetActive(false);
     }
 
-	//Button pressed
+	//Quit Button pressed
 	public void OnQButtonPress()
 	{
 		inMenu = false;
@@ -154,4 +157,18 @@ public class MenuScript : MonoBehaviour
 			yield return null;
 		}
 	}
+
+    // Mouse over Play button
+    public void MOPlayBtn()
+    {
+        selectedOption = 1;
+        SwapSelected(selectedOption);
+    }
+
+    // Mouse over Quit button
+    public void MOQuitBtn()
+    {
+        selectedOption = 2;
+        SwapSelected(selectedOption);
+    }
 }

@@ -15,6 +15,8 @@ public class GameOver : MonoBehaviour
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
     private bool playerDead = false;
+
+    // button select varaibles
     private int numberOfOptions = 2;
     private int selectedOption;
 
@@ -83,7 +85,8 @@ public class GameOver : MonoBehaviour
                 SwapSelected(selectedOption);
             }
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") ||
+                Input.GetButton("Enter"))
             {
                 switch (selectedOption)
                 {
@@ -101,18 +104,20 @@ public class GameOver : MonoBehaviour
     void SwapSelected(int option)
     {
         // reset selected highlight
-
-        Debug.Log("Picked: " + selectedOption);
-        switch (selectedOption)
+        if (btnHighlight != null)
         {
-            case 1:
-                btnHighlight.transform.position =
-                        retryBtn.transform.position;
-                break;
-            case 2:
-                btnHighlight.transform.position =
-                        mainMenuBtn.transform.position;
-                break;
+            Debug.Log("Picked: " + selectedOption);
+            switch (selectedOption)
+            {
+                case 1:
+                    btnHighlight.transform.position =
+                            retryBtn.transform.position;
+                    break;
+                case 2:
+                    btnHighlight.transform.position =
+                            mainMenuBtn.transform.position;
+                    break;
+            }
         }
         inputTimer = 0;
     }
@@ -149,5 +154,19 @@ public class GameOver : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Pause();
         btnHighlight.SetActive(true);
         Time.timeScale = 0; // pause game
+    }
+
+    // Mouse over Retry button
+    public void MORetryBtn()
+    {
+        selectedOption = 1;
+        SwapSelected(selectedOption);
+    }
+
+    // Mouse over Menu button
+    public void MOMenuBtn()
+    {
+        selectedOption = 2;
+        SwapSelected(selectedOption);
     }
 }

@@ -15,6 +15,7 @@ public class EndLevel : MonoBehaviour
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
 
+    // button select varaibles
     private int numberOfOptions = 2;
     private int selectedOption;
     private bool gameEnded = false;
@@ -84,7 +85,8 @@ public class EndLevel : MonoBehaviour
                 SwapSelected(selectedOption);
             }
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") ||
+                Input.GetButton("Enter"))
             {
                 switch (selectedOption)
                 {
@@ -150,5 +152,19 @@ public class EndLevel : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Pause();
         btnHighlight.SetActive(true);
         Time.timeScale = 0; // pause game
+    }
+
+    // Mouse over Retry button
+    public void MORetryBtn()
+    {
+        selectedOption = 1;
+        SwapSelected(selectedOption);
+    }
+
+    // Mouse over Menu button
+    public void MOMenuBtn()
+    {
+        selectedOption = 2;
+        SwapSelected(selectedOption);
     }
 }

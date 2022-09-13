@@ -16,6 +16,7 @@ public class Pause : MonoBehaviour
     private bool gamePaused;
     private bool canPause;
 
+    // button select varaibles
     private int numberOfOptions = 2;
     private int selectedOption;
 
@@ -86,7 +87,8 @@ public class Pause : MonoBehaviour
                 SwapSelected(selectedOption);
             }
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") || 
+                Input.GetButton("Enter"))
             {
 
                 switch (selectedOption)
@@ -191,6 +193,20 @@ public class Pause : MonoBehaviour
         btnHighlight.SetActive(false);
 
         Time.timeScale = 1; // unpause game
+    }
+
+    //Mouse over Resume button
+    public void MOResumeBtn()
+    {
+        selectedOption = 1;
+        SwapSelected(selectedOption);
+    }
+
+    //Mouse over Main Menu button
+    public void MOMenuBtn()
+    {
+        selectedOption = 2;
+        SwapSelected(selectedOption);
     }
 
     public void disablePause()
