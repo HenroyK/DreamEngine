@@ -13,7 +13,6 @@ public class ScaleObject : MonoBehaviour
     void Start()
     {
         currentRes = new Vector2 (Screen.currentResolution.width, Screen.currentResolution.height);
-        print(currentRes.x + "|" + currentRes.y);
         Scale();
     }
 
@@ -21,7 +20,6 @@ public class ScaleObject : MonoBehaviour
     void Scale()
     {
         Vector2 diff = currentRes - targetRes;
-        print(diff.x + "|" + diff.y);
         scaledObject.transform.localScale += (scaledObject.transform.localScale * ((diff.x / targetRes.x)));
     }
 }
