@@ -307,7 +307,6 @@ public class MovementScript : MonoBehaviour
 	//Change to the new layer
 	void ChangeLayer(int newDepth)
 	{
-		audioSource.volume = 1;
 		audioSource.PlayOneShot(changeClip);
 		depth.curDepth = newDepth;
 		lerpTimer = 0;
@@ -367,7 +366,6 @@ public class MovementScript : MonoBehaviour
 	void Jump()
 	{
 		jumpTimer = 0.2f;
-		audioSource.volume = 1;
 		audioSource.PlayOneShot(jumpClip);
 		animator.SetTrigger("Jump_Start");
 		playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpaccel);
@@ -403,7 +401,6 @@ public class MovementScript : MonoBehaviour
 
 	void RunAudio()
     {
-		audioSource.volume = 0.3f;
 		if (stepTimer < 0)
         {
 			stepTimer = stepDelay;

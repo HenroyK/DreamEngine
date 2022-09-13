@@ -22,6 +22,6 @@ public class ScaleObject : MonoBehaviour
     {
         Vector2 diff = currentRes - targetRes;
         print(diff.x + "|" + diff.y);
-        scaledObject.transform.localScale += (scaledObject.transform.localScale * (((diff.x / targetRes.x)*100)/100));
+        scaledObject.transform.localScale += (scaledObject.transform.localScale * ((diff.x / targetRes.x)));
     }
 }
