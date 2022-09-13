@@ -294,7 +294,7 @@ public class MovementScript : MonoBehaviour
 				if (hit.collider.gameObject.layer != 0 && hit.collider.gameObject.layer != 3 && hit.collider.tag != "DoesntBlockSwap" && hit.collider.tag != "Player")
 				{
 					valid = false;
-					Debug.Log("Hit: " + hit.collider.name);
+					//Debug.Log("Hit: " + hit.collider.name);
 				}
 			}
 			if(valid)

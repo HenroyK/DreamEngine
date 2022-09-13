@@ -7,6 +7,8 @@ public class ScoreScript : MonoBehaviour
 {
     //Score variable, does nothing right now.
     private int score = 0;
+    private int displayScore = 0;
+    private float scoreUpdateTimer;
     private int combo = 0;
     [SerializeField]
     private int comboCap = 10;
@@ -57,7 +59,7 @@ public class ScoreScript : MonoBehaviour
         //The twelfth root of two is an algebraic irrational number, approximately equal to 1.0594631.
         //It is most important in Western music theory, where it represents the frequency ratio (musical interval) of a semitone
         //Here, it makes the pitch of the audioclip change by half a note per combo.
-        scoreAudioSource.pitch = Mathf.Pow(1.0594631f, combo);
+        scoreAudioSource.pitch = Mathf.Pow(1.0594631f, combo -5);
         scoreAudioSource.Play();
     }
     //public void AddScore(int pScore, int pMultiplier)
@@ -76,11 +78,16 @@ public class ScoreScript : MonoBehaviour
         {
             comboBar.GetComponent<Image>().fillAmount = 0;
         }
-
+        scoreUpdateTimer -= Time.deltaTime;
         //update scoreboard
+        if (displayScore < score && scoreUpdateTimer < 0)
+        {
+            scoreUpdateTimer = 0.05f;
+            displayScore++;
+            scoreText.text = "Score: " + displayScore;
+        }
 
-        scoreText.text = "Score: " + score;
-        comboText.text = "Combo: " + combo;
+        comboText.text = "Combo: x" + combo;
     }
     //public void SetCheckpoint()
     //{
@@ -88,13 +95,21 @@ public class ScoreScript : MonoBehaviour
     //}
     public void DropCombo()
     {
-        if (combo > 1)
+        if (combo > 0)
         {
             combo -= 1;
             //tempComboTimer is used to allow the combo bar to be displayed properly.
-            //here the combo is hardcoded to have a timer of 1 between dropping.
-            comboTimer = 1;
-            tempComboTimer = 1;
+            //here the combo is hardcoded to have a timer of 0.5 between dropping once it's started ticking down.
+
+            comboTimer = 0.5f;
+            if (combo > 0)
+            {
+                tempComboTimer = 0.5f;
+            }
+            else
+            {
+                tempComboTimer = 0;
+            }
         }
     }
     public void ResetCombo()
@@ -102,5 +117,9 @@ public class ScoreScript : MonoBehaviour
         //score = checkpointScore;
         combo = 0;
         comboTimer = 0;
+    }
+    public int getScore()
+    {
+        return score;
     }
 }

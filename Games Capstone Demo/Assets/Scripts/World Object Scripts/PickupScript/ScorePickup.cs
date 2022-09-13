@@ -17,6 +17,7 @@ public class ScorePickup : CollectableScript
         GameObject scoreController = GameObject.FindGameObjectWithTag("GameController");
         scoreController.GetComponent<ScoreScript>().UpdateCombo(comboIncrement);
         scoreController.GetComponent<ScoreScript>().AddScore(score);
+
         GameObject effect = Instantiate(scoreEffect);
         effect.transform.position = this.gameObject.transform.position;
         effect = Instantiate(burstEffect);

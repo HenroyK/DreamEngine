@@ -105,7 +105,7 @@ public class GameContollerScript : MonoBehaviour
                     {
                         //Spawn Object
                         GameObject newObject = Instantiate(nextCommand.spawnObject, nextCommand.vector3, Quaternion.identity);
-                        Debug.Log("Spawning " + nextCommand.spawnObject + " at " + nextCommand.vector3 + ".");
+                        //Debug.Log("Spawning " + nextCommand.spawnObject + " at " + nextCommand.vector3 + ".");
                         //Set Object speed
                         newObject.BroadcastMessage("ChangeSpeed", globalSpeed);
 
@@ -133,7 +133,7 @@ public class GameContollerScript : MonoBehaviour
                         //a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                     }
                     
-                    Debug.Log("Global speed is now" + globalSpeed);
+                    //Debug.Log("Global speed is now" + globalSpeed);
                     break;
                 case Command.CommandType.Camera:
                     //make Camera look at worldpoint.
@@ -150,10 +150,7 @@ public class GameContollerScript : MonoBehaviour
                     //Probably make a list of audio sources, place them into a list and use that to access them.
                     break;
                 case Command.CommandType.SetLayer:
-                    //Checkpoint
                     player.GetComponent<DepthBehaviour>().SetLayerState(nextCommand.layerNo, nextCommand.layerState);
-                    //NotImplemented
-                    //Probably make a list of audio sources, place them into a list and use that to access them.
                     break;
                 case Command.CommandType.AwaitTrigger:
                     pauseTimer = true;
@@ -163,7 +160,7 @@ public class GameContollerScript : MonoBehaviour
                     break;
             }
             delay = nextCommand.time;
-            Debug.Log("Waiting " + delay + " seconds.");
+            //Debug.Log("Waiting " + delay + " seconds.");
         }
     }
 
