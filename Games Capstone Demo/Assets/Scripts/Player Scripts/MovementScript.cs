@@ -99,7 +99,7 @@ public class MovementScript : MonoBehaviour
 		stepTimer -= Time.deltaTime;
 		currentlyGrounded = IsGrounded();
 
-		if (!ziplined && Input.GetButtonDown("Dash") && (playerRigidbody.velocity.x != 0) && !isDashing && currentDashCooldown <= 0)
+		if (!ziplined && Input.GetButtonDown("Dash") && (Input.GetAxis("Horizontal") != 0) && !isDashing && currentDashCooldown <= 0)
 		{
 			animator.SetTrigger("Dash");
 			playerRigidbody.useGravity = false;
