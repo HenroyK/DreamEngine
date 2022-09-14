@@ -59,6 +59,7 @@ public class MovementScript : MonoBehaviour
 	public float lerpSpeed;
 	private bool currentlyGrounded = true;
 	private bool dashed = false;
+    private Vector3 swapVel;
 
 	// Start is called before the first frame update
 	void Start()
@@ -187,16 +188,15 @@ public class MovementScript : MonoBehaviour
 			//Change depth
 			if (!ziplined)
 			{
-                if (lerpTimer >=1)
+                if (lerpTimer >= 1)
                 {
-
-					if (Input.GetAxis("Swap") > 0)
-					{
-						ChangeDepth(depth.CheckLayer(-1));
+                    if (Input.GetAxis("Swap") > 0)
+                    {
+                        ChangeDepth(depth.CheckLayer(-1));
 					}
 					else if (Input.GetAxis("Swap") < 0)
-					{
-						ChangeDepth(depth.CheckLayer(1));
+                    {
+                        ChangeDepth(depth.CheckLayer(1));
 					}
 				}
 			}
@@ -210,10 +210,10 @@ public class MovementScript : MonoBehaviour
 				EndZipline();
 		}
 		//Lerping to the current layer
-		if (lerpTimer < 1)
+		if (lerpTimer <= 1)
 		{
 			lerpTimer += Time.deltaTime*lerpSpeed;
-			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]), lerpTimer);
+			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + (swapVel.x/100), transform.position.y+(swapVel.y/100), depth.layerAxis[depth.curDepth]), lerpTimer);
 		}
 
 		//Swap phys material (moving with objects)
@@ -229,11 +229,15 @@ public class MovementScript : MonoBehaviour
 
 	void LateUpdate()
 	{
-		//Animations / Audio
-		if (Input.GetAxis("Horizontal") < 0)
-			spriteRenderer.flipX = true;
-		else
-			spriteRenderer.flipX = false;
+        //Animations / Audio
+        if (Input.GetAxis("Horizontal") < 0 || (!currentlyGrounded && playerRigidbody.velocity.x < 0))
+        {
+            spriteRenderer.flipX = true;
+            if(Input.GetAxis("Horizontal") > 0)
+                spriteRenderer.flipX = false;
+        }
+        else
+            spriteRenderer.flipX = false;
 		//Idle
 		if (Input.GetAxis("Horizontal") == 0)
 		{
@@ -249,7 +253,7 @@ public class MovementScript : MonoBehaviour
 			if(Input.GetAxis("Horizontal") > 0)
 				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
 			else
-				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / (maxSpeed*2));
+				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / (maxSpeed*1.75f));
 		}
 
 		if (!currentlyGrounded && playerRigidbody.velocity.y < -1)
@@ -308,6 +312,7 @@ public class MovementScript : MonoBehaviour
 		audioSource.PlayOneShot(changeClip);
 		depth.curDepth = newDepth;
 		lerpTimer = 0;
+        swapVel = playerRigidbody.velocity;
 		//transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
 	}
 
