@@ -60,9 +60,11 @@ public class MovementScript : MonoBehaviour
 	private bool currentlyGrounded = true;
 	private bool dashed = false;
     private Vector3 swapVel;
+    private BlackFade fader;
+    private GameObject gameController;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
 	{
 		if (spotLight != null)
 		{
@@ -76,7 +78,9 @@ public class MovementScript : MonoBehaviour
                 spotlightSpawn, 
 				Quaternion.Euler(spotLightRotation));
         }
-	}
+        gameController = GameObject.FindWithTag("GameController");
+        fader = gameController.GetComponent<BlackFade>();
+    }
 	
 	void FixedUpdate()
 	{
@@ -229,6 +233,13 @@ public class MovementScript : MonoBehaviour
 
 	void LateUpdate()
 	{
+        //Fade check
+        Physics.Raycast(gameObject.transform.position, -gameObject.transform.right,
+            out RaycastHit hit, fader.fadeDist, LayerMask.GetMask("Boundary"), UnityEngine.QueryTriggerInteraction.Collide);
+        if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Boundary"))
+        {
+            fader.SetFade(gameObject,Vector3.Distance(gameObject.transform.position, hit.point));
+        }
         //Animations / Audio
         if (Input.GetAxis("Horizontal") < 0 || (!currentlyGrounded && playerRigidbody.velocity.x < 0))
         {
@@ -346,7 +357,7 @@ public class MovementScript : MonoBehaviour
 	public void ZiplineTo(Vector3 attachPos,Vector3 endPos, float relSpeed)
 	{
 		//Finish dashing before grabbing on
-		if (!ignoreZipline && !ziplined && !isDashing)
+		if (!ignoreZipline && !ziplined && !isDashing && !currentlyGrounded)
 		{
 			transform.position = new Vector3(attachPos.x, attachPos.y - 1, attachPos.z);
 			ziplined = true;
@@ -404,7 +415,7 @@ public class MovementScript : MonoBehaviour
 
 	void RunAudio()
     {
-		if (stepTimer < 0)
+		if (stepTimer < 0 && currentlyGrounded)
         {
 			stepTimer = stepDelay;
 			audioSource.PlayOneShot(runClip);
@@ -428,7 +439,7 @@ public class MovementScript : MonoBehaviour
 	}
     void OnCollisionEnter(Collision other)
     {
-    	if (ziplined && other.gameObject.tag == "Wall")
+    	if (ziplined && other.gameObject.layer == LayerMask.NameToLayer("Wall"))
     	{
 			EndZipline();
     	}

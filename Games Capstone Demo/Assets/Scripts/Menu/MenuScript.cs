@@ -14,6 +14,7 @@ public class MenuScript : MonoBehaviour
 	public GameObject cutsceneUI;
 	public AudioSource audioSource;
 	public AudioClip cutsceneMusic;
+    public AudioClip pickClip;
     public Button playBtn;
     public Button quitBtn;
     public GameObject btnHighlight;
@@ -123,6 +124,7 @@ public class MenuScript : MonoBehaviour
                     quitBtn.transform.position;
                 break;
 		}
+        audioSource.PlayOneShot(pickClip);
 		inputTimer = 0;
 	}
 

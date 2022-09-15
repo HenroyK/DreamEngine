@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.66621685, g: 0.8827709, b: 0.8857476, a: 1}
+  m_IndirectSpecularColor: {r: 0.66620904, g: 0.8827703, b: 0.8857487, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -434,6 +434,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaledObject: {fileID: 104766985}
   targetRes: {x: 1920, y: 1080}
+--- !u!82 &308665883 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -5148376597940169800, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+  m_PrefabInstance: {fileID: 642384426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &393305312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -908,6 +913,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6135416542360553615, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: pickClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dec111397c41e8d4a905d7fad84e313b, type: 3}
+    - target: {fileID: 6135416542360553615, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 308665883}
     - target: {fileID: 6775435487571302454, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: fadeDist
       value: 25
