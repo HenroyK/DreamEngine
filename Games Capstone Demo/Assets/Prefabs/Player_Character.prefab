@@ -150,11 +150,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultRespawn: {x: 0, y: 30}
+  hiddenZone: {x: 500, y: 500, z: 500}
   respawnPostions:
   - {x: 0, y: 30}
   - {x: 10, y: 30}
   - {x: 20, y: 30}
-  respawnDelay: 10
+  respawnDelay: 1
 --- !u!114 &5078044890271832808
 MonoBehaviour:
   m_ObjectHideFlags: 0

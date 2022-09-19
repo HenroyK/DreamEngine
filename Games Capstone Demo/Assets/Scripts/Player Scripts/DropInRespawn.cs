@@ -14,6 +14,10 @@ public class DropInRespawn : MonoBehaviour
 
     public float respawnDelay = 1.0f;
 
+    private float curRespawnDelay;
+    private bool respawning = false;
+    private Vector3 curRespawnPosition;
+
     private GameObject playerCharacter;
     private DepthBehaviour depthScript;
     private bool[] layerActive;
@@ -39,9 +43,25 @@ public class DropInRespawn : MonoBehaviour
             Debug.Log("Error. Couldn't find Player object.");
         }
 
+        curRespawnDelay = respawnDelay;
+
         layerActive = depthScript.layerAvailable;
         layerZAxis = depthScript.layerAxis;
         curLayer = depthScript.curDepth;
+    }
+
+    private void Update()
+    {
+        if (respawning)
+        {
+            curRespawnDelay -= Time.deltaTime;
+            if (curRespawnDelay <= 0)
+            {
+                DropPlayerInWorld(curRespawnPosition);
+                curRespawnDelay = respawnDelay;
+                respawning = false;
+            }
+        }
     }
 
     // Advanced respawn function
@@ -129,15 +149,18 @@ public class DropInRespawn : MonoBehaviour
 
     private void RepositionPlayer(Vector3 position)
     {
-        playerCharacter.transform.position = hiddenZone;  // reposition player
+        curRespawnPosition = position;
+        respawning = true;
+        playerCharacter.transform.position = curRespawnPosition;  // reposition player
         // reset player velocity
         playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
         playerCharacter.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         playerCharacter.GetComponent<Rigidbody>().useGravity = false;
         playerCharacter.GetComponent<MovementScript>().enabled = false;
+    }
 
-        StartCoroutine(WaitPeriod(respawnDelay)); // use update function for timer
-
+    private void DropPlayerInWorld(Vector3 position)
+    {
         playerCharacter.transform.position = position;  // reposition player
         // reset player velocity
         playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -145,11 +168,6 @@ public class DropInRespawn : MonoBehaviour
         playerCharacter.GetComponent<Rigidbody>().useGravity = true;
         playerCharacter.GetComponent<MovementScript>().enabled = true;
         //Debug.LogError("Respawned");
-    }
-
-    IEnumerator WaitPeriod(float time)
-    {
-        yield return new WaitForSeconds(time);
     }
 
     public void RespawnPlayer()
