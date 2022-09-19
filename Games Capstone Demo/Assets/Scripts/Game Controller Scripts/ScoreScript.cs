@@ -9,7 +9,7 @@ public class ScoreScript : MonoBehaviour
     private int score = 0;
     private int displayScore = -1;
     private float scoreUpdateTimer;
-    private int combo = 0;
+    private int combo = 1;
     [SerializeField]
     private int comboCap = 10;
     private float comboTimer = 0; 
@@ -95,14 +95,14 @@ public class ScoreScript : MonoBehaviour
     //}
     public void DropCombo()
     {
-        if (combo > 0)
+        if (combo > 1)
         {
             combo -= 1;
             //tempComboTimer is used to allow the combo bar to be displayed properly.
             //here the combo is hardcoded to have a timer of 0.5 between dropping once it's started ticking down.
 
             comboTimer = 0.5f;
-            if (combo > 0)
+            if (combo > 1)
             {
                 tempComboTimer = 0.5f;
             }
@@ -115,7 +115,7 @@ public class ScoreScript : MonoBehaviour
     public void ResetCombo()
     {
         //score = checkpointScore;
-        combo = 0;
+        combo = 1;
         comboTimer = 0;
     }
     public int getScore()
