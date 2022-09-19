@@ -97,6 +97,12 @@ public class MovementScript : MonoBehaviour
 				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
 			}
 		}
+		//Lerping to the current layer
+		if (lerpTimer <= 1)
+		{
+			lerpTimer += Time.fixedDeltaTime * lerpSpeed;
+			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + (swapVel.x / 100), transform.position.y + (swapVel.y / 100), depth.layerAxis[depth.curDepth]), lerpTimer);
+		}
 	}
 	// Update is called once per frame
 	void Update()
@@ -205,6 +211,7 @@ public class MovementScript : MonoBehaviour
 				}
 			}
 		}
+
 		if(ziplined)
 		{
 			playerRigidbody.velocity = Vector3.zero;
@@ -213,12 +220,7 @@ public class MovementScript : MonoBehaviour
 			if (Vector3.Distance(transform.position, ziplinePos) < 5)
 				EndZipline();
 		}
-		//Lerping to the current layer
-		if (lerpTimer <= 1)
-		{
-			lerpTimer += Time.deltaTime*lerpSpeed;
-			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + (swapVel.x/100), transform.position.y+(swapVel.y/100), depth.layerAxis[depth.curDepth]), lerpTimer);
-		}
+		
 
 		//Swap phys material (moving with objects)
 		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && currentlyGrounded)
