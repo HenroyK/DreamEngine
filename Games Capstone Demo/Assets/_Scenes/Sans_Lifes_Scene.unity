@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Temp_Floor
       objectReference: {fileID: 0}
+    - target: {fileID: 5108885940772329104, guid: 82e2065cce386d745a0a8f56fe92e501, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5108885940772329108, guid: 82e2065cce386d745a0a8f56fe92e501, type: 3}
       propertyPath: m_RootOrder
       value: 1

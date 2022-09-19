@@ -154,6 +154,7 @@ MonoBehaviour:
   - {x: 0, y: 30}
   - {x: 10, y: 30}
   - {x: 20, y: 30}
+  respawnDelay: 10
 --- !u!114 &5078044890271832808
 MonoBehaviour:
   m_ObjectHideFlags: 0

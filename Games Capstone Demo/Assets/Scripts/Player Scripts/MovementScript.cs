@@ -144,8 +144,17 @@ public class MovementScript : MonoBehaviour
 			//CoyoteTimer or grounded
 			if (currentlyGrounded || coyoteTimer > 0)
 			{
+				// TEST THIS ASAP
 				//Move left/right
-				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+				//playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+				if (Input.GetAxis("Horizontal") > 0.15f && Input.GetAxis("Horizontal") < 0.30f)
+                {
+					playerRigidbody.velocity = new Vector3(0.30f * maxSpeed, playerRigidbody.velocity.y);
+				}
+                else
+                {
+					playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+				}
 				//Debug.Log(Input.GetAxis("Horizontal"));
 				if (playerRigidbody.velocity.x < 0)
                 {

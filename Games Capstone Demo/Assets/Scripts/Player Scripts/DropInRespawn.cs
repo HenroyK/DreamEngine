@@ -8,8 +8,11 @@ using UnityEngine;
 public class DropInRespawn : MonoBehaviour
 {
     public Vector2 defaultRespawn = new Vector2(0, 30);
+    public Vector3 hiddenZone = new Vector3(500, 500, 500);
     
     public Vector2[] respawnPostions;
+
+    public float respawnDelay = 1.0f;
 
     private GameObject playerCharacter;
     private DepthBehaviour depthScript;
@@ -64,7 +67,8 @@ public class DropInRespawn : MonoBehaviour
 
             if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
             {
-                playerCharacter.transform.position = spawnPoint;
+                //playerCharacter.transform.position = spawnPoint;
+                RepositionPlayer(spawnPoint);
                 return;
             }
         }
@@ -88,7 +92,8 @@ public class DropInRespawn : MonoBehaviour
                         if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
                         {
                             depthScript.curDepth = nextLayer;
-                            playerCharacter.transform.position = spawnPoint;
+                            //playerCharacter.transform.position = spawnPoint;
+                            RepositionPlayer(spawnPoint);
                             return;
                         }
                     }
@@ -109,7 +114,8 @@ public class DropInRespawn : MonoBehaviour
                     if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
                     {
                         depthScript.curDepth = i;
-                        playerCharacter.transform.position = spawnPoint;
+                        //playerCharacter.transform.position = spawnPoint;
+                        RepositionPlayer(spawnPoint);
                         return;
                     }
                 }
@@ -117,8 +123,33 @@ public class DropInRespawn : MonoBehaviour
         }
 
         // 4. default respawn position
-        playerCharacter.transform.position = new Vector3(
-                defaultRespawn.x, defaultRespawn.y, layerZAxis[curLayer]);
+        RepositionPlayer(new Vector3(
+                defaultRespawn.x, defaultRespawn.y, layerZAxis[curLayer]));
+    }
+
+    private void RepositionPlayer(Vector3 position)
+    {
+        playerCharacter.transform.position = hiddenZone;  // reposition player
+        // reset player velocity
+        playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        playerCharacter.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        playerCharacter.GetComponent<Rigidbody>().useGravity = false;
+        playerCharacter.GetComponent<MovementScript>().enabled = false;
+
+        StartCoroutine(WaitPeriod(respawnDelay)); // use update function for timer
+
+        playerCharacter.transform.position = position;  // reposition player
+        // reset player velocity
+        playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        playerCharacter.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        playerCharacter.GetComponent<Rigidbody>().useGravity = true;
+        playerCharacter.GetComponent<MovementScript>().enabled = true;
+        //Debug.LogError("Respawned");
+    }
+
+    IEnumerator WaitPeriod(float time)
+    {
+        yield return new WaitForSeconds(time);
     }
 
     public void RespawnPlayer()
