@@ -48,7 +48,6 @@ public class MovementScript : MonoBehaviour
 	public Animator animator;
 	public SpriteRenderer spriteRenderer;
 	//
-	private bool moveBack = true;
 	private bool ziplined = false;
 	private bool ignoreZipline = false;
 	private Vector3 ziplinePos;
@@ -62,6 +61,7 @@ public class MovementScript : MonoBehaviour
     private Vector3 swapVel;
     private BlackFade fader;
     private GameObject gameController;
+    private float swapPen;
 
     // Start is called before the first frame update
     void Start()
@@ -97,7 +97,13 @@ public class MovementScript : MonoBehaviour
 				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
 			}
 		}
-	}
+        //Lerping to the current layer
+        if (lerpTimer <= 1)
+        {
+            lerpTimer += Time.deltaTime * lerpSpeed;
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + swapVel.x, transform.position.y + ((swapVel.y / 100)- swapPen), depth.layerAxis[depth.curDepth]), lerpTimer);
+        }
+    }
 	// Update is called once per frame
 	void Update()
 	{
@@ -213,12 +219,6 @@ public class MovementScript : MonoBehaviour
 			if (Vector3.Distance(transform.position, ziplinePos) < 5)
 				EndZipline();
 		}
-		//Lerping to the current layer
-		if (lerpTimer <= 1)
-		{
-			lerpTimer += Time.deltaTime*lerpSpeed;
-			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + (swapVel.x/100), transform.position.y+(swapVel.y/100), depth.layerAxis[depth.curDepth]), lerpTimer);
-		}
 
 		//Swap phys material (moving with objects)
 		if (jumpTimer <= 0 && !ziplined && Input.GetAxis("Horizontal") == 0 && currentlyGrounded)
@@ -309,7 +309,21 @@ public class MovementScript : MonoBehaviour
 					valid = false;
 					//Debug.Log("Hit: " + hit.collider.name);
 				}
-			}
+                if(hit.collider.tag == "ground" || hit.collider.gameObject.layer == LayerMask.NameToLayer("GroundFloor"))
+                {
+                    Vector3 dir;
+                    float dist;
+                    Rigidbody hitRB = hit.collider.GetComponent<Rigidbody>();
+                    bool overlapped = Physics.ComputePenetration(
+                playerCollider, new Vector3(transform.position.x,transform.position.y+swapVel.y,transform.position.z + (depth.layerAxis[depth.curDepth] - depth.layerAxis[newDepth])), transform.rotation,
+                hit.collider, hitRB.position, hitRB.rotation,
+                out dir, out dist);
+                    if(dist > 0)
+                    {
+                        swapPen = dist;
+                    }
+                }
+            }
 			if(valid)
 			{
 				ChangeLayer(newDepth);
@@ -323,7 +337,7 @@ public class MovementScript : MonoBehaviour
 		audioSource.PlayOneShot(changeClip);
 		depth.curDepth = newDepth;
 		lerpTimer = 0;
-        swapVel = playerRigidbody.velocity;
+        swapVel = playerRigidbody.velocity/100;
 		//transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
 	}
 
@@ -394,23 +408,8 @@ public class MovementScript : MonoBehaviour
 	private void OnDrawGizmos()
     {
 		Gizmos.color = Color.red;
-		// *********************************
-		// NUMBERS ARE TO BE CHANGED IF MODEL IS UPDATED.
-		Gizmos.DrawWireCube(playerCollider.bounds.center + new Vector3(0, -2.5f, 0), new Vector3(2,0.2f,2));
-
-		if(moveBack)
-        {
-			Gizmos.DrawRay(transform.position, Vector3.forward * 5);
-
-			//Draw a cube at the maximum distance
-			Gizmos.DrawWireCube(transform.position + Vector3.forward * 5, transform.localScale);
-		}
-        else
-        {
-			Gizmos.DrawRay(transform.position, Vector3.forward * -5);
-			//Draw a cube at the maximum distance
-			Gizmos.DrawWireCube(transform.position + Vector3.forward * -5, transform.localScale);
-		}
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y + (playerRigidbody.velocity.y/100), transform.position.z + (depth.layerAxis[depth.curDepth] - depth.layerAxis[depth.curDepth-1])));
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y + (playerRigidbody.velocity.y/100), transform.position.z + (depth.layerAxis[depth.curDepth] - depth.layerAxis[depth.curDepth+1])));
 	}
 
 	void RunAudio()

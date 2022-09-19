@@ -334,9 +334,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3856960298370762850}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Models
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -515,9 +515,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5525380005753893801, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5380586722048926542, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5024844302715926143, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
       propertyPath: m_Name
       value: Road_model_P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_TagString
+      value: ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302114712107474353, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
@@ -589,9 +613,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5525380005753893801, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5380586722048926542, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5024844302715926143, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
       propertyPath: m_Name
       value: Road_model_P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_TagString
+      value: ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302114712107474353, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d25738818d82ad043ab8d6c3fab5cd75, type: 3}
