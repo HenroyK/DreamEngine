@@ -14,6 +14,7 @@ public class MenuScript : MonoBehaviour
 	public GameObject cutsceneUI;
 	public AudioSource audioSource;
 	public AudioClip cutsceneMusic;
+    public AudioClip pickClip;
     public Button playBtn;
     public Button quitBtn;
     public GameObject btnHighlight;
@@ -100,7 +101,7 @@ public class MenuScript : MonoBehaviour
 			else
 				cutsceneUI.GetComponent<RawImage>().texture = introImages[curScene];
 		}
-		if (Input.GetButtonDown("Skip"))
+		if (Input.GetButtonDown("Dash"))
 		{
 			curScene = -1;
 			StartCoroutine(LoadAsyncScene());
@@ -123,6 +124,7 @@ public class MenuScript : MonoBehaviour
                     quitBtn.transform.position;
                 break;
 		}
+        audioSource.PlayOneShot(pickClip);
 		inputTimer = 0;
 	}
 

@@ -2283,17 +2283,6 @@ MonoBehaviour:
     layerNo: 0
     layerState: 0
   - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: -85, y: -5, z: 13}
-    time: 0
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
     spawnObject: {fileID: 972125480459473594, guid: 6d3b6f54109714b4ca234b985bcec7c0, type: 3}
     vector3: {x: 50, y: 1, z: 22}
     time: 35
@@ -2316,31 +2305,9 @@ MonoBehaviour:
     layerNo: 0
     layerState: 0
   - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: 50, y: -5, z: 13}
-    time: 0
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
     spawnObject: {fileID: 3983534823119249688, guid: 5652b587123261d49bad483d9c149b7d, type: 3}
     vector3: {x: 50, y: 1, z: 22}
     time: 30
-    speed: 10
-    audioClip: {fileID: 0}
-    audioFunction: 0
-    audioDuration: 0
-    audioVolume: 0
-    layerNo: 0
-    layerState: 0
-  - commandType: 1
-    spawnObject: {fileID: 5960614955786097384, guid: 657bf037dcbe04fc882dda855b8b85cb, type: 3}
-    vector3: {x: 50, y: -5, z: 13}
-    time: 0
     speed: 10
     audioClip: {fileID: 0}
     audioFunction: 0
@@ -2393,6 +2360,8 @@ MonoBehaviour:
   retryBtn: {fileID: 6135416543556955063}
   mainMenuBtn: {fileID: 4193835902702781249}
   btnHighlight: {fileID: 7877436387452050694}
+  audioSource: {fileID: 0}
+  pickClip: {fileID: 0}
   waitTime: 0.3
 --- !u!114 &3959074571831529636
 MonoBehaviour:
@@ -2572,6 +2541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986495c2002cd49428e99d5226f43c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forwardClamp: 17
+  backwardClamp: -20
+  upClamp: -5
+  downClamp: 5
 --- !u!114 &6775435487571302454
 MonoBehaviour:
   m_ObjectHideFlags: 0
