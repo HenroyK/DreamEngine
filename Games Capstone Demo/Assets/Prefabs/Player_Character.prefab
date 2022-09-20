@@ -115,12 +115,12 @@ MonoBehaviour:
   maxSpeed: 15
   accel: 1
   airStrafeSpeed: 5
-  jumpaccel: 35
+  jumpaccel: 30
   jumpTimer: 0
   globalSpeed: 0
   coyoteTimeLimit: 0.1
   coyoteTimer: 0
-  jumpBoost: 1.5
+  jumpBoost: 2
   audioSource: {fileID: -7998740433712840455}
   runClip: {fileID: 8300000, guid: 827993acc4956c54398d676a9030c1e8, type: 3}
   jumpClip: {fileID: 8300000, guid: 471219dc6e5bfbd4d90c826e39e3b18a, type: 3}
@@ -175,7 +175,7 @@ MonoBehaviour:
   - 20
   - 30
   - 40
-  curDepth: 1
+  curDepth: 2
   player: {fileID: 8022007116041893449}
 --- !u!54 &8022007116041893814
 Rigidbody:
