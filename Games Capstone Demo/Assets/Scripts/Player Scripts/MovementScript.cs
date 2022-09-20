@@ -15,6 +15,7 @@ public class MovementScript : MonoBehaviour
 	public float spotLightHeight = 12;
 
 	public float maxSpeed;
+	public float minSpeed = 5;
     public float accel;
 	public float airStrafeSpeed;
 	public float jumpaccel;
@@ -157,17 +158,27 @@ public class MovementScript : MonoBehaviour
 			{
 				// TEST THIS ASAP
 				//Move left/right
-				//playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
-				if (Input.GetAxis("Horizontal") > 0.15f && Input.GetAxis("Horizontal") < 0.30f)
+
+                if (Input.GetAxis("Horizontal") > 0)
                 {
-					playerRigidbody.velocity = new Vector3(0.30f * maxSpeed, playerRigidbody.velocity.y);
-				}
+                    playerRigidbody.velocity = new Vector3(
+                        Mathf.Clamp(Input.GetAxis("Horizontal") * maxSpeed, minSpeed, maxSpeed), playerRigidbody.velocity.y);
+                }
+                else if (Input.GetAxis("Horizontal") < 0)
+                {
+                    float max = maxSpeed + globalSpeed;
+                    playerRigidbody.velocity = new Vector3(
+                        Mathf.Clamp(Input.GetAxis("Horizontal") * maxSpeed, -max, -minSpeed), playerRigidbody.velocity.y);
+                }
                 else
                 {
+					// Default move velocity
 					playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
 				}
-				//Debug.Log(Input.GetAxis("Horizontal"));
-				if (playerRigidbody.velocity.x < 0)
+
+
+                //Debug.Log(Input.GetAxis("Horizontal"));
+                if (playerRigidbody.velocity.x < 0)
                 {
 					playerRigidbody.velocity += new Vector3(-globalSpeed, 0);
 				}
