@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3076955090340270796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3_Story_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,6 +86,10 @@ PrefabInstance:
     - target: {fileID: 3824439020974339281, guid: 47ecc170a649c8b4bace4f8185562197, type: 3}
       propertyPath: m_Name
       value: building.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824439020974339281, guid: 47ecc170a649c8b4bace4f8185562197, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47ecc170a649c8b4bace4f8185562197, type: 3}

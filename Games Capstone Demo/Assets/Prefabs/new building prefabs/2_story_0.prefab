@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1628156969591327027}
   - component: {fileID: 2206682878269976896}
   - component: {fileID: 2450070147712903438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2_story_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &2206682878269976896
 BoxCollider:
