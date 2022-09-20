@@ -101,7 +101,7 @@ public class MenuScript : MonoBehaviour
 			else
 				cutsceneUI.GetComponent<RawImage>().texture = introImages[curScene];
 		}
-		if (Input.GetButtonDown("Skip"))
+		if (Input.GetButtonDown("Dash"))
 		{
 			curScene = -1;
 			StartCoroutine(LoadAsyncScene());
