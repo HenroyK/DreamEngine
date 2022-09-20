@@ -48,7 +48,6 @@ public class MovementScript : MonoBehaviour
 	public Animator animator;
 	public SpriteRenderer spriteRenderer;
 	//
-	private bool moveBack = true;
 	private bool ziplined = false;
 	private bool ignoreZipline = false;
 	private Vector3 ziplinePos;
@@ -59,9 +58,13 @@ public class MovementScript : MonoBehaviour
 	public float lerpSpeed;
 	private bool currentlyGrounded = true;
 	private bool dashed = false;
+    private Vector3 swapVel;
+    private BlackFade fader;
+    private GameObject gameController;
+    private float swapPen;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
 	{
 		if (spotLight != null)
 		{
@@ -75,7 +78,9 @@ public class MovementScript : MonoBehaviour
                 spotlightSpawn, 
 				Quaternion.Euler(spotLightRotation));
         }
-	}
+        gameController = GameObject.FindWithTag("GameController");
+        fader = gameController.GetComponent<BlackFade>();
+    }
 	
 	void FixedUpdate()
 	{
@@ -92,7 +97,13 @@ public class MovementScript : MonoBehaviour
 				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + jumpBoost);
 			}
 		}
-	}
+        //Lerping to the current layer
+        if (lerpTimer <= 1)
+        {
+            lerpTimer += Time.deltaTime * lerpSpeed;
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + swapVel.x, transform.position.y + ((swapVel.y / 100)- swapPen), depth.layerAxis[depth.curDepth]), lerpTimer);
+        }
+    }
 	// Update is called once per frame
 	void Update()
 	{
@@ -144,8 +155,17 @@ public class MovementScript : MonoBehaviour
 			//CoyoteTimer or grounded
 			if (currentlyGrounded || coyoteTimer > 0)
 			{
+				// TEST THIS ASAP
 				//Move left/right
-				playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+				//playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+				if (Input.GetAxis("Horizontal") > 0.15f && Input.GetAxis("Horizontal") < 0.30f)
+                {
+					playerRigidbody.velocity = new Vector3(0.30f * maxSpeed, playerRigidbody.velocity.y);
+				}
+                else
+                {
+					playerRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, playerRigidbody.velocity.y);
+				}
 				//Debug.Log(Input.GetAxis("Horizontal"));
 				if (playerRigidbody.velocity.x < 0)
                 {
@@ -187,16 +207,15 @@ public class MovementScript : MonoBehaviour
 			//Change depth
 			if (!ziplined)
 			{
-                if (lerpTimer >=1)
+                if (lerpTimer >= 1)
                 {
-
-					if (Input.GetAxis("Swap") > 0)
-					{
-						ChangeDepth(depth.CheckLayer(-1));
+                    if (Input.GetAxis("Swap") > 0)
+                    {
+                        ChangeDepth(depth.CheckLayer(-1));
 					}
 					else if (Input.GetAxis("Swap") < 0)
-					{
-						ChangeDepth(depth.CheckLayer(1));
+                    {
+                        ChangeDepth(depth.CheckLayer(1));
 					}
 				}
 			}
@@ -208,12 +227,6 @@ public class MovementScript : MonoBehaviour
 			transform.position = Vector3.MoveTowards(transform.position, ziplinePos, (ziplineSpeed + ziplineRelSpeed) * Time.deltaTime);
 			if (Vector3.Distance(transform.position, ziplinePos) < 5)
 				EndZipline();
-		}
-		//Lerping to the current layer
-		if (lerpTimer < 1)
-		{
-			lerpTimer += Time.deltaTime*lerpSpeed;
-			transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]), lerpTimer);
 		}
 
 		//Swap phys material (moving with objects)
@@ -229,11 +242,22 @@ public class MovementScript : MonoBehaviour
 
 	void LateUpdate()
 	{
-		//Animations / Audio
-		if (Input.GetAxis("Horizontal") < 0)
-			spriteRenderer.flipX = true;
-		else
-			spriteRenderer.flipX = false;
+        //Fade check
+        Physics.Raycast(gameObject.transform.position, -gameObject.transform.right,
+            out RaycastHit hit, fader.fadeDist, LayerMask.GetMask("Boundary"), UnityEngine.QueryTriggerInteraction.Collide);
+        if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Boundary"))
+        {
+            fader.SetFade(gameObject,Vector3.Distance(gameObject.transform.position, hit.point));
+        }
+        //Animations / Audio
+        if (Input.GetAxis("Horizontal") < 0 || (!currentlyGrounded && playerRigidbody.velocity.x < 0))
+        {
+            spriteRenderer.flipX = true;
+            if(Input.GetAxis("Horizontal") > 0)
+                spriteRenderer.flipX = false;
+        }
+        else
+            spriteRenderer.flipX = false;
 		//Idle
 		if (Input.GetAxis("Horizontal") == 0)
 		{
@@ -246,10 +270,14 @@ public class MovementScript : MonoBehaviour
 			RunAudio();
 			animator.SetBool("Moving", true);
 			animator.SetTrigger("Run");
-			if(Input.GetAxis("Horizontal") > 0)
+			if (Input.GetAxis("Horizontal") > 0)
 				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
+			else if (Input.GetAxis("Horizontal") < 0)
+				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / (maxSpeed * 1.75f));
 			else
-				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / (maxSpeed*2));
+				animator.SetFloat("Horizontal Speed", 1);
+			if (!currentlyGrounded)
+				animator.SetFloat("Horizontal Speed", 1);
 		}
 
 		if (!currentlyGrounded && playerRigidbody.velocity.y < -1)
@@ -294,7 +322,21 @@ public class MovementScript : MonoBehaviour
 					valid = false;
 					//Debug.Log("Hit: " + hit.collider.name);
 				}
-			}
+                if(hit.collider.tag == "ground" || hit.collider.gameObject.layer == LayerMask.NameToLayer("GroundFloor"))
+                {
+                    Vector3 dir;
+                    float dist;
+                    Rigidbody hitRB = hit.collider.GetComponent<Rigidbody>();
+                    bool overlapped = Physics.ComputePenetration(
+                playerCollider, new Vector3(transform.position.x,transform.position.y+swapVel.y,transform.position.z + (depth.layerAxis[depth.curDepth] - depth.layerAxis[newDepth])), transform.rotation,
+                hit.collider, hitRB.position, hitRB.rotation,
+                out dir, out dist);
+                    if(dist > 0)
+                    {
+                        swapPen = dist;
+                    }
+                }
+            }
 			if(valid)
 			{
 				ChangeLayer(newDepth);
@@ -308,6 +350,7 @@ public class MovementScript : MonoBehaviour
 		audioSource.PlayOneShot(changeClip);
 		depth.curDepth = newDepth;
 		lerpTimer = 0;
+        swapVel = playerRigidbody.velocity/100;
 		//transform.position = new Vector3(transform.position.x, transform.position.y, depth.layerAxis[depth.curDepth]);
 	}
 
@@ -341,7 +384,7 @@ public class MovementScript : MonoBehaviour
 	public void ZiplineTo(Vector3 attachPos,Vector3 endPos, float relSpeed)
 	{
 		//Finish dashing before grabbing on
-		if (!ignoreZipline && !ziplined && !isDashing)
+		if (!ignoreZipline && !ziplined && !isDashing && !currentlyGrounded)
 		{
 			transform.position = new Vector3(attachPos.x, attachPos.y - 1, attachPos.z);
 			ziplined = true;
@@ -378,28 +421,13 @@ public class MovementScript : MonoBehaviour
 	private void OnDrawGizmos()
     {
 		Gizmos.color = Color.red;
-		// *********************************
-		// NUMBERS ARE TO BE CHANGED IF MODEL IS UPDATED.
-		Gizmos.DrawWireCube(playerCollider.bounds.center + new Vector3(0, -2.5f, 0), new Vector3(2,0.2f,2));
-
-		if(moveBack)
-        {
-			Gizmos.DrawRay(transform.position, Vector3.forward * 5);
-
-			//Draw a cube at the maximum distance
-			Gizmos.DrawWireCube(transform.position + Vector3.forward * 5, transform.localScale);
-		}
-        else
-        {
-			Gizmos.DrawRay(transform.position, Vector3.forward * -5);
-			//Draw a cube at the maximum distance
-			Gizmos.DrawWireCube(transform.position + Vector3.forward * -5, transform.localScale);
-		}
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y + (playerRigidbody.velocity.y/100), transform.position.z + (depth.layerAxis[depth.curDepth] - depth.layerAxis[depth.curDepth-1])));
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y + (playerRigidbody.velocity.y/100), transform.position.z + (depth.layerAxis[depth.curDepth] - depth.layerAxis[depth.curDepth+1])));
 	}
 
 	void RunAudio()
     {
-		if (stepTimer < 0)
+		if (stepTimer < 0 && currentlyGrounded)
         {
 			stepTimer = stepDelay;
 			audioSource.PlayOneShot(runClip);
@@ -423,7 +451,7 @@ public class MovementScript : MonoBehaviour
 	}
     void OnCollisionEnter(Collision other)
     {
-    	if (ziplined && other.gameObject.tag == "Wall")
+    	if (ziplined && other.gameObject.layer == LayerMask.NameToLayer("Wall"))
     	{
 			EndZipline();
     	}

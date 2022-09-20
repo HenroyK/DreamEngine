@@ -11,6 +11,8 @@ public class GameOver : MonoBehaviour
     public Button retryBtn;
     public Button mainMenuBtn;
     public GameObject btnHighlight;
+    public AudioSource audioSource;
+    public AudioClip pickClip;
 
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
@@ -29,6 +31,7 @@ public class GameOver : MonoBehaviour
     {
         GameObject gameController = GameObject.FindWithTag("GameController");
 
+        audioSource.ignoreListenerPause = true;
         if (gameController != null)
         {
             pauseScript = gameController.GetComponent<Pause>();
@@ -119,6 +122,7 @@ public class GameOver : MonoBehaviour
                     break;
             }
         }
+        audioSource.PlayOneShot(pickClip); //Cant play while timescale is 0 :c
         inputTimer = 0;
     }
 
