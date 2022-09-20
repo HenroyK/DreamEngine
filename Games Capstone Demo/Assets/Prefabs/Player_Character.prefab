@@ -150,10 +150,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultRespawn: {x: 0, y: 30}
+  hiddenZone: {x: 500, y: 500, z: 500}
   respawnPostions:
   - {x: 0, y: 30}
   - {x: 10, y: 30}
   - {x: 20, y: 30}
+  respawnDelay: 1
 --- !u!114 &5078044890271832808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,11 +170,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerAvailable: 0001010000
   layerAxis:
-  - 12
-  - 17
-  - 22
-  - 27
-  - 32
+  - 0
+  - 10
+  - 20
+  - 30
+  - 40
   curDepth: 1
   player: {fileID: 8022007116041893449}
 --- !u!54 &8022007116041893814

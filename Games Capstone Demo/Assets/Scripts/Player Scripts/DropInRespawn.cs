@@ -8,8 +8,15 @@ using UnityEngine;
 public class DropInRespawn : MonoBehaviour
 {
     public Vector2 defaultRespawn = new Vector2(0, 30);
+    public Vector3 hiddenZone = new Vector3(500, 500, 500);
     
     public Vector2[] respawnPostions;
+
+    public float respawnDelay = 1.0f;
+
+    private float curRespawnDelay;
+    private bool respawning = false;
+    private Vector3 curRespawnPosition;
 
     private GameObject playerCharacter;
     private DepthBehaviour depthScript;
@@ -36,9 +43,25 @@ public class DropInRespawn : MonoBehaviour
             Debug.Log("Error. Couldn't find Player object.");
         }
 
+        curRespawnDelay = respawnDelay;
+
         layerActive = depthScript.layerAvailable;
         layerZAxis = depthScript.layerAxis;
         curLayer = depthScript.curDepth;
+    }
+
+    private void Update()
+    {
+        if (respawning)
+        {
+            curRespawnDelay -= Time.deltaTime;
+            if (curRespawnDelay <= 0)
+            {
+                DropPlayerInWorld(curRespawnPosition);
+                curRespawnDelay = respawnDelay;
+                respawning = false;
+            }
+        }
     }
 
     // Advanced respawn function
@@ -64,7 +87,8 @@ public class DropInRespawn : MonoBehaviour
 
             if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
             {
-                playerCharacter.transform.position = spawnPoint;
+                //playerCharacter.transform.position = spawnPoint;
+                RepositionPlayer(spawnPoint);
                 return;
             }
         }
@@ -88,7 +112,8 @@ public class DropInRespawn : MonoBehaviour
                         if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
                         {
                             depthScript.curDepth = nextLayer;
-                            playerCharacter.transform.position = spawnPoint;
+                            //playerCharacter.transform.position = spawnPoint;
+                            RepositionPlayer(spawnPoint);
                             return;
                         }
                     }
@@ -109,7 +134,8 @@ public class DropInRespawn : MonoBehaviour
                     if (!Physics.CheckBox(spawnPoint, transform.localScale, weirdQuat, mask))
                     {
                         depthScript.curDepth = i;
-                        playerCharacter.transform.position = spawnPoint;
+                        //playerCharacter.transform.position = spawnPoint;
+                        RepositionPlayer(spawnPoint);
                         return;
                     }
                 }
@@ -117,8 +143,31 @@ public class DropInRespawn : MonoBehaviour
         }
 
         // 4. default respawn position
-        playerCharacter.transform.position = new Vector3(
-                defaultRespawn.x, defaultRespawn.y, layerZAxis[curLayer]);
+        RepositionPlayer(new Vector3(
+                defaultRespawn.x, defaultRespawn.y, layerZAxis[curLayer]));
+    }
+
+    private void RepositionPlayer(Vector3 position)
+    {
+        curRespawnPosition = position;
+        respawning = true;
+        playerCharacter.transform.position = curRespawnPosition;  // reposition player
+        // reset player velocity
+        playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        playerCharacter.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        playerCharacter.GetComponent<Rigidbody>().useGravity = false;
+        playerCharacter.GetComponent<MovementScript>().enabled = false;
+    }
+
+    private void DropPlayerInWorld(Vector3 position)
+    {
+        playerCharacter.transform.position = position;  // reposition player
+        // reset player velocity
+        playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        playerCharacter.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        playerCharacter.GetComponent<Rigidbody>().useGravity = true;
+        playerCharacter.GetComponent<MovementScript>().enabled = true;
+        //Debug.LogError("Respawned");
     }
 
     public void RespawnPlayer()
