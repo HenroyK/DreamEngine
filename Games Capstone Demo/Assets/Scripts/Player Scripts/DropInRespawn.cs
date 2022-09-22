@@ -8,7 +8,6 @@ using UnityEngine;
 public class DropInRespawn : MonoBehaviour
 {
     public Vector2 defaultRespawn = new Vector2(0, 30);
-    public Vector3 hiddenZone = new Vector3(500, 500, 500);
     
     public Vector2[] respawnPostions;
 

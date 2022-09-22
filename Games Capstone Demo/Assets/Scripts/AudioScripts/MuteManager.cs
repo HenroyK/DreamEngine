@@ -9,14 +9,26 @@ public class MuteManager : MonoBehaviour
     void Start()
     {
         isMuted = PlayerPrefs.GetInt("MUTED") == 1;
-        AudioListener.pause = isMuted;
+        //AudioListener.pause = isMuted;
+        if (isMuted)
+        {
+            AudioListener.volume = 0;
+        }
     }
 
     public void MutePressed()
     {
         isMuted = !isMuted;
-        AudioListener.pause = isMuted;
+        //AudioListener.pause = isMuted;
         PlayerPrefs.SetInt("MUTED", isMuted ? 1 : 0);
+        if (isMuted)
+        {
+            AudioListener.volume = 0;
+        }
+        else
+        {
+            AudioListener.volume = 1;
+        }
     }
 
     void Update()

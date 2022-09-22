@@ -110,9 +110,11 @@ MonoBehaviour:
   roughMat: {fileID: 13400000, guid: f074a990f229a1b4181fd9ae58e3c947, type: 2}
   cooldownBar: {fileID: 5836240254894637982}
   spotLight: {fileID: 924176796843420716, guid: 8a50016834e185b428e69e0d8caa011f, type: 3}
+  spotLightToggle: 0
   spotLightRotation: {x: 90, y: 0, z: 0}
   spotLightHeight: 8
   maxSpeed: 15
+  minSpeed: 5
   accel: 1
   airStrafeSpeed: 5
   jumpaccel: 30
@@ -149,12 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe7321046214221449897544031aa0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultRespawn: {x: 0, y: 30}
-  hiddenZone: {x: 500, y: 500, z: 500}
+  defaultRespawn: {x: 0, y: 36}
   respawnPostions:
-  - {x: 0, y: 30}
-  - {x: 10, y: 30}
-  - {x: 20, y: 30}
+  - {x: 0, y: 36}
+  - {x: 10, y: 36}
+  - {x: 20, y: 36}
   respawnDelay: 1
 --- !u!114 &5078044890271832808
 MonoBehaviour:

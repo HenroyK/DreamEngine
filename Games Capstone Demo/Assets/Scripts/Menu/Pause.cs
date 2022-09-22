@@ -23,9 +23,6 @@ public class Pause : MonoBehaviour
     private float inputTimer = 0;
     [SerializeField]
     private float waitTime = 0.2f;
-    private float initialWaitTime = 0.2f;
-    private float initialInputTimer = 0;
-    private bool newlyOpened = false;
 
     // Game starts unpaused (running)
     // Set up the button variables for use
