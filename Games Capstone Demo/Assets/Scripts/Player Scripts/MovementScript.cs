@@ -11,6 +11,7 @@ public class MovementScript : MonoBehaviour
 	public PhysicMaterial roughMat;
 	public GameObject cooldownBar;
 	public GameObject spotLight;
+	public bool spotLightToggle = false;
 	public Vector3 spotLightRotation;
 	public float spotLightHeight = 12;
 
@@ -67,7 +68,7 @@ public class MovementScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-		if (spotLight != null)
+		if (spotLight != null && spotLightToggle == true)
 		{
 			Vector3 spotlightSpawn = new Vector3(
 				this.transform.position.x, 

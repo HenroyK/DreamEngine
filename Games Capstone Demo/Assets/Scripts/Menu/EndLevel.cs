@@ -61,46 +61,49 @@ public class EndLevel : MonoBehaviour
 
     void Update()
     {
-        inputTimer += Time.unscaledDeltaTime;
-
-        if (gameEnded && inputTimer >= waitTime)
+        if (gameEnded)
         {
-            // select options code
-            if (Input.GetAxisRaw("Swap") > 0)
+            inputTimer += Time.unscaledDeltaTime;
+
+            if (inputTimer >= waitTime)
             {
-                selectedOption += 1;
-                if (selectedOption > numberOfOptions)
+                // select options code
+                if (Input.GetAxisRaw("Swap") > 0)
                 {
-                    selectedOption = 1;
+                    selectedOption += 1;
+                    if (selectedOption > numberOfOptions)
+                    {
+                        selectedOption = 1;
+                    }
+
+                    // reset selected highlight
+                    SwapSelected(selectedOption);
                 }
 
-                // reset selected highlight
-                SwapSelected(selectedOption);
-            }
-
-            if (Input.GetAxisRaw("Swap") < 0)
-            {
-                selectedOption -= 1;
-                if (selectedOption < 1)
+                if (Input.GetAxisRaw("Swap") < 0)
                 {
-                    selectedOption = numberOfOptions;
+                    selectedOption -= 1;
+                    if (selectedOption < 1)
+                    {
+                        selectedOption = numberOfOptions;
+                    }
+
+                    // reset selected highlight
+                    SwapSelected(selectedOption);
                 }
 
-                // reset selected highlight
-                SwapSelected(selectedOption);
-            }
-
-            if (Input.GetButton("Jump") ||
-                Input.GetButton("Enter"))
-            {
-                switch (selectedOption)
+                if (Input.GetButton("Jump") ||
+                    Input.GetButton("Enter"))
                 {
-                    case 1:
-                        ReloadOnClick();
-                        break;
-                    case 2:
-                        MainMenuOnClick();
-                        break;
+                    switch (selectedOption)
+                    {
+                        case 1:
+                            ReloadOnClick();
+                            break;
+                        case 2:
+                            MainMenuOnClick();
+                            break;
+                    }
                 }
             }
         }
@@ -109,7 +112,7 @@ public class EndLevel : MonoBehaviour
     void SwapSelected(int option)
     {
         // reset selected highlight
-
+        inputTimer = 0;
         Debug.Log("Picked: " + selectedOption);
         if (btnHighlight != null)
         {
@@ -125,7 +128,6 @@ public class EndLevel : MonoBehaviour
                     break;
             }
         }
-        inputTimer = 0;
     }
 
     // Reload on button press

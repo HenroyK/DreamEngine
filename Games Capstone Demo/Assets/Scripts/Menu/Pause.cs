@@ -22,7 +22,10 @@ public class Pause : MonoBehaviour
 
     private float inputTimer = 0;
     [SerializeField]
-    private float waitTime = 0.3f;
+    private float waitTime = 0.2f;
+    private float initialWaitTime = 0.2f;
+    private float initialInputTimer = 0;
+    private bool newlyOpened = false;
 
     // Game starts unpaused (running)
     // Set up the button variables for use
@@ -58,47 +61,50 @@ public class Pause : MonoBehaviour
     // Game is paused and unpaused with a toggle control (key)
     void Update()
     {
-        inputTimer += Time.unscaledDeltaTime;
-
-        if (gamePaused && inputTimer >= waitTime)
+        if (gamePaused)
         {
-            // select options code
-            if (Input.GetAxisRaw("Swap") > 0)
+            inputTimer += Time.unscaledDeltaTime;
+
+            if (inputTimer >= waitTime)
             {
-                selectedOption += 1;
-                if (selectedOption > numberOfOptions)
+                // select options code
+                if (Input.GetAxisRaw("Swap") > 0)
                 {
-                    selectedOption = 1;
+                    selectedOption += 1;
+                    if (selectedOption > numberOfOptions)
+                    {
+                        selectedOption = 1;
+                    }
+
+                    // reset selected highlight
+                    SwapSelected(selectedOption);
                 }
 
-                // reset selected highlight
-                SwapSelected(selectedOption);
-            }
-
-            if (Input.GetAxisRaw("Swap") < 0)
-            {
-                selectedOption -= 1;
-                if (selectedOption < 1)
+                if (Input.GetAxisRaw("Swap") < 0)
                 {
-                    selectedOption = numberOfOptions;
+                    selectedOption -= 1;
+                    if (selectedOption < 1)
+                    {
+                        selectedOption = numberOfOptions;
+                    }
+
+                    // reset selected highlight
+                    SwapSelected(selectedOption);
                 }
 
-                // reset selected highlight
-                SwapSelected(selectedOption);
-            }
-
-            if (Input.GetButton("Jump") || 
-                Input.GetButton("Enter"))
-            {
-
-                switch (selectedOption)
+                if (Input.GetButton("Jump") ||
+                    Input.GetButton("Enter"))
                 {
-                    case 1:
-                        ResumeOnClick();
-                        break;
-                    case 2:
-                        MainMenuOnClick();
-                        break;
+
+                    switch (selectedOption)
+                    {
+                        case 1:
+                            ResumeOnClick();
+                            break;
+                        case 2:
+                            MainMenuOnClick();
+                            break;
+                    }
                 }
             }
         }
@@ -113,8 +119,8 @@ public class Pause : MonoBehaviour
     {
         // reset selected highlight
 
-        Debug.Log("Picked: " + selectedOption);
-
+        //Debug.Log("Picked: " + selectedOption);
+        inputTimer = 0;
         if (btnHighlight != null)
         {
             switch (selectedOption)
@@ -129,7 +135,6 @@ public class Pause : MonoBehaviour
                     break;
             }
         }
-        inputTimer = 0;
     }
 
     // Manages the pause state of the game,
@@ -158,17 +163,6 @@ public class Pause : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    // Mouse over select highlight
-    //bool IsMouseOverUI()
-    //{
-    //    return EventSystem.current.IsPointerOverGameObject();
-    //}
-
-    //bool IsMouseOverUIwithIgnores()
-    //{
-    //    PointerEventData pED
-    //}
-
     // pauses game and music, loads respective UI
     void PauseGame()
     {
@@ -178,7 +172,6 @@ public class Pause : MonoBehaviour
         // pause game music (attached to game controller object)
         gameObject.GetComponent<AudioSource>().Pause();
         btnHighlight.SetActive(true);
-
         Time.timeScale = 0; // pause game
     }
 
@@ -191,7 +184,7 @@ public class Pause : MonoBehaviour
         // unpause game music (attached to game controller object)
         gameObject.GetComponent<AudioSource>().UnPause();
         btnHighlight.SetActive(false);
-
+        inputTimer = 0;
         Time.timeScale = 1; // unpause game
     }
 
