@@ -44,68 +44,73 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-		inputTimer += Time.unscaledDeltaTime;
-
-		if (inMenu && inputTimer >= waitTime)
+        if (inMenu)
         {
-			// select options code
-			if (Input.GetAxisRaw("Swap") > 0)
-			{
-				selectedOption += 1;
-				if (selectedOption > numberOfOptions)
-				{
-					selectedOption = 1;
-				}
+            inputTimer += Time.unscaledDeltaTime;
 
-				// reset selected highlight
-				SwapSelected(selectedOption);
-			}
+            if (inputTimer >= waitTime)
+            {
+                // select options code
+                if (Input.GetAxisRaw("Swap") > 0)
+                {
+                    selectedOption += 1;
+                    if (selectedOption > numberOfOptions)
+                    {
+                        selectedOption = 1;
+                    }
 
-			if (Input.GetAxisRaw("Swap") < 0)
-			{
-				selectedOption -= 1;
-				if (selectedOption < 1)
-				{
-					selectedOption = numberOfOptions;
-				}
+                    // reset selected highlight
+                    SwapSelected(selectedOption);
+                }
 
-				// reset selected highlight
-				SwapSelected(selectedOption);
-			}
+                if (Input.GetAxisRaw("Swap") < 0)
+                {
+                    selectedOption -= 1;
+                    if (selectedOption < 1)
+                    {
+                        selectedOption = numberOfOptions;
+                    }
 
-			if (Input.GetButton("Jump") ||
-                Input.GetButton("Enter"))
-			{
+                    // reset selected highlight
+                    SwapSelected(selectedOption);
+                }
 
-				switch (selectedOption)
-				{
-					case 1:
-						OnPButtonPress();
-						break;
-					case 2:
-						OnQButtonPress();
-						break;
-				}
-			}
-		}
+                if (Input.GetButton("Jump") ||
+                    Input.GetButton("Enter"))
+                {
 
-		//Progress when jump is pressed, loading when hitting the end of the images
-		if (Input.GetButtonDown("Jump") && curScene >= 0)
-		{
-			curScene++;
-			if (curScene >= introImages.Count)
-			{
-				curScene = -1;
-				StartCoroutine(LoadAsyncScene());
-			}
-			else
-				cutsceneUI.GetComponent<RawImage>().texture = introImages[curScene];
-		}
-		if (Input.GetButtonDown("Dash"))
-		{
-			curScene = -1;
-			StartCoroutine(LoadAsyncScene());
-		}
+                    switch (selectedOption)
+                    {
+                        case 1:
+                            OnPButtonPress();
+                            break;
+                        case 2:
+                            OnQButtonPress();
+                            break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            //Progress when jump is pressed, loading when hitting the end of the images
+            if (Input.GetButtonDown("Jump") && curScene >= 0)
+            {
+                curScene++;
+                if (curScene >= introImages.Count)
+                {
+                    curScene = -1;
+                    StartCoroutine(LoadAsyncScene());
+                }
+                else
+                    cutsceneUI.GetComponent<RawImage>().texture = introImages[curScene];
+            }
+            if (Input.GetButtonDown("Dash"))
+            {
+                curScene = -1;
+                StartCoroutine(LoadAsyncScene());
+            }
+        }
 	}
 
 	void SwapSelected(int option)
