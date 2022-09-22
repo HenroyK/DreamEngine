@@ -442,7 +442,8 @@ public class MovementScript : MonoBehaviour
 		{
 			case "Respawn":
 				audioSource.PlayOneShot(respawnClip);
-				break;
+                animator.SetTrigger("Respawn");
+                break;
 			default:
 				Debug.LogWarning("No clip found");
 				break;

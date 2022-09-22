@@ -7,13 +7,17 @@ public class BlackFade : MonoBehaviour
 {
 	//Vars
 	public Image blackFader;
+    public Image transitionFader;
 	public float maxFade;
 	public float fadeDist;
+    public float transitionTime;
+    public bool transition;
 
-	private GameObject closest;
+    private GameObject closest;
 	private float closeDist = 25;
 	private GameObject player;
 	private RaycastHit hit;
+    private float fadeTimer;
 
 	public void Start()
 	{
@@ -22,6 +26,23 @@ public class BlackFade : MonoBehaviour
 
 	public void LateUpdate()
 	{
+        //Fade transition
+        if(transition)
+        {
+            if (fadeTimer < 1)
+            {
+                print(fadeTimer);
+                fadeTimer += Time.deltaTime / transitionTime;
+                transitionFader.color = new Color(0, 0, 0, fadeTimer);
+            }
+            else
+            {
+                Debug.Log("Change level");
+                BroadcastMessage("ChangeLevel");
+                transition = false;
+            }
+
+        }
 
 		//Raycast to get the true distance to the closest object (so size is accounted for)
 		if (player != null)

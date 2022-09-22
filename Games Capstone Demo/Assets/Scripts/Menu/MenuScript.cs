@@ -118,10 +118,12 @@ public class MenuScript : MonoBehaviour
 			case 1:
                 btnHighlight.transform.position =
                     playBtn.transform.position;
+                playBtn.Select();
                 break;
 			case 2:
                 btnHighlight.transform.position =
                     quitBtn.transform.position;
+                quitBtn.Select();
                 break;
 		}
         audioSource.PlayOneShot(pickClip);
