@@ -158,28 +158,28 @@ public class EndLevel : MonoBehaviour
         btnHighlight.SetActive(true);
         Time.timeScale = 0; // pause game
 
-        DisplayLeaderboard();
-        WriteLeaderboard();
+        //DisplayLeaderboard();
+        //WriteLeaderboard();
     }
-    private void DisplayLeaderboard()
-    {
-        leaderboard = XMLManager.instance.LoadScores(1);
-        leaderboard.Add(new HighScoreEntry { name = "Name Not Implemented + " + scoreScript.getScore() , score = scoreScript.getScore() });
-        leaderboard.OrderBy(HighScoreEntry => HighScoreEntry.score);
+    //private void DisplayLeaderboard()
+    //{
+    //    leaderboard = XMLManager.instance.LoadScores(1);
+    //    leaderboard.Add(new HighScoreEntry { name = "Name Not Implemented + " + scoreScript.getScore() , score = scoreScript.getScore() });
+    //    leaderboard.OrderBy(HighScoreEntry => HighScoreEntry.score);
 
-        //Change this for an actual display
-        Debug.Log("----Printing Scoreboard----");
-        int i = 1;
-        foreach (HighScoreEntry h in leaderboard)
-        {
-            Debug.Log(i +". "+ h.name + ": "+ h.score);
-        }
-        Debug.Log("----Finished Printing----");
-    }
-    private void WriteLeaderboard()
-    {
-        XMLManager.instance.SaveScores(leaderboard, 1);
-    }
+    //    //Change this for an actual display
+    //    Debug.Log("----Printing Scoreboard----");
+    //    int i = 1;
+    //    foreach (HighScoreEntry h in leaderboard)
+    //    {
+    //        Debug.Log(i +". "+ h.name + ": "+ h.score);
+    //    }
+    //    Debug.Log("----Finished Printing----");
+    //}
+    //private void WriteLeaderboard()
+    //{
+    //    XMLManager.instance.SaveScores(leaderboard, 1);
+    //}
 
     // Mouse over Retry button
     public void MORetryBtn()
