@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7426125459342200137}
   - component: {fileID: 1169533992510613230}
   m_Layer: 0
-  m_Name: PickupEffect
+  m_Name: ScoreCounterEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24bc87fb810abe4ab1ad7769ce3fcc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  speedChangePercent: 0.2
-  speedChangeDistance: 0
+  speed: 60

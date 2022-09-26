@@ -86,6 +86,7 @@ public class ScoreScript : MonoBehaviour
             displayScore++;
             scoreText.text = "Score: " + displayScore;
         }
+        PlayerStats.score = score;
 
         comboText.text = "Combo: x" + combo;
     }
