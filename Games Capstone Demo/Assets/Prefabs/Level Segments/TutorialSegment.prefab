@@ -576,6 +576,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1830887329887579527}
     m_Modifications:
+    - target: {fileID: 890278370537546866, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4217258812114757161, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -586,7 +590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4217258812114757161, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.619106
+      value: 4.619107
       objectReference: {fileID: 0}
     - target: {fileID: 4217258812114757161, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -650,7 +654,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 124
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &9213853604129089287
 BoxCollider:
