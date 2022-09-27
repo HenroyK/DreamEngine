@@ -38,7 +38,7 @@ public class BlackFade : MonoBehaviour
             else
             {
                 Debug.Log("Change level");
-                BroadcastMessage("ChangeLevel");
+                BroadcastMessage("ChangeLevel");  // Calls function with this name for any script
                 transition = false;
             }
 

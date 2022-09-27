@@ -12,7 +12,7 @@ public class EndLevel : MonoBehaviour
     public Button reloadLevelBtn;
     public Button mainMenuBtn;
     public GameObject btnHighlight;
-    public GameObject blackOutSquare;
+    //public GameObject blackOutSquare;
 
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
@@ -111,33 +111,36 @@ public class EndLevel : MonoBehaviour
     }
 
     // still testing this function
-    public IEnumerator FadeBlackOut(bool fadeToBlack = true, int fadeSpeed = 5)
-    {
-        Color objectColor = blackOutSquare.GetComponent<Image>().color;
-        float fadeAmount;
+    //public IEnumerator FadeBlackOut(bool fadeToBlack = true, int fadeSpeed = 5)
+    //{
+    //    Color objectColor = blackOutSquare.GetComponent<Image>().color;
+    //    float fadeAmount;
 
-        if (fadeToBlack)
-        {
-            while (blackOutSquare.GetComponent<Image>().color.a < 1)
-            {
-                fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+    //    if (fadeToBlack)
+    //    {
+    //        while (blackOutSquare.GetComponent<Image>().color.a < 1)
+    //        {
+    //            fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
 
-                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-                blackOutSquare.GetComponent<Image>().color = objectColor;
-                yield return null;
-            }
-        }
-        else
-        {
-            fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+    //            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+    //            blackOutSquare.GetComponent<Image>().color = objectColor;
+    //            yield return null;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        while (blackOutSquare.GetComponent<Image>().color.a > 0)
+    //        {
+    //            fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
 
-            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-            blackOutSquare.GetComponent<Image>().color = objectColor;
-            yield return null;
-        }
+    //            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+    //            blackOutSquare.GetComponent<Image>().color = objectColor;
+    //            yield return null;
+    //        }
+    //    }
         
-        yield return new WaitForEndOfFrame();
-    }
+    //    yield return new WaitForEndOfFrame();
+    //}
 
     void SwapSelected(int option)
     {
@@ -179,7 +182,7 @@ public class EndLevel : MonoBehaviour
     }
 
     // Turns on end game UI, pauses game and music
-    public void EndLevelReached()
+    public void ChangeLevel()
     {
         pauseScript.disablePause(); // disable pause functionality
         gameControllerScript.PlayerControls(false); // disable player controls

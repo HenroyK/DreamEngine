@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class EndLevelPoint : MonoBehaviour
 {
     private EndLevel endLevelScript;
+    private BlackFade fadeScript;
 
     // Get a reference of EndLevel script attached to the scene game controller script
     void Start()
@@ -15,6 +16,7 @@ public class EndLevelPoint : MonoBehaviour
         if (gameController != null)
         {
             endLevelScript = gameController.GetComponent<EndLevel>();
+            fadeScript = gameController.GetComponent<BlackFade>();
         }
         else
         {
@@ -27,7 +29,8 @@ public class EndLevelPoint : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            endLevelScript.EndLevelReached();
+            //endLevelScript.ChangeLevel();
+            fadeScript.transition = true;
         }
     }
 }
