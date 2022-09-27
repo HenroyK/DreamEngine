@@ -9,6 +9,7 @@ TagManager:
   - DoesntBlockSwap
   - PickupEffectTarget
   - Tutorial
+  - QuitBtn
   layers:
   - Default
   - TransparentFX
