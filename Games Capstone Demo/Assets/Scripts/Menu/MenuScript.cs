@@ -53,14 +53,11 @@ public class MenuScript : MonoBehaviour
 	{
         SwapMenu();
 
-        //if (enableQuitbtn)
-        //{
-        //    WithQuitBtn();
-        //}
-        //else
-        //{
-        //    WithoutQuitBtn();
-        //}
+        if(curScene > 0)
+        {
+            cutsceneUI.gameObject.transform.Find("ProgressText").gameObject.SetActive(false);
+            cutsceneUI.gameObject.transform.Find("SkipText").gameObject.SetActive(false);
+        }
 	}
 
     void SwapMenu()
@@ -178,6 +175,7 @@ public class MenuScript : MonoBehaviour
 	//Play Button pressed
 	public void OnPButtonPress()
 	{
+
 		curScene = 0;
 		audioSource.clip = cutsceneMusic;
 		audioSource.Play(0);

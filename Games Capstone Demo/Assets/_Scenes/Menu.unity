@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -760,8 +760,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -10, y: 25}
-  m_SizeDelta: {x: -90, y: 50}
+  m_AnchoredPosition: {x: -10, y: 15}
+  m_SizeDelta: {x: -10, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &520181696
 MonoBehaviour:
@@ -783,7 +783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: to skip.
+  m_text: Skip
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0642e557e28829479a2da0e35ece3cd, type: 2}
   m_sharedMaterial: {fileID: 6595578695911867182, guid: c0642e557e28829479a2da0e35ece3cd, type: 2}
@@ -1153,8 +1153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 25}
-  m_SizeDelta: {x: -10, y: 50}
+  m_AnchoredPosition: {x: 0, y: 15}
+  m_SizeDelta: {x: -580, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &873867029
 MonoBehaviour:
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '      to progress.'
+  m_text: '      Next'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0642e557e28829479a2da0e35ece3cd, type: 2}
   m_sharedMaterial: {fileID: 6595578695911867182, guid: c0642e557e28829479a2da0e35ece3cd, type: 2}
@@ -1602,13 +1602,6 @@ MonoBehaviour:
   introImages:
   - {fileID: 2800000, guid: b68bd9b181f47b542ba7cb7689d52e25, type: 3}
   - {fileID: 2800000, guid: 562aa930a4df928489c4c2a09084399c, type: 3}
-  - {fileID: 2800000, guid: 801cab5e216143c489920e884eaf0560, type: 3}
-  - {fileID: 2800000, guid: 17d47f700155d09469e575347d8dd31a, type: 3}
-  - {fileID: 2800000, guid: cfd4885f042d22949b232cd0ddf05ec3, type: 3}
-  - {fileID: 2800000, guid: 72d513f983def1843918fa1663dd6058, type: 3}
-  - {fileID: 2800000, guid: 208195a6eea405946bc4a3869046c3bb, type: 3}
-  - {fileID: 2800000, guid: 37e63908ae0bf5b4bbae2cbead2856b1, type: 3}
-  - {fileID: 2800000, guid: 11daa11b274a21f46add3777a0f95fc6, type: 3}
   cutsceneUI: {fileID: 1382998447}
   audioSource: {fileID: 1540553031}
   cutsceneMusic: {fileID: 8300000, guid: 60365191d1c6c674a9dfa1d34e80b788, type: 3}
@@ -1761,7 +1754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -120, y: 10}
+  m_AnchoredPosition: {x: -100, y: 10}
   m_SizeDelta: {x: 60, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2033927531
