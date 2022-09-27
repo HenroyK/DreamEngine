@@ -27,7 +27,7 @@ public class EndLevel : MonoBehaviour
 
     private float inputTimer = 0;
     [SerializeField]
-    private float waitTime = 0.3f;
+    private float waitTime = 0.5f;
 
     // Set up variables, find scripts, and enable buttons
     void Start()
