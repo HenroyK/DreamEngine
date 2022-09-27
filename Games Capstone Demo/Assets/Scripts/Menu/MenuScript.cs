@@ -59,6 +59,12 @@ public class MenuScript : MonoBehaviour
         {
             WithoutQuitBtn();
         }
+
+        if(curScene > 0)
+        {
+            cutsceneUI.gameObject.transform.Find("ProgressText").gameObject.SetActive(false);
+            cutsceneUI.gameObject.transform.Find("SkipText").gameObject.SetActive(false);
+        }
 	}
 
     void WithQuitBtn()
@@ -225,6 +231,7 @@ public class MenuScript : MonoBehaviour
 	//Play Button pressed
 	public void OnPButtonPress()
 	{
+
 		curScene = 0;
 		audioSource.clip = cutsceneMusic;
 		audioSource.Play(0);
