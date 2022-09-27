@@ -18,7 +18,7 @@ public class MenuScript : MonoBehaviour
     public Button playBtn;
     public Button quitBtn;
     public GameObject btnHighlight;
-    public bool enableQuitbtn = false;
+    public bool enableQuitBtn = false;
 
     private int curScene = -1;
 
@@ -41,7 +41,7 @@ public class MenuScript : MonoBehaviour
                     playBtn.transform.position;
         btnHighlight.SetActive(true);
 
-        if(!enableQuitbtn) {
+        if(!enableQuitBtn) {
             GameObject quitButton = GameObject.FindWithTag("QuitBtn");
 
             quitButton.SetActive(false);
@@ -51,17 +51,19 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-        if (enableQuitbtn)
-        {
-            WithQuitBtn();
-        }
-        else
-        {
-            WithoutQuitBtn();
-        }
+        SwapMenu();
+
+        //if (enableQuitbtn)
+        //{
+        //    WithQuitBtn();
+        //}
+        //else
+        //{
+        //    WithoutQuitBtn();
+        //}
 	}
 
-    void WithQuitBtn()
+    void SwapMenu()
     {
         if (inMenu)
         {
@@ -73,9 +75,20 @@ public class MenuScript : MonoBehaviour
                 if (Input.GetAxisRaw("Swap") > 0)
                 {
                     selectedOption += 1;
-                    if (selectedOption > numberOfOptions)
+
+                    if (enableQuitBtn)
                     {
-                        selectedOption = 1;
+                        if (selectedOption > numberOfOptions)
+                        {
+                            selectedOption = 1;
+                        }
+                    }
+                    else
+                    {
+                        if (selectedOption > (numberOfOptions - 1))
+                        {
+                            selectedOption = 1;
+                        }
                     }
 
                     // reset selected highlight
@@ -85,9 +98,17 @@ public class MenuScript : MonoBehaviour
                 if (Input.GetAxisRaw("Swap") < 0)
                 {
                     selectedOption -= 1;
+
                     if (selectedOption < 1)
                     {
-                        selectedOption = numberOfOptions;
+                        if (enableQuitBtn)
+                        {
+                            selectedOption = numberOfOptions;
+                        }
+                        else
+                        {
+                            selectedOption = (numberOfOptions - 1);
+                        }
                     }
 
                     // reset selected highlight
@@ -97,7 +118,7 @@ public class MenuScript : MonoBehaviour
                 if (Input.GetButton("Jump") ||
                     Input.GetButton("Enter"))
                 {
-
+                    // quit button needs to be last in the switch case
                     switch (selectedOption)
                     {
                         case 1:
@@ -105,74 +126,6 @@ public class MenuScript : MonoBehaviour
                             break;
                         case 2:
                             OnQButtonPress();
-                            break;
-                    }
-                }
-            }
-        }
-        else
-        {
-            //Progress when jump is pressed, loading when hitting the end of the images
-            if (Input.GetButtonDown("Jump") && curScene >= 0)
-            {
-                curScene++;
-                if (curScene >= introImages.Count)
-                {
-                    curScene = -1;
-                    StartCoroutine(LoadAsyncScene());
-                }
-                else
-                    cutsceneUI.GetComponent<RawImage>().texture = introImages[curScene];
-            }
-            if (Input.GetButtonDown("Dash"))
-            {
-                curScene = -1;
-                StartCoroutine(LoadAsyncScene());
-            }
-        }
-    }
-
-    void WithoutQuitBtn()
-    {
-        if (inMenu)
-        {
-            inputTimer += Time.unscaledDeltaTime;
-
-            if (inputTimer >= waitTime)
-            {
-                // select options code
-                if (Input.GetAxisRaw("Swap") > 0)
-                {
-                    selectedOption += 1;
-                    if (selectedOption > (numberOfOptions - 1))
-                    {
-                        selectedOption = 1;
-                    }
-
-                    // reset selected highlight
-                    SwapSelected(selectedOption);
-                }
-
-                if (Input.GetAxisRaw("Swap") < 0)
-                {
-                    selectedOption -= 1;
-                    if (selectedOption < 1)
-                    {
-                        selectedOption = (numberOfOptions - 1);
-                    }
-
-                    // reset selected highlight
-                    SwapSelected(selectedOption);
-                }
-
-                if (Input.GetButton("Jump") ||
-                    Input.GetButton("Enter"))
-                {
-
-                    switch (selectedOption)
-                    {
-                        case 1:
-                            OnPButtonPress();
                             break;
                     }
                 }
