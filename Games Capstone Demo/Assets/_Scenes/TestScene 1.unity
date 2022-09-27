@@ -346,6 +346,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 72769453335982300, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315373641423291739, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942991355508755324, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2970008930775174571, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: startComboTimer
       value: 6.5
