@@ -13,18 +13,17 @@ public class BlockMove : MonoBehaviour
 		blockRigidbody = this.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        blockRigidbody.velocity = Vector3.left * speed;
         if (transform.position.x < -450)
         {
             Destroy(this.gameObject);
         }
-        blockRigidbody.velocity = Vector3.left * speed;
     }
 
-	//Speed change message subscription
-	public void ChangeSpeed(float newSpeed)
+    //Speed change message subscription
+    public void ChangeSpeed(float newSpeed)
 	{
 		speed = newSpeed;
 	}
