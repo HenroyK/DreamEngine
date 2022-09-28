@@ -207,7 +207,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6442436285451924755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8198d61cacf83734cb52d24d6d8fb4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownBackground: {fileID: 0}
+  cooldownBackground: {fileID: 7460640383160540926}
 --- !u!1 &7460640383160540926
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +249,6 @@ GameObject:
   - component: {fileID: 7190785474884888141}
   - component: {fileID: 6163303418934691759}
   - component: {fileID: 2709117939930504601}
-  - component: {fileID: 7995861641786394754}
   m_Layer: 5
   m_Name: BackImage
   m_TagString: Untagged
@@ -315,15 +314,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7995861641786394754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7460640383160540926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c10df60b2aa3a947bac357f85e7b264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

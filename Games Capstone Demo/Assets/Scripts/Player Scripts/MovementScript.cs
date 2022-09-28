@@ -105,6 +105,10 @@ public class MovementScript : MonoBehaviour
             lerpTimer += Time.deltaTime * lerpSpeed;
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + swapVel.x, transform.position.y + ((swapVel.y / 100)- swapPen), depth.layerAxis[depth.curDepth]), lerpTimer);
         }
+        else
+        {
+            swapVel.Set(0, 0, 0);
+        }
     }
 	// Update is called once per frame
 	void Update()

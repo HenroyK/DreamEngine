@@ -17,21 +17,22 @@ public class BlackFade : MonoBehaviour
 	private float closeDist = 25;
 	private GameObject player;
 	private RaycastHit hit;
-    private float fadeTimer;
+    private float fadeTimer = 1;
 
 	public void Start()
 	{
 		player = GameObject.FindWithTag("Player");
-	}
+        transitionFader.gameObject.SetActive(true);
+    }
 
 	public void LateUpdate()
 	{
         //Fade transition
         if(transition)
         {
+            //Fade out
             if (fadeTimer < 1)
             {
-                print(fadeTimer);
                 fadeTimer += Time.deltaTime / transitionTime;
                 transitionFader.color = new Color(0, 0, 0, fadeTimer);
             }
@@ -42,6 +43,15 @@ public class BlackFade : MonoBehaviour
                 transition = false;
             }
 
+        }
+        else
+        {
+            //Fade in at start
+            if (fadeTimer > 0)
+            {
+                fadeTimer -= Time.deltaTime;
+                transitionFader.color = new Color(0, 0, 0, fadeTimer);
+            }
         }
 
 		//Raycast to get the true distance to the closest object (so size is accounted for)
