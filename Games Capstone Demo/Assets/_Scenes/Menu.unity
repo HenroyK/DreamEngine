@@ -2095,7 +2095,7 @@ MonoBehaviour:
   quitBtn: {fileID: 819923976}
   transitionFader: {fileID: 691432470}
   loadingNum: {fileID: 1673312905}
-  loadingText: {fileID: 544649376}
+  loadingText: {fileID: 49275044}
   btnHighlight: {fileID: 1502886227}
   nextSceneNum: 1
   enableQuitBtn: 0
