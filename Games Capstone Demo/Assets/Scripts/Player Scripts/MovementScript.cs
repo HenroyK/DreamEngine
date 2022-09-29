@@ -64,6 +64,7 @@ public class MovementScript : MonoBehaviour
     private BlackFade fader;
     private GameObject gameController;
     private float swapPen;
+    private bool onMoving = false;
 
     // Start is called before the first frame update
     void Start()
@@ -287,9 +288,9 @@ public class MovementScript : MonoBehaviour
 			animator.SetBool("Moving", true);
 			animator.SetTrigger("Run");
 			if (Input.GetAxis("Horizontal") > 0)
-				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / maxSpeed);
+				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / (maxSpeed / 1.1f));
 			else if (Input.GetAxis("Horizontal") < 0)
-				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / (maxSpeed * 1.75f));
+				animator.SetFloat("Horizontal Speed", Mathf.Abs(playerRigidbody.velocity.x) / (maxSpeed * 1.5f));
 			else
 				animator.SetFloat("Horizontal Speed", 1);
 			if (!currentlyGrounded)
@@ -306,6 +307,9 @@ public class MovementScript : MonoBehaviour
 			dashed = false;
 			audioSource.PlayOneShot(dashReadyClip);
 		}
+        print(onMoving);
+        animator.SetBool("OnMoving", onMoving);
+        onMoving = false;
 	}
 
 	// Change the physics material of the collider
@@ -376,7 +380,29 @@ public class MovementScript : MonoBehaviour
 		LayerMask mask = LayerMask.GetMask(new string[] { "GroundFloor", "Building" });
 		Quaternion weirdQuat = new Quaternion();
 		weirdQuat.eulerAngles = new Vector3(0, 0, 0);
-		if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -2.5f, 0), new Vector3(1, 0.1f, 1), weirdQuat, mask))
+        //Check for moving platforms (boxcheck wouldnt work so this will do for now)
+        print(playerRigidbody.velocity.y);
+        if (playerRigidbody.velocity.y < 0)
+        {
+            print("casting");
+            Physics.Raycast(gameObject.transform.position, (-transform.up + transform.right) * 15,
+                out RaycastHit hitR, 15, mask);
+            if (hitR.collider && hitR.collider.gameObject.tag == "Moving")
+                onMoving = true;
+            Physics.Raycast(gameObject.transform.position, -transform.up * 10,
+                out RaycastHit hitM, 10, mask);
+            if (hitM.collider && hitM.collider.gameObject.tag == "Moving")
+                onMoving = true;
+            Physics.Raycast(gameObject.transform.position, (-transform.up + -transform.right) * 15,
+                out RaycastHit hitL, 15, mask);
+            if (hitL.collider && hitL.collider.gameObject.tag == "Moving")
+                onMoving = true;
+        }
+        else
+        {
+            onMoving = false;
+        }
+        if (Physics.CheckBox(playerCollider.bounds.center + new Vector3(0, -2.5f, 0), new Vector3(1, 0.1f, 1), weirdQuat, mask))
 		{
 			coyoteTimer = coyoteTimeLimit;
 			if(ziplined)
@@ -468,9 +494,13 @@ public class MovementScript : MonoBehaviour
 	}
     void OnCollisionEnter(Collision other)
     {
+        //Right bounds stops ziplines
     	if (ziplined && other.gameObject.layer == LayerMask.NameToLayer("Wall"))
     	{
 			EndZipline();
     	}
+        //Moving platforms stop falling animation
+        if (other.gameObject.tag == "Moving")
+            onMoving = true;
     }
 }

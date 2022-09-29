@@ -230,9 +230,11 @@ public class MenuScript : MonoBehaviour
                 if (asyncLoad.allowSceneActivation == false)
                 {
                     loaded = true;
-                    asyncLoad.allowSceneActivation = true;
                 }
             }
+            //Allow loading when faded
+            if(transitionFader.color.a >=1)
+                asyncLoad.allowSceneActivation = true;
             yield return null;
 		}
     }
