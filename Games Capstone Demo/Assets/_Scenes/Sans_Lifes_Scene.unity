@@ -1125,7 +1125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3959074571831529636, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: nextSceneNum
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.size
