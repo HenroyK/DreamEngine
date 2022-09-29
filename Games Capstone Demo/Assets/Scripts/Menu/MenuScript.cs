@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class MenuScript : MonoBehaviour
 {
@@ -17,11 +18,16 @@ public class MenuScript : MonoBehaviour
     public AudioClip pickClip;
     public Button playBtn;
     public Button quitBtn;
+    public Image transitionFader;
+    public GameObject loadingNum;
+    public GameObject loadingText;
     public GameObject btnHighlight;
     public int nextSceneNum = -1;
     public bool enableQuitBtn = false;
 
     private int curScene = -1;
+    private float fadeTimer = 0;
+    private bool loaded = false;
 
     // button select varaibles
     private int numberOfOptions = 2;
@@ -53,8 +59,12 @@ public class MenuScript : MonoBehaviour
     void Update()
 	{
         SwapMenu();
-
-        if(curScene > 0)
+        if (loaded)
+        {
+            fadeTimer += Time.deltaTime;
+            transitionFader.color = new Color(0, 0, 0, fadeTimer);
+        }
+        if (curScene > 0)
         {
             cutsceneUI.gameObject.transform.Find("ProgressText").gameObject.SetActive(false);
             cutsceneUI.gameObject.transform.Find("SkipText").gameObject.SetActive(false);
@@ -182,8 +192,7 @@ public class MenuScript : MonoBehaviour
 	//Play Button pressed
 	public void OnPButtonPress()
 	{
-
-		curScene = 0;
+        curScene = 0;
 		audioSource.clip = cutsceneMusic;
 		audioSource.Play(0);
 		cutsceneUI.SetActive(true);
@@ -201,16 +210,32 @@ public class MenuScript : MonoBehaviour
 
 	//Load scene (asynchronous)
 	IEnumerator LoadAsyncScene()
-	{
-		AsyncOperation asyncLoad = 
+    {
+        cutsceneUI.gameObject.transform.Find("LoadingTextH").gameObject.SetActive(true);
+        AsyncOperation asyncLoad = 
 			SceneManager.LoadSceneAsync(nextSceneNum);
+        asyncLoad.allowSceneActivation = false;
 
-		//Wait until scene fully loads
-		while (!asyncLoad.isDone)
+        //Wait until scene fully loads
+        while (!asyncLoad.isDone)
 		{
-			yield return null;
+            //Whatever happened to just getting Text.text? seriously this is dumb
+            loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = Mathf.Round((asyncLoad.progress * 100)) + "%";
+            loadingNum.gameObject.transform.Find("LoadingNum").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text;
+            if(asyncLoad.progress >= 0.9f)
+            {
+                loadingNum.gameObject.SetActive(false);
+                loadingText.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
+                loadingText.gameObject.transform.Find("LoadingText").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
+                if (asyncLoad.allowSceneActivation == false)
+                {
+                    loaded = true;
+                    asyncLoad.allowSceneActivation = true;
+                }
+            }
+            yield return null;
 		}
-	}
+    }
 
     // Mouse over Play button
     public void MOPlayBtn()
