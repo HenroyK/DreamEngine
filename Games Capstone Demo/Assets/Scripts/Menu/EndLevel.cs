@@ -9,10 +9,11 @@ using System.Linq;
 public class EndLevel : MonoBehaviour
 {
     public GameObject endLevelMenuUI;
+    public GameObject nextLevelBtn;
     public Button reloadLevelBtn;
     public Button mainMenuBtn;
     public GameObject btnHighlight;
-    //public GameObject blackOutSquare;
+    public int nextSceneNum = -1;
 
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
@@ -21,7 +22,7 @@ public class EndLevel : MonoBehaviour
     private List<HighScoreEntry> leaderboard = new List<HighScoreEntry>();
 
     // button select varaibles
-    private int numberOfOptions = 2;
+    private int numberOfOptions = 3; 
     private int selectedOption;
     private bool gameEnded = false;
 
@@ -99,9 +100,12 @@ public class EndLevel : MonoBehaviour
                     switch (selectedOption)
                     {
                         case 1:
-                            ReloadOnClick();
+                           NextLevelOnClick();
                             break;
                         case 2:
+                            ReloadOnClick();
+                            break;
+                        case 3:
                             MainMenuOnClick();
                             break;
                     }
@@ -152,14 +156,39 @@ public class EndLevel : MonoBehaviour
             switch (selectedOption)
             {
                 case 1:
+                    btnHighlight.transform.position = 
+                        nextLevelBtn.transform.position;
+                    break;
+                case 2:
                     btnHighlight.transform.position =
                         reloadLevelBtn.transform.position;
                     break;
-                case 2:
+                case 3:
                     btnHighlight.transform.position =
                         mainMenuBtn.transform.position;
                     break;
             }
+        }
+    }
+    
+    //Load scene (asynchronous)
+    IEnumerator LoadAsyncScene()
+    {
+        AsyncOperation asyncLoad =
+            SceneManager.LoadSceneAsync(nextSceneNum);
+
+        //Wait until scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    void NextLevelOnClick()
+    {
+        if (nextSceneNum != -1)
+        {
+            StartCoroutine(LoadAsyncScene());
         }
     }
 
@@ -217,16 +246,22 @@ public class EndLevel : MonoBehaviour
     //}
 
     // Mouse over Retry button
-    public void MORetryBtn()
+    public void MONextLevelBtn()
     {
         selectedOption = 1;
+        SwapSelected(selectedOption);
+    }
+
+    public void MORetryBtn()
+    {
+        selectedOption = 2;
         SwapSelected(selectedOption);
     }
 
     // Mouse over Menu button
     public void MOMenuBtn()
     {
-        selectedOption = 2;
+        selectedOption = 3;
         SwapSelected(selectedOption);
     }
 }

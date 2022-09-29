@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1609,7 +1609,8 @@ MonoBehaviour:
   playBtn: {fileID: 127851646}
   quitBtn: {fileID: 819923976}
   btnHighlight: {fileID: 1502886227}
-  enableQuitbtn: 0
+  nextSceneNum: 1
+  enableQuitBtn: 0
   waitTime: 0.3
 --- !u!82 &1540553031
 AudioSource:

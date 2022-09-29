@@ -18,6 +18,7 @@ public class MenuScript : MonoBehaviour
     public Button playBtn;
     public Button quitBtn;
     public GameObject btnHighlight;
+    public int nextSceneNum = -1;
     public bool enableQuitBtn = false;
 
     private int curScene = -1;
@@ -137,7 +138,10 @@ public class MenuScript : MonoBehaviour
                 if (curScene >= introImages.Count)
                 {
                     curScene = -1;
-                    StartCoroutine(LoadAsyncScene());
+                    if (nextSceneNum != -1)
+                    {
+                        StartCoroutine(LoadAsyncScene());
+                    }
                 }
                 else
                     cutsceneUI.GetComponent<RawImage>().texture = introImages[curScene];
@@ -145,7 +149,10 @@ public class MenuScript : MonoBehaviour
             if (Input.GetButtonDown("Dash"))
             {
                 curScene = -1;
-                StartCoroutine(LoadAsyncScene());
+                if (nextSceneNum != -1)
+                {
+                    StartCoroutine(LoadAsyncScene());
+                }
             }
         }
     }
@@ -196,7 +203,7 @@ public class MenuScript : MonoBehaviour
 	IEnumerator LoadAsyncScene()
 	{
 		AsyncOperation asyncLoad = 
-			SceneManager.LoadSceneAsync(1);
+			SceneManager.LoadSceneAsync(nextSceneNum);
 
 		//Wait until scene fully loads
 		while (!asyncLoad.isDone)
