@@ -11,4 +11,9 @@ public static class PlayerStats
     {
         score += pScore;
     }
+
+    public static int scoreScreenScoreEffectCounter = 0;
+    public static int levelSScore = 600;
+    public static int levelAScore = 550;
+    public static int levelBScore = 300;
 }

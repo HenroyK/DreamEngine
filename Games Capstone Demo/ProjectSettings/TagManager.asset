@@ -10,6 +10,8 @@ TagManager:
   - PickupEffectTarget
   - Tutorial
   - QuitBtn
+  - MovePoint
+  - Canvas
   layers:
   - Default
   - TransparentFX
