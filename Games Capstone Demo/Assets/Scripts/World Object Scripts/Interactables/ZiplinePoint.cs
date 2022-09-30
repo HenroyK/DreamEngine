@@ -9,10 +9,11 @@ public class ZiplinePoint : MonoBehaviour
 
 	private RaycastHit hitInfo;
 	private Vector3 endPos;
-
-	void Start()
+    private LayerMask mask;
+    void Start()
 	{
-		endPos = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y-1, endPoint.transform.position.z);
+        mask = LayerMask.GetMask("Player");
+        endPos = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y-1, endPoint.transform.position.z);
 	}
 
 	// Update is called once per frame
@@ -20,13 +21,20 @@ public class ZiplinePoint : MonoBehaviour
 	{
 		if (endPoint != null)
 		{
+            //transform.LookAt(endPoint.transform);
 			endPos = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y - 1, endPoint.transform.position.z);
-			if (Physics.Linecast(transform.position, endPoint.transform.position, out hitInfo))
-			{
-				if (hitInfo.collider.tag == "Player")
-					GameObject.FindWithTag("Player").GetComponent<MovementScript>().ZiplineTo(hitInfo.point, endPos, (transform.position.y - endPos.y));
-			}
-        }		
+            /*RaycastHit[] blockDetect = Physics.BoxCastAll(transform.position, new Vector3(0.5f, 0.5f, 0.5f), (transform.position-endPoint.transform.position).normalized,
+                transform.rotation, Vector3.Distance(transform.position, endPoint.transform.position));
+            foreach (RaycastHit hit in blockDetect)
+            {
+                if (hit.collider.tag == "Player")
+                    GameObject.FindWithTag("Player").GetComponent<MovementScript>().ZiplineTo(hitInfo.point, endPos, (transform.position.y - endPos.y));
+            }*/
+                if (Physics.Linecast(transform.position, endPoint.transform.position, out hitInfo, mask))
+                {
+                    GameObject.FindWithTag("Player").GetComponent<MovementScript>().ZiplineTo(hitInfo.point, endPoint, (transform.position.y - endPos.y));
+                }
+            }		
 	}
 
 	private void OnDrawGizmos()
