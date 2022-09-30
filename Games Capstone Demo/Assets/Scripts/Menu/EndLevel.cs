@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
+using TMPro;
 
 public class EndLevel : MonoBehaviour
 {
@@ -14,6 +15,14 @@ public class EndLevel : MonoBehaviour
     public Button mainMenuBtn;
     public GameObject btnHighlight;
     public int nextSceneNum = -1;
+    public bool menuEnabled = false;
+
+    public Image transitionFader;
+    public GameObject loadingNum;
+    public GameObject loadingText;
+
+    private float fadeTimer = 0;
+    private bool loaded = false;
 
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
@@ -63,6 +72,12 @@ public class EndLevel : MonoBehaviour
 
     void Update()
     {
+        if (loaded)
+        {
+            fadeTimer += Time.deltaTime;
+            transitionFader.color = new Color(0, 0, 0, fadeTimer);
+        }
+
         if (gameEnded)
         {
             inputTimer += Time.unscaledDeltaTime;
@@ -174,14 +189,44 @@ public class EndLevel : MonoBehaviour
     //Load scene (asynchronous)
     IEnumerator LoadAsyncScene()
     {
+        loadingText.gameObject.SetActive(true);
         AsyncOperation asyncLoad =
             SceneManager.LoadSceneAsync(nextSceneNum);
+        asyncLoad.allowSceneActivation = false;
 
         //Wait until scene fully loads
         while (!asyncLoad.isDone)
         {
+            //Whatever happened to just getting Text.text? seriously this is dumb
+            loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = Mathf.Round((asyncLoad.progress * 100)) + "%";
+            loadingNum.gameObject.transform.Find("LoadingNum").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = 
+                loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text;
+            if (asyncLoad.progress >= 0.9f)
+            {
+                loadingNum.gameObject.SetActive(false);
+                loadingText.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
+                loadingText.gameObject.transform.Find("LoadingText").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
+                if (asyncLoad.allowSceneActivation == false)
+                {
+                    loaded = true;
+                }
+            }
+            //Allow loading when faded
+            if (transitionFader.color.a >= 1)
+                asyncLoad.allowSceneActivation = true;
             yield return null;
         }
+
+        ////////
+
+        //AsyncOperation asyncLoad =
+        //    SceneManager.LoadSceneAsync(nextSceneNum);
+
+        ////Wait until scene fully loads
+        //while (!asyncLoad.isDone)
+        //{
+        //    yield return null;
+        //}
     }
 
     void NextLevelOnClick()
@@ -213,17 +258,24 @@ public class EndLevel : MonoBehaviour
     // Turns on end game UI, pauses game and music
     public void ChangeLevel()
     {
-        pauseScript.disablePause(); // disable pause functionality
-        gameControllerScript.PlayerControls(false); // disable player controls
-        endLevelMenuUI.SetActive(true); // enable game over UI
-        gameEnded = true; // game has ended
-        // pause game music (attached to game controller object)
-        gameObject.GetComponent<AudioSource>().Pause();
-        btnHighlight.SetActive(true);
-        Time.timeScale = 0; // pause game
+        if (menuEnabled)
+        {
+            pauseScript.disablePause(); // disable pause functionality
+            gameControllerScript.PlayerControls(false); // disable player controls
+            endLevelMenuUI.SetActive(true); // enable game over UI
+            gameEnded = true; // game has ended
+                              // pause game music (attached to game controller object)
+            gameObject.GetComponent<AudioSource>().Pause();
+            btnHighlight.SetActive(true);
+            Time.timeScale = 0; // pause game
 
-        //DisplayLeaderboard();
-        //WriteLeaderboard();
+            //DisplayLeaderboard();
+            //WriteLeaderboard();
+        }
+        else
+        {
+            NextLevelOnClick();
+        }
     }
     //private void DisplayLeaderboard()
     //{

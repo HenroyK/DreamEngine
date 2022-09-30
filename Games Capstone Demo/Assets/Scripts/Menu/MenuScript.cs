@@ -221,7 +221,8 @@ public class MenuScript : MonoBehaviour
 		{
             //Whatever happened to just getting Text.text? seriously this is dumb
             loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = Mathf.Round((asyncLoad.progress * 100)) + "%";
-            loadingNum.gameObject.transform.Find("LoadingNum").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text;
+            loadingNum.gameObject.transform.Find("LoadingNum").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = 
+                loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text;
             if(asyncLoad.progress >= 0.9f)
             {
                 loadingNum.gameObject.SetActive(false);

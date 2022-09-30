@@ -1124,6 +1124,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3959074571831529636, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
+      propertyPath: menuEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959074571831529636, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: nextSceneNum
       value: 0
       objectReference: {fileID: 0}
