@@ -18,7 +18,7 @@ public class ScoreTallySpawner : MonoBehaviour
     void Awake()
     {
         Debug.Log(PlayerStats.score);
-        //PlayerStats.score = 500;
+        //PlayerStats.score = 570;
         score = PlayerStats.score;
         Debug.Log(score);
         Time.timeScale = 1;
@@ -34,7 +34,7 @@ public class ScoreTallySpawner : MonoBehaviour
         {
             spawnCounter += 10;
             spawnIntervalCounter = 0;
-            GameObject.Instantiate(tallyPrefab, this.transform.position, this.transform.rotation);
+            GameObject.Instantiate(tallyPrefab, this.transform.position, this.transform.rotation).transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
         }
     }
 }
