@@ -21,10 +21,15 @@ public class ScoreSceneScript : MonoBehaviour
         //Progress when jump is pressed, loading when hitting the end of the images
         if (Input.GetButtonDown("Jump") || Input.GetButton("Enter"))
         {
-            if (nextSceneNum != -1)
-            {
-                StartCoroutine(LoadAsyncScene());
-            }
+            LoadSceneOnClick();
+        }
+    }
+
+    public void LoadSceneOnClick()
+    {
+        if (nextSceneNum != -1)
+        {
+            StartCoroutine(LoadAsyncScene());
         }
     }
 
