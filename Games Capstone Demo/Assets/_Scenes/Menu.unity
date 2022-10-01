@@ -2097,7 +2097,7 @@ MonoBehaviour:
   loadingNum: {fileID: 1673312905}
   loadingText: {fileID: 49275044}
   btnHighlight: {fileID: 1502886227}
-  nextSceneNum: 3
+  nextSceneNum: 1
   enableQuitBtn: 0
   waitTime: 0.3
 --- !u!82 &1540553031
