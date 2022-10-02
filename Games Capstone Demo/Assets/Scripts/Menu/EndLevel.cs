@@ -27,6 +27,7 @@ public class EndLevel : MonoBehaviour
     private GameContollerScript gameControllerScript;
     private Pause pauseScript;
     private ScoreScript scoreScript;
+    private BlackFade fadeScript;
 
     private List<HighScoreEntry> leaderboard = new List<HighScoreEntry>();
 
@@ -49,6 +50,7 @@ public class EndLevel : MonoBehaviour
             pauseScript = gameController.GetComponent<Pause>();
             gameControllerScript = gameController.GetComponent<GameContollerScript>();
             scoreScript = gameController.GetComponent<ScoreScript>();
+            fadeScript = gameController.GetComponent<BlackFade>();
         }
         else
         {
@@ -213,7 +215,10 @@ public class EndLevel : MonoBehaviour
             }
             //Allow loading when faded
             if (transitionFader.color.a >= 1)
+            {
                 asyncLoad.allowSceneActivation = true;
+                fadeScript.loading = true;
+            }
             yield return null;
         }
 

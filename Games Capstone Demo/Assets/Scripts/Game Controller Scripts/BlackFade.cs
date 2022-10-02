@@ -12,6 +12,7 @@ public class BlackFade : MonoBehaviour
 	public float fadeDist;
     public float transitionTime;
     public bool transition;
+    public bool loading;
 
     private GameObject closest;
 	private float closeDist = 25;
@@ -52,6 +53,11 @@ public class BlackFade : MonoBehaviour
                 fadeTimer -= Time.deltaTime;
                 transitionFader.color = new Color(0, 0, 0, fadeTimer);
             }
+        }
+
+        if(loading)
+        {
+            transitionFader.color = new Color(0, 0, 0, 1);
         }
 
 		//Raycast to get the true distance to the closest object (so size is accounted for)
