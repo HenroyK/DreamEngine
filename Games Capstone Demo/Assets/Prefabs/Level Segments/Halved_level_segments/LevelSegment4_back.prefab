@@ -821,6 +821,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_OBJS_L4
       objectReference: {fileID: 0}
+    - target: {fileID: 4511594590597687003, guid: c5f4304e121bd6f41b4c6cffffdcb041, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301783672408286134, guid: c5f4304e121bd6f41b4c6cffffdcb041, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8987342800145208242, guid: c5f4304e121bd6f41b4c6cffffdcb041, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5f4304e121bd6f41b4c6cffffdcb041, type: 3}
 --- !u!4 &4278416237704991952 stripped
