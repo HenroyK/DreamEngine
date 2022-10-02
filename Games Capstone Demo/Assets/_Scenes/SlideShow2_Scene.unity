@@ -1506,7 +1506,7 @@ MonoBehaviour:
   audioSource: {fileID: 1540553031}
   cutsceneMusic: {fileID: 8300000, guid: 60365191d1c6c674a9dfa1d34e80b788, type: 3}
   pickClip: {fileID: 8300000, guid: dec111397c41e8d4a905d7fad84e313b, type: 3}
-  nextSceneNum: 5
+  nextSceneNum: 7
   transitionFader: {fileID: 1077022636}
   loadingNum: {fileID: 523172392}
   loadingText: {fileID: 1624668107}

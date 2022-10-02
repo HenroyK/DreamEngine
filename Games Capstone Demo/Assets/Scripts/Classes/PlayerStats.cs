@@ -16,4 +16,6 @@ public static class PlayerStats
     public static int levelSScore = 600;
     public static int levelAScore = 550;
     public static int levelBScore = 300;
+    public static int level1Score = 0;
+    public static int level2Score = 0;
 }
