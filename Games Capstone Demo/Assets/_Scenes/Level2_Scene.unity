@@ -352,11 +352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 14932268790416517, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: bRank
-      value: 300
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 14932268790416517, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: sRank
-      value: 600
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 72769453335982300, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: m_IsActive
