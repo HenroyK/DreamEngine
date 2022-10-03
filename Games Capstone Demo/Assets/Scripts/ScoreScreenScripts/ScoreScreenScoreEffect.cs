@@ -15,7 +15,7 @@ public class ScoreScreenScoreEffect : MonoBehaviour
 
         //If statements with xPerScore changes here.
         float xPerScore = 45f/PlayerStats.levelSScore;
-        targetLocation = target.transform.position + new Vector3((xPerScore*PlayerStats.scoreScreenScoreEffectCounter*10)-(45/2), 0,0);
+        targetLocation = target.transform.position + new Vector3(Mathf.Clamp((xPerScore*PlayerStats.scoreScreenScoreEffectCounter*10), 0f, 45f)-(45/2), 0,0);
         PlayerStats.scoreScreenScoreEffectCounter++;
     }
     private void Update()
