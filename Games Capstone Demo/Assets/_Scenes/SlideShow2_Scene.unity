@@ -1500,8 +1500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introImages:
-  - {fileID: 2800000, guid: 562aa930a4df928489c4c2a09084399c, type: 3}
-  - {fileID: 2800000, guid: b68bd9b181f47b542ba7cb7689d52e25, type: 3}
+  - {fileID: 2800000, guid: 992c16b0cf264b149afddf99b8b4f3b2, type: 3}
   cutsceneUI: {fileID: 1382998447}
   audioSource: {fileID: 1540553031}
   cutsceneMusic: {fileID: 8300000, guid: 60365191d1c6c674a9dfa1d34e80b788, type: 3}
