@@ -22,7 +22,7 @@ public class CutSceneScript : MonoBehaviour
     public GameObject loadingNum;
     public GameObject loadingText;
 
-    private float fadeTimer = 0;
+    private float fadeTimer = 1;
     private bool loaded = false;
 
     private int curScene = -1;
@@ -30,6 +30,7 @@ public class CutSceneScript : MonoBehaviour
     //Startup stuff
     void Start()
     {
+        transitionFader.gameObject.SetActive(true);
         audioSource.Play(0);
 
         curScene = 0;
@@ -47,6 +48,11 @@ public class CutSceneScript : MonoBehaviour
         if (loaded)
         {
             fadeTimer += Time.deltaTime;
+            transitionFader.color = new Color(0, 0, 0, fadeTimer);
+        }
+        else if (fadeTimer > 0)
+        {
+            fadeTimer -= Time.deltaTime;
             transitionFader.color = new Color(0, 0, 0, fadeTimer);
         }
 

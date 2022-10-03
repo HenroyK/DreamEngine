@@ -11,19 +11,14 @@ public class ScoreSceneScript : MonoBehaviour
     public GameObject loadingNum;
     public GameObject loadingText;
 
-    private float fadeTimer = 0;
+    private float fadeTimer = 1;
     private bool loaded = false;
 
     public int nextSceneNum = -1;
-
-    // Start is called before the first frame update
+    //Startup stuff
     void Start()
     {
-        if (loaded)
-        {
-            fadeTimer += Time.deltaTime;
-            transitionFader.color = new Color(0, 0, 0, fadeTimer);
-        }
+        transitionFader.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -33,6 +28,17 @@ public class ScoreSceneScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") || Input.GetButton("Enter"))
         {
             LoadSceneOnClick();
+        }
+
+        if (loaded)
+        {
+            fadeTimer += Time.deltaTime;
+            transitionFader.color = new Color(0, 0, 0, fadeTimer);
+        }
+        else if (fadeTimer > 0)
+        {
+            fadeTimer -= Time.deltaTime;
+            transitionFader.color = new Color(0, 0, 0, fadeTimer);
         }
     }
 
