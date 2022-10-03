@@ -36,6 +36,6 @@ public class TotalScoreScript : MonoBehaviour
                 break;
         }
 
-        
+        PlayerStats.totalScore = 0;
     }
 }
