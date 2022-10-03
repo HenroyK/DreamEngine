@@ -7,12 +7,18 @@ using UnityEngine.UI;
 
 public class ScoreSceneScript : MonoBehaviour
 {
-    public int nextSceneNum = -1;
+    public Image transitionFader;
+    public GameObject loadingNum;
+    public GameObject loadingText;
 
-    // Start is called before the first frame update
+    private float fadeTimer = 1;
+    private bool loaded = false;
+
+    public int nextSceneNum = -1;
+    //Startup stuff
     void Start()
     {
-        
+        transitionFader.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -22,6 +28,17 @@ public class ScoreSceneScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") || Input.GetButton("Enter"))
         {
             LoadSceneOnClick();
+        }
+
+        if (loaded)
+        {
+            fadeTimer += Time.deltaTime;
+            transitionFader.color = new Color(0, 0, 0, fadeTimer);
+        }
+        else if (fadeTimer > 0)
+        {
+            fadeTimer -= Time.deltaTime;
+            transitionFader.color = new Color(0, 0, 0, fadeTimer);
         }
     }
 
@@ -36,14 +53,41 @@ public class ScoreSceneScript : MonoBehaviour
     //Load scene (asynchronous)
     IEnumerator LoadAsyncScene()
     {
-
+        loadingText.gameObject.SetActive(true);
         AsyncOperation asyncLoad =
             SceneManager.LoadSceneAsync(nextSceneNum);
+        asyncLoad.allowSceneActivation = false;
 
         //Wait until scene fully loads
         while (!asyncLoad.isDone)
         {
+            //Whatever happened to just getting Text.text? seriously this is dumb
+            loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = Mathf.Round((asyncLoad.progress * 100)) + "%";
+            loadingNum.gameObject.transform.Find("LoadingNum").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text =
+                loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text;
+            if (asyncLoad.progress >= 0.9f)
+            {
+                loadingNum.gameObject.SetActive(false);
+                loadingText.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
+                loadingText.gameObject.transform.Find("LoadingText").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
+                if (asyncLoad.allowSceneActivation == false)
+                {
+                    loaded = true;
+                }
+            }
+            //Allow loading when faded
+            if (transitionFader.color.a >= 1)
+                asyncLoad.allowSceneActivation = true;
             yield return null;
         }
+
+        //AsyncOperation asyncLoad =
+        //    SceneManager.LoadSceneAsync(nextSceneNum);
+
+        ////Wait until scene fully loads
+        //while (!asyncLoad.isDone)
+        //{
+        //    yield return null;
+        //}
     }
 }
