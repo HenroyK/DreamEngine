@@ -411,6 +411,8 @@ public class MovementScript : MonoBehaviour
         }
         else
         {
+            if (currentlyGrounded && onMoving)
+                playerRigidbody.velocity += new Vector3(-globalSpeed*1.4f, 0);
             return false;
         }
     }
