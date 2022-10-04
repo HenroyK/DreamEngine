@@ -20,8 +20,6 @@ public class ScaleObject : MonoBehaviour
     public void Scale()
     {
         Vector2 diff = targetRes - currentRes;
-        print(currentRes + "|" + targetRes);
-        print(diff);
         scaledObject.transform.localScale += (scaledObject.transform.localScale * ((diff.x / targetRes.x)));
     }
 }

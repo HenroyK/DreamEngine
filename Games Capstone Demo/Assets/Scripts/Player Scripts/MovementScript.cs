@@ -304,6 +304,12 @@ public class MovementScript : MonoBehaviour
         animator.SetBool("Grounded", currentlyGrounded);
         animator.SetFloat("Vertical Speed", playerRigidbody.velocity.y);
         animator.SetBool("Zipline", ziplined);
+        //Swapping
+        if (lerpTimer < 0.9f)
+            animator.SetBool("Swapping", true);
+        else
+            animator.SetBool("Swapping", false);
+        //Dash ready audio
         if (currentDashCooldown / dashCooldown <= 0 && dashed == true)
         {
             dashed = false;
@@ -311,6 +317,7 @@ public class MovementScript : MonoBehaviour
         }
         animator.SetBool("OnMoving", onMoving);
         onMoving = false;
+
     }
 
     // Change the physics material of the collider

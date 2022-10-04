@@ -41,7 +41,8 @@ public class MenuScript : MonoBehaviour
 	//Startup stuff
 	void Start()
     {
-		audioSource.Play(0);
+        Time.timeScale = 1;
+        audioSource.Play(0);
 
 		selectedOption = 1;
         btnHighlight.transform.position =
