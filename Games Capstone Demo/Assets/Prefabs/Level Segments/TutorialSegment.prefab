@@ -31,6 +31,38 @@ Transform:
   m_Father: {fileID: 1830887329887579527}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2790407061606058743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8484859951799564171}
+  m_Layer: 5
+  m_Name: ThumbStick
+  m_TagString: Tutorial
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8484859951799564171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790407061606058743}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 586971254495693386}
+  m_Father: {fileID: 1830887329887579527}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5487704315753136409
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,9 +76,9 @@ GameObject:
   - component: {fileID: 1651423641100244736}
   - component: {fileID: 8421762555471148622}
   - component: {fileID: 2168833353940663623}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: 1_0
-  m_TagString: Untagged
+  m_TagString: Tutorial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,12 +91,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5487704315753136409}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.74, y: 13.48, z: 8.772}
+  m_LocalPosition: {x: 12.65, y: 13.7, z: 8.48}
   m_LocalScale: {x: 0.30945882, y: 0.30945882, z: 0.30945882}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1830887329887579527}
-  m_RootOrder: 11
+  m_Father: {fileID: 8484859951799564171}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8088803332108661790
 SpriteRenderer:
@@ -106,7 +138,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1068034242, guid: 194f1d105ebb2634c9945fdad19608d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -205,7 +237,7 @@ Transform:
   - {fileID: 5075562582365983531}
   - {fileID: 8651806423207796249}
   - {fileID: 5569012307594926752}
-  - {fileID: 586971254495693386}
+  - {fileID: 8484859951799564171}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
