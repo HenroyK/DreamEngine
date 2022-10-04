@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/TotalScoreScreen.unity
     guid: 0487528a8eac8f94bbdb955815bf3c96
+  - enabled: 1
+    path: Assets/_Scenes/Credits.unity
+    guid: 43e80b8a5f444a148921e07515889c9e
   m_configObjects: {}
