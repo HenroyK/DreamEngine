@@ -127,8 +127,8 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 827993acc4956c54398d676a9030c1e8, type: 3}
   jumpClip: {fileID: 8300000, guid: 471219dc6e5bfbd4d90c826e39e3b18a, type: 3}
   dashClip: {fileID: 8300000, guid: 40cd752a3affc3f418657b620a5733f0, type: 3}
-  dashReadyClip: {fileID: 8300000, guid: 0e50354484fa2724f8307799288c4b3c, type: 3}
-  changeClip: {fileID: 8300000, guid: dec111397c41e8d4a905d7fad84e313b, type: 3}
+  dashReadyClip: {fileID: 8300000, guid: 86c97e209fa8a6a42bdf97b8e6503970, type: 3}
+  changeClip: {fileID: 8300000, guid: eb745d4555e12384fa18e8d87a52834e, type: 3}
   respawnClip: {fileID: 8300000, guid: 3bdc61066664b6144a13ce8fb86d8b09, type: 3}
   stepDelay: 0.6
   dashDuration: 0.1
