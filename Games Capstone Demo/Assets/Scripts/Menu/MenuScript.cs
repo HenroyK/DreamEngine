@@ -67,8 +67,8 @@ public class MenuScript : MonoBehaviour
         }
         if (curScene > 0)
         {
-            cutsceneUI.gameObject.transform.Find("ProgressText").gameObject.SetActive(false);
-            cutsceneUI.gameObject.transform.Find("SkipText").gameObject.SetActive(false);
+            if(cutsceneUI.gameObject.transform.Find("NextB"))
+                cutsceneUI.gameObject.transform.Find("NextB").gameObject.SetActive(false);
         }
 	}
 
