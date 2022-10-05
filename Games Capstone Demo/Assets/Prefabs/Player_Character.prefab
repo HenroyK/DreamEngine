@@ -124,7 +124,7 @@ MonoBehaviour:
   coyoteTimer: 0
   jumpBoost: 2
   audioSource: {fileID: -7998740433712840455}
-  runClip: {fileID: 8300000, guid: 827993acc4956c54398d676a9030c1e8, type: 3}
+  runClip: {fileID: 8300000, guid: 33f73f3a868e3ec469c4b010758d3644, type: 3}
   jumpClip: {fileID: 8300000, guid: 471219dc6e5bfbd4d90c826e39e3b18a, type: 3}
   dashClip: {fileID: 8300000, guid: 40cd752a3affc3f418657b620a5733f0, type: 3}
   dashReadyClip: {fileID: 8300000, guid: 86c97e209fa8a6a42bdf97b8e6503970, type: 3}
