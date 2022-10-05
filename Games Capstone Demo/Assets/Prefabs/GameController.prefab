@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7284015971692104220}
   - component: {fileID: 4896599623419393352}
   m_Layer: 5
-  m_Name: SImage
+  m_Name: DImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 890b7409fe41e474fa78425e5fb15719, type: 3}
+  m_Texture: {fileID: 2800000, guid: 6caf05cd268838445b0dd2b4f64cf101, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -5822,7 +5822,7 @@ GameObject:
   - component: {fileID: 5374726862950573227}
   - component: {fileID: 3289057709365451465}
   m_Layer: 5
-  m_Name: WImage
+  m_Name: AImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5876,7 +5876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 96f69fbff679c20419864ff429e6a7b0, type: 3}
+  m_Texture: {fileID: 2800000, guid: ba0151d4953eb614d8d49c6768e475ef, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
