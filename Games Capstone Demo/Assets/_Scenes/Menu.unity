@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &28182781
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1600,7 +1600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &819923975
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2317,7 +2317,7 @@ MonoBehaviour:
   loadingText: {fileID: 49275044}
   btnHighlight: {fileID: 1502886227}
   nextSceneNum: 1
-  enableQuitBtn: 0
+  enableQuitBtn: 1
   waitTime: 0.3
 --- !u!82 &1540553031
 AudioSource:
