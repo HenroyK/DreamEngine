@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6b3495972aa58498faa1141c2aa3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 2
+  spawnDelay: 0.2
   spawnInterval: 0.05
   tallyPrefab: {fileID: -4534538935934175847, guid: 2044bc0d006a3d143bec2d6e0202e4a8, type: 3}
 --- !u!114 &312257917
@@ -1246,6 +1246,7 @@ MonoBehaviour:
   transitionFader: {fileID: 1835105612}
   loadingNum: {fileID: 1720781545}
   loadingText: {fileID: 272333355}
+  canGoNext: 0
   nextSceneNum: 3
 --- !u!82 &646069073
 AudioSource:

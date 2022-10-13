@@ -28,4 +28,8 @@ public class ScoreScreenScoreEffect : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    public void SkipScore()
+    {
+        Destroy(this.gameObject);
+    }
 }

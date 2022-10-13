@@ -10,10 +10,10 @@ public class ScoreSceneScript : MonoBehaviour
     public Image transitionFader;
     public GameObject loadingNum;
     public GameObject loadingText;
-
+    public bool canGoNext = false;
     private float fadeTimer = 1;
     private bool loaded = false;
-
+    private bool triedSkip = false;
     public int nextSceneNum = -1;
     //Startup stuff
     void Start()
@@ -44,10 +44,18 @@ public class ScoreSceneScript : MonoBehaviour
 
     public void LoadSceneOnClick()
     {
-        if (nextSceneNum != -1)
+        if(canGoNext)
         {
-            StartCoroutine(LoadAsyncScene());
+            if (nextSceneNum != -1)
+            {
+                StartCoroutine(LoadAsyncScene());
+            }
         }
+        else
+        {
+            ScoreSkip();
+        }
+       
     }
 
     //Load scene (asynchronous)
@@ -90,4 +98,20 @@ public class ScoreSceneScript : MonoBehaviour
         //    yield return null;
         //}
     }
+
+    void ScoreSkip()
+    {
+        if (!triedSkip)
+        {
+            BroadcastMessage("SkipScore");
+            StartCoroutine(WaitSkip(0.5f));
+            triedSkip = true;
+        }
+    }
+    IEnumerator WaitSkip(float pTime)
+    {
+        yield return new WaitForSecondsRealtime(pTime);
+        canGoNext = true;
+    }
+
 }
