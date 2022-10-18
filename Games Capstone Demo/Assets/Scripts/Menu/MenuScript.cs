@@ -19,8 +19,7 @@ public class MenuScript : MonoBehaviour
     public Button playBtn;
     public Button quitBtn;
     public Image transitionFader;
-    public GameObject loadingNum;
-    public GameObject loadingText;
+    public GameObject loadingThrobber;
     public GameObject btnHighlight;
     public int nextSceneNum = -1;
     public bool enableQuitBtn = false;
@@ -162,6 +161,7 @@ public class MenuScript : MonoBehaviour
                 curScene = -1;
                 if (nextSceneNum != -1)
                 {
+                    loadingThrobber.SetActive(true);
                     StartCoroutine(LoadAsyncScene());
                 }
             }
@@ -212,7 +212,6 @@ public class MenuScript : MonoBehaviour
 	//Load scene (asynchronous)
 	IEnumerator LoadAsyncScene()
     {
-        cutsceneUI.gameObject.transform.Find("LoadingTextH").gameObject.SetActive(true);
         AsyncOperation asyncLoad = 
 			SceneManager.LoadSceneAsync(nextSceneNum);
         asyncLoad.allowSceneActivation = false;
@@ -220,15 +219,8 @@ public class MenuScript : MonoBehaviour
         //Wait until scene fully loads
         while (!asyncLoad.isDone)
 		{
-            //Whatever happened to just getting Text.text? seriously this is dumb
-            loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = Mathf.Round((asyncLoad.progress * 100)) + "%";
-            loadingNum.gameObject.transform.Find("LoadingNum").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = 
-                loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text;
             if(asyncLoad.progress >= 0.9f)
             {
-                loadingNum.gameObject.SetActive(false);
-                loadingText.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
-                loadingText.gameObject.transform.Find("LoadingText").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
                 if (asyncLoad.allowSceneActivation == false)
                 {
                     loaded = true;
