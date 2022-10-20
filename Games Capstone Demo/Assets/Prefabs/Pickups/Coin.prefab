@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4862628808244180285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,6 +53,19 @@ MonoBehaviour:
   score: 1
   scoreEffect: {fileID: 4244087062777355129, guid: 65089d2e13addb440becbad99bd38706, type: 3}
   burstEffect: {fileID: 7823297336109712818, guid: c8380cb41a93ff54d8ad2acac1189009, type: 3}
+  sprites:
+  - {fileID: 1147816966, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 1463806308, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: -1132087353, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 2102503997, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: -1470934174, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 79147879, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 121937048, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 313344171, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 1835385923, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 697098035, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: -1426478945, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 884525475, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
 --- !u!54 &3143715238199361276
 Rigidbody:
   m_ObjectHideFlags: 0

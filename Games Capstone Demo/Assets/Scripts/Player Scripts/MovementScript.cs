@@ -10,6 +10,7 @@ public class MovementScript : MonoBehaviour
     public PhysicMaterial slipperyMat;
     public PhysicMaterial roughMat;
     public GameObject cooldownBar;
+    public GameObject ziplinePrompt;
     public GameObject spotLight;
     public bool spotLightToggle = false;
     public Vector3 spotLightRotation;
@@ -33,6 +34,7 @@ public class MovementScript : MonoBehaviour
     public AudioClip dashClip;
     public AudioClip dashReadyClip;
     public AudioClip changeClip;
+    public AudioClip noChangeClip;
     public AudioClip respawnClip;
     public float stepDelay = 0.3f;
     private float stepTimer = 0;
@@ -49,6 +51,7 @@ public class MovementScript : MonoBehaviour
 
     public Animator animator;
     public SpriteRenderer spriteRenderer;
+    public GameObject spriteObj;
     //
     private bool ziplined = false;
     private bool ignoreZipline = false;
@@ -66,6 +69,10 @@ public class MovementScript : MonoBehaviour
     private float swapPen;
     private bool onMoving = false;
     private GameObject zipPos;
+    private float shakeTimer = 0;
+    private bool swapHeld = false;
+    private bool showZiplinePrompt = false;
+    private Camera mainCam;
 
     // Start is called before the first frame update
     void Start()
@@ -84,10 +91,19 @@ public class MovementScript : MonoBehaviour
         }
         gameController = GameObject.FindWithTag("GameController");
         fader = gameController.GetComponent<BlackFade>();
+        mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
 
     void FixedUpdate()
     {
+        mainCam.fieldOfView = 62 - (transform.position.z/5);
+        shakeTimer -= Time.fixedDeltaTime;
+        if(shakeTimer <= 0)
+        {
+            spriteObj.transform.localPosition = Vector3.zero;
+            shakeTimer = 0;
+        }
+
         jumpTimer -= Time.fixedDeltaTime;
         if (jumpTimer <= 0)
         {
@@ -235,6 +251,10 @@ public class MovementScript : MonoBehaviour
                     {
                         ChangeDepth(depth.CheckLayer(1));
                     }
+                    else
+                    {
+                        swapHeld = false;
+                    }
                 }
             }
         }
@@ -268,6 +288,11 @@ public class MovementScript : MonoBehaviour
         {
             fader.SetFade(gameObject, Vector3.Distance(gameObject.transform.position, hit.point));
         }
+        //Zipline prompt (next frame will hide the prompt if not enabled again)
+        if (showZiplinePrompt)
+            showZiplinePrompt = false;
+        else
+            ziplinePrompt.SetActive(false);
         //Animations / Audio
         if (Input.GetAxis("Horizontal") < 0 || (!currentlyGrounded && playerRigidbody.velocity.x < 0))
         {
@@ -369,6 +394,16 @@ public class MovementScript : MonoBehaviour
             {
                 ChangeLayer(newDepth);
             }
+            else
+            {
+                if (swapHeld == false)
+                {
+                    audioSource.PlayOneShot(noChangeClip);
+                    spriteObj.transform.localPosition = new Vector3(0f, 0f, Mathf.Clamp(newDepth - depth.curDepth, -1, 1) / 2f);
+                    shakeTimer = 0.2f;
+                }
+                swapHeld = true;
+            }
         }
     }
 
@@ -435,21 +470,29 @@ public class MovementScript : MonoBehaviour
     //Zipline to a point
     public void ZiplineTo(Vector3 attachPos, GameObject endPos, float relSpeed)
     {
-        //Finish dashing before grabbing on
-        if (!ignoreZipline && !ziplined && !isDashing && !currentlyGrounded)
+        if (!ignoreZipline && !ziplined)
         {
-            transform.position = new Vector3(attachPos.x, attachPos.y - 3, attachPos.z);
-            ziplined = true;
-            zipPos = endPos;
-            ziplinePos = new Vector3(zipPos.transform.position.x, zipPos.transform.position.y - 3, zipPos.transform.position.z);
-            playerRigidbody.useGravity = false;
-            ziplineRelSpeed = relSpeed;
+            showZiplinePrompt = true;
+            ziplinePrompt.SetActive(true);
+            //Finish dashing before grabbing on
+            if (!isDashing && !currentlyGrounded && Input.GetButtonDown("Jump"))
+            {
+                showZiplinePrompt = false;
+                ziplinePrompt.SetActive(false);
+                transform.position = new Vector3(attachPos.x, attachPos.y - 3, attachPos.z);
+                ziplined = true;
+                zipPos = endPos;
+                ziplinePos = new Vector3(zipPos.transform.position.x, zipPos.transform.position.y - 3, zipPos.transform.position.z);
+                playerRigidbody.useGravity = false;
+                ziplineRelSpeed = relSpeed;
+            }
         }
     }
 
     //Finish ziplinging
     public void EndZipline()
     {
+        showZiplinePrompt = false;
         ziplined = false;
         ziplinePos = new Vector3(0, 0, 0);
         playerRigidbody.useGravity = true;

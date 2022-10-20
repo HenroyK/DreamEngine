@@ -1,5 +1,78 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1361182401156976000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960359923379622952}
+  - component: {fileID: 5565070955668413222}
+  - component: {fileID: 3006524621543310909}
+  m_Layer: 7
+  m_Name: Prompt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1960359923379622952
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361182401156976000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8171315263022377674}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 3, y: 4}
+  m_SizeDelta: {x: 3, y: 3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5565070955668413222
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361182401156976000}
+  m_CullTransparentMesh: 1
+--- !u!114 &3006524621543310909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361182401156976000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: d1d336f2d22dc0c43a2c51c49b184b9c, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &8022007116041893449
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,6 +182,7 @@ MonoBehaviour:
   slipperyMat: {fileID: 13400000, guid: 90e132eae38f1ff45b597e425bdbaf82, type: 2}
   roughMat: {fileID: 13400000, guid: f074a990f229a1b4181fd9ae58e3c947, type: 2}
   cooldownBar: {fileID: 5836240254894637982}
+  ziplinePrompt: {fileID: 1361182401156976000}
   spotLight: {fileID: 924176796843420716, guid: 8a50016834e185b428e69e0d8caa011f, type: 3}
   spotLightToggle: 0
   spotLightRotation: {x: 90, y: 0, z: 0}
@@ -129,6 +203,7 @@ MonoBehaviour:
   dashClip: {fileID: 8300000, guid: 40cd752a3affc3f418657b620a5733f0, type: 3}
   dashReadyClip: {fileID: 8300000, guid: 86c97e209fa8a6a42bdf97b8e6503970, type: 3}
   changeClip: {fileID: 8300000, guid: eb745d4555e12384fa18e8d87a52834e, type: 3}
+  noChangeClip: {fileID: 8300000, guid: bf685fe3017e2504ebbd40cca3905370, type: 3}
   respawnClip: {fileID: 8300000, guid: 3bdc61066664b6144a13ce8fb86d8b09, type: 3}
   stepDelay: 0.6
   dashDuration: 0.1
@@ -137,6 +212,7 @@ MonoBehaviour:
   depth: {fileID: 5078044890271832808}
   animator: {fileID: 6728015053132064364}
   spriteRenderer: {fileID: 2874584860296227141}
+  spriteObj: {fileID: 2677434210614466754}
   ziplineSpeed: 10
   lerpSpeed: 5
 --- !u!114 &-1646179683084080548
@@ -341,11 +417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4616267282936678609, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.61
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4616267282936678609, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4616267282936678609, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
       propertyPath: m_LocalPosition.z
@@ -397,6 +473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
+--- !u!1 &2677434210614466754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5483183536938855651, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
+  m_PrefabInstance: {fileID: 7579565159512142881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &2874584860296227141 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5680329862108798308, guid: 9888adcaf4c5c9043855d1081163b825, type: 3}
@@ -546,6 +627,10 @@ PrefabInstance:
     - target: {fileID: 7460640383160540926, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593226054475844749, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7995861641786394754, guid: 18e8e498c2029a545acff1a66f3d566e, type: 3}

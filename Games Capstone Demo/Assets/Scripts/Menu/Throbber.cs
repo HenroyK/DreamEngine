@@ -11,7 +11,6 @@ public class Throbber : MonoBehaviour
 
     private float fps = 14;
     private int frame = 0;
-    private float timer = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,23 +23,11 @@ public class Throbber : MonoBehaviour
     {
         while (gameObject.activeSelf != false)
         {
-            print("throbbing");
-            print(gameObject.activeSelf != false);
-            print(frame);
+            //Animation because unity doesnt do this easy
             frame += 1;
             if (frame >= sprites.Length)
                 frame = 0;
             image.sprite = sprites[frame];
-            //Animation because unity doesnt do this easy
-            /*timer += Time.fixedDeltaTime;
-            if (timer > 1 / fps)
-            {
-                timer = 0;
-                frame += 1;
-                if (frame >= sprites.Length)
-                    frame = 0;
-                image.sprite = sprites[frame];
-            }*/
             yield return new WaitForSeconds(1/fps);
         }
     }

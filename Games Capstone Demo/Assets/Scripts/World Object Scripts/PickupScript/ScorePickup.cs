@@ -12,6 +12,19 @@ public class ScorePickup : CollectableScript
     private GameObject scoreEffect;
     [SerializeField]
     private GameObject burstEffect;
+    [SerializeField]
+    public Sprite[] sprites;
+
+    private void Start()
+    {
+        //Choose a random sprite if there is any
+        if(sprites.Length > 0)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0,sprites.Length-1)];
+            gameObject.GetComponent<Animator>().enabled = false;
+        }
+    }
+
     public override void PickUp()
     {
         GameObject scoreController = GameObject.FindGameObjectWithTag("GameController");

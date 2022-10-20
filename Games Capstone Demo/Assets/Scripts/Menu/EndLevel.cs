@@ -18,8 +18,7 @@ public class EndLevel : MonoBehaviour
     public bool menuEnabled = false;
 
     public Image transitionFader;
-    public GameObject loadingNum;
-    public GameObject loadingText;
+    public GameObject loadingThrobber;
 
     private float fadeTimer = 0;
     private bool loaded = false;
@@ -191,7 +190,7 @@ public class EndLevel : MonoBehaviour
     //Load scene (asynchronous)
     IEnumerator LoadAsyncScene()
     {
-        loadingText.gameObject.SetActive(true);
+        loadingThrobber.SetActive(true);
         AsyncOperation asyncLoad =
             SceneManager.LoadSceneAsync(nextSceneNum);
         asyncLoad.allowSceneActivation = false;
@@ -199,15 +198,8 @@ public class EndLevel : MonoBehaviour
         //Wait until scene fully loads
         while (!asyncLoad.isDone)
         {
-            //Whatever happened to just getting Text.text? seriously this is dumb
-            loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = Mathf.Round((asyncLoad.progress * 100)) + "%";
-            loadingNum.gameObject.transform.Find("LoadingNum").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = 
-                loadingNum.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text;
             if (asyncLoad.progress >= 0.9f)
             {
-                loadingNum.gameObject.SetActive(false);
-                loadingText.GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
-                loadingText.gameObject.transform.Find("LoadingText").GetComponent<TextMeshProUGUI>().GetComponent<TMP_Text>().text = "Done!";
                 if (asyncLoad.allowSceneActivation == false)
                 {
                     loaded = true;

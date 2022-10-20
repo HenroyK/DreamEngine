@@ -72,6 +72,7 @@ public class CutSceneScript : MonoBehaviour
                 curScene = -1;
                 if (nextSceneNum != -1)
                 {
+                    loadingThrobber.SetActive(true);
                     StartCoroutine(LoadAsyncScene());
                 }
             }
