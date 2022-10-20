@@ -24,6 +24,6 @@ public class PickupDestinationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.transform.position = sceneCamera.ScreenToWorldPoint(new Vector3(1600, 900, 20));
+        this.gameObject.transform.position = sceneCamera.ScreenToWorldPoint(new Vector3(Screen.width * 0.83f, Screen.height * 0.83f, 20));
     }
 }
