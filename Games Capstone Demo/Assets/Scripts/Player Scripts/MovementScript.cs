@@ -104,6 +104,16 @@ public class MovementScript : MonoBehaviour
             shakeTimer = 0;
         }
 
+        //Drop through platform
+        /*if(Input.GetAxis("DropThrough") != 0)
+        {
+            GameObject[] passables = GameObject.FindGameObjectsWithTag("Passable");
+            foreach (GameObject passable in passables)
+            {
+                passable.BroadcastMessage("DropThrough");
+            }
+        }*/
+
         jumpTimer -= Time.fixedDeltaTime;
         if (jumpTimer <= 0)
         {
