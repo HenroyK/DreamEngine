@@ -8,7 +8,7 @@ public class UnpauseTrigger : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameContollerScript>().UnPauseTimer();
         
-        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Tutorial"))
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Trigger"))
         {
             Debug.Log(g);
             g.BroadcastMessage("DeleteTrigger");
