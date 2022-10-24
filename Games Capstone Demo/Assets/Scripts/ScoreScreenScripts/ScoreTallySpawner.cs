@@ -6,7 +6,7 @@ public class ScoreTallySpawner : MonoBehaviour
 {
     private int score = 0;
     [SerializeField]
-    private float spawnDelay = 2;
+    private float spawnDelay = 0.2f;
     private float spawnDelayCounter = 0;
     [SerializeField]
     private float spawnInterval = 0.05f;
@@ -36,5 +36,9 @@ public class ScoreTallySpawner : MonoBehaviour
             spawnIntervalCounter = 0;
             GameObject.Instantiate(tallyPrefab, this.transform.position, this.transform.rotation).transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
         }
+    }
+    public void SkipScore()
+    {
+        this.enabled = false;
     }
 }

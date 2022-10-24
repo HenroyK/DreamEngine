@@ -82,4 +82,20 @@ public class ScoreSceneScript : MonoBehaviour
         //    yield return null;
         //}
     }
+
+    void ScoreSkip()
+    {
+        if (!triedSkip)
+        {
+            BroadcastMessage("SkipScore");
+            StartCoroutine(WaitSkip(0.5f));
+            triedSkip = true;
+        }
+    }
+    IEnumerator WaitSkip(float pTime)
+    {
+        yield return new WaitForSecondsRealtime(pTime);
+        canGoNext = true;
+    }
+
 }
