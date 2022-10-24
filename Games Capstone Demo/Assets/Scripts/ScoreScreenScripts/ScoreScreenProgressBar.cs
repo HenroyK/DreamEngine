@@ -49,7 +49,10 @@ public class ScoreScreenProgressBar : MonoBehaviour
             {
                 scoreStamp.GetComponent<ScoreStampScript>().DisplayStamp(ScoreStampScript.Stamp.C);
             }
-            this.enabled = false;
         }
+    }
+    public void SkipScore()
+    {
+        FillScore(score);
     }
 }

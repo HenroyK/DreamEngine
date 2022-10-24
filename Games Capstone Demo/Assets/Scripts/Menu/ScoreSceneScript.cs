@@ -13,6 +13,9 @@ public class ScoreSceneScript : MonoBehaviour
     private float fadeTimer = 1;
     private bool loaded = false;
 
+    private bool canGoNext = false;
+    private bool triedSkip = false;
+
     public int nextSceneNum = -1;
     //Startup stuff
     void Start()
@@ -82,4 +85,20 @@ public class ScoreSceneScript : MonoBehaviour
         //    yield return null;
         //}
     }
+
+    void ScoreSkip()
+    {
+        if (!triedSkip)
+        {
+            BroadcastMessage("SkipScore");
+            StartCoroutine(WaitSkip(0.5f));
+            triedSkip = true;
+        }
+    }
+    IEnumerator WaitSkip(float pTime)
+    {
+        yield return new WaitForSecondsRealtime(pTime);
+        canGoNext = true;
+    }
+
 }

@@ -35,7 +35,5 @@ public class TotalScoreScript : MonoBehaviour
                 stamp.GetComponent<ScoreStampScript>().DisplayStamp(ScoreStampScript.Stamp.C);
                 break;
         }
-
-        PlayerStats.totalScore = 0;
     }
 }

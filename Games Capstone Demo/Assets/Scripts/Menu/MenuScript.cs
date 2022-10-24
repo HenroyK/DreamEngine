@@ -40,6 +40,8 @@ public class MenuScript : MonoBehaviour
 	//Startup stuff
 	void Start()
     {
+        PlayerStats.totalScore = 0;
+
         Time.timeScale = 1;
         audioSource.Play(0);
 
