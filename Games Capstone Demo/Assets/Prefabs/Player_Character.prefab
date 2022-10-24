@@ -233,6 +233,7 @@ MonoBehaviour:
   - {x: 10, y: 36}
   - {x: 20, y: 36}
   respawnDelay: 1
+  spawnEffect: {fileID: 4244087062777355129, guid: 76eae608479d8ca4fa6dc39f3c10308a, type: 3}
 --- !u!114 &5078044890271832808
 MonoBehaviour:
   m_ObjectHideFlags: 0

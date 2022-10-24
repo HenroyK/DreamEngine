@@ -13,6 +13,8 @@ public class DropInRespawn : MonoBehaviour
 
     public float respawnDelay = 1.0f;
 
+    public GameObject spawnEffect;
+
     private float curRespawnDelay;
     private bool respawning = false;
     private Vector3 curRespawnPosition;
@@ -148,6 +150,8 @@ public class DropInRespawn : MonoBehaviour
 
     private void RepositionPlayer(Vector3 position)
     {
+        GameObject effect = Instantiate(spawnEffect);
+        effect.transform.position = playerCharacter.transform.position;
         curRespawnPosition = position;
         respawning = true;
         playerCharacter.transform.position = curRespawnPosition;  // reposition player
