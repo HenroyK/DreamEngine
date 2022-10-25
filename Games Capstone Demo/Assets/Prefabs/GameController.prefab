@@ -3940,7 +3940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 8022007116041893449, guid: b89e4bae75b720242b05bb0c2f20ff49, type: 3}
   playerSpawn: {fileID: 8135401473251834655}
-  playerSpawnLayer: 1
+  playerSpawnLayer: 2
   enableLifes: 0
   audioManager: {fileID: 0}
   commandList:
@@ -4022,6 +4022,8 @@ MonoBehaviour:
     layerNo: 0
     layerState: 0
   commandListIndex: 0
+  checkpointDelay: 0
+  pauseTimer: 0
 --- !u!114 &14932268790416517
 MonoBehaviour:
   m_ObjectHideFlags: 0

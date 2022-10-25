@@ -379,14 +379,6 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
-      propertyPath: playerSpawn
-      value: 
-      objectReference: {fileID: 642384427}
-    - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
-      propertyPath: playerSpawnLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135416542360553610, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: commandList.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -736,11 +728,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
---- !u!1 &642384427 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8135401473251834655, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
-  m_PrefabInstance: {fileID: 642384426}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &642384428 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6135416543534961545, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
