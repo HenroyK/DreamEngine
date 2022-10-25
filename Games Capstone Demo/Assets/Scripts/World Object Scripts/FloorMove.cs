@@ -28,7 +28,7 @@ public class FloorMove : MonoBehaviour
     }
 
     //Speed change message subscription
-    public void ChangeSpeed(float newSpeed)
+    public void UpdateSpeed(float newSpeed)
     {
         speed = newSpeed;
     }

@@ -12,6 +12,8 @@ TagManager:
   - QuitBtn
   - MovePoint
   - Canvas
+  - Moving
+  - Background
   layers:
   - Default
   - TransparentFX

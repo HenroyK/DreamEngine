@@ -126,6 +126,8 @@ public class GameContollerScript : MonoBehaviour
                 case Command.CommandType.ChangeSpeed:
                     globalSpeed = nextCommand.speed;
                     player.BroadcastMessage("UpdateSpeed", globalSpeed);
+                    GameObject background = GameObject.FindWithTag("Background");
+                    background.GetComponent<FloorMove>().BroadcastMessage("UpdateSpeed", globalSpeed);
                     foreach (GameObject a in movingObjects)
                     {
                         a.BroadcastMessage("ChangeSpeed", globalSpeed);
