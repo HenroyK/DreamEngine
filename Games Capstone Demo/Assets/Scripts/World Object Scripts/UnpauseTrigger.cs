@@ -10,9 +10,7 @@ public class UnpauseTrigger : MonoBehaviour
         
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Trigger"))
         {
-            Debug.Log(g);
             g.BroadcastMessage("DeleteTrigger");
         }
-        BroadcastMessage("DeleteTrigger");
     }
 }
