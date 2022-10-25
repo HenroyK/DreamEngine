@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class PlayerStats
 {
+    public static bool hasSpawnedFPSCounter = false;
+    public static bool showFPSCounter = false;
     public static int score = 0;
     public static int totalScore = 0;
     //public static int numPickups = 0;
