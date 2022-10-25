@@ -129,7 +129,7 @@ public class GameContollerScript : MonoBehaviour
                     globalSpeed = nextCommand.speed;
                     player.BroadcastMessage("UpdateSpeed", globalSpeed);
                     GameObject background = GameObject.FindWithTag("Background");
-                    background.GetComponent<FloorMove>().BroadcastMessage("UpdateSpeed", globalSpeed);
+                    background.GetComponent<FloorMove>().BroadcastMessage("ChangeSpeed", globalSpeed);
                     foreach (GameObject a in movingObjects)
                     {
                         if (a != null)

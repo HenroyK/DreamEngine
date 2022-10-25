@@ -374,10 +374,6 @@ PrefabInstance:
       propertyPath: startComboTimer
       value: 6.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3096351789698885461, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.8
-      objectReference: {fileID: 0}
     - target: {fileID: 3959074571831529636, guid: cb0b64295492e4f4d87b4d12fc69ac7c, type: 3}
       propertyPath: nextSceneNum
       value: 5
