@@ -13,6 +13,8 @@ public class DropInRespawn : MonoBehaviour
 
     public float respawnDelay = 1.0f;
 
+    public GameObject playerSprite;
+
     private float curRespawnDelay;
     private bool respawning = false;
     private Vector3 curRespawnPosition;
@@ -148,6 +150,7 @@ public class DropInRespawn : MonoBehaviour
 
     private void RepositionPlayer(Vector3 position)
     {
+        playerSprite.SetActive(false);
         curRespawnPosition = position;
         respawning = true;
         playerCharacter.transform.position = curRespawnPosition;  // reposition player
@@ -160,6 +163,7 @@ public class DropInRespawn : MonoBehaviour
 
     private void DropPlayerInWorld(Vector3 position)
     {
+        playerSprite.SetActive(true);
         playerCharacter.transform.position = position;  // reposition player
         // reset player velocity
         playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
