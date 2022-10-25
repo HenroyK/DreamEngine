@@ -21,7 +21,7 @@ public class FPSCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tilde))
+        if (Input.GetKeyDown(KeyCode.BackQuote))
         {
             PlayerStats.showFPSCounter = !PlayerStats.showFPSCounter;
         }
