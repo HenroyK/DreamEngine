@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 4095687058576012272}
   - component: {fileID: 1820835639791396292}
   - component: {fileID: 2547705879411515039}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: trigger
-  m_TagString: DoesntBlockSwap
+  m_TagString: Tutorial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

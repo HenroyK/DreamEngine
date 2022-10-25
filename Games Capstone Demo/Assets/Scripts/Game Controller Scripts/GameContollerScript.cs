@@ -30,7 +30,9 @@ public class GameContollerScript : MonoBehaviour
 
     private float delay = 0;
     private float globalSpeed;
+    [SerializeField]
     private float checkpointDelay;
+    [SerializeField]
     private bool pauseTimer = false;
 
     
@@ -128,7 +130,11 @@ public class GameContollerScript : MonoBehaviour
                     player.BroadcastMessage("UpdateSpeed", globalSpeed);
                     foreach (GameObject a in movingObjects)
                     {
-                        a.BroadcastMessage("ChangeSpeed", globalSpeed);
+                        if (a != null)
+                        {
+                            a.BroadcastMessage("ChangeSpeed", globalSpeed);
+                        }
+
                         
                         //a.GetComponent<BlockMove>().ChangeSpeed(globalSpeed);
                     }

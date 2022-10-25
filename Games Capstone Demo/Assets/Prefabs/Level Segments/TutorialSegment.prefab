@@ -211,7 +211,8 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7385301690001385176, guid: 54ac07bf68916c2449a9e1f2bf7820e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 54ac07bf68916c2449a9e1f2bf7820e6, type: 3}
 --- !u!4 &3081519195152656489 stripped
 Transform:
@@ -823,7 +824,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Billboard_3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1805178239242617945, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
+    - {fileID: 3574371532195527016, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
+    - {fileID: 1311540342463078493, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
+    - {fileID: 3795180385678459438, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 08faec2b6ee769943b844076d18133e7, type: 3}
 --- !u!4 &5569012307594926752 stripped
 Transform:
