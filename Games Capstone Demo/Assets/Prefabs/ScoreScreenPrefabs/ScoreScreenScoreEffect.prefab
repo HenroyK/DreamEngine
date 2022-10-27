@@ -90,3 +90,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
+  sprites:
+  - {fileID: 1147816966, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 1463806308, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: -1132087353, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 2102503997, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: -1470934174, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 79147879, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 121937048, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 313344171, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 1835385923, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 697098035, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: -1426478945, guid: ea2a189f0547abc439d72c098fc043be, type: 3}
+  - {fileID: 884525475, guid: ea2a189f0547abc439d72c098fc043be, type: 3}

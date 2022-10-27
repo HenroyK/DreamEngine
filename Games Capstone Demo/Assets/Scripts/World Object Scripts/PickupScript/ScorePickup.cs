@@ -34,8 +34,10 @@ public class ScorePickup : CollectableScript
 
         GameObject effect = Instantiate(scoreEffect);
         effect.transform.position = this.gameObject.transform.position;
+        effect.gameObject.GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         effect = Instantiate(burstEffect);
         effect.transform.position = this.gameObject.transform.position;
+        PlayerStats.levelScoreCount++;
         Destroy(this.gameObject);
     }
 }
