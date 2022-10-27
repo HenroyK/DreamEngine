@@ -15,5 +15,6 @@ public class SetScoreTargets : MonoBehaviour
         PlayerStats.levelAScore = aRank;
         PlayerStats.levelBScore = bRank;
         PlayerStats.scoreScreenScoreEffectCounter = 0;
+        PlayerStats.levelScoreCount = 0;
     }
 }

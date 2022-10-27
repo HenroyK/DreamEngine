@@ -42,6 +42,7 @@ public class MenuScript : MonoBehaviour
     {
         PlayerStats.totalScore = 0;
 
+
         Time.timeScale = 1;
         audioSource.Play(0);
 
