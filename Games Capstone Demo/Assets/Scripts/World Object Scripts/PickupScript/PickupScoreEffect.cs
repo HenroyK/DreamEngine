@@ -12,6 +12,7 @@ public class PickupScoreEffect : MonoBehaviour
     private float speedChangeDistance = 0;
     void Start()
     {
+
         target = GameObject.FindGameObjectWithTag("PickupEffectTarget");
         //Debug.Log(target.transform.position);
         speedChangeDistance = Vector3.Distance(transform.position, target.transform.position) * (speedChangePercent);
