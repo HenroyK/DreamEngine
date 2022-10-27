@@ -45,7 +45,7 @@ public class MovementScript : MonoBehaviour
     private float currentDashCooldown = -1;
     private float currentDashDuration = -1;
     private bool isDashing = false;
-    private float dashDirection;
+    private string dashDirection;
 
     public DepthBehaviour depth;
 
@@ -152,11 +152,40 @@ public class MovementScript : MonoBehaviour
             currentDashDuration = dashDuration;
             currentDashCooldown = dashCooldown;
             //set which direction to dash
-            dashDirection = Input.GetAxis("Horizontal");
+            //dashDirection = Input.GetAxis("Horizontal");
             //set dashing state
             isDashing = true;
             dashed = true;
         }
+        else if (!ziplined && (Input.GetAxis("DashLeft") != 0) && !isDashing && currentDashCooldown <= 0)
+        {
+            // left trigger dash
+            animator.SetTrigger("Dash");
+            playerRigidbody.useGravity = false;
+            audioSource.PlayOneShot(dashClip);
+            currentDashDuration = dashDuration;
+            currentDashCooldown = dashCooldown;
+            //set which direction to dash
+            dashDirection = "left";
+            //set dashing state
+            isDashing = true;
+            dashed = true;
+        }
+        else if (!ziplined && (Input.GetAxis("DashRight") != 0) && !isDashing && currentDashCooldown <= 0)
+        {
+            // right trigger dash
+            animator.SetTrigger("Dash");
+            playerRigidbody.useGravity = false;
+            audioSource.PlayOneShot(dashClip);
+            currentDashDuration = dashDuration;
+            currentDashCooldown = dashCooldown;
+            //set which direction to dash
+            dashDirection = "right";
+            //set dashing state
+            isDashing = true;
+            dashed = true;
+        }
+
         //Tick down dash duration
         currentDashDuration -= Time.deltaTime;
         currentDashCooldown -= Time.deltaTime;
@@ -174,8 +203,14 @@ public class MovementScript : MonoBehaviour
 
         if (isDashing)  //when dashing.
         {
+            //When doing a standing dash
+            if (dashDirection == "left")
+                playerRigidbody.velocity = new Vector3(-dashSpeed, 0);
+            else if (dashDirection == "right")
+                playerRigidbody.velocity = new Vector3(dashSpeed, 0);
+
             //When dashing, move in a set direction
-            if (Input.GetAxis("Horizontal") != 0)
+            else if (Input.GetAxis("Horizontal") != 0)
             {
                 if (Input.GetAxis("Horizontal") > 0)
                     playerRigidbody.velocity = new Vector3(dashSpeed, 0);

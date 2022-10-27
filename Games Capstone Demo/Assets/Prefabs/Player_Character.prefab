@@ -206,8 +206,8 @@ MonoBehaviour:
   noChangeClip: {fileID: 8300000, guid: bf685fe3017e2504ebbd40cca3905370, type: 3}
   respawnClip: {fileID: 8300000, guid: 3bdc61066664b6144a13ce8fb86d8b09, type: 3}
   stepDelay: 0.6
-  dashDuration: 0.1
-  dashCooldown: 3
+  dashDuration: 0.15
+  dashCooldown: 1.5
   dashSpeed: 60
   depth: {fileID: 5078044890271832808}
   animator: {fileID: 6728015053132064364}
