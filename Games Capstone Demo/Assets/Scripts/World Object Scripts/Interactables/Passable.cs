@@ -24,7 +24,7 @@ public class Passable : MonoBehaviour
         //Non collide if player below collider bounds
         if (collider != null && player != null)
         {
-            if (player.transform.position.y <= transform.position.y + collider.bounds.size.y || drop)
+            if (player.transform.position.y <= (transform.position.y + collider.bounds.size.y + 1.5f) || drop)
                 collider.enabled = false;
             else
                 collider.enabled = true;
@@ -34,9 +34,10 @@ public class Passable : MonoBehaviour
             player = GameObject.FindWithTag("Player");
             collider = gameObject.GetComponent<Collider>();
         }
+        drop = false;
     }
 
-    void DropThrough()
+    public void DropThrough()
     {
         if(droppable)
             drop = true;

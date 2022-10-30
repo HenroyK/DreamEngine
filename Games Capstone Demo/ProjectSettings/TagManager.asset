@@ -15,6 +15,7 @@ TagManager:
   - Moving
   - Background
   - Trigger
+  - Passable
   layers:
   - Default
   - TransparentFX

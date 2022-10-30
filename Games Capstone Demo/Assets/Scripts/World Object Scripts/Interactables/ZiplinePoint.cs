@@ -23,23 +23,19 @@ public class ZiplinePoint : MonoBehaviour
 		{
             //transform.LookAt(endPoint.transform);
 			endPos = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y - 1, endPoint.transform.position.z);
-            /*RaycastHit[] blockDetect = Physics.BoxCastAll(transform.position, new Vector3(0.5f, 0.5f, 0.5f), (transform.position-endPoint.transform.position).normalized,
-                transform.rotation, Vector3.Distance(transform.position, endPoint.transform.position));
-            foreach (RaycastHit hit in blockDetect)
+            if (Physics.Linecast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(endPoint.transform.position.x, endPoint.transform.position.y + 1, endPoint.transform.position.z), out hitInfo, mask) || Physics.Linecast(new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), new Vector3(endPoint.transform.position.x, endPoint.transform.position.y - 1, endPoint.transform.position.z), out hitInfo, mask))
             {
-                if (hit.collider.tag == "Player")
-                    GameObject.FindWithTag("Player").GetComponent<MovementScript>().ZiplineTo(hitInfo.point, endPos, (transform.position.y - endPos.y));
-            }*/
-                if (Physics.Linecast(transform.position, endPoint.transform.position, out hitInfo, mask))
-                {
-                    GameObject.FindWithTag("Player").GetComponent<MovementScript>().ZiplineTo(hitInfo.point, endPoint, (transform.position.y - endPos.y));
-                }
-            }		
+                GameObject.FindWithTag("Player").GetComponent<MovementScript>().ZiplineTo(hitInfo.point, endPoint, (transform.position.y - endPos.y));
+            }
+        }		
 	}
 
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;
-		Gizmos.DrawLine(transform.position, endPoint.transform.position);
-	}
+        Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(endPoint.transform.position.x, endPoint.transform.position.y + 1, endPoint.transform.position.z));
+        Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), new Vector3(endPoint.transform.position.x, endPoint.transform.position.y - 1, endPoint.transform.position.z));
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position,endPoint.transform.position);
+    }
 }

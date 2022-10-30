@@ -105,14 +105,15 @@ public class MovementScript : MonoBehaviour
         }
 
         //Drop through platform
-        /*if(Input.GetAxis("DropThrough") != 0)
+        if(Input.GetButton("Dash"))
         {
+            jumpTimer = 0f;
             GameObject[] passables = GameObject.FindGameObjectsWithTag("Passable");
             foreach (GameObject passable in passables)
             {
                 passable.BroadcastMessage("DropThrough");
             }
-        }*/
+        }
 
         jumpTimer -= Time.fixedDeltaTime;
         if (jumpTimer <= 0)
@@ -252,7 +253,7 @@ public class MovementScript : MonoBehaviour
                 }
 
                 //Jump
-                if (Input.GetButtonDown("Jump"))
+                if (Input.GetButtonDown("Jump") && !Input.GetButtonDown("Dash"))
                 {
                     Jump();
                     //Debug.Log("normal jump 1");
@@ -275,7 +276,7 @@ public class MovementScript : MonoBehaviour
                 else
                 {
                     //Jump
-                    if (Input.GetButtonDown("Jump"))
+                    if (Input.GetButtonDown("Jump") && !Input.GetButtonDown("Dash"))
                     {
                         Jump();
                         //Debug.Log("normal jump 2");

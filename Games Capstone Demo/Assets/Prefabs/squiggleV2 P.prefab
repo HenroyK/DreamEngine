@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6179973997384940765}
   m_Layer: 6
   m_Name: squiggleV2 P
-  m_TagString: Untagged
+  m_TagString: Passable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d11f8c5cecb804c9bb0ad3ffd82582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droppable: 0
 --- !u!1 &5946506801227666190
 GameObject:
   m_ObjectHideFlags: 0
