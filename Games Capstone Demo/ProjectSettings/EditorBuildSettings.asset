@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: 7b211292e79248e4f979a7c759d019ab
   - enabled: 1
     path: Assets/_Scenes/Level1ScoreScreen.unity
-    guid: ef76e7d22f6367c44b22b4c645e79b6b
+    guid: 5e5aeed553d1b134c92150e8539c8244
   - enabled: 1
     path: Assets/_Scenes/SlideShow1_Scene.unity
     guid: 961600110059bc148af34048b6a82084
@@ -22,7 +22,7 @@ EditorBuildSettings:
     guid: f96b76579d775894f9ffcee41fcc2bd6
   - enabled: 1
     path: Assets/_Scenes/Level2ScoreScreen.unity
-    guid: d650b12cfe84054498632829b5fb5c60
+    guid: 3258a31102ddacf468ff76fd4a832175
   - enabled: 1
     path: Assets/_Scenes/SlideShow2_Scene.unity
     guid: aad29615a0bb995438873663c3f23c40

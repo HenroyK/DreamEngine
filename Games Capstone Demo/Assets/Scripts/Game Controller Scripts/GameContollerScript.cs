@@ -35,7 +35,7 @@ public class GameContollerScript : MonoBehaviour
     [SerializeField]
     private bool pauseTimer = false;
 
-    
+
 
     //Below is stuff for later.
     //public List<GameObject> otherSpawnMovingObjects = new List<GameObject>();
