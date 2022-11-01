@@ -18,7 +18,6 @@ public class ScoreTallySpawner : MonoBehaviour
     void Awake()
     {
         Debug.Log(PlayerStats.score);
-        //PlayerStats.score = 570;
         score = PlayerStats.score;
         Debug.Log(score);
         Time.timeScale = 1;

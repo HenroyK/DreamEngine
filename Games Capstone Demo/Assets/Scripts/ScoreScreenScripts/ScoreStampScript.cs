@@ -12,6 +12,8 @@ public class ScoreStampScript : MonoBehaviour
     private GameObject scoreStampC;
     [SerializeField]
     private GameObject scoreStampS;
+    [SerializeField]
+    private GameObject memoryImage;
     public AudioSource audioSource;
     public AudioClip audioClip;
     public enum Stamp {A, B, C, S}
@@ -33,6 +35,7 @@ public class ScoreStampScript : MonoBehaviour
                 scoreStampS.SetActive(true);
                 break;
         }
+        memoryImage.SetActive(true);
         audioSource.PlayOneShot(audioClip);
     }
 }

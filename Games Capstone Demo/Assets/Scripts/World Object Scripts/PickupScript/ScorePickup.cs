@@ -17,6 +17,7 @@ public class ScorePickup : CollectableScript
 
     private void Start()
     {
+        PlayerStats.pickupMax += 1;
         //Choose a random sprite if there is any
         if(sprites.Length > 0)
         {
