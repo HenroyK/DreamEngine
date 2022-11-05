@@ -64,6 +64,7 @@ public class CutSceneScript : MonoBehaviour
 
     void ProceedScene()
     {
+        // Move to next scene
         if (Input.GetButtonDown("Jump") && curScene >= 0)
         {
             curScene++;
@@ -79,6 +80,7 @@ public class CutSceneScript : MonoBehaviour
             else
                 cutsceneUI.GetComponent<RawImage>().texture = introImages[curScene];
         }
+        // Skip cutscene sequence
         if (Input.GetButtonDown("Dash"))
         {
             curScene = -1;
@@ -112,14 +114,5 @@ public class CutSceneScript : MonoBehaviour
                 asyncLoad.allowSceneActivation = true;
             yield return null;
         }
-
-        //AsyncOperation asyncLoad =
-        //    SceneManager.LoadSceneAsync(nextSceneNum);
-
-        ////Wait until scene fully loads
-        //while (!asyncLoad.isDone)
-        //{
-        //    yield return null;
-        //}
     }
 }

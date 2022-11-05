@@ -8,11 +8,8 @@ using UnityEngine;
 public class DropInRespawn : MonoBehaviour
 {
     public Vector2 defaultRespawn = new Vector2(0, 30);
-    
     public Vector2[] respawnPostions;
-
     public float respawnDelay = 1.0f;
-
     public GameObject spawnEffect;
 
     private float curRespawnDelay;
@@ -26,9 +23,6 @@ public class DropInRespawn : MonoBehaviour
     private int curLayer;
 	private BlackFade fader;
 
-    //private bool blockDetect = false;
-    //private RaycastHit blockRaycastHit;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -40,17 +34,17 @@ public class DropInRespawn : MonoBehaviour
             depthScript = playerCharacter.GetComponent<DepthBehaviour>();
         }
         else
-        {
-            Debug.Log("Error. Couldn't find Player object.");
-        }
+        { Debug.Log("Error. Couldn't find Player object."); }
 
         curRespawnDelay = respawnDelay;
 
+        // get all available layers from depth script
         layerActive = depthScript.layerAvailable;
         layerZAxis = depthScript.layerAxis;
         curLayer = depthScript.curDepth;
     }
 
+    // Drop player back into the level after the delay timer runs out
     private void Update()
     {
         if (respawning)
@@ -74,6 +68,7 @@ public class DropInRespawn : MonoBehaviour
     {
         fader.ResetFade();
 		playerCharacter.GetComponent<MovementScript>().PlayAudio("Respawn");
+
         // 1.checks current layer to see if any spawn positions are free
         curLayer = depthScript.curDepth;
 
@@ -148,14 +143,15 @@ public class DropInRespawn : MonoBehaviour
                 defaultRespawn.x, defaultRespawn.y, layerZAxis[curLayer]));
     }
 
+    // Respawns player on death
     private void RepositionPlayer(Vector3 position)
     {
-        GameObject effect = Instantiate(spawnEffect);
-        effect.transform.position = playerCharacter.transform.position;
+        GameObject effect = Instantiate(spawnEffect); // spawn effect
+        effect.transform.position = playerCharacter.transform.position; // set effect position
         curRespawnPosition = position;
         respawning = true;
         playerCharacter.transform.position = curRespawnPosition;  // reposition player
-        // reset player velocity
+        // reset player velocity and hold player in spawn position
         playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
         playerCharacter.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         playerCharacter.GetComponent<Rigidbody>().useGravity = false;
@@ -165,7 +161,7 @@ public class DropInRespawn : MonoBehaviour
     private void DropPlayerInWorld(Vector3 position)
     {
         playerCharacter.transform.position = position;  // reposition player
-        // reset player velocity
+        // reset player velocity, and re-enable player in the level
         playerCharacter.GetComponent<Rigidbody>().velocity = Vector3.zero;
         playerCharacter.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         playerCharacter.GetComponent<Rigidbody>().useGravity = true;

@@ -6,6 +6,7 @@ public class MuteManager : MonoBehaviour
 {
     private bool isMuted;
     
+    // Get mute state on start
     void Start()
     {
         isMuted = PlayerPrefs.GetInt("MUTED") == 1;
@@ -15,22 +16,16 @@ public class MuteManager : MonoBehaviour
             AudioListener.volume = 0;
         }
     }
-
+    // Toggle mute state
     public void MutePressed()
     {
         isMuted = !isMuted;
-        //AudioListener.pause = isMuted;
         PlayerPrefs.SetInt("MUTED", isMuted ? 1 : 0);
         if (isMuted)
-        {
-            AudioListener.volume = 0;
-        }
+        { AudioListener.volume = 0; }
         else
-        {
-            AudioListener.volume = 1;
-        }
+        { AudioListener.volume = 1; }
     }
-
     void Update()
     {
         if (Input.GetButtonDown("Mute"))

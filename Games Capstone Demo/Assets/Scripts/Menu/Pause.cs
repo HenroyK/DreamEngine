@@ -55,16 +55,16 @@ public class Pause : MonoBehaviour
         // position selected highlight Icon/shade
     }
 
-    // Game is paused and unpaused with a toggle control (key)
     void Update()
     {
         if (gamePaused)
         {
+            // Select swap and input delay timer
             inputTimer += Time.unscaledDeltaTime;
 
             if (inputTimer >= waitTime)
             {
-                // select options code
+                // select options code, up
                 if (Input.GetAxisRaw("Swap") > 0)
                 {
                     selectedOption += 1;
@@ -76,7 +76,8 @@ public class Pause : MonoBehaviour
                     // reset selected highlight
                     SwapSelected(selectedOption);
                 }
-
+                
+                // select options code, down
                 if (Input.GetAxisRaw("Swap") < 0)
                 {
                     selectedOption -= 1;
@@ -89,6 +90,7 @@ public class Pause : MonoBehaviour
                     SwapSelected(selectedOption);
                 }
 
+                // Enter current selected option
                 if (Input.GetButton("Jump") ||
                     Input.GetButton("Enter"))
                 {
@@ -106,17 +108,16 @@ public class Pause : MonoBehaviour
             }
         }
 
+        // Game is paused and unpaused with a toggle control (key)
         if (Input.GetButtonDown("Pause") && canPause)
         {
             TogglePause();
         }
     }
 
+    // Changes the position of the select highligher
     void SwapSelected(int option)
     {
-        // reset selected highlight
-
-        //Debug.Log("Picked: " + selectedOption);
         inputTimer = 0;
         if (btnHighlight != null)
         {

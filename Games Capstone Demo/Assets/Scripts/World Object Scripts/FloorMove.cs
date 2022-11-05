@@ -15,16 +15,15 @@ public class FloorMove : MonoBehaviour
         blockRigidbody = this.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // reset floor position when it reaches the end
         if (transform.position.x <= endX)
         {
-            Debug.Log("RESET FLOOR");
             transform.position = start;
         }
+        // move down the X axis at "speed"
         blockRigidbody.velocity = Vector3.left * speed;
-        //transform.position += Vector3.left * speed * Time.deltaTime;
     }
 
     //Speed change message subscription
