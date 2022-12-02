@@ -2086,6 +2086,7 @@ MonoBehaviour:
   btnHighlight: {fileID: 1502886227}
   nextSceneNum: 1
   enableQuitBtn: 0
+  expoInfo: {fileID: 1702441627}
   waitTime: 0.3
 --- !u!82 &1540553031
 AudioSource:
@@ -2345,7 +2346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1702441628
 Transform:
   m_ObjectHideFlags: 0

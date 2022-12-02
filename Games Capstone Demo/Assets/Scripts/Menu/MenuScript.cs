@@ -24,6 +24,8 @@ public class MenuScript : MonoBehaviour
     public int nextSceneNum = -1;
     public bool enableQuitBtn = false;
 
+    public GameObject expoInfo;
+
     private int curScene = -1;
     private float fadeTimer = 0;
     private bool loaded = false;
@@ -55,6 +57,8 @@ public class MenuScript : MonoBehaviour
             GameObject quitButton = GameObject.FindWithTag("QuitBtn");
 
             quitButton.SetActive(false);
+
+            expoInfo.SetActive(true);
         }
     }
 
@@ -203,6 +207,8 @@ public class MenuScript : MonoBehaviour
 		cutsceneUI.SetActive(true);
 		inMenu = false;
         btnHighlight.SetActive(false);
+        // turn expo info QR code off
+        expoInfo.SetActive(false);
     }
 
 	//Quit Button pressed
